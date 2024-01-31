@@ -33,11 +33,11 @@ namespace ScheduleApp
             this.loginLabel = new System.Windows.Forms.Label();
             this.menuBarPanel = new System.Windows.Forms.Panel();
             this.loginPanelMain = new System.Windows.Forms.Panel();
-            this.userLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.userInput = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.loginButton = new System.Windows.Forms.Button();
+            this.passwordInput = new System.Windows.Forms.TextBox();
+            this.userInput = new System.Windows.Forms.TextBox();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.userLabel = new System.Windows.Forms.Label();
             this.menuBarPanel.SuspendLayout();
             this.loginPanelMain.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +84,7 @@ namespace ScheduleApp
             this.loginPanelMain.BackColor = System.Drawing.Color.Transparent;
             this.loginPanelMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.loginPanelMain.Controls.Add(this.loginButton);
-            this.loginPanelMain.Controls.Add(this.textBox1);
+            this.loginPanelMain.Controls.Add(this.passwordInput);
             this.loginPanelMain.Controls.Add(this.userInput);
             this.loginPanelMain.Controls.Add(this.passwordLabel);
             this.loginPanelMain.Controls.Add(this.userLabel);
@@ -92,44 +92,6 @@ namespace ScheduleApp
             this.loginPanelMain.Name = "loginPanelMain";
             this.loginPanelMain.Size = new System.Drawing.Size(508, 490);
             this.loginPanelMain.TabIndex = 3;
-            // 
-            // userLabel
-            // 
-            this.userLabel.AutoSize = true;
-            this.userLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.userLabel.Location = new System.Drawing.Point(89, 108);
-            this.userLabel.Name = "userLabel";
-            this.userLabel.Size = new System.Drawing.Size(109, 34);
-            this.userLabel.TabIndex = 0;
-            this.userLabel.Text = "Username:";
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.passwordLabel.Location = new System.Drawing.Point(90, 176);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(105, 34);
-            this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password:";
-            // 
-            // userInput
-            // 
-            this.userInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInput.Location = new System.Drawing.Point(215, 108);
-            this.userInput.Name = "userInput";
-            this.userInput.Size = new System.Drawing.Size(213, 38);
-            this.userInput.TabIndex = 2;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(215, 172);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 38);
-            this.textBox1.TabIndex = 3;
             // 
             // loginButton
             // 
@@ -142,6 +104,47 @@ namespace ScheduleApp
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // passwordInput
+            // 
+            this.passwordInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordInput.Location = new System.Drawing.Point(215, 172);
+            this.passwordInput.Name = "passwordInput";
+            this.passwordInput.Size = new System.Drawing.Size(213, 38);
+            this.passwordInput.TabIndex = 3;
+            this.passwordInput.TextChanged += new System.EventHandler(this.passwordInput_TextChanged);
+            // 
+            // userInput
+            // 
+            this.userInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInput.Location = new System.Drawing.Point(215, 108);
+            this.userInput.Name = "userInput";
+            this.userInput.Size = new System.Drawing.Size(213, 38);
+            this.userInput.TabIndex = 2;
+            this.userInput.TextChanged += new System.EventHandler(this.userInput_TextChanged);
+            // 
+            // passwordLabel
+            // 
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.passwordLabel.Location = new System.Drawing.Point(90, 176);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(105, 34);
+            this.passwordLabel.TabIndex = 1;
+            this.passwordLabel.Text = "Password:";
+            // 
+            // userLabel
+            // 
+            this.userLabel.AutoSize = true;
+            this.userLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.userLabel.Location = new System.Drawing.Point(89, 108);
+            this.userLabel.Name = "userLabel";
+            this.userLabel.Size = new System.Drawing.Size(109, 34);
+            this.userLabel.TabIndex = 0;
+            this.userLabel.Text = "Username:";
             // 
             // loginForm
             // 
@@ -165,14 +168,14 @@ namespace ScheduleApp
         #endregion
 
         private System.Windows.Forms.Button logExitButton;
-        private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Panel menuBarPanel;
         private System.Windows.Forms.Panel loginPanelMain;
         private System.Windows.Forms.TextBox userInput;
-        private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox passwordInput;
+        public System.Windows.Forms.Label loginLabel;
+        public System.Windows.Forms.Label passwordLabel;
+        public System.Windows.Forms.Label userLabel;
     }
 }
 

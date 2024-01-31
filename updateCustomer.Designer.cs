@@ -45,9 +45,11 @@ namespace ScheduleApp
             this.UplnameInput = new System.Windows.Forms.TextBox();
             this.upfnLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.updateHeader = new System.Windows.Forms.Label();
-            this.updateButton = new System.Windows.Forms.Button();
+            this.postalCLabel = new System.Windows.Forms.Label();
+            this.postalCodeInput = new System.Windows.Forms.TextBox();
             this.upCancelButton = new System.Windows.Forms.Button();
+            this.updateCButton = new System.Windows.Forms.Button();
+            this.updateHeader = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +57,7 @@ namespace ScheduleApp
             // 
             this.UpcustIdInput.Location = new System.Drawing.Point(116, 59);
             this.UpcustIdInput.Name = "UpcustIdInput";
+            this.UpcustIdInput.ReadOnly = true;
             this.UpcustIdInput.Size = new System.Drawing.Size(245, 38);
             this.UpcustIdInput.TabIndex = 28;
             // 
@@ -70,7 +73,7 @@ namespace ScheduleApp
             // 
             // UpcountryInput
             // 
-            this.UpcountryInput.Location = new System.Drawing.Point(167, 394);
+            this.UpcountryInput.Location = new System.Drawing.Point(142, 440);
             this.UpcountryInput.Name = "UpcountryInput";
             this.UpcountryInput.Size = new System.Drawing.Size(202, 38);
             this.UpcountryInput.TabIndex = 26;
@@ -79,7 +82,7 @@ namespace ScheduleApp
             // 
             this.upCountryLabel.AutoSize = true;
             this.upCountryLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upCountryLabel.Location = new System.Drawing.Point(3, 394);
+            this.upCountryLabel.Location = new System.Drawing.Point(50, 443);
             this.upCountryLabel.Name = "upCountryLabel";
             this.upCountryLabel.Size = new System.Drawing.Size(82, 29);
             this.upCountryLabel.TabIndex = 25;
@@ -87,7 +90,7 @@ namespace ScheduleApp
             // 
             // UpcityInput
             // 
-            this.UpcityInput.Location = new System.Drawing.Point(60, 325);
+            this.UpcityInput.Location = new System.Drawing.Point(146, 325);
             this.UpcityInput.Name = "UpcityInput";
             this.UpcityInput.Size = new System.Drawing.Size(202, 38);
             this.UpcityInput.TabIndex = 24;
@@ -96,7 +99,7 @@ namespace ScheduleApp
             // 
             this.upCityLabel.AutoSize = true;
             this.upCityLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upCityLabel.Location = new System.Drawing.Point(3, 334);
+            this.upCityLabel.Location = new System.Drawing.Point(82, 325);
             this.upCityLabel.Name = "upCityLabel";
             this.upCityLabel.Size = new System.Drawing.Size(51, 29);
             this.upCityLabel.TabIndex = 23;
@@ -104,7 +107,7 @@ namespace ScheduleApp
             // 
             // UpaddressInput
             // 
-            this.UpaddressInput.Location = new System.Drawing.Point(146, 265);
+            this.UpaddressInput.Location = new System.Drawing.Point(146, 268);
             this.UpaddressInput.Name = "UpaddressInput";
             this.UpaddressInput.Size = new System.Drawing.Size(223, 38);
             this.UpaddressInput.TabIndex = 22;
@@ -121,7 +124,7 @@ namespace ScheduleApp
             // 
             // UpPhoneInput
             // 
-            this.UpPhoneInput.Location = new System.Drawing.Point(146, 209);
+            this.UpPhoneInput.Location = new System.Drawing.Point(146, 212);
             this.UpPhoneInput.Name = "UpPhoneInput";
             this.UpPhoneInput.Size = new System.Drawing.Size(223, 38);
             this.UpPhoneInput.TabIndex = 20;
@@ -130,7 +133,7 @@ namespace ScheduleApp
             // 
             this.upPhoneLabel.AutoSize = true;
             this.upPhoneLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upPhoneLabel.Location = new System.Drawing.Point(3, 212);
+            this.upPhoneLabel.Location = new System.Drawing.Point(-5, 221);
             this.upPhoneLabel.Name = "upPhoneLabel";
             this.upPhoneLabel.Size = new System.Drawing.Size(137, 29);
             this.upPhoneLabel.TabIndex = 19;
@@ -142,17 +145,18 @@ namespace ScheduleApp
             this.UpfnameInput.Name = "UpfnameInput";
             this.UpfnameInput.Size = new System.Drawing.Size(168, 38);
             this.UpfnameInput.TabIndex = 18;
+            this.UpfnameInput.TextChanged += new System.EventHandler(this.UpfnameInput_TextChanged);
             // 
             // uplnLabel
             // 
             this.uplnLabel.AutoSize = true;
             this.uplnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uplnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.uplnLabel.Location = new System.Drawing.Point(213, 121);
+            this.uplnLabel.Location = new System.Drawing.Point(253, 121);
             this.uplnLabel.Name = "uplnLabel";
-            this.uplnLabel.Size = new System.Drawing.Size(95, 27);
+            this.uplnLabel.Size = new System.Drawing.Size(91, 27);
             this.uplnLabel.TabIndex = 17;
-            this.uplnLabel.Text = "Last Name :";
+            this.uplnLabel.Text = "Last Name ";
             // 
             // UplnameInput
             // 
@@ -166,16 +170,18 @@ namespace ScheduleApp
             this.upfnLabel.AutoSize = true;
             this.upfnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upfnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upfnLabel.Location = new System.Drawing.Point(3, 121);
+            this.upfnLabel.Location = new System.Drawing.Point(35, 121);
             this.upfnLabel.Name = "upfnLabel";
-            this.upfnLabel.Size = new System.Drawing.Size(97, 27);
+            this.upfnLabel.Size = new System.Drawing.Size(93, 27);
             this.upfnLabel.TabIndex = 15;
-            this.upfnLabel.Text = "First Name :";
+            this.upfnLabel.Text = "First Name ";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.postalCLabel);
+            this.panel1.Controls.Add(this.postalCodeInput);
             this.panel1.Controls.Add(this.upCancelButton);
-            this.panel1.Controls.Add(this.updateButton);
+            this.panel1.Controls.Add(this.updateCButton);
             this.panel1.Controls.Add(this.updateHeader);
             this.panel1.Controls.Add(this.upPhoneLabel);
             this.panel1.Controls.Add(this.UpcustIdInput);
@@ -193,48 +199,67 @@ namespace ScheduleApp
             this.panel1.Controls.Add(this.UpaddressInput);
             this.panel1.Location = new System.Drawing.Point(2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(492, 565);
+            this.panel1.Size = new System.Drawing.Size(424, 607);
             this.panel1.TabIndex = 29;
+            // 
+            // postalCLabel
+            // 
+            this.postalCLabel.AutoSize = true;
+            this.postalCLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.postalCLabel.Location = new System.Drawing.Point(25, 388);
+            this.postalCLabel.Name = "postalCLabel";
+            this.postalCLabel.Size = new System.Drawing.Size(111, 29);
+            this.postalCLabel.TabIndex = 33;
+            this.postalCLabel.Text = "Postal Code :";
+            // 
+            // postalCodeInput
+            // 
+            this.postalCodeInput.Location = new System.Drawing.Point(142, 385);
+            this.postalCodeInput.Name = "postalCodeInput";
+            this.postalCodeInput.Size = new System.Drawing.Size(202, 38);
+            this.postalCodeInput.TabIndex = 32;
+            // 
+            // upCancelButton
+            // 
+            this.upCancelButton.BackColor = System.Drawing.Color.Black;
+            this.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
+            this.upCancelButton.Location = new System.Drawing.Point(275, 531);
+            this.upCancelButton.Name = "upCancelButton";
+            this.upCancelButton.Size = new System.Drawing.Size(123, 60);
+            this.upCancelButton.TabIndex = 31;
+            this.upCancelButton.Text = "CANCEL";
+            this.upCancelButton.UseVisualStyleBackColor = false;
+            this.upCancelButton.Click += new System.EventHandler(this.upCancelButton_Click);
+            // 
+            // updateCButton
+            // 
+            this.updateCButton.BackColor = System.Drawing.Color.Black;
+            this.updateCButton.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.updateCButton.Location = new System.Drawing.Point(21, 531);
+            this.updateCButton.Name = "updateCButton";
+            this.updateCButton.Size = new System.Drawing.Size(123, 60);
+            this.updateCButton.TabIndex = 30;
+            this.updateCButton.Text = "SAVE";
+            this.updateCButton.UseVisualStyleBackColor = false;
+            this.updateCButton.Click += new System.EventHandler(this.updateCButton_Click);
             // 
             // updateHeader
             // 
             this.updateHeader.AutoSize = true;
             this.updateHeader.ForeColor = System.Drawing.Color.Gainsboro;
-            this.updateHeader.Location = new System.Drawing.Point(162, 8);
+            this.updateHeader.Location = new System.Drawing.Point(123, 8);
             this.updateHeader.Name = "updateHeader";
             this.updateHeader.Size = new System.Drawing.Size(166, 29);
             this.updateHeader.TabIndex = 29;
             this.updateHeader.Text = "UPDATE CUSTOMER";
             this.updateHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // updateButton
-            // 
-            this.updateButton.BackColor = System.Drawing.Color.Black;
-            this.updateButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.updateButton.Location = new System.Drawing.Point(72, 478);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(123, 60);
-            this.updateButton.TabIndex = 30;
-            this.updateButton.Text = "SAVE";
-            this.updateButton.UseVisualStyleBackColor = false;
-            // 
-            // upCancelButton
-            // 
-            this.upCancelButton.BackColor = System.Drawing.Color.Black;
-            this.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.upCancelButton.Location = new System.Drawing.Point(279, 478);
-            this.upCancelButton.Name = "upCancelButton";
-            this.upCancelButton.Size = new System.Drawing.Size(123, 60);
-            this.upCancelButton.TabIndex = 31;
-            this.upCancelButton.Text = "CANCEL";
-            this.upCancelButton.UseVisualStyleBackColor = false;
-            // 
             // updateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(497, 567);
+            this.ClientSize = new System.Drawing.Size(429, 620);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -265,7 +290,9 @@ namespace ScheduleApp
         private System.Windows.Forms.Label upfnLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button upCancelButton;
-        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button updateCButton;
         private System.Windows.Forms.Label updateHeader;
+        private System.Windows.Forms.Label postalCLabel;
+        private System.Windows.Forms.TextBox postalCodeInput;
     }
 }

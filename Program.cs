@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using ScheduleApp.Database;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,9 +17,21 @@ namespace ScheduleApp
         [STAThread]
         static void Main()
         {
+            // initialize database connection
+            // gets connection string 
+            string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            
+     
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DB_Connection.startConnection();
             Application.Run(new loginForm());
+            DB_Connection.closeConnection();
         }
     }
 }
+// Order of Forms - Login - Calendar - Customer Data - 
+// From Calendar - New / Update / Delete Appt --- Button to link Customer Data
+// From Customer Data - New/ Update / Delete Cust. --- Button to link Calendar 
+//TODO Ensure all cancel / exit buttons on each form are functional
