@@ -33,5 +33,24 @@ namespace ScheduleApp.Database
                 city.ID = (int)command.LastInsertedId;
             }
         }
+        public void Update(City city)
+        {
+            CountryData countryData = new CountryData();
+            countryData.Update(city.Country);
+
+            string updateQueryCity = "UPDATE city SET city = @city, lastUpdateBy = @lastUpdateBy" +
+                " WHERE cityId = @cityId";
+
+            using (MySqlCommand command = new MySqlCommand(updateQueryCity, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@cityId", city.ID);
+                command.Parameters.AddWithValue("@city", city.Name);
+                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
+
+                // Execute the command to update the city
+                command.ExecuteNonQuery();
+
+            }
+        }
     }
 }

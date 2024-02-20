@@ -11,7 +11,7 @@ namespace ScheduleApp
 {
     public partial class customerData : Form
     {
-        private int selectedCustomer = -1;
+        private Customer selectedCustomer;
 
         public customerData()
         {
@@ -211,21 +211,78 @@ namespace ScheduleApp
 
 
         private void selectRow()
+
         {
-            Int32 selectedRowCount =
-                dataGridCustomer.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount > 0)
+            selectedCustomer = new Customer();
+
+            Int32 rowCount = dataGridCustomer.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            // if more then 1 row was selected they can't update more than one customer at a time. 
+            if (rowCount > 0)
             {
-                System.Text.StringBuilder stringB = new System.Text.StringBuilder();
-                for (int i = 0; i < selectedRowCount; i++)
+
+                for (int i = 0; i < rowCount; i++)
                 {
-                    stringB.Append("Row: ");
-                    stringB.Append(dataGridCustomer.SelectedRows[i].Index.ToString());
+                    int cellCount = dataGridCustomer.SelectedRows[i].Cells.Count;
+                    for (int j = 0; j < cellCount; j++)
+                    {
+                        object cellValue = dataGridCustomer.SelectedRows[i].Cells[j].Value;
+                        int columnIndex = dataGridCustomer.SelectedRows[i].Cells[j].ColumnIndex;
+                        string columnName = dataGridCustomer.Columns[columnIndex].Name;
+
+                        switch (columnName)
+                        {
+                            case "customerId":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                break;
+                            case "customerName":
+                                string[] name = ((String)cellValue).Split(' ');
+                                if (name.Length != 2)
+                                {
+                                    MessageBox.Show("Customer must have First and Last Name separated by a space!");
+                                }
+                                else {
+                                    selectedCustomer.FirstName = name[0];
+                                    selectedCustomer.LastName = name[1];
+                                }
+                            
+                                break;
+                            case "addressId":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //int
+                               // TODO grab the datagrid view row and put it into a selected customer object 
+                                break;
+                            case "active":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //bool
+                                break;
+                            case "createDate":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //dateTime
+                                break;
+                            case "createdBy":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //string
+                                break;
+                            case "lastUpdate":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //dateTime
+                                break;
+                            case "lastUpdateBy":
+                                selectedCustomer.ID = (Int32)cellValue;
+                                //string
+                                break;
+
+                            default:
+                               
+                                break;
+
+                        }
+                    }
 
                 }
-                stringB.Append("Total: " + selectedRowCount.ToString());
-                MessageBox.Show(stringB.ToString(), "Selected Row");
             }
+
+            loadData();
 
 
         }
@@ -266,11 +323,13 @@ namespace ScheduleApp
         private void updateCustomerButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            updateAppt updateAppointment = new updateAppt();
-            updateCustomer updateCustmr = new updateCustomer();
+
             // TO DO needs to select the row and fill update form
+            // ensure the correct row is being selected from the database correctly 
             selectRow();
-            updateCustmr.Show();
+            updateCustomer updateCustomer = new updateCustomer(selectedCustomer);
+          
+            updateCustomer.Show();
 
 
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleApp.models
 {
-    class Country
+    public class Country
     {
         private int id;
         private string name;

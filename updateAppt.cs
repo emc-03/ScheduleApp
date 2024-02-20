@@ -80,7 +80,7 @@ namespace ScheduleApp
         }
 
         private void updateAppt_Load(object sender, EventArgs e)
-        {
+        { 
 
         }
     }

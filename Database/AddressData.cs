@@ -10,9 +10,10 @@ namespace ScheduleApp.Database
 {
     class AddressData
     {
-        public void Add(Address address) {
+        public void Add(Address address)
+        {
 
-       
+
             CityData cityData = new CityData();
             cityData.Add(address.City);
 
@@ -38,5 +39,29 @@ namespace ScheduleApp.Database
             }
 
         }
+
+        public void Update(Address address)
+        {
+            CityData cityData = new CityData();
+            cityData.Update(address.City);
+
+            string updateQueryAddress = "UPDATE address SET address = @address, address2 = @address2,  postalCode = @postalCode, phone = @phone,  lastUpdateBy = @lastUpdateBy" +
+                " WHERE addressId = @addressId";
+
+            using (MySqlCommand command = new MySqlCommand(updateQueryAddress, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@addressId", address.ID);
+                command.Parameters.AddWithValue("@address", address.Address1);
+                command.Parameters.AddWithValue("@address2", address.Address2);
+                command.Parameters.AddWithValue("@postalCode", address.PostalCode);
+                command.Parameters.AddWithValue("@phone", address.PhoneNumber);
+                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
+                // Execute the command to update the address
+                command.ExecuteNonQuery();
+
+            }
+        }
     }
 }
+
+

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ScheduleApp.Database
+
 {
     class CustomerData
     {
@@ -34,14 +35,11 @@ namespace ScheduleApp.Database
             }
 
         }
-
-
         public void Update(Customer customer)
         {
             AddressData addressData = new AddressData();
             addressData.Update(customer.Address);
 
-           
             string updateQueryCustomer = "UPDATE customer SET customerName = @customerName, active = @active,  lastUpdateBy = @lastUpdateBy" +
                 " WHERE customerId = @customerId";
 
@@ -55,10 +53,8 @@ namespace ScheduleApp.Database
                 // Execute the command to update the customer
                 command.ExecuteNonQuery();
 
-               
             }
-
-
         }
     }
 }
+

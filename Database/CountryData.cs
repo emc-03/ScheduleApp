@@ -32,6 +32,24 @@ namespace ScheduleApp.Database
             }
 
         }
+        public void Update(Country country)
+        {
 
+            string updateQueryCountry = "UPDATE country SET country = @country, lastUpdateBy = @lastUpdateBy" +
+                " WHERE countryId = @countryId";
+
+            using (MySqlCommand command = new MySqlCommand(updateQueryCountry, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@countryId", country.ID);
+                command.Parameters.AddWithValue("@country", country.Name);
+                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
+
+                // Execute the command to update the country
+                command.ExecuteNonQuery();
+
+            }
+        }
     }
+
+
 }

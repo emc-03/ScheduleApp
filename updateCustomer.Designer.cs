@@ -60,7 +60,9 @@ namespace ScheduleApp
             this.UpcustIdInput.ReadOnly = true;
             this.UpcustIdInput.Size = new System.Drawing.Size(245, 38);
             this.UpcustIdInput.TabIndex = 28;
-            // 
+            this.UpcustIdInput.TextChanged += new System.EventHandler(this.UpcustIdInput_TextChanged);
+            this.UpcustIdInput.Text = customerToUpdate.ID.ToString();
+            // TODo populate the form with the customer feilds 
             // upCustomerIDLabel
             // 
             this.upCustomerIDLabel.AutoSize = true;
