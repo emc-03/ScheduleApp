@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class updateCustomer : Form
+    public partial class UpdateCustomerForm : Form
     {
-        private Customer customerToUpdate;
-        public updateCustomer(Customer customer)
+        private Customer customerToUpdate = new Customer();
+        public UpdateCustomerForm(Customer customer)
         {
-            InitializeComponent();
             customerToUpdate = customer;
-           
+            InitializeComponent();
+                       
         }
 
         private void upCancelButton_Click(object sender, EventArgs e)
@@ -40,6 +40,13 @@ namespace ScheduleApp
 
             CustomerData customerData = new CustomerData();
             customerToUpdate.ID = int.Parse(this.UpcustIdInput.Text);
+            customerToUpdate.FirstName = this.UpfnameInput.Text;
+            customerToUpdate.LastName = this.UplnameInput.Text;
+            customerToUpdate.Address.Address1 = this.UpaddressInput.Text;
+           // customerToUpdate.IsActive = this.customerToUpdate.IsActive;
+
+          
+
             // TODO populate all feilds from customer.
             customerData.Update(customerToUpdate);
             // messagebox or exit 

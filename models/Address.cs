@@ -13,7 +13,7 @@ namespace ScheduleApp.models
         private string address2;
         private string postalCode;
         private string phoneNumber;
-        private City city;
+        private City city = new City();
 
         public int ID { get { return id; } set { id = value; } }
         public string Address1 { get { return address1; } set { address1 = value; } }
@@ -21,6 +21,6 @@ namespace ScheduleApp.models
         public string PostalCode { get { return postalCode; } set { postalCode = value; } }
         public string PhoneNumber { get { return phoneNumber; } set { phoneNumber = value; } }
         public City City { get { return city; } set { city = value; } }
-        
+     
     }
 }

@@ -31,7 +31,7 @@ namespace ScheduleApp
             mySqlDataAdapter.Fill(dataTable);
 
             dataGridCustomer.DataSource = dataTable;
-
+            //TODO add find methods to the data classes and use them to populate the dataGridView
         }
 
         private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
@@ -52,9 +52,6 @@ namespace ScheduleApp
 
 
             Customer customer = new Customer();
-            customer.Address = new Address();
-            customer.Address.City = new City();
-            customer.Address.City.Country = new Country();
 
             Random rnd = new Random();
             int customerID = rnd.Next(1000);
@@ -172,8 +169,12 @@ namespace ScheduleApp
                 int index = dataGridCustomer.Rows.Add();
                 //TODO find col names in GUI for line 173 
                 // repeat for all properties on customer
-                dataGridCustomer.Rows[index].Cells["columnNameHere"].Value = customer.ID;
-
+                dataGridCustomer.Rows[index].Cells["customerId"].Value = customer.ID;
+                dataGridCustomer.Rows[index].Cells["customerName"].Value = customer.FirstName;
+                dataGridCustomer.Rows[index].Cells["customerName"].Value = customer.LastName;
+                dataGridCustomer.Rows[index].Cells["addressId"].Value = customer.Address;
+                dataGridCustomer.Rows[index].Cells["active"].Value = customer.IsActive;
+                dataGridCustomer.Rows[index].Tag = customer;
 
 
                 Console.WriteLine("Data inserted successfully.");
@@ -198,13 +199,13 @@ namespace ScheduleApp
         {
             selectRow();
 
-            string connString = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString;
-            MySqlConnection mySqlConnection = new MySqlConnection(connString);
-
-            mySqlConnection.Open();
-
+           
             string deleteCustomer = "DELETE FROM Customer Where customerID = @ID";
-            MySqlCommand command = new MySqlCommand(deleteCustomer, mySqlConnection);
+            using (MySqlCommand command = new MySqlCommand(deleteCustomer, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@ID", selectedCustomer.ID);
+                command.ExecuteNonQuery();
+            }
 
             MessageBox.Show("Customer information has been deleted.");
         }
@@ -213,73 +214,14 @@ namespace ScheduleApp
         private void selectRow()
 
         {
-            selectedCustomer = new Customer();
 
             Int32 rowCount = dataGridCustomer.Rows.GetRowCount(DataGridViewElementStates.Selected);
             // if more then 1 row was selected they can't update more than one customer at a time. 
             if (rowCount > 0)
             {
 
-                for (int i = 0; i < rowCount; i++)
-                {
-                    int cellCount = dataGridCustomer.SelectedRows[i].Cells.Count;
-                    for (int j = 0; j < cellCount; j++)
-                    {
-                        object cellValue = dataGridCustomer.SelectedRows[i].Cells[j].Value;
-                        int columnIndex = dataGridCustomer.SelectedRows[i].Cells[j].ColumnIndex;
-                        string columnName = dataGridCustomer.Columns[columnIndex].Name;
+                selectedCustomer = dataGridCustomer.SelectedRows[0].Tag as Customer;
 
-                        switch (columnName)
-                        {
-                            case "customerId":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                break;
-                            case "customerName":
-                                string[] name = ((String)cellValue).Split(' ');
-                                if (name.Length != 2)
-                                {
-                                    MessageBox.Show("Customer must have First and Last Name separated by a space!");
-                                }
-                                else {
-                                    selectedCustomer.FirstName = name[0];
-                                    selectedCustomer.LastName = name[1];
-                                }
-                            
-                                break;
-                            case "addressId":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //int
-                               // TODO grab the datagrid view row and put it into a selected customer object 
-                                break;
-                            case "active":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //bool
-                                break;
-                            case "createDate":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //dateTime
-                                break;
-                            case "createdBy":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //string
-                                break;
-                            case "lastUpdate":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //dateTime
-                                break;
-                            case "lastUpdateBy":
-                                selectedCustomer.ID = (Int32)cellValue;
-                                //string
-                                break;
-
-                            default:
-                               
-                                break;
-
-                        }
-                    }
-
-                }
             }
 
             loadData();
@@ -327,9 +269,13 @@ namespace ScheduleApp
             // TO DO needs to select the row and fill update form
             // ensure the correct row is being selected from the database correctly 
             selectRow();
-            updateCustomer updateCustomer = new updateCustomer(selectedCustomer);
+       
+            if (selectedCustomer != null) {
+            UpdateCustomerForm updateCustomer = new UpdateCustomerForm(selectedCustomer);
+                updateCustomer.Show();
+            }
+            // else if the selectedCustomer is null then create a messagebox 
           
-            updateCustomer.Show();
 
 
         }
