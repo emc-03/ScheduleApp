@@ -11,7 +11,8 @@ namespace ScheduleApp.Database
     class CountryData
 
     {
-        public void Add(Country country) {
+        public void Add(Country country)
+        {
 
             string newQueryCountry = "INSERT INTO country (country, createDate, createdBy, lastUpdateBy)" +
                    " VALUES (@country, @createDate, @createdBy, @lastUpdateBy)";
@@ -28,7 +29,7 @@ namespace ScheduleApp.Database
 
                 // Retrieve the last inserted ID (if using auto-increment)
                 country.ID = (int)command.LastInsertedId;
-            
+
             }
 
         }
@@ -47,6 +48,15 @@ namespace ScheduleApp.Database
                 // Execute the command to update the country
                 command.ExecuteNonQuery();
 
+            }
+        }
+        public void Delete(Country country)
+        {
+            string deleteCountry = "DELETE FROM Country Where countryId = @ID";
+            using (MySqlCommand command = new MySqlCommand(deleteCountry, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@ID", country.ID);
+                command.ExecuteNonQuery();
             }
         }
     }

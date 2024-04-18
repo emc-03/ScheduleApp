@@ -44,7 +44,7 @@ namespace ScheduleApp
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            customerData custData = new customerData();
+            CustomerInformationForm custData = new CustomerInformationForm();
             custData.Show();
 
         }
@@ -57,7 +57,7 @@ namespace ScheduleApp
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            customerData customer = new customerData();
+            CustomerInformationForm customer = new CustomerInformationForm();
             customer.Show();
         }
 

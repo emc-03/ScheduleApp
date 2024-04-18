@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,47 @@ namespace ScheduleApp.Database
                 command.ExecuteNonQuery();
 
             }
+        }
+        public void Delete(Customer customer)
+        {
+            AddressData addressData = new AddressData();
+            addressData.Delete(customer.Address);
+            string deleteCustomer = "DELETE FROM Customer Where customerID = @ID";
+            using (MySqlCommand command = new MySqlCommand(deleteCustomer, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@ID", customer.ID);
+                command.ExecuteNonQuery();
+            }
+        }
+        public List<Customer> FindAll()
+        {
+
+            List<Customer> customerList = new List<Customer>();
+            string getCustomer = "SELECT * FROM customer";
+            AddressData addressData = new AddressData();
+            
+            using (MySqlCommand command = new MySqlCommand(getCustomer, DB_Connection.conn))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    // this reads 1 row at a time 
+                    {
+                        Customer customer = new Customer();
+                        customer.ID = (int)reader["CustomerId"];
+                        string[] name = reader["customerName"].ToString().Split('|');
+                        customer.FirstName = name[0];
+                        customer.LastName = name[1];
+                        // add the rest of the customer table properties from the database 
+                        // need to retrieve address, city and country info for each customer. - call a get method and pass the customer
+                        customer.Address.ID = (int)reader["addressId"];
+                        addressData.Get(customer.Address.ID);
+                        customerList.Add(customer);
+                    }
+                }
+            }
+            
+            return customerList;
         }
     }
 }

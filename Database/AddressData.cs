@@ -61,6 +61,18 @@ namespace ScheduleApp.Database
 
             }
         }
+
+        public void Delete(Address address)
+        {
+            CityData cityData = new CityData();
+            cityData.Delete(address.City);
+            string deleteAddress = "DELETE FROM Address Where addressId = @ID";
+            using (MySqlCommand command = new MySqlCommand(deleteAddress, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@ID", address.ID);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
 

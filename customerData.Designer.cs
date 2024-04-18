@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class customerData
+    partial class CustomerInformationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace ScheduleApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(customerData));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerInformationForm));
             this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
             this.custButtonPanel1 = new System.Windows.Forms.Panel();
             this.deleteCustButton = new System.Windows.Forms.Button();

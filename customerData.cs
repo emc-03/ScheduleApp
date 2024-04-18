@@ -5,15 +5,16 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class customerData : Form
+    public partial class CustomerInformationForm : Form
     {
-        private Customer selectedCustomer;
-
-        public customerData()
+        private Customer _selectedCustomer;
+        private readonly CustomerData _customerData = new CustomerData();
+        public CustomerInformationForm()
         {
             InitializeComponent();
             loadData();
@@ -22,16 +23,10 @@ namespace ScheduleApp
         // dataGridView
         public void loadData()
         {
-            string getCustomer = "SELECT * FROM customer";
-
-            MySqlCommand command = new MySqlCommand(getCustomer, DB_Connection.conn);
-
-            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command);
-            DataTable dataTable = new DataTable();
-            mySqlDataAdapter.Fill(dataTable);
-
-            dataGridCustomer.DataSource = dataTable;
-            //TODO add find methods to the data classes and use them to populate the dataGridView
+           List<Customer> customerList = _customerData.FindAll();
+           //dataGridCustomer.DataSource = BINDINGLIST? ;
+            
+            // TODO Binding list to make sure that when a row is selected that the full customer is available 
         }
 
         private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
@@ -163,8 +158,8 @@ namespace ScheduleApp
             try
             {
 
-                CustomerData customerData = new CustomerData();
-                customerData.Add(customer);
+               
+                _customerData.Add(customer);
 
                 int index = dataGridCustomer.Rows.Add();
                 //TODO find col names in GUI for line 173 
@@ -197,17 +192,12 @@ namespace ScheduleApp
 
         private void deleteCustButton_Click(object sender, EventArgs e)
         {
-            selectRow();
-
            
-            string deleteCustomer = "DELETE FROM Customer Where customerID = @ID";
-            using (MySqlCommand command = new MySqlCommand(deleteCustomer, DB_Connection.conn))
-            {
-                command.Parameters.AddWithValue("@ID", selectedCustomer.ID);
-                command.ExecuteNonQuery();
-            }
-
+            selectRow();
+            if(_selectedCustomer != null) { 
+            _customerData.Delete(_selectedCustomer);
             MessageBox.Show("Customer information has been deleted.");
+            }
         }
 
 
@@ -220,7 +210,7 @@ namespace ScheduleApp
             if (rowCount > 0)
             {
 
-                selectedCustomer = dataGridCustomer.SelectedRows[0].Tag as Customer;
+                _selectedCustomer = dataGridCustomer.SelectedRows[0].Tag as Customer;
 
             }
 
@@ -270,8 +260,8 @@ namespace ScheduleApp
             // ensure the correct row is being selected from the database correctly 
             selectRow();
        
-            if (selectedCustomer != null) {
-            UpdateCustomerForm updateCustomer = new UpdateCustomerForm(selectedCustomer);
+            if (_selectedCustomer != null) {
+            UpdateCustomerForm updateCustomer = new UpdateCustomerForm(_selectedCustomer);
                 updateCustomer.Show();
             }
             // else if the selectedCustomer is null then create a messagebox 

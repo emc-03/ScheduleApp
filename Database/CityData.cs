@@ -52,5 +52,16 @@ namespace ScheduleApp.Database
 
             }
         }
+        public void Delete(City city)
+        {
+            CountryData countryData = new CountryData();
+            countryData.Delete(city.Country);
+            string deleteCity = "DELETE FROM City Where cityId = @ID";
+            using (MySqlCommand command = new MySqlCommand(deleteCity, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@ID", city.ID);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }

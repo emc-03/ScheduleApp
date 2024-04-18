@@ -26,7 +26,7 @@ namespace ScheduleApp
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            customerData customerDataForm = new customerData();
+            CustomerInformationForm customerDataForm = new CustomerInformationForm();
             customerDataForm.Show();
         }
 
