@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace ScheduleApp
 {
@@ -14,6 +15,7 @@ namespace ScheduleApp
     {
         private Customer _selectedCustomer;
         private readonly CustomerData _customerData = new CustomerData();
+        private Dictionary<int, Customer> _customerDictionary;
         public CustomerInformationForm()
         {
             InitializeComponent();
@@ -23,8 +25,10 @@ namespace ScheduleApp
         // dataGridView
         public void loadData()
         {
-           List<Customer> customerList = _customerData.FindAll();
-           //dataGridCustomer.DataSource = BINDINGLIST? ;
+           _customerDictionary = _customerData.FindAll();
+            BindingSource source = new BindingSource();
+            source.DataSource = _customerDictionary.Values.ToList();
+            dataGridCustomer.DataSource = source;
             
             // TODO Binding list to make sure that when a row is selected that the full customer is available 
         }
@@ -210,7 +214,7 @@ namespace ScheduleApp
             if (rowCount > 0)
             {
 
-                _selectedCustomer = dataGridCustomer.SelectedRows[0].Tag as Customer;
+                //_selectedCustomer = dataGridCustomer.SelectedRows[0];
 
             }
 

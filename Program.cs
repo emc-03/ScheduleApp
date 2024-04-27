@@ -17,17 +17,14 @@ namespace ScheduleApp
         [STAThread]
         static void Main()
         {
-            // initialize database connection
-            // gets connection string 
-            string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-            
-     
+          
+               
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             DB_Connection.startConnection();
             Application.Run(new loginForm());
-            DB_Connection.closeConnection();
+            DB_Connection.closeConnection(); // TODO Remove closeConnection 
         }
     }
 }

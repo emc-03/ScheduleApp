@@ -11,11 +11,16 @@ namespace ScheduleApp.Database
 {
     public class DB_Connection
     {
+        private static string connectionString;
+        public static string ConnectionString {
+            get { return connectionString; }
+            set { connectionString = value; }
+        }
        public static MySqlConnection conn { get; set; }
      
         public static void startConnection() {
 
-            string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+             connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
          
             try
             {
@@ -50,6 +55,4 @@ namespace ScheduleApp.Database
     }
 }
 
-public class searchInDB { 
-   
-}
+

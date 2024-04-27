@@ -59,6 +59,32 @@ namespace ScheduleApp.Database
                 command.ExecuteNonQuery();
             }
         }
+        public Country Get(int countryId)
+        {
+            Country country = new Country();
+           
+
+            string getCountryQuery = "SELECT TOP(1) FROM country WHERE countryId = @countryId";
+
+
+            using (MySqlCommand command = new MySqlCommand(getCountryQuery, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@countryId", countryId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        country.ID = countryId;
+                        country.Name = reader["country"].ToString();
+                       
+                    }
+                }
+
+            }
+            return country;
+        }
+
     }
 
 

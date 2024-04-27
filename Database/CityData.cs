@@ -63,5 +63,31 @@ namespace ScheduleApp.Database
                 command.ExecuteNonQuery();
             }
         }
+        public City Get(int cityId)
+        {
+            City city = new City();
+            CountryData countryData = new CountryData();
+
+            string getCityQuery = "SELECT TOP(1) FROM city WHERE cityId = @cityId";
+
+
+            using (MySqlCommand command = new MySqlCommand(getCityQuery, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@cityId", cityId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        city.ID = cityId;
+                        city.Name = reader["city"].ToString();
+                        city.Country = countryData.Get((int)reader["countryId"]);
+
+                    }
+                }
+
+            }
+            return city;
+        }
     }
 }

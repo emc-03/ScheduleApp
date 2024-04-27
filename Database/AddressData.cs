@@ -73,6 +73,38 @@ namespace ScheduleApp.Database
                 command.ExecuteNonQuery();
             }
         }
+
+        public Address Get(int addressId)
+        {
+            Address address = new Address();
+            CityData cityData = new CityData();
+
+            string getAddressQuery = "SELECT TOP(1) FROM address WHERE addressId = @addressId";
+
+            // TODO Create a using statment to open a new connection - same thing in city and country class
+            // replace end of line 85 with new connection parameter
+            using (MySqlCommand command = new MySqlCommand(getAddressQuery, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@addressId", addressId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        address.ID = addressId;
+
+                        address.Address1 = reader["address"].ToString();
+                        address.Address2 = reader["address2"].ToString();
+                        address.PostalCode = reader["postalCode"].ToString();
+                        address.PhoneNumber = reader["phoneNumber"].ToString();
+                        address.City = cityData.Get((int)reader["cityId"]);
+
+                    }
+                }
+               
+            }
+            return address;
+        }
     }
 }
 
