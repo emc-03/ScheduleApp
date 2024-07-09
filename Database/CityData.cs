@@ -18,19 +18,24 @@ namespace ScheduleApp.Database
             string newQueryCity = "INSERT INTO city (city, countryId, createDate, createdBy, lastUpdateBy)" +
                         " VALUES (@city, @countryId, @createDate, @createdBy, @lastUpdateBy)";
 
-            using (MySqlCommand command = new MySqlCommand(newQueryCity, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@city", city.Name);
-                command.Parameters.AddWithValue("@countryId", city.Country.ID);
-                command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
-                command.Parameters.AddWithValue("@createdBy", "createdByCity");
-                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByCity");
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(newQueryCity, connection))
+                {
+                    command.Parameters.AddWithValue("@city", city.Name);
+                    command.Parameters.AddWithValue("@countryId", city.Country.ID);
+                    command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
+                    command.Parameters.AddWithValue("@createdBy", "createdByCity");
+                    command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByCity");
 
-                // Execute the command to insert into the 'city' table
-                command.ExecuteNonQuery();
+                    // Execute the command to insert into the 'city' table
+                    command.ExecuteNonQuery();
 
-                // Retrieve the last inserted ID (if using auto-increment)
-                city.ID = (int)command.LastInsertedId;
+                    // Retrieve the last inserted ID (if using auto-increment)
+                    city.ID = (int)command.LastInsertedId;
+                }
+                connection.Close();
             }
         }
         public void Update(City city)
@@ -54,40 +59,46 @@ namespace ScheduleApp.Database
         }
         public void Delete(City city)
         {
-            CountryData countryData = new CountryData();
-            countryData.Delete(city.Country);
+
             string deleteCity = "DELETE FROM City Where cityId = @ID";
             using (MySqlCommand command = new MySqlCommand(deleteCity, DB_Connection.conn))
             {
                 command.Parameters.AddWithValue("@ID", city.ID);
                 command.ExecuteNonQuery();
             }
+            CountryData countryData = new CountryData();
+            countryData.Delete(city.Country);
         }
         public City Get(int cityId)
         {
             City city = new City();
             CountryData countryData = new CountryData();
 
-            string getCityQuery = "SELECT TOP(1) FROM city WHERE cityId = @cityId";
+            string getCityQuery = "SELECT * FROM city WHERE cityId = @cityId";
 
-
-            using (MySqlCommand command = new MySqlCommand(getCityQuery, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@cityId", cityId);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(getCityQuery, connection))
                 {
-                    if (reader.Read())
+                    command.Parameters.AddWithValue("@cityId", cityId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        city.ID = cityId;
-                        city.Name = reader["city"].ToString();
-                        city.Country = countryData.Get((int)reader["countryId"]);
+                        if (reader.Read())
+                        {
+                            city.ID = cityId;
+                            city.Name = reader["city"].ToString();
+                            city.Country = countryData.Get((int)reader["countryId"]);
 
+                        }
                     }
-                }
 
+                }
+                connection.Close();
             }
             return city;
+
         }
     }
 }

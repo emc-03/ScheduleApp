@@ -46,8 +46,6 @@ namespace ScheduleApp
             this.postalCodeInput = new System.Windows.Forms.TextBox();
             this.addressInput2 = new System.Windows.Forms.TextBox();
             this.addCustomerLabel = new System.Windows.Forms.Label();
-            this.custIdInput = new System.Windows.Forms.TextBox();
-            this.customerID = new System.Windows.Forms.Label();
             this.countryInput = new System.Windows.Forms.TextBox();
             this.Country = new System.Windows.Forms.Label();
             this.cityInput = new System.Windows.Forms.TextBox();
@@ -175,6 +173,7 @@ namespace ScheduleApp
             this.custSearchBox.Text = "customer id";
             this.custSearchBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.custSearchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.custSearchBox_MouseClick);
+            this.custSearchBox.TextChanged += new System.EventHandler(this.custSearchBox_TextChanged);
             // 
             // panel2
             // 
@@ -182,8 +181,6 @@ namespace ScheduleApp
             this.panel2.Controls.Add(this.postalCodeInput);
             this.panel2.Controls.Add(this.addressInput2);
             this.panel2.Controls.Add(this.addCustomerLabel);
-            this.panel2.Controls.Add(this.custIdInput);
-            this.panel2.Controls.Add(this.customerID);
             this.panel2.Controls.Add(this.countryInput);
             this.panel2.Controls.Add(this.Country);
             this.panel2.Controls.Add(this.cityInput);
@@ -201,6 +198,7 @@ namespace ScheduleApp
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(381, 683);
             this.panel2.TabIndex = 5;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // postalCodeLabel
             // 
@@ -224,6 +222,7 @@ namespace ScheduleApp
             this.addressInput2.Name = "addressInput2";
             this.addressInput2.Size = new System.Drawing.Size(223, 38);
             this.addressInput2.TabIndex = 16;
+            this.addressInput2.TextChanged += new System.EventHandler(this.addressInput2_TextChanged);
             // 
             // addCustomerLabel
             // 
@@ -234,24 +233,6 @@ namespace ScheduleApp
             this.addCustomerLabel.Size = new System.Drawing.Size(143, 34);
             this.addCustomerLabel.TabIndex = 15;
             this.addCustomerLabel.Text = "Add Customer";
-            // 
-            // custIdInput
-            // 
-            this.custIdInput.Location = new System.Drawing.Point(133, 167);
-            this.custIdInput.Name = "custIdInput";
-            this.custIdInput.ReadOnly = true;
-            this.custIdInput.Size = new System.Drawing.Size(223, 38);
-            this.custIdInput.TabIndex = 14;
-            this.custIdInput.TextChanged += new System.EventHandler(this.custIdInput_TextChanged);
-            // 
-            // customerID
-            // 
-            this.customerID.AutoSize = true;
-            this.customerID.Location = new System.Drawing.Point(16, 176);
-            this.customerID.Name = "customerID";
-            this.customerID.Size = new System.Drawing.Size(111, 29);
-            this.customerID.TabIndex = 13;
-            this.customerID.Text = "Customer ID:";
             // 
             // countryInput
             // 
@@ -303,7 +284,7 @@ namespace ScheduleApp
             // 
             // phoneInput
             // 
-            this.phoneInput.Location = new System.Drawing.Point(133, 217);
+            this.phoneInput.Location = new System.Drawing.Point(133, 182);
             this.phoneInput.Name = "phoneInput";
             this.phoneInput.Size = new System.Drawing.Size(223, 38);
             this.phoneInput.TabIndex = 6;
@@ -311,7 +292,7 @@ namespace ScheduleApp
             // phoneLabel
             // 
             this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(-5, 226);
+            this.phoneLabel.Location = new System.Drawing.Point(1, 185);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(137, 29);
             this.phoneLabel.TabIndex = 5;
@@ -341,6 +322,7 @@ namespace ScheduleApp
             this.lnameInput.Name = "lnameInput";
             this.lnameInput.Size = new System.Drawing.Size(168, 38);
             this.lnameInput.TabIndex = 2;
+            this.lnameInput.TextChanged += new System.EventHandler(this.lnameInput_TextChanged);
             // 
             // firstNameLabel
             // 
@@ -392,7 +374,7 @@ namespace ScheduleApp
             this.apptList.TabIndex = 8;
             this.apptList.Text = "Customer Appointments";
             // 
-            // customerData
+            // CustomerInformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -412,7 +394,7 @@ namespace ScheduleApp
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.Name = "customerData";
+            this.Name = "CustomerInformationForm";
             this.Text = "CUSTOMER INFORMATION";
             ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).EndInit();
             this.custButtonPanel1.ResumeLayout(false);
@@ -438,8 +420,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Button customerSearch;
         private System.Windows.Forms.TextBox custSearchBox;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox custIdInput;
-        private System.Windows.Forms.Label customerID;
         private System.Windows.Forms.TextBox countryInput;
         private System.Windows.Forms.Label Country;
         private System.Windows.Forms.TextBox cityInput;

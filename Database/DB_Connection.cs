@@ -24,7 +24,7 @@ namespace ScheduleApp.Database
          
             try
             {
-                conn = new MySqlConnection(constr);
+                conn = new MySqlConnection(connectionString);
                 //initializes mysql connection
                 conn.Open();
                 MessageBox.Show("Connection is Open");

@@ -15,7 +15,9 @@ namespace ScheduleApp
     {
         private Customer _selectedCustomer;
         private readonly CustomerData _customerData = new CustomerData();
-        private Dictionary<int, Customer> _customerDictionary;
+        //TODO Start here change to list 
+        private List<Customer> _customerList = new List<Customer>();
+
         public CustomerInformationForm()
         {
             InitializeComponent();
@@ -25,11 +27,12 @@ namespace ScheduleApp
         // dataGridView
         public void loadData()
         {
-           _customerDictionary = _customerData.FindAll();
+            _customerList = _customerData.FindAll();
             BindingSource source = new BindingSource();
-            source.DataSource = _customerDictionary.Values.ToList();
+            source.DataSource = _customerList;
             dataGridCustomer.DataSource = source;
-            
+
+
             // TODO Binding list to make sure that when a row is selected that the full customer is available 
         }
 
@@ -52,9 +55,8 @@ namespace ScheduleApp
 
             Customer customer = new Customer();
 
-            Random rnd = new Random();
-            int customerID = rnd.Next(1000);
-            custIdInput.Text = customerID.ToString();
+           
+
             if (string.IsNullOrWhiteSpace(fnameInput.Text))
             {
                 MessageBox.Show("Fill in missing fields.");
@@ -162,21 +164,17 @@ namespace ScheduleApp
             try
             {
 
-               
+
                 _customerData.Add(customer);
 
-                int index = dataGridCustomer.Rows.Add();
-                //TODO find col names in GUI for line 173 
-                // repeat for all properties on customer
-                dataGridCustomer.Rows[index].Cells["customerId"].Value = customer.ID;
-                dataGridCustomer.Rows[index].Cells["customerName"].Value = customer.FirstName;
-                dataGridCustomer.Rows[index].Cells["customerName"].Value = customer.LastName;
-                dataGridCustomer.Rows[index].Cells["addressId"].Value = customer.Address;
-                dataGridCustomer.Rows[index].Cells["active"].Value = customer.IsActive;
-                dataGridCustomer.Rows[index].Tag = customer;
-
-
+                loadData();
                 Console.WriteLine("Data inserted successfully.");
+                this.fnameInput.Clear();
+                this.lnameInput.Clear();
+                //TODO clear each input box
+                
+                    
+                
             }
             catch (Exception ex)
             {
@@ -196,11 +194,14 @@ namespace ScheduleApp
 
         private void deleteCustButton_Click(object sender, EventArgs e)
         {
-           
             selectRow();
-            if(_selectedCustomer != null) { 
-            _customerData.Delete(_selectedCustomer);
-            MessageBox.Show("Customer information has been deleted.");
+            if (_selectedCustomer != null)
+            {
+                _customerData.Delete(_selectedCustomer);
+                int rowIndex = dataGridCustomer.SelectedRows[0].Index;
+                dataGridCustomer.Rows.RemoveAt(rowIndex);
+
+                MessageBox.Show("Customer information has been deleted.");
             }
         }
 
@@ -208,14 +209,30 @@ namespace ScheduleApp
         private void selectRow()
 
         {
-
+            //int rowCount = dataGridCustomer.SelectedRows.Count;
             Int32 rowCount = dataGridCustomer.Rows.GetRowCount(DataGridViewElementStates.Selected);
             // if more then 1 row was selected they can't update more than one customer at a time. 
             if (rowCount > 0)
             {
+                var rawSelectedCustomerID = dataGridCustomer.SelectedRows[0].Cells["ID"].Value;
+                if (rawSelectedCustomerID == null || !int.TryParse(rawSelectedCustomerID.ToString(), out int selectedCustomerID))
+                {
+                    return;
+                }
+                // Check if the customer with the selected ID exists in the list
+                if (_customerList.Any(customer => customer.ID == selectedCustomerID))
+                {
+                    _selectedCustomer = _customerList.First(customer => customer.ID == selectedCustomerID);
+                }
+                else
+                {
+                    MessageBox.Show("Could not find Customer in memory.");
+                }
 
-                //_selectedCustomer = dataGridCustomer.SelectedRows[0];
-
+            }
+            else
+            {
+                MessageBox.Show("No row selected.");
             }
 
             loadData();
@@ -238,7 +255,28 @@ namespace ScheduleApp
 
         private void customerSearch_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ConnectionString))
+                {
+                    if (connection.State == ConnectionState.Closed)
+                        connection.Open();
+                    using (DataTable dataTable = new DataTable("Customer"))
+                    using (SqlCommand cmd = new SqlCommand("", connection))
+                    {
+                        cmd.Parameters.AddWithValue("customerId", customerSearch.Text);
+                        cmd.Parameters.AddWithValue("contactname", string.Format("%{0}%", customerSearch.Text));
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+                        dataGridCustomer.DataSource = dataTable;
 
+                    }
+                }
+            }
+            catch(Exception ex) {
+
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -263,18 +301,39 @@ namespace ScheduleApp
             // TO DO needs to select the row and fill update form
             // ensure the correct row is being selected from the database correctly 
             selectRow();
-       
-            if (_selectedCustomer != null) {
-            UpdateCustomerForm updateCustomer = new UpdateCustomerForm(_selectedCustomer);
+
+            if (_selectedCustomer != null)
+            {
+                UpdateCustomerForm updateCustomer = new UpdateCustomerForm(_selectedCustomer);
                 updateCustomer.Show();
             }
             // else if the selectedCustomer is null then create a messagebox 
-          
+
 
 
         }
 
         private void custIdInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addressInput2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lnameInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void custSearchBox_TextChanged(object sender, EventArgs e)
         {
 
         }

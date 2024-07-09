@@ -25,22 +25,13 @@ namespace ScheduleApp
         public calendarForm()
         {
             InitializeComponent();
-            loadDataGrid();
+            
         }
 
-        public void loadDataGrid()
-        {
-            string getAppt = "SELECT * FROM appointment";
+     
 
-            MySqlCommand command = new MySqlCommand(getAppt, DB_Connection.conn);
 
-            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command);
-            DataTable dataTable = new DataTable();
-            mySqlDataAdapter.Fill(dataTable);
 
-            appointmentDataGrid.DataSource = dataTable;
-
-        }
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -126,7 +117,7 @@ namespace ScheduleApp
 
         private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -138,7 +129,7 @@ namespace ScheduleApp
         {
             try
             {
-                string connectionString = "?";
+                //string connectionString = "?";
                 //string searchAppt = TextBox.?; TODO What do I reference ? 
 
                 //using (MySqlConnection connection = new MySqlConnection(connectionString));
@@ -164,5 +155,15 @@ namespace ScheduleApp
             */
 
         }
-}
+
+        private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

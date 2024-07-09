@@ -16,21 +16,27 @@ namespace ScheduleApp.Database
 
             string newQueryCountry = "INSERT INTO country (country, createDate, createdBy, lastUpdateBy)" +
                    " VALUES (@country, @createDate, @createdBy, @lastUpdateBy)";
-
-            using (MySqlCommand command = new MySqlCommand(newQueryCountry, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@country", country.Name);
-                command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
-                command.Parameters.AddWithValue("@createdBy", "createdByCountry");
-                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByCountry");
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(newQueryCountry, connection))
+                {
+                    command.Parameters.AddWithValue("@country", country.Name);
+                    command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
+                    command.Parameters.AddWithValue("@createdBy", "createdByCountry");
+                    command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByCountry");
 
-                // Execute the command to insert into the 'country' table
-                command.ExecuteNonQuery();
+                    // Execute the command to insert into the 'country' table
+                    command.ExecuteNonQuery();
 
-                // Retrieve the last inserted ID (if using auto-increment)
-                country.ID = (int)command.LastInsertedId;
+                    // Retrieve the last inserted ID (if using auto-increment)
+                    country.ID = (int)command.LastInsertedId;
 
+                }
+
+                connection.Close();
             }
+
 
         }
         public void Update(Country country)
@@ -52,6 +58,7 @@ namespace ScheduleApp.Database
         }
         public void Delete(Country country)
         {
+
             string deleteCountry = "DELETE FROM Country Where countryId = @ID";
             using (MySqlCommand command = new MySqlCommand(deleteCountry, DB_Connection.conn))
             {
@@ -62,25 +69,29 @@ namespace ScheduleApp.Database
         public Country Get(int countryId)
         {
             Country country = new Country();
-           
-
-            string getCountryQuery = "SELECT TOP(1) FROM country WHERE countryId = @countryId";
 
 
-            using (MySqlCommand command = new MySqlCommand(getCountryQuery, DB_Connection.conn))
+            string getCountryQuery = "SELECT * FROM country WHERE countryId = @countryId";
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@countryId", countryId);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(getCountryQuery, connection))
                 {
-                    if (reader.Read())
-                    {
-                        country.ID = countryId;
-                        country.Name = reader["country"].ToString();
-                       
-                    }
-                }
+                    command.Parameters.AddWithValue("@countryId", countryId);
 
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            country.ID = countryId;
+                            country.Name = reader["country"].ToString();
+
+                        }
+                    }
+
+                }
+                connection.Close();
             }
             return country;
         }

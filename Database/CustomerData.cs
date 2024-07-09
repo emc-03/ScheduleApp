@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ScheduleApp.Database
 {
@@ -18,13 +19,15 @@ namespace ScheduleApp.Database
 
             string newQueryCustomer = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy)" +
                 " VALUES (@customerName, @addressId, 1, @createDate, @createdBy, @lastUpdateBy)";
-
-
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
+                connection.Open();
 
-                using (MySqlCommand command = new MySqlCommand(newQueryCustomer, DB_Connection.conn))
+
+
+                using (MySqlCommand command = new MySqlCommand(newQueryCustomer, connection))
                 {
-                    command.Parameters.AddWithValue("@customerName", customer.FirstName + "|" + customer.LastName);
+                    command.Parameters.AddWithValue("@customerName", customer.FirstName + " " + customer.LastName);
                     command.Parameters.AddWithValue("@addressId", customer.Address.ID);
                     command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
                     command.Parameters.AddWithValue("@createdBy", "createdBy");
@@ -34,6 +37,8 @@ namespace ScheduleApp.Database
 
                     customer.ID = (int)command.LastInsertedId;
                 }
+
+                connection.Close();
             }
         }
 
@@ -75,7 +80,7 @@ namespace ScheduleApp.Database
             AddressData addressData = new AddressData();
             addressData.Update(customer.Address);
 
-            string updateQueryCustomer = "UPDATE customer SET customerName = @customerName, active = @active,  lastUpdateBy = @lastUpdateBy" +
+            string updateQueryCustomer = "UPDATE customer SET customerName = @customerName, active = @active,  lastUpdateBy = @lastUpdateBy" + 
                 " WHERE customerId = @customerId";
 
 
@@ -83,7 +88,7 @@ namespace ScheduleApp.Database
 
                 using (MySqlCommand command = new MySqlCommand(updateQueryCustomer, DB_Connection.conn))
                 {
-                    command.Parameters.AddWithValue("@customerName", customer.FirstName + "|" + customer.LastName);
+                    command.Parameters.AddWithValue("@customerName", customer.FirstName + " " + customer.LastName);
                     command.Parameters.AddWithValue("@customerId", customer.ID);
                     command.Parameters.AddWithValue("@active", customer.IsActive);
                     command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
@@ -95,23 +100,25 @@ namespace ScheduleApp.Database
 
         public void Delete(Customer customer)
         {
-            AddressData addressData = new AddressData();
-            addressData.Delete(customer.Address);
-            string deleteCustomer = "DELETE FROM Customer Where customerId = @ID";
+            // create new class for appt in database folder 'appointment data' - add methods,
+            // delete method and call on any appointments with customerId, before I can delete the customer itself.
+            string deleteCustomer = "DELETE FROM Customer Where customerId = @customerId";
 
             {
 
                 using (MySqlCommand command = new MySqlCommand(deleteCustomer, DB_Connection.conn))
                 {
-                    command.Parameters.AddWithValue("@ID", customer.ID);
+                    command.Parameters.AddWithValue("@customerId", customer.ID);
                     command.ExecuteNonQuery();
                 }
             }
+            AddressData addressData = new AddressData();
+            addressData.Delete(customer.Address);
         }
 
-        public Dictionary<int, Customer> FindAll()
+        public List<Customer> FindAll()
         {
-            Dictionary<int, Customer> customerDictionary= new Dictionary<int, Customer>();
+            List<Customer> customerFindAllList = new List<Customer>();
             string getCustomer = "SELECT * FROM customer";
             AddressData addressData = new AddressData();
 
@@ -120,6 +127,7 @@ namespace ScheduleApp.Database
                 //open connection 
                 using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
                 {
+                    connection.Open();
                     using (MySqlCommand command = new MySqlCommand(getCustomer, connection))
 
                     {
@@ -131,17 +139,27 @@ namespace ScheduleApp.Database
                                 Customer customer = new Customer();
                                 customer.ID = (int)reader["customerId"];
                                 string[] name = reader["customerName"].ToString().Split(' ');
-                                customer.FirstName = name[0];
-                                customer.LastName = name[1];
+                                if (name.Length < 2)
+                                {
+                                    MessageBox.Show("Must have first and last name.");
+                                    // won't populate a single first name.
+                                }
+                                else
+                                {
+                                    customer.FirstName = name[0];
+                                    customer.LastName = name[1];
+                                }
+
                                 customer.IsActive = (bool)reader["active"];
                                 customer.Address = addressData.Get((int)reader["addressId"]);
-                                customerDictionary.Add(customer.ID, customer);
+                                customerFindAllList.Add(customer);
                             }
                         }
                     }
+                    connection.Close();
                 }
             }
-            return customerDictionary;
+            return customerFindAllList;
         }
     }
 }

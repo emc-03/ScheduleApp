@@ -19,25 +19,29 @@ namespace ScheduleApp.Database
 
             string newQueryAddress = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)" +
                    " VALUES (@address, @address2,  @cityId, @postalCode, @phone, @createDate, @createdBy, @lastUpdateBy)";
-
-            using (MySqlCommand command = new MySqlCommand(newQueryAddress, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@address", address.Address1);
-                command.Parameters.AddWithValue("@address2", address.Address2);
-                command.Parameters.AddWithValue("@cityId", address.City.ID);
-                command.Parameters.AddWithValue("@postalCode", address.PostalCode);
-                command.Parameters.AddWithValue("@phone", address.PhoneNumber);
-                command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
-                command.Parameters.AddWithValue("@createdBy", "createdByAddress");
-                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByAddress");
+                connection.Open();
 
-                // Execute the command to insert into the 'address' table
-                command.ExecuteNonQuery();
+                using (MySqlCommand command = new MySqlCommand(newQueryAddress, connection))
+                {
+                    command.Parameters.AddWithValue("@address", address.Address1);
+                    command.Parameters.AddWithValue("@address2", address.Address2);
+                    command.Parameters.AddWithValue("@cityId", address.City.ID);
+                    command.Parameters.AddWithValue("@postalCode", address.PostalCode);
+                    command.Parameters.AddWithValue("@phone", address.PhoneNumber);
+                    command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
+                    command.Parameters.AddWithValue("@createdBy", "createdByAddress");
+                    command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedByAddress");
 
-                // Retrieve the last inserted ID (if using auto-increment)
-                address.ID = (int)command.LastInsertedId;
+                    // Execute the command to insert into the 'address' table
+                    command.ExecuteNonQuery();
+
+                    // Retrieve the last inserted ID (if using auto-increment)
+                    address.ID = (int)command.LastInsertedId;
+                }
+                connection.Close();
             }
-
         }
 
         public void Update(Address address)
@@ -64,14 +68,15 @@ namespace ScheduleApp.Database
 
         public void Delete(Address address)
         {
-            CityData cityData = new CityData();
-            cityData.Delete(address.City);
+
             string deleteAddress = "DELETE FROM Address Where addressId = @ID";
             using (MySqlCommand command = new MySqlCommand(deleteAddress, DB_Connection.conn))
             {
                 command.Parameters.AddWithValue("@ID", address.ID);
                 command.ExecuteNonQuery();
             }
+            CityData cityData = new CityData();
+            cityData.Delete(address.City);
         }
 
         public Address Get(int addressId)
@@ -79,29 +84,36 @@ namespace ScheduleApp.Database
             Address address = new Address();
             CityData cityData = new CityData();
 
-            string getAddressQuery = "SELECT TOP(1) FROM address WHERE addressId = @addressId";
+            string getAddressQuery = "SELECT * FROM address WHERE addressId = @addressId";
 
             // TODO Create a using statment to open a new connection - same thing in city and country class
             // replace end of line 85 with new connection parameter
-            using (MySqlCommand command = new MySqlCommand(getAddressQuery, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@addressId", addressId);
+                connection.Open();
 
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(getAddressQuery, connection))
                 {
-                    if (reader.Read())
+                    command.Parameters.AddWithValue("@addressId", addressId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        address.ID = addressId;
+                        if (reader.Read())
+                        {
+                            address.ID = addressId;
 
-                        address.Address1 = reader["address"].ToString();
-                        address.Address2 = reader["address2"].ToString();
-                        address.PostalCode = reader["postalCode"].ToString();
-                        address.PhoneNumber = reader["phoneNumber"].ToString();
-                        address.City = cityData.Get((int)reader["cityId"]);
+                            address.Address1 = reader["address"].ToString();
+                            address.Address2 = reader["address2"].ToString();
+                            address.PostalCode = reader["postalCode"].ToString();
+                            address.PhoneNumber = reader["phone"].ToString();
+                            address.City = cityData.Get((int)reader["cityId"]);
 
+                        }
                     }
+
                 }
-               
+
+                connection.Close();
             }
             return address;
         }
