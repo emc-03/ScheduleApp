@@ -28,12 +28,20 @@ namespace ScheduleApp
         public void loadData()
         {
             _customerList = _customerData.FindAll();
-            BindingSource source = new BindingSource();
-            source.DataSource = _customerList;
-            dataGridCustomer.DataSource = source;
-
-
-            // TODO Binding list to make sure that when a row is selected that the full customer is available 
+            dataGridCustomer.Columns.Add("customerName", "Name");
+            dataGridCustomer.Columns.Add("customerPhone", "Phone");
+            dataGridCustomer.Columns.Add("customerAddress1", "Primary Address");
+            dataGridCustomer.Columns.Add("customerAddress2", "Secondary Address");
+            dataGridCustomer.Columns.Add("customerCity", "City");
+            dataGridCustomer.Columns.Add("customerCountry", "Country");
+            dataGridCustomer.Columns.Add("customerID", "ID");
+            dataGridCustomer.Columns["customerID"].Visible = false;
+            foreach (Customer customer in _customerList)
+            {
+                dataGridCustomer.Rows.Add(customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
+                    customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
+                //create a helper method to add a new customer into the datagrid view 
+            }
         }
 
         private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
@@ -214,7 +222,7 @@ namespace ScheduleApp
             // if more then 1 row was selected they can't update more than one customer at a time. 
             if (rowCount > 0)
             {
-                var rawSelectedCustomerID = dataGridCustomer.SelectedRows[0].Cells["ID"].Value;
+                var rawSelectedCustomerID = dataGridCustomer.SelectedRows[0].Cells["customerID"].Value;
                 if (rawSelectedCustomerID == null || !int.TryParse(rawSelectedCustomerID.ToString(), out int selectedCustomerID))
                 {
                     return;

@@ -128,8 +128,9 @@ namespace ScheduleApp
             // dataGridCustomer
             // 
             this.dataGridCustomer.AllowUserToResizeColumns = false;
+            this.dataGridCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridCustomer.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridCustomer.Location = new System.Drawing.Point(0, 0);
             this.dataGridCustomer.Name = "dataGridCustomer";
             this.dataGridCustomer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
@@ -378,6 +379,8 @@ namespace ScheduleApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1165, 716);
             this.Controls.Add(this.apptList);

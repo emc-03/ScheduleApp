@@ -121,7 +121,7 @@ namespace ScheduleApp.Database
             List<Customer> customerFindAllList = new List<Customer>();
             string getCustomer = "SELECT * FROM customer";
             AddressData addressData = new AddressData();
-
+            AppointmentData appointmentData = new AppointmentData();
 
             {
                 //open connection 
@@ -152,6 +152,7 @@ namespace ScheduleApp.Database
 
                                 customer.IsActive = (bool)reader["active"];
                                 customer.Address = addressData.Get((int)reader["addressId"]);
+                                customer.Appointments = appointmentData.FindAll 
                                 customerFindAllList.Add(customer);
                             }
                         }

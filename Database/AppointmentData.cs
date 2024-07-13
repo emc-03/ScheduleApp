@@ -10,7 +10,12 @@ namespace ScheduleApp.Database
     {
         //findCustomerID - find list of appointments to call appointmentData when pulling a customer out of the database
         //findUserID
-        
+        public List<Appointment> FindAllApptList(int userID, int customerID) { 
+            //user and customer appointment list 
+           //SELECT FROM WHERE  userID == customerID 
+           //make list of an appointments, read one row at a time, creating a single appointment, set values, declare a list outside of the loop,
+           //then return all matching appointments 
+        }
 
         public void loadDataGrid()
         {

@@ -80,7 +80,7 @@ namespace ScheduleApp
             string loginName = userInput.Text;
             string password = passwordInput.Text;
 
-            string searchRow = "SELECT * From customer WHERE Name = @Name and password = @password";
+            string searchRow = "SELECT * From user WHERE username = '"+loginName+"' and password = '"+password+"'";
             DataTable dataTable = new DataTable();
             MySqlCommand mySqlCommand = new MySqlCommand(searchRow);
             mySqlCommand.Connection = DB_Connection.conn;
@@ -89,7 +89,7 @@ namespace ScheduleApp
 
             // Use LINQ to find the user with the matching username and password
             var user = dataTable.AsEnumerable().SingleOrDefault(row =>
-                row.Field<string>("Name") == loginName &&
+                row.Field<string>("username") == loginName &&
                 row.Field<string>("password") == password);
 
 
@@ -114,7 +114,12 @@ namespace ScheduleApp
                 // Update the user's login timestamp
                 try
                 {
-                    string updateTimestampQuery = "UPDATE user SET lastLogin = @lastLogin WHERE customerId = @Id";
+                    string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "Login_History.txt"), true))
+                    {
+                        outputFile.WriteLine("User : " + loginName + " lastLogin : " + DateTime.UtcNow);
+                    }
+                    /*string updateTimestampQuery = "UPDATE user SET lastLogin = @lastLogin WHERE customerId = @Id";
                     MySqlCommand updateCommand = new MySqlCommand(updateTimestampQuery);
                     updateCommand.Connection = DB_Connection.conn;
 
@@ -123,7 +128,7 @@ namespace ScheduleApp
                     updateCommand.Parameters.AddWithValue("@customerId", User.userId);
 
                     updateCommand.ExecuteNonQuery();
-                    DB_Connection.conn.Close();
+                    DB_Connection.conn.Close();*/
                 }
                 catch (Exception ex)
                 {
@@ -133,9 +138,7 @@ namespace ScheduleApp
                 DateTime currentTime = DateTime.UtcNow;
                 DateTime alertTime = currentTime.AddMinutes(15);
 
-                string checkAppointmentsQuery = @"
-                SELECT * FROM appointments
-                WHERE customerId = @customerId AND startTime BETWEEN @currentTime AND @alertTime";
+                string checkAppointmentsQuery = "SELECT * FROM appointment WHERE userId = "+User.userId+" AND start between '"+currentTime+"' AND '"+alertTime+"'";
 
                 DataTable appointmentsTable = new DataTable();
                 MySqlCommand appointmentsCommand = new MySqlCommand(checkAppointmentsQuery);
