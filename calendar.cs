@@ -20,23 +20,26 @@ namespace ScheduleApp
         private SqlConnection gridConnection;
         private SqlDataAdapter adapter;
         private DataSet data;
+        private Customer _selectedCustomer;
 
+        
 
-        public calendarForm()
+        public calendarForm(Customer selectedCustomer)
         {
+            _selectedCustomer = selectedCustomer;
             InitializeComponent();
-            
+
         }
 
-     
+
 
 
 
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CustomerInformationForm custData = new CustomerInformationForm();
-            custData.Show();
+           // CustomerInformationForm custData = new CustomerInformationForm();
+            //custData.Show();
 
         }
 
@@ -48,53 +51,25 @@ namespace ScheduleApp
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            CustomerInformationForm customer = new CustomerInformationForm();
-            customer.Show();
+            //CustomerInformationForm customer = new CustomerInformationForm();
+           // customer.Show();
         }
 
-      // TODO copy the login form sql from the login form and create a query from the database to find the 
-            // appointments for the userID and the customerID; display them to the calendar
-            
+        // TODO copy the login form sql from the login form and create a query from the database to find the 
+        // appointments for the userID and the customerID; display them to the calendar
 
 
-            // PREVIOUS CODE DESIGN -- FIX NEW DESIGN AND DELETE LATER 
-            //int customerData = Convert.ToInt32(UpcustIdInput.Text);
-            //string searchRow = "SELECT * From user WHERE userId = @customerData and userId = @userData";
-            //DataTable weekTable = new DataTable();
-            //MySqlCommand mySqlCommand = new MySqlCommand(searchRow);
-            //mySqlCommand.Connection = DB_Connection.conn;
-
-            //mySqlCommand.Parameters.AddWithValue("@customerData", customerData);
-            //mySqlCommand.Parameters.AddWithValue("@userData", User.userId);
 
 
-            //int adapter = new MySqlDataAdapter(mySqlCommand).Fill(weekTable);
-     
 
-       
-
-            
-            // PREVIOUS CODE DESIGN _ UPDATE NEW DESIGN AND DELETE LATER
-            //string searchRow = "SELECT * From user WHERE userId = @customerData and userId = @userData";
-            //DataTable monthTable = new DataTable();
-            //MySqlCommand mySqlCommand = new MySqlCommand(searchRow);
-            //mySqlCommand.Connection = DB_Connection.conn;
-
-            //mySqlCommand.Parameters.AddWithValue("@customerData", customerData);
-            //mySqlCommand.Parameters.AddWithValue("@userData", User.userId);
-
-            //int adapter = new MySqlDataAdapter(mySqlCommand).Fill(monthTable);
-
-        
-
-               private void apptTaskLabel_Click(object sender, EventArgs e)
+        private void apptTaskLabel_Click(object sender, EventArgs e)
         {
 
         }
 
         private void createApptButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             ApptType create = new ApptType();
             create.Show();
         }
@@ -109,15 +84,15 @@ namespace ScheduleApp
 
         private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
 
         }
 
-       
+
 
         private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void monthRadioButton_CheckedChanged(object sender, EventArgs e)

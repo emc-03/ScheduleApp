@@ -3,22 +3,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using ScheduleApp.models;
 
 namespace ScheduleApp.Database
 {
     class AppointmentData
     {
-        //findCustomerID - find list of appointments to call appointmentData when pulling a customer out of the database
-        //findUserID
-        public List<Appointment> FindAllApptList(int userID, int customerID) { 
-            //user and customer appointment list 
-           //SELECT FROM WHERE  userID == customerID 
-           //make list of an appointments, read one row at a time, creating a single appointment, set values, declare a list outside of the loop,
-           //then return all matching appointments 
-        }
 
-        public void loadDataGrid()
+                public List<Appointment> FindAllApptList(int _userID, int _customerID)
         {
+            List<Appointment> allAppointments = new List<Appointment>();
+            string apptQuery = "SELECT * FROM appointment WHERE userId = @userID AND customerId = @ID";
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(apptQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@userID", _userID);
+                    command.Parameters.AddWithValue("@ID", _customerID);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Appointment appointment = new Appointment();
+                            appointment.ID = (int)reader["appointmentId"];
+                            appointment.CustomerID = _customerID;
+                            appointment.UserID = _userID;
+                            appointment.Contact = reader["contact"].ToString();
+                            appointment.Description = reader["description"].ToString();
+                            appointment.Start = (DateTime)reader["start"];
+                            appointment.End = (DateTime)reader["end"];
+                            appointment.Location = reader["location"].ToString();
+                            appointment.Title = reader["title"].ToString();
+                            appointment.Type = reader["type"].ToString();
+                            appointment.URL = reader["url"].ToString();
+
+                            allAppointments.Add(appointment);
+                        }
+
+                    }
+
+                }
+
+            }
+            return allAppointments;
+        }
+        // Create Add, Update, Delete 
+
+          
+            //user and customer appointment list 
+            //SELECT FROM WHERE  userID == customerID 
+            //make list of an appointments, read one row at a time, creating a single appointment, set values, declare a list outside of the loop,
+            //then return all matching appointments 
+
+
+
+
+            //  public void loadDataGrid()
+            // {
             //{
             //    _calendarList = _customerData.FindAll();
             //    BindingSource source = new BindingSource();
@@ -45,7 +91,7 @@ namespace ScheduleApp.Database
             //            //loadWeekView();
             //        }
             //        SELECT * FROM client_schedule.appointment
-                //WHERE start >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) day AND start < CURDATE() - INTERVAL weekday(CURDATE()) day + interval 7 day;
+            //WHERE start >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) day AND start < CURDATE() - INTERVAL weekday(CURDATE()) day + interval 7 day;
             //        {
             //            //loadAll();
             //        }
@@ -73,4 +119,4 @@ namespace ScheduleApp.Database
             //}
         }
     }
-}
+

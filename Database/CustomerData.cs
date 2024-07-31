@@ -80,7 +80,7 @@ namespace ScheduleApp.Database
             AddressData addressData = new AddressData();
             addressData.Update(customer.Address);
 
-            string updateQueryCustomer = "UPDATE customer SET customerName = @customerName, active = @active,  lastUpdateBy = @lastUpdateBy" + 
+            string updateQueryCustomer = "UPDATE customer SET customerName = @customerName, active = @active,  lastUpdateBy = @lastUpdateBy" +
                 " WHERE customerId = @customerId";
 
 
@@ -116,52 +116,51 @@ namespace ScheduleApp.Database
             addressData.Delete(customer.Address);
         }
 
-        public List<Customer> FindAll()
+        public List<Customer> FindAll(int userId)
         {
             List<Customer> customerFindAllList = new List<Customer>();
-            string getCustomer = "SELECT * FROM customer";
+            string getCustomer = "SELECT * FROM customer"; // Not filtering by userId
             AddressData addressData = new AddressData();
             AppointmentData appointmentData = new AppointmentData();
 
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                //open connection 
-                using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(getCustomer, connection))
                 {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(getCustomer, connection))
-
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            // this reads 1 row at a time 
+                            Customer customer = new Customer();
+                            customer.ID = (int)reader["customerId"];
+                            string[] name = reader["customerName"].ToString().Split(' ');
+                            if (name.Length < 2)
                             {
-                                Customer customer = new Customer();
-                                customer.ID = (int)reader["customerId"];
-                                string[] name = reader["customerName"].ToString().Split(' ');
-                                if (name.Length < 2)
-                                {
-                                    MessageBox.Show("Must have first and last name.");
-                                    // won't populate a single first name.
-                                }
-                                else
-                                {
-                                    customer.FirstName = name[0];
-                                    customer.LastName = name[1];
-                                }
-
-                                customer.IsActive = (bool)reader["active"];
-                                customer.Address = addressData.Get((int)reader["addressId"]);
-                                customer.Appointments = appointmentData.FindAll 
-                                customerFindAllList.Add(customer);
+                                MessageBox.Show("Must have first and last name.");
                             }
+                            else
+                            {
+                                customer.FirstName = name[0];
+                                customer.LastName = name[1];
+                            }
+
+                            customer.IsActive = (bool)reader["active"];
+                            customer.Address = addressData.Get((int)reader["addressId"]);
+                            customer.AppointmentList = appointmentData.FindAllApptList(userId, customer.ID); // Use customer ID
+
+                            customerFindAllList.Add(customer);
                         }
                     }
-                    connection.Close();
                 }
+                connection.Close();
             }
+
             return customerFindAllList;
         }
+
+
+
     }
 }
 

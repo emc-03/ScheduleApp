@@ -31,8 +31,8 @@ namespace ScheduleApp
         private void returnToParentForm()
         {
             this.Close();
-            CustomerInformationForm customerDataForm = new CustomerInformationForm();
-            customerDataForm.Show();
+            //CustomerInformationForm customerDataForm = new CustomerInformationForm();
+            //customerDataForm.Show();
         }
 
         private void UpfnameInput_TextChanged(object sender, EventArgs e)

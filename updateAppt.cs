@@ -75,8 +75,8 @@ namespace ScheduleApp
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            calendarForm calendar = new calendarForm();
-            calendar.Show();
+            //calendarForm calendar = new calendarForm();
+            //calendar.Show();
         }
 
         private void updateAppt_Load(object sender, EventArgs e)

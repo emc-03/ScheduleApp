@@ -195,16 +195,16 @@ namespace ScheduleApp
         #endregion
 
         private System.Windows.Forms.TextBox createIdInput;
-        private System.Windows.Forms.Label upCustomerIDLabel;
-        private System.Windows.Forms.Label upfnLabel;
         private System.Windows.Forms.TextBox createLnameInput;
-        private System.Windows.Forms.Label uplnLabel;
         private System.Windows.Forms.TextBox createFnameInput;
         private System.Windows.Forms.TextBox apptTypeBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label dateTime;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button CreateCancelButton;
         private System.Windows.Forms.Button createApptButton;
+        private System.Windows.Forms.Label upCustomerIDLabel;
+        private System.Windows.Forms.Label upfnLabel;
+        private System.Windows.Forms.Label uplnLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label dateTime;
     }
 }

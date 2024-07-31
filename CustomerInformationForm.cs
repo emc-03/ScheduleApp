@@ -18,16 +18,34 @@ namespace ScheduleApp
         //TODO Start here change to list 
         private List<Customer> _customerList = new List<Customer>();
 
-        public CustomerInformationForm()
+        public CustomerInformationForm(int userId)
         {
             InitializeComponent();
-            loadData();
+            loadData(userId);
+            // could be made into a lambda - inner foreach becomes a if statement - .Any method
+            DateTime quarterTime = DateTime.UtcNow.AddMinutes(15);
+            bool foundAppointment = false;
+            foreach (Customer customer in _customerList)
+            {
+                if (foundAppointment) {
+                    break;
+                }
+                foreach (Appointment appointment in customer.AppointmentList)
+                {
+                    if (appointment.Start <= quarterTime &) {
+                        // add a currenttime var and add additional if statemtent 
+                        MessageBox.Show("You have an appointment within the next 15 minutes.");
+                        foundAppointment = true;
+                        break;
+                    }
+                }
+            }
 
         }
         // dataGridView
-        public void loadData()
+        public void loadData(int userId)
         {
-            _customerList = _customerData.FindAll();
+            _customerList = _customerData.FindAll(userId);
             dataGridCustomer.Columns.Add("customerName", "Name");
             dataGridCustomer.Columns.Add("customerPhone", "Phone");
             dataGridCustomer.Columns.Add("customerAddress1", "Primary Address");
@@ -38,10 +56,16 @@ namespace ScheduleApp
             dataGridCustomer.Columns["customerID"].Visible = false;
             foreach (Customer customer in _customerList)
             {
-                dataGridCustomer.Rows.Add(customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
-                    customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
+                addCustomertoDataGrid(customer);
                 //create a helper method to add a new customer into the datagrid view 
             }
+
+        }
+
+       private void addCustomertoDataGrid(Customer customer)
+        {
+            dataGridCustomer.Rows.Add(customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
+                customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
         }
 
         private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
@@ -175,7 +199,7 @@ namespace ScheduleApp
 
                 _customerData.Add(customer);
 
-                loadData();
+                addCustomertoDataGrid(customer);
                 Console.WriteLine("Data inserted successfully.");
                 this.fnameInput.Clear();
                 this.lnameInput.Clear();
@@ -243,7 +267,7 @@ namespace ScheduleApp
                 MessageBox.Show("No row selected.");
             }
 
-            loadData();
+            
 
 
         }
@@ -255,9 +279,14 @@ namespace ScheduleApp
 
         private void apptLookup_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            calendarForm calendar = new calendarForm();
-            calendar.Show();
+            selectRow();
+            if (_selectedCustomer != null)
+            {
+                //this.Hide();
+                calendarForm calendar = new calendarForm(_selectedCustomer);
+                calendar.Show();
+            }
+               
         }
 
 
@@ -304,7 +333,7 @@ namespace ScheduleApp
 
         private void updateCustomerButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
 
             // TO DO needs to select the row and fill update form
             // ensure the correct row is being selected from the database correctly 

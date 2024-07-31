@@ -25,8 +25,8 @@ namespace ScheduleApp
         private void CreateCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            calendarForm calendar = new calendarForm();
-            calendar.Show();
+            //calendarForm calendar = new calendarForm();
+            //calendar.Show();
         }
     }
 }
