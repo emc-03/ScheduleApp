@@ -13,10 +13,13 @@ namespace ScheduleApp
 {
     public partial class CustomerInformationForm : Form
     {
+
         private Customer _selectedCustomer;
         private readonly CustomerData _customerData = new CustomerData();
         //TODO Start here change to list 
         private List<Customer> _customerList = new List<Customer>();
+        private readonly User _user = new User();
+
 
         public CustomerInformationForm(int userId)
         {
@@ -24,15 +27,18 @@ namespace ScheduleApp
             loadData(userId);
             // could be made into a lambda - inner foreach becomes a if statement - .Any method
             DateTime quarterTime = DateTime.UtcNow.AddMinutes(15);
+
             bool foundAppointment = false;
             foreach (Customer customer in _customerList)
             {
-                if (foundAppointment) {
+                if (foundAppointment)
+                {
                     break;
                 }
                 foreach (Appointment appointment in customer.AppointmentList)
                 {
-                    if (appointment.Start <= quarterTime &) {
+                    if (appointment.Start <= quarterTime && appointment.Start >= DateTime.UtcNow)
+                    {
                         // add a currenttime var and add additional if statemtent 
                         MessageBox.Show("You have an appointment within the next 15 minutes.");
                         foundAppointment = true;
@@ -57,12 +63,12 @@ namespace ScheduleApp
             foreach (Customer customer in _customerList)
             {
                 addCustomertoDataGrid(customer);
-                //create a helper method to add a new customer into the datagrid view 
+                
             }
 
         }
 
-       private void addCustomertoDataGrid(Customer customer)
+        private void addCustomertoDataGrid(Customer customer)
         {
             dataGridCustomer.Rows.Add(customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
                 customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
@@ -87,7 +93,7 @@ namespace ScheduleApp
 
             Customer customer = new Customer();
 
-           
+
 
             if (string.IsNullOrWhiteSpace(fnameInput.Text))
             {
@@ -204,9 +210,9 @@ namespace ScheduleApp
                 this.fnameInput.Clear();
                 this.lnameInput.Clear();
                 //TODO clear each input box
-                
-                    
-                
+
+
+
             }
             catch (Exception ex)
             {
@@ -267,7 +273,7 @@ namespace ScheduleApp
                 MessageBox.Show("No row selected.");
             }
 
-            
+
 
 
         }
@@ -277,16 +283,16 @@ namespace ScheduleApp
 
         }
 
-        private void apptLookup_Click(object sender, EventArgs e)
+        private void apptLookup_Click(object sender, EventArgs e)//object sender, EventArgs e)
         {
+
             selectRow();
             if (_selectedCustomer != null)
             {
-                //this.Hide();
                 calendarForm calendar = new calendarForm(_selectedCustomer);
                 calendar.Show();
             }
-               
+
         }
 
 
@@ -310,7 +316,8 @@ namespace ScheduleApp
                     }
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
 
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -371,6 +378,11 @@ namespace ScheduleApp
         }
 
         private void custSearchBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerInformationForm_Load(object sender, EventArgs e)
         {
 
         }

@@ -126,5 +126,10 @@ namespace ScheduleApp
         {
 
         }
+
+        private void loginPanelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -399,6 +399,7 @@ namespace ScheduleApp
             this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.Name = "CustomerInformationForm";
             this.Text = "CUSTOMER INFORMATION";
+            this.Load += new System.EventHandler(this.CustomerInformationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).EndInit();
             this.custButtonPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

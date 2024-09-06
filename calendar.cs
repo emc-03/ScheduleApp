@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using ScheduleApp.Database;
+using ScheduleApp.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,28 +18,102 @@ namespace ScheduleApp
     public partial class calendarForm : Form
 
     {
-        private SqlConnection gridConnection;
-        private SqlDataAdapter adapter;
-        private DataSet data;
+        //private SqlConnection gridConnection;
+        //private SqlDataAdapter adapter;
+        //private DataSet data;
         private Customer _selectedCustomer;
+        //private readonly AppointmentData _appointmentData = new AppointmentData();
+        //private List<Appointment> _appointmentList = new List<Appointment>();
+        private Appointment _appointment;
+        //private User _user;
+        private readonly User _user = new User();
 
-        
+        //TODO Start here change to list 
+
 
         public calendarForm(Customer selectedCustomer)
         {
             _selectedCustomer = selectedCustomer;
+            //_user = selectedUser;
             InitializeComponent();
+            loadData();
 
         }
 
+        public void loadData()
+        {
+            //_appointmentList = _appointmentData.FindAll(userId);
+            appointmentDataGrid.Columns.Add("appointmentStart", "Start Time");
+            appointmentDataGrid.Columns.Add("appointmentEnd", "End Time");
+            appointmentDataGrid.Columns.Add("appointmentTitle", "Title");
+            appointmentDataGrid.Columns.Add("appointmentType", "Appointment Type");
+            appointmentDataGrid.Columns.Add("appointmentLocation", "Location");
+            appointmentDataGrid.Columns.Add("appointmentDescription", "Description");
+            appointmentDataGrid.Columns.Add("appointmentContact", "Contact");
+            appointmentDataGrid.Columns.Add("appointmentID", "ID");
+            appointmentDataGrid.Columns["appointmentID"].Visible = false;
+
+            foreach (Appointment appointment in _selectedCustomer.AppointmentList)
+            {
+                addAppointmenttoDataGrid(appointment);
+
+            }
+
+        }
+
+        private void addAppointmenttoDataGrid(Appointment appointment)
+        {
+            appointmentDataGrid.Rows.Add(
+                appointment.Start,
+                appointment.End,
+                appointment.Title,
+                appointment.Type,
+                appointment.Location,
+                appointment.Description,
+                appointment.Contact,
+                appointment.ID);
+        }
+
+        private void selectRow()
+
+        {
+            //int rowCount = dataGridCustomer.SelectedRows.Count;
+            //Int32 rowCount = appointmentDataGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            Int32 rowCount = appointmentDataGrid.SelectedRows.Count;
+            // if more then 1 row was selected they can't update more than one customer at a time. 
+            if (rowCount > 0)
+            {
+                var selectedAppointmentID = appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value;
+                if (selectedAppointmentID == null || !int.TryParse(selectedAppointmentID.ToString(), out int ID))
+                {
+                    return;
+                }
+                // Check if the appointment with the selected ID exists in the list
+                if (_selectedCustomer.AppointmentList.Any(appointment => appointment.ID == ID))
+                {
+                    _appointment = _selectedCustomer.AppointmentList.First(appointment => appointment.ID == ID);  //(appoin => appointment.ID == ID);
+                }
+                else
+                {
+                    MessageBox.Show("Could not find Customer in memory.");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No row selected.");
+            }
 
 
 
 
+        }
+
+        
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-           // CustomerInformationForm custData = new CustomerInformationForm();
+            // CustomerInformationForm custData = new CustomerInformationForm();
             //custData.Show();
 
         }
@@ -52,11 +127,9 @@ namespace ScheduleApp
         {
             this.Close();
             //CustomerInformationForm customer = new CustomerInformationForm();
-           // customer.Show();
+            // customer.Show();
         }
 
-        // TODO copy the login form sql from the login form and create a query from the database to find the 
-        // appointments for the userID and the customerID; display them to the calendar
 
 
 
@@ -76,69 +149,75 @@ namespace ScheduleApp
 
         private void updateApptButton_Click(object sender, EventArgs e)
         {
+            selectRow();
             this.Hide();
             updateAppt update = new updateAppt();
-            update.Show();
-
-        }
-
-        private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-        }
-
-
-
-        private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void searchApptButton_Click(object sender, EventArgs e)
-        {
-            try
+            if (_appointment != null)
             {
-                //string connectionString = "?";
-                //string searchAppt = TextBox.?; TODO What do I reference ? 
-
-                //using (MySqlConnection connection = new MySqlConnection(connectionString));
-                // search the query 
-
+                update.Show();
             }
-            catch
-            {
-                MessageBox.Show("Appointment could not be found!");
-            }
-
-            // when monthRadioButton selected 
-            /*   string monthConnection = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString; // table for test use - TODO  where to find the connection string?; 
-
-             create sql object 
-            gridConnection = new SqlConnection(monthConnection);
-             create dataAdapter object
-            adapter = new SqlDataAdapter("SELECT * FROM client_schedule", monthConnection);
-             create a Dataset Object 
-            data = new DataSet();
-            adapter.Fill(data, "client_schedule");
-            monthDataGrid.DataSource = data.Tables["client_schedule"];
-            */
-
-        }
-
-        private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
-        {
-
+            else { 
+            MessageBox.Show("No Appointment Selected!");
         }
     }
+
+    private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+
+    }
+
+
+
+    private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void searchApptButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            //string connectionString = "?";
+            //string searchAppt = TextBox.?; TODO What do I reference ? 
+
+            //using (MySqlConnection connection = new MySqlConnection(connectionString));
+            // search the query 
+
+        }
+        catch
+        {
+            MessageBox.Show("Appointment could not be found!");
+        }
+
+        // when monthRadioButton selected 
+        /*   string monthConnection = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString; // table for test use - TODO  where to find the connection string?; 
+
+         create sql object 
+        gridConnection = new SqlConnection(monthConnection);
+         create dataAdapter object
+        adapter = new SqlDataAdapter("SELECT * FROM client_schedule", monthConnection);
+         create a Dataset Object 
+        data = new DataSet();
+        adapter.Fill(data, "client_schedule");
+        monthDataGrid.DataSource = data.Tables["client_schedule"];
+        */
+
+    }
+
+    private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
+    {
+
+    }
+}
 }

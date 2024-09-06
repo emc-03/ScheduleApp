@@ -128,7 +128,6 @@ namespace ScheduleApp
             // 
             this.UplnameInput.Location = new System.Drawing.Point(186, 110);
             this.UplnameInput.Name = "UplnameInput";
-            this.UplnameInput.ReadOnly = true;
             this.UplnameInput.Size = new System.Drawing.Size(131, 20);
             this.UplnameInput.TabIndex = 55;
             this.UplnameInput.TextChanged += new System.EventHandler(this.UplnameInput_TextChanged);
@@ -149,7 +148,6 @@ namespace ScheduleApp
             // 
             this.UpfnameInput.Location = new System.Drawing.Point(17, 110);
             this.UpfnameInput.Name = "UpfnameInput";
-            this.UpfnameInput.ReadOnly = true;
             this.UpfnameInput.Size = new System.Drawing.Size(131, 20);
             this.UpfnameInput.TabIndex = 57;
             this.UpfnameInput.TextChanged += new System.EventHandler(this.UpfnameInput_TextChanged);

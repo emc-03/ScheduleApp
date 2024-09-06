@@ -92,6 +92,7 @@ namespace ScheduleApp
             this.loginPanelMain.Name = "loginPanelMain";
             this.loginPanelMain.Size = new System.Drawing.Size(508, 490);
             this.loginPanelMain.TabIndex = 3;
+            this.loginPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.loginPanelMain_Paint);
             // 
             // loginButton
             // 

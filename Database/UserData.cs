@@ -10,8 +10,16 @@ namespace ScheduleApp.Database
 {
     class UserData
     {
+
+        /*
+        public void Add(User user)
+        {
+            int MyUserID = user.ID;
+        }
+        */
+        
         public User Get(string userName, string password) {
-            User user = null; // declared but not initilized until line 28
+            User user = new User(); // declared but not initilized until line 28
 
             string searchRow = "SELECT * From user WHERE username = @username AND password = @password";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
@@ -43,16 +51,16 @@ namespace ScheduleApp.Database
                             {
                                 MessageBox.Show("User isActive value is invalid.");
                             }
-                           
-
+                              
                         }
                         
                     }
-
+                    
                 }
-
+                
             }
             return user;
         }
+        
     }
 }
