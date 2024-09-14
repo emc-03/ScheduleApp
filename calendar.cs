@@ -18,23 +18,16 @@ namespace ScheduleApp
     public partial class calendarForm : Form
 
     {
-        //private SqlConnection gridConnection;
-        //private SqlDataAdapter adapter;
-        //private DataSet data;
+        
         private Customer _selectedCustomer;
-        //private readonly AppointmentData _appointmentData = new AppointmentData();
-        //private List<Appointment> _appointmentList = new List<Appointment>();
         private Appointment _appointment;
-        //private User _user;
-        private readonly User _user = new User();
-
-        //TODO Start here change to list 
 
 
         public calendarForm(Customer selectedCustomer)
         {
+            
             _selectedCustomer = selectedCustomer;
-            //_user = selectedUser;
+
             InitializeComponent();
             loadData();
 
@@ -77,39 +70,33 @@ namespace ScheduleApp
         private void selectRow()
 
         {
-            //int rowCount = dataGridCustomer.SelectedRows.Count;
-            //Int32 rowCount = appointmentDataGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+
             Int32 rowCount = appointmentDataGrid.SelectedRows.Count;
             // if more then 1 row was selected they can't update more than one customer at a time. 
             if (rowCount > 0)
             {
-                var selectedAppointmentID = appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value;
-                if (selectedAppointmentID == null || !int.TryParse(selectedAppointmentID.ToString(), out int ID))
+                int selectedAppointmentID = Convert.ToInt32(appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value);
+                Appointment selectedAppointment = _selectedCustomer.AppointmentList.FirstOrDefault(a => a.ID == selectedAppointmentID);
+
+                if (selectedAppointment == null)
                 {
-                    return;
-                }
-                // Check if the appointment with the selected ID exists in the list
-                if (_selectedCustomer.AppointmentList.Any(appointment => appointment.ID == ID))
-                {
-                    _appointment = _selectedCustomer.AppointmentList.First(appointment => appointment.ID == ID);  //(appoin => appointment.ID == ID);
+
+                    MessageBox.Show("Could not find Customer in memory.");
                 }
                 else
                 {
-                    MessageBox.Show("Could not find Customer in memory.");
+                    _appointment = selectedAppointment;
                 }
-
             }
             else
             {
                 MessageBox.Show("No row selected.");
             }
 
-
-
-
         }
 
-        
+
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -132,9 +119,6 @@ namespace ScheduleApp
 
 
 
-
-
-
         private void apptTaskLabel_Click(object sender, EventArgs e)
         {
 
@@ -142,82 +126,84 @@ namespace ScheduleApp
 
         private void createApptButton_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            ApptType create = new ApptType();
+
+            CreateAppointment create = new CreateAppointment();
             create.Show();
         }
 
         private void updateApptButton_Click(object sender, EventArgs e)
         {
             selectRow();
-            this.Hide();
-            updateAppt update = new updateAppt();
+
+
             if (_appointment != null)
             {
+                updateAppt update = new updateAppt(_appointment);
                 update.Show();
             }
-            else { 
-            MessageBox.Show("No Appointment Selected!");
+            else
+            {
+                MessageBox.Show("No Appointment Selected!");
+            }
         }
-    }
 
-    private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-    {
-
-
-    }
-
-
-
-    private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void searchApptButton_Click(object sender, EventArgs e)
-    {
-        try
+        private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //string connectionString = "?";
-            //string searchAppt = TextBox.?; TODO What do I reference ? 
 
-            //using (MySqlConnection connection = new MySqlConnection(connectionString));
-            // search the query 
 
         }
-        catch
+
+
+
+        private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("Appointment could not be found!");
+
         }
 
-        // when monthRadioButton selected 
-        /*   string monthConnection = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString; // table for test use - TODO  where to find the connection string?; 
+        private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
 
-         create sql object 
-        gridConnection = new SqlConnection(monthConnection);
-         create dataAdapter object
-        adapter = new SqlDataAdapter("SELECT * FROM client_schedule", monthConnection);
-         create a Dataset Object 
-        data = new DataSet();
-        adapter.Fill(data, "client_schedule");
-        monthDataGrid.DataSource = data.Tables["client_schedule"];
-        */
+        }
 
+        private void searchApptButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //string connectionString = "?";
+                //string searchAppt = TextBox.?; TODO What do I reference ? 
+
+                //using (MySqlConnection connection = new MySqlConnection(connectionString));
+                // search the query 
+
+            }
+            catch
+            {
+                MessageBox.Show("Appointment could not be found!");
+            }
+
+            // when monthRadioButton selected 
+            /*   string monthConnection = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString; // table for test use - TODO  where to find the connection string?; 
+
+             create sql object 
+            gridConnection = new SqlConnection(monthConnection);
+             create dataAdapter object
+            adapter = new SqlDataAdapter("SELECT * FROM client_schedule", monthConnection);
+             create a Dataset Object 
+            data = new DataSet();
+            adapter.Fill(data, "client_schedule");
+            monthDataGrid.DataSource = data.Tables["client_schedule"];
+            */
+
+        }
+
+        private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-
-    private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
-    {
-
-    }
-}
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScheduleApp.Database;
+using ScheduleApp.models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -14,9 +16,24 @@ namespace ScheduleApp
 {
     public partial class updateAppt : Form
     {
-        public updateAppt()
+        //private Appointment _appointment;
+        private Appointment apptToUpdate = new Appointment();
+       
+        public updateAppt(Appointment appointment)
         {
+            //_appointment = appointment;
+            apptToUpdate = appointment;
             InitializeComponent();
+            populateCustomerData();
+        }
+
+        private void populateCustomerData() {
+
+            // Populate the controls with customer data
+            upApptType.Text = apptToUpdate.Description;
+            upDateTime.Text = apptToUpdate.Start.ToString();
+            upHourBox.Text = apptToUpdate.End.Hour.ToString();
+
         }
 
         private void UpcustIdInput_TextChanged(object sender, EventArgs e)
@@ -98,19 +115,25 @@ namespace ScheduleApp
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            AppointmentData appointmentData = new AppointmentData();
+            apptToUpdate.Description = this.upApptType.Text;
 
+            appointmentData. Update(apptToUpdate);
+            MessageBox.Show("Appointment successfully updated.");
+            this.Close();
         }
 
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            //calendarForm calendar = new calendarForm();
-            //calendar.Show();
+        
         }
 
         private void updateAppt_Load(object sender, EventArgs e)
         {
 
         }
+
+    
     }
 }

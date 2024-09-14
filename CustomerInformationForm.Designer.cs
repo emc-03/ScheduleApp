@@ -229,7 +229,7 @@ namespace ScheduleApp
             // 
             this.addCustomerLabel.AutoSize = true;
             this.addCustomerLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCustomerLabel.Location = new System.Drawing.Point(89, 17);
+            this.addCustomerLabel.Location = new System.Drawing.Point(96, 17);
             this.addCustomerLabel.Name = "addCustomerLabel";
             this.addCustomerLabel.Size = new System.Drawing.Size(143, 34);
             this.addCustomerLabel.TabIndex = 15;

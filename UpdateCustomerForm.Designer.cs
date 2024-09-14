@@ -50,243 +50,243 @@ namespace ScheduleApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateCustomerForm));
-            UpdateCustomerForm updateCustomerForm = this;
-            updateCustomerForm.UpcountryInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upCountryLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.UpcityInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upCityLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.UpaddressInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upAddressLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.Upaddress2Input = new System.Windows.Forms.TextBox();
-            updateCustomerForm.UpPhoneInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upPhoneLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.UpfnameInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.uplnLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.UplnameInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upfnLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.panel1 = new System.Windows.Forms.Panel();
-            updateCustomerForm.postalCLabel = new System.Windows.Forms.Label();
-            updateCustomerForm.postalCodeInput = new System.Windows.Forms.TextBox();
-            updateCustomerForm.upCancelButton = new System.Windows.Forms.Button();
-            updateCustomerForm.updateCButton = new System.Windows.Forms.Button();
-            updateCustomerForm.updateHeader = new System.Windows.Forms.Label();
-            updateCustomerForm.panel1.SuspendLayout();
-            updateCustomerForm.SuspendLayout();
+            //UpdateCustomerForm updateCustomerForm = this;
+            this.UpcountryInput = new System.Windows.Forms.TextBox();
+            this.upCountryLabel = new System.Windows.Forms.Label();
+            this.UpcityInput = new System.Windows.Forms.TextBox();
+            this.upCityLabel = new System.Windows.Forms.Label();
+            this.UpaddressInput = new System.Windows.Forms.TextBox();
+            this.upAddressLabel = new System.Windows.Forms.Label();
+            this.Upaddress2Input = new System.Windows.Forms.TextBox();
+            this.UpPhoneInput = new System.Windows.Forms.TextBox();
+            this.upPhoneLabel = new System.Windows.Forms.Label();
+            this.UpfnameInput = new System.Windows.Forms.TextBox();
+            this.uplnLabel = new System.Windows.Forms.Label();
+            this.UplnameInput = new System.Windows.Forms.TextBox();
+            this.upfnLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.postalCLabel = new System.Windows.Forms.Label();
+            this.postalCodeInput = new System.Windows.Forms.TextBox();
+            this.upCancelButton = new System.Windows.Forms.Button();
+            this.updateCButton = new System.Windows.Forms.Button();
+            this.updateHeader = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // UpcountryInput
             // 
-            updateCustomerForm.UpcountryInput.Location = new System.Drawing.Point(153, 440);
-            updateCustomerForm.UpcountryInput.Name = "UpcountryInput";
-            updateCustomerForm.UpcountryInput.Size = new System.Drawing.Size(202, 38);
-            updateCustomerForm.UpcountryInput.TabIndex = 26;
-            updateCustomerForm.UpcountryInput.Text = updateCustomerForm.customerToUpdate.Address.City.Country.Name;
+            this.UpcountryInput.Location = new System.Drawing.Point(153, 440);
+            this.UpcountryInput.Name = "UpcountryInput";
+            this.UpcountryInput.Size = new System.Drawing.Size(202, 38);
+            this.UpcountryInput.TabIndex = 26;
+            //updateCustomerForm.UpcountryInput.Text = updateCustomerForm.customerToUpdate.Address.City.Country.Name;
             // 
             // upCountryLabel
             // 
-            updateCustomerForm.upCountryLabel.AutoSize = true;
-            updateCustomerForm.upCountryLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.upCountryLabel.Location = new System.Drawing.Point(50, 443);
-            updateCustomerForm.upCountryLabel.Name = "upCountryLabel";
-            updateCustomerForm.upCountryLabel.Size = new System.Drawing.Size(82, 29);
-            updateCustomerForm.upCountryLabel.TabIndex = 25;
-            updateCustomerForm.upCountryLabel.Text = "Country :";
+            this.upCountryLabel.AutoSize = true;
+            this.upCountryLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.upCountryLabel.Location = new System.Drawing.Point(50, 443);
+            this.upCountryLabel.Name = "upCountryLabel";
+            this.upCountryLabel.Size = new System.Drawing.Size(82, 29);
+            this.upCountryLabel.TabIndex = 25;
+            this.upCountryLabel.Text = "Country :";
             // 
             // UpcityInput
             // 
-            updateCustomerForm.UpcityInput.Location = new System.Drawing.Point(153, 319);
-            updateCustomerForm.UpcityInput.Name = "UpcityInput";
-            updateCustomerForm.UpcityInput.Size = new System.Drawing.Size(202, 38);
-            updateCustomerForm.UpcityInput.TabIndex = 24;
-            updateCustomerForm.UpcityInput.Text = updateCustomerForm.customerToUpdate.Address.City.Name;
+            this.UpcityInput.Location = new System.Drawing.Point(153, 319);
+            this.UpcityInput.Name = "UpcityInput";
+            this.UpcityInput.Size = new System.Drawing.Size(202, 38);
+            this.UpcityInput.TabIndex = 24;
+            //updateCustomerForm.UpcityInput.Text = updateCustomerForm.customerToUpdate.Address.City.Name;
             // 
             // upCityLabel
             // 
-            updateCustomerForm.upCityLabel.AutoSize = true;
-            updateCustomerForm.upCityLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.upCityLabel.Location = new System.Drawing.Point(81, 328);
-            updateCustomerForm.upCityLabel.Name = "upCityLabel";
-            updateCustomerForm.upCityLabel.Size = new System.Drawing.Size(51, 29);
-            updateCustomerForm.upCityLabel.TabIndex = 23;
-            updateCustomerForm.upCityLabel.Text = "City :";
+            this.upCityLabel.AutoSize = true;
+            this.upCityLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.upCityLabel.Location = new System.Drawing.Point(81, 328);
+            this.upCityLabel.Name = "upCityLabel";
+            this.upCityLabel.Size = new System.Drawing.Size(51, 29);
+            this.upCityLabel.TabIndex = 23;
+            this.upCityLabel.Text = "City :";
             // 
             // UpaddressInput
             // 
-            updateCustomerForm.UpaddressInput.Location = new System.Drawing.Point(153, 214);
-            updateCustomerForm.UpaddressInput.Name = "UpaddressInput";
-            updateCustomerForm.UpaddressInput.Size = new System.Drawing.Size(223, 38);
-            updateCustomerForm.UpaddressInput.TabIndex = 22;
-            updateCustomerForm.UpaddressInput.Text = updateCustomerForm.customerToUpdate.Address.Address1;
+            this.UpaddressInput.Location = new System.Drawing.Point(153, 214);
+            this.UpaddressInput.Name = "UpaddressInput";
+            this.UpaddressInput.Size = new System.Drawing.Size(223, 38);
+            this.UpaddressInput.TabIndex = 22;
+            //updateCustomerForm.UpaddressInput.Text = updateCustomerForm.customerToUpdate.Address.Address1;
             // 
             // upAddressLabel
             // 
-            updateCustomerForm.upAddressLabel.AutoSize = true;
-            updateCustomerForm.upAddressLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.upAddressLabel.Location = new System.Drawing.Point(10, 217);
-            updateCustomerForm.upAddressLabel.Name = "upAddressLabel";
-            updateCustomerForm.upAddressLabel.Size = new System.Drawing.Size(130, 29);
-            updateCustomerForm.upAddressLabel.TabIndex = 21;
-            updateCustomerForm.upAddressLabel.Text = "Street Address :";
+            this.upAddressLabel.AutoSize = true;
+            this.upAddressLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.upAddressLabel.Location = new System.Drawing.Point(10, 217);
+            this.upAddressLabel.Name = "upAddressLabel";
+            this.upAddressLabel.Size = new System.Drawing.Size(130, 29);
+            this.upAddressLabel.TabIndex = 21;
+            this.upAddressLabel.Text = "Street Address :";
             // 
             // Upaddress2Input
             // 
-            updateCustomerForm.Upaddress2Input.Location = new System.Drawing.Point(153, 267);
-            updateCustomerForm.Upaddress2Input.Name = "Upaddress2Input";
-            updateCustomerForm.Upaddress2Input.Size = new System.Drawing.Size(223, 38);
-            updateCustomerForm.Upaddress2Input.TabIndex = 22;
-            updateCustomerForm.Upaddress2Input.Text = updateCustomerForm.customerToUpdate.Address.Address2;
+            this.Upaddress2Input.Location = new System.Drawing.Point(153, 267);
+            this.Upaddress2Input.Name = "Upaddress2Input";
+            this.Upaddress2Input.Size = new System.Drawing.Size(223, 38);
+            this.Upaddress2Input.TabIndex = 22;
+            //updateCustomerForm.Upaddress2Input.Text = updateCustomerForm.customerToUpdate.Address.Address2;
             // 
             // UpPhoneInput
             // 
-            updateCustomerForm.UpPhoneInput.Location = new System.Drawing.Point(153, 153);
-            updateCustomerForm.UpPhoneInput.Name = "UpPhoneInput";
-            updateCustomerForm.UpPhoneInput.Size = new System.Drawing.Size(223, 38);
-            updateCustomerForm.UpPhoneInput.TabIndex = 20;
-            updateCustomerForm.UpPhoneInput.TextChanged += new System.EventHandler(updateCustomerForm.UpPhoneInput_TextChanged);
-            updateCustomerForm.UpPhoneInput.Text = updateCustomerForm.customerToUpdate.Address.PhoneNumber;
+            this.UpPhoneInput.Location = new System.Drawing.Point(153, 153);
+            this.UpPhoneInput.Name = "UpPhoneInput";
+            this.UpPhoneInput.Size = new System.Drawing.Size(223, 38);
+            this.UpPhoneInput.TabIndex = 20;
+            this.UpPhoneInput.TextChanged += new System.EventHandler(this.UpPhoneInput_TextChanged);
+            //updateCustomerForm.UpPhoneInput.Text = updateCustomerForm.customerToUpdate.Address.PhoneNumber;
             // 
             // upPhoneLabel
             // 
-            updateCustomerForm.upPhoneLabel.AutoSize = true;
-            updateCustomerForm.upPhoneLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.upPhoneLabel.Location = new System.Drawing.Point(10, 162);
-            updateCustomerForm.upPhoneLabel.Name = "upPhoneLabel";
-            updateCustomerForm.upPhoneLabel.Size = new System.Drawing.Size(137, 29);
-            updateCustomerForm.upPhoneLabel.TabIndex = 19;
-            updateCustomerForm.upPhoneLabel.Text = "Phone Number :";
+            this.upPhoneLabel.AutoSize = true;
+            this.upPhoneLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.upPhoneLabel.Location = new System.Drawing.Point(10, 162);
+            this.upPhoneLabel.Name = "upPhoneLabel";
+            this.upPhoneLabel.Size = new System.Drawing.Size(137, 29);
+            this.upPhoneLabel.TabIndex = 19;
+            this.upPhoneLabel.Text = "Phone Number :";
             // 
             // UpfnameInput
             // 
-            updateCustomerForm.UpfnameInput.Location = new System.Drawing.Point(8, 89);
-            updateCustomerForm.UpfnameInput.Name = "UpfnameInput";
-            updateCustomerForm.UpfnameInput.Size = new System.Drawing.Size(168, 38);
-            updateCustomerForm.UpfnameInput.TabIndex = 18;
-            updateCustomerForm.UpfnameInput.TextChanged += new System.EventHandler(updateCustomerForm.UpfnameInput_TextChanged);
-            updateCustomerForm.UpfnameInput.Text = updateCustomerForm.customerToUpdate.FirstName;
+            this.UpfnameInput.Location = new System.Drawing.Point(8, 89);
+            this.UpfnameInput.Name = "UpfnameInput";
+            this.UpfnameInput.Size = new System.Drawing.Size(168, 38);
+            this.UpfnameInput.TabIndex = 18;
+            this.UpfnameInput.TextChanged += new System.EventHandler(this.UpfnameInput_TextChanged);
+            //updateCustomerForm.UpfnameInput.Text = updateCustomerForm.customerToUpdate.FirstName;
             // 
             // uplnLabel
             // 
-            updateCustomerForm.uplnLabel.AutoSize = true;
-            updateCustomerForm.uplnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            updateCustomerForm.uplnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.uplnLabel.Location = new System.Drawing.Point(257, 59);
-            updateCustomerForm.uplnLabel.Name = "uplnLabel";
-            updateCustomerForm.uplnLabel.Size = new System.Drawing.Size(91, 27);
-            updateCustomerForm.uplnLabel.TabIndex = 17;
-            updateCustomerForm.uplnLabel.Text = "Last Name ";
+            this.uplnLabel.AutoSize = true;
+            this.uplnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uplnLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.uplnLabel.Location = new System.Drawing.Point(257, 59);
+            this.uplnLabel.Name = "uplnLabel";
+            this.uplnLabel.Size = new System.Drawing.Size(91, 27);
+            this.uplnLabel.TabIndex = 17;
+            this.uplnLabel.Text = "Last Name ";
             // 
             // UplnameInput
             // 
-            updateCustomerForm.UplnameInput.Location = new System.Drawing.Point(205, 89);
-            updateCustomerForm.UplnameInput.Name = "UplnameInput";
-            updateCustomerForm.UplnameInput.Size = new System.Drawing.Size(168, 38);
-            updateCustomerForm.UplnameInput.TabIndex = 16;
-            updateCustomerForm.UplnameInput.Text = updateCustomerForm.customerToUpdate.LastName;
+            this.UplnameInput.Location = new System.Drawing.Point(205, 89);
+            this.UplnameInput.Name = "UplnameInput";
+            this.UplnameInput.Size = new System.Drawing.Size(168, 38);
+            this.UplnameInput.TabIndex = 16;
+            //updateCustomerForm.UplnameInput.Text = updateCustomerForm.customerToUpdate.LastName;
             // 
             // upfnLabel
             // 
-            updateCustomerForm.upfnLabel.AutoSize = true;
-            updateCustomerForm.upfnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            updateCustomerForm.upfnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.upfnLabel.Location = new System.Drawing.Point(39, 59);
-            updateCustomerForm.upfnLabel.Name = "upfnLabel";
-            updateCustomerForm.upfnLabel.Size = new System.Drawing.Size(93, 27);
-            updateCustomerForm.upfnLabel.TabIndex = 15;
-            updateCustomerForm.upfnLabel.Text = "First Name ";
+            this.upfnLabel.AutoSize = true;
+            this.upfnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.upfnLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.upfnLabel.Location = new System.Drawing.Point(39, 59);
+            this.upfnLabel.Name = "upfnLabel";
+            this.upfnLabel.Size = new System.Drawing.Size(93, 27);
+            this.upfnLabel.TabIndex = 15;
+            this.upfnLabel.Text = "First Name ";
             // 
             // panel1
             // 
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.postalCLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.postalCodeInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upCancelButton);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.updateCButton);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.updateHeader);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upPhoneLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upfnLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UplnameInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UpcountryInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.uplnLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upCountryLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UpfnameInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UpcityInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UpPhoneInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upCityLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.upAddressLabel);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.UpaddressInput);
-            updateCustomerForm.panel1.Controls.Add(updateCustomerForm.Upaddress2Input);
-            updateCustomerForm.panel1.Location = new System.Drawing.Point(2, 1);
-            updateCustomerForm.panel1.Name = "panel1";
-            updateCustomerForm.panel1.Size = new System.Drawing.Size(424, 607);
-            updateCustomerForm.panel1.TabIndex = 29;
+            this.panel1.Controls.Add(this.postalCLabel);
+            this.panel1.Controls.Add(this.postalCodeInput);
+            this.panel1.Controls.Add(this.upCancelButton);
+            this.panel1.Controls.Add(this.updateCButton);
+            this.panel1.Controls.Add(this.updateHeader);
+            this.panel1.Controls.Add(this.upPhoneLabel);
+            this.panel1.Controls.Add(this.upfnLabel);
+            this.panel1.Controls.Add(this.UplnameInput);
+            this.panel1.Controls.Add(this.UpcountryInput);
+            this.panel1.Controls.Add(this.uplnLabel);
+            this.panel1.Controls.Add(this.upCountryLabel);
+            this.panel1.Controls.Add(this.UpfnameInput);
+            this.panel1.Controls.Add(this.UpcityInput);
+            this.panel1.Controls.Add(this.UpPhoneInput);
+            this.panel1.Controls.Add(this.upCityLabel);
+            this.panel1.Controls.Add(this.upAddressLabel);
+            this.panel1.Controls.Add(this.UpaddressInput);
+            this.panel1.Controls.Add(this.Upaddress2Input);
+            this.panel1.Location = new System.Drawing.Point(2, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(424, 607);
+            this.panel1.TabIndex = 29;
             // 
             // postalCLabel
             // 
-            updateCustomerForm.postalCLabel.AutoSize = true;
-            updateCustomerForm.postalCLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.postalCLabel.Location = new System.Drawing.Point(25, 388);
-            updateCustomerForm.postalCLabel.Name = "postalCLabel";
-            updateCustomerForm.postalCLabel.Size = new System.Drawing.Size(111, 29);
-            updateCustomerForm.postalCLabel.TabIndex = 33;
-            updateCustomerForm.postalCLabel.Text = "Postal Code :";
+            this.postalCLabel.AutoSize = true;
+            this.postalCLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.postalCLabel.Location = new System.Drawing.Point(25, 388);
+            this.postalCLabel.Name = "postalCLabel";
+            this.postalCLabel.Size = new System.Drawing.Size(111, 29);
+            this.postalCLabel.TabIndex = 33;
+            this.postalCLabel.Text = "Postal Code :";
             // 
             // postalCodeInput
             // 
-            updateCustomerForm.postalCodeInput.Location = new System.Drawing.Point(153, 379);
-            updateCustomerForm.postalCodeInput.Name = "postalCodeInput";
-            updateCustomerForm.postalCodeInput.Size = new System.Drawing.Size(202, 38);
-            updateCustomerForm.postalCodeInput.TabIndex = 32;
-            updateCustomerForm.postalCodeInput.Text = updateCustomerForm.customerToUpdate.Address.PostalCode;
+            this.postalCodeInput.Location = new System.Drawing.Point(153, 379);
+            this.postalCodeInput.Name = "postalCodeInput";
+            this.postalCodeInput.Size = new System.Drawing.Size(202, 38);
+            this.postalCodeInput.TabIndex = 32;
+            //updateCustomerForm.postalCodeInput.Text = updateCustomerForm.customerToUpdate.Address.PostalCode;
             // 
             // upCancelButton
             // 
-            updateCustomerForm.upCancelButton.BackColor = System.Drawing.Color.Black;
-            updateCustomerForm.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
-            updateCustomerForm.upCancelButton.Location = new System.Drawing.Point(275, 531);
-            updateCustomerForm.upCancelButton.Name = "upCancelButton";
-            updateCustomerForm.upCancelButton.Size = new System.Drawing.Size(123, 60);
-            updateCustomerForm.upCancelButton.TabIndex = 31;
-            updateCustomerForm.upCancelButton.Text = "CANCEL";
-            updateCustomerForm.upCancelButton.UseVisualStyleBackColor = false;
-            updateCustomerForm.upCancelButton.Click += new System.EventHandler(updateCustomerForm.upCancelButton_Click);
+            this.upCancelButton.BackColor = System.Drawing.Color.Black;
+            this.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
+            this.upCancelButton.Location = new System.Drawing.Point(275, 531);
+            this.upCancelButton.Name = "upCancelButton";
+            this.upCancelButton.Size = new System.Drawing.Size(123, 60);
+            this.upCancelButton.TabIndex = 31;
+            this.upCancelButton.Text = "CANCEL";
+            this.upCancelButton.UseVisualStyleBackColor = false;
+            this.upCancelButton.Click += new System.EventHandler(this.upCancelButton_Click);
             // 
             // updateCButton
             // 
-            updateCustomerForm.updateCButton.BackColor = System.Drawing.Color.Black;
-            updateCustomerForm.updateCButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            updateCustomerForm.updateCButton.Location = new System.Drawing.Point(21, 531);
-            updateCustomerForm.updateCButton.Name = "updateCButton";
-            updateCustomerForm.updateCButton.Size = new System.Drawing.Size(123, 60);
-            updateCustomerForm.updateCButton.TabIndex = 30;
-            updateCustomerForm.updateCButton.Text = "SAVE";
-            updateCustomerForm.updateCButton.UseVisualStyleBackColor = false;
-            updateCustomerForm.updateCButton.Click += new System.EventHandler(updateCustomerForm.updateCButton_Click);
+            this.updateCButton.BackColor = System.Drawing.Color.Black;
+            this.updateCButton.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.updateCButton.Location = new System.Drawing.Point(21, 531);
+            this.updateCButton.Name = "updateCButton";
+            this.updateCButton.Size = new System.Drawing.Size(123, 60);
+            this.updateCButton.TabIndex = 30;
+            this.updateCButton.Text = "SAVE";
+            this.updateCButton.UseVisualStyleBackColor = false;
+            this.updateCButton.Click += new System.EventHandler(this.updateCButton_Click);
             // 
             // updateHeader
             // 
-            updateCustomerForm.updateHeader.AutoSize = true;
-            updateCustomerForm.updateHeader.ForeColor = System.Drawing.Color.Gainsboro;
-            updateCustomerForm.updateHeader.Location = new System.Drawing.Point(123, 8);
-            updateCustomerForm.updateHeader.Name = "updateHeader";
-            updateCustomerForm.updateHeader.Size = new System.Drawing.Size(166, 29);
-            updateCustomerForm.updateHeader.TabIndex = 29;
-            updateCustomerForm.updateHeader.Text = "UPDATE CUSTOMER";
-            updateCustomerForm.updateHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.updateHeader.AutoSize = true;
+            this.updateHeader.ForeColor = System.Drawing.Color.Gainsboro;
+            this.updateHeader.Location = new System.Drawing.Point(123, 8);
+            this.updateHeader.Name = "updateHeader";
+            this.updateHeader.Size = new System.Drawing.Size(166, 29);
+            this.updateHeader.TabIndex = 29;
+            this.updateHeader.Text = "UPDATE CUSTOMER";
+            this.updateHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // UpdateCustomerForm
             // 
-            updateCustomerForm.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
-            updateCustomerForm.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            updateCustomerForm.BackColor = System.Drawing.Color.Black;
-            updateCustomerForm.ClientSize = new System.Drawing.Size(429, 620);
-            updateCustomerForm.Controls.Add(updateCustomerForm.panel1);
-            updateCustomerForm.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            updateCustomerForm.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            updateCustomerForm.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            updateCustomerForm.Name = "UpdateCustomerForm";
-            updateCustomerForm.Text = "Update Customer";
-            updateCustomerForm.Load += new System.EventHandler(updateCustomerForm.UpdateCustomerForm_Load);
-            updateCustomerForm.panel1.ResumeLayout(false);
-            updateCustomerForm.panel1.PerformLayout();
-            updateCustomerForm.ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(429, 620);
+            this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.Name = "UpdateCustomerForm";
+            this.Text = "Update Customer";
+            this.Load += new System.EventHandler(this.UpdateCustomerForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 

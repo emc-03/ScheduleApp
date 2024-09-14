@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class ApptType
+    partial class CreateAppointment
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace ScheduleApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApptType));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAppointment));
             this.createIdInput = new System.Windows.Forms.TextBox();
             this.upCustomerIDLabel = new System.Windows.Forms.Label();
             this.upfnLabel = new System.Windows.Forms.Label();
@@ -163,8 +163,9 @@ namespace ScheduleApp
             this.createApptButton.TabIndex = 50;
             this.createApptButton.Text = "SAVE";
             this.createApptButton.UseVisualStyleBackColor = false;
+            this.createApptButton.Click += new System.EventHandler(this.createApptButton_Click);
             // 
-            // ApptType
+            // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -184,9 +185,8 @@ namespace ScheduleApp
             this.Controls.Add(this.upCustomerIDLabel);
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ApptType";
+            this.Name = "CreateAppointment";
             this.Text = "Create Appointment";
-            this.Load += new System.EventHandler(this.ApptType_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

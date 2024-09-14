@@ -20,7 +20,20 @@ namespace ScheduleApp
         {
             customerToUpdate = customer;
             InitializeComponent();
-                       
+            PopulateCustomerData();
+
+        }
+        private void PopulateCustomerData()
+        {
+            // Populate the controls with customer data
+            UpcountryInput.Text = customerToUpdate.Address.City.Country.Name;
+            UpcityInput.Text = customerToUpdate.Address.City.Name;
+            UpaddressInput.Text = customerToUpdate.Address.Address1;
+            Upaddress2Input.Text = customerToUpdate.Address.Address2;
+            UpPhoneInput.Text = customerToUpdate.Address.PhoneNumber;
+            UpfnameInput.Text = customerToUpdate.FirstName;
+            UplnameInput.Text = customerToUpdate.LastName;
+            postalCodeInput.Text = customerToUpdate.Address.PostalCode;
         }
 
         private void upCancelButton_Click(object sender, EventArgs e)

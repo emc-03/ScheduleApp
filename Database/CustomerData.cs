@@ -12,7 +12,7 @@ namespace ScheduleApp.Database
 {
     class CustomerData
     {
-        public void Add(Customer customer)
+        public Customer Add(Customer customer)
         {
             AddressData addressData = new AddressData();
             addressData.Add(customer.Address);
@@ -40,6 +40,7 @@ namespace ScheduleApp.Database
 
                 connection.Close();
             }
+            return customer;
         }
 
         public Customer Get(int customerID)

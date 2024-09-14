@@ -12,7 +12,7 @@ namespace ScheduleApp.Database
     class AppointmentData
     {
 
-                public List<Appointment> FindAllApptList(int _userID, int _customerID)
+        public List<Appointment> FindAllApptList(int _userID, int _customerID)
         {
             List<Appointment> allAppointments = new List<Appointment>();
             string apptQuery = "SELECT * FROM appointment WHERE userId = @userID AND customerId = @ID";
@@ -52,78 +52,64 @@ namespace ScheduleApp.Database
             }
             return allAppointments;
         }
-        /*
-        public List<Appointment> FindAllApptList_noCust(int _userID)
+
+        public Appointment Add(Appointment appointment)
         {
-            List<Appointment> allAppointments = new List<Appointment>();
-            string apptQuery = "SELECT * FROM appointment WHERE userId = @userID";
+           
+
+            string newQueryAppointment = "INSERT INTO appointment (appointmentStart, appointmentEnd, appointmentTitle, appointmentType, appointmentLocation, appointmentDescription, appointmentContact)" +
+                "VALUES (@appointmentStart, @appointmentEnd, @appointmentTitle, @appointmentType, @appointmentLocation, @appointmentDescription, @appointmentContact)";
+
+
 
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(apptQuery, connection))
+
+                using (MySqlCommand command = new MySqlCommand(newQueryAppointment, connection))
                 {
-                    command.Parameters.AddWithValue("@userID", _userID);
+                    command.Parameters.AddWithValue("@appointmentStart", appointment.Start);
+                    command.Parameters.AddWithValue("@appointmentEnd", appointment.End);
+                    command.Parameters.AddWithValue("@appointmentTitle", appointment.Description);
+                    command.Parameters.AddWithValue("@appointmentType", appointment.Type);
+                    command.Parameters.AddWithValue("@appointmentLocation", appointment.Location);
+                    command.Parameters.AddWithValue("@appointmentDescription", appointment.Title);
+                    command.Parameters.AddWithValue("@appointmentContact", appointment.Contact);
+                    
+                    
 
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Appointment appointment = new Appointment();
-                            appointment.ID = (int)reader["appointmentId"];
-                            appointment.CustomerID = (int)reader["customerId"];
-                            appointment.UserID = _userID;
-                            appointment.Contact = reader["contact"].ToString();
-                            appointment.Description = reader["description"].ToString();
-                            appointment.Start = (DateTime)reader["start"];
-                            appointment.End = (DateTime)reader["end"];
-                            appointment.Location = reader["location"].ToString();
-                            appointment.Title = reader["title"].ToString();
-                            appointment.Type = reader["type"].ToString();
-                            appointment.URL = reader["url"].ToString();
+                    command.ExecuteNonQuery();
 
-                            allAppointments.Add(appointment);
-                        }
-
-                    }
+                     appointment.ID = (int)command.LastInsertedId;
 
                 }
 
-            }
-            return allAppointments;
-        }
-
-        public List<Appointment> FindAll(int userId)
-        {
-            List<Appointment> appointmentFindAllList = new List<Appointment>();
-            string getAppointment = "SELECT * FROM appointment"; // Not filtering by userId
-            AddressData addressData = new AddressData();
-            AppointmentData appointmentData = new AppointmentData();
-
-            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
-            {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(getAppointment, connection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Appointment appointment = new Appointment();
-                            appointment.ID = (int)reader["appointmentId"];
-                            appointment.AppointmentList = appointmentData.FindAllApptList_noCust(userId);
-
-                            appointmentFindAllList.Add(appointment);
-                        }
-                    }
-                }
                 connection.Close();
             }
-
-            return appointmentFindAllList;
+            return appointment;
         }
-        */
-        // Create Add, Update, Delete 
+
+        public void Update(Appointment appointment)
+        {
+           
+
+            string updateQueryAppointment = "UPDATE appointment SET Title = @Title, Start = @Start WHERE appointmentId = @ID";
+
+            {
+
+                using (MySqlCommand command = new MySqlCommand(updateQueryAppointment, DB_Connection.conn))
+                {
+                    command.Parameters.AddWithValue("@Title", appointment.Description);
+                    command.Parameters.AddWithValue("@Start", appointment.Start);
+                    command.Parameters.AddWithValue("@ID", appointment.ID);
+
+                    command.ExecuteNonQuery();
+
+                }
+            }
+            //does not need a return, ID is being used to match the ID in the database 
+        }
+        // Delete 
 
 
         //user and customer appointment list 

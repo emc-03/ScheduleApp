@@ -202,16 +202,14 @@ namespace ScheduleApp
             try
             {
 
-
-                _customerData.Add(customer);
+                //reassigning the customer so it has an ID from the database
+                customer = _customerData.Add(customer);
 
                 addCustomertoDataGrid(customer);
                 Console.WriteLine("Data inserted successfully.");
                 this.fnameInput.Clear();
                 this.lnameInput.Clear();
-                //TODO clear each input box
-
-
+                
 
             }
             catch (Exception ex)
@@ -274,7 +272,7 @@ namespace ScheduleApp
             }
 
 
-
+        
 
         }
 
@@ -340,10 +338,7 @@ namespace ScheduleApp
 
         private void updateCustomerButton_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-
-            // TO DO needs to select the row and fill update form
-            // ensure the correct row is being selected from the database correctly 
+         
             selectRow();
 
             if (_selectedCustomer != null)
