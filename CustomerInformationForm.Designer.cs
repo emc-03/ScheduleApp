@@ -82,12 +82,13 @@ namespace ScheduleApp
             // 
             // deleteCustButton
             // 
+            this.deleteCustButton.AutoSize = true;
             this.deleteCustButton.BackColor = System.Drawing.Color.Black;
             this.deleteCustButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteCustButton.ForeColor = System.Drawing.Color.LightCoral;
             this.deleteCustButton.Location = new System.Drawing.Point(615, 13);
             this.deleteCustButton.Name = "deleteCustButton";
-            this.deleteCustButton.Size = new System.Drawing.Size(105, 35);
+            this.deleteCustButton.Size = new System.Drawing.Size(105, 39);
             this.deleteCustButton.TabIndex = 2;
             this.deleteCustButton.Text = "Delete";
             this.deleteCustButton.UseVisualStyleBackColor = false;
@@ -95,16 +96,18 @@ namespace ScheduleApp
             // 
             // updateCustomerButton
             // 
+            this.updateCustomerButton.AutoSize = true;
             this.updateCustomerButton.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.updateCustomerButton.Location = new System.Drawing.Point(15, 13);
             this.updateCustomerButton.Name = "updateCustomerButton";
-            this.updateCustomerButton.Size = new System.Drawing.Size(108, 35);
+            this.updateCustomerButton.Size = new System.Drawing.Size(108, 39);
             this.updateCustomerButton.TabIndex = 3;
             this.updateCustomerButton.Text = "Update";
             this.updateCustomerButton.Click += new System.EventHandler(this.updateCustomerButton_Click);
             // 
             // newCustomer
             // 
+            this.newCustomer.AutoSize = true;
             this.newCustomer.BackColor = System.Drawing.Color.Black;
             this.newCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.newCustomer.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -129,6 +132,7 @@ namespace ScheduleApp
             // 
             this.dataGridCustomer.AllowUserToResizeColumns = false;
             this.dataGridCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridCustomer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCustomer.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridCustomer.Location = new System.Drawing.Point(0, 0);
@@ -337,6 +341,7 @@ namespace ScheduleApp
             // 
             // exitButton
             // 
+            this.exitButton.AutoSize = true;
             this.exitButton.BackColor = System.Drawing.Color.Black;
             this.exitButton.Location = new System.Drawing.Point(1027, 653);
             this.exitButton.Name = "exitButton";
@@ -356,6 +361,7 @@ namespace ScheduleApp
             // 
             // apptLookup
             // 
+            this.apptLookup.AutoSize = true;
             this.apptLookup.BackColor = System.Drawing.Color.CornflowerBlue;
             this.apptLookup.ForeColor = System.Drawing.Color.Black;
             this.apptLookup.Location = new System.Drawing.Point(42, 38);
@@ -402,11 +408,13 @@ namespace ScheduleApp
             this.Load += new System.EventHandler(this.CustomerInformationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).EndInit();
             this.custButtonPanel1.ResumeLayout(false);
+            this.custButtonPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

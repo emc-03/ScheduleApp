@@ -30,121 +30,106 @@ namespace ScheduleApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAppointment));
-            this.createIdInput = new System.Windows.Forms.TextBox();
-            this.upCustomerIDLabel = new System.Windows.Forms.Label();
-            this.upfnLabel = new System.Windows.Forms.Label();
-            this.createLnameInput = new System.Windows.Forms.TextBox();
-            this.uplnLabel = new System.Windows.Forms.Label();
-            this.createFnameInput = new System.Windows.Forms.TextBox();
-            this.apptTypeBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTime = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.createTitleInput = new System.Windows.Forms.TextBox();
+            this.createTitleLable = new System.Windows.Forms.Label();
+            this.createContactInput = new System.Windows.Forms.TextBox();
+            this.createLinkInput = new System.Windows.Forms.TextBox();
+            this.createLinkLabel = new System.Windows.Forms.Label();
+            this.createDateTimeLabel = new System.Windows.Forms.Label();
+            this.createDateTimeSelect = new System.Windows.Forms.DateTimePicker();
             this.CreateCancelButton = new System.Windows.Forms.Button();
             this.createApptButton = new System.Windows.Forms.Button();
+            this.createDescriptionInput = new System.Windows.Forms.TextBox();
+            this.createDescriptionLable = new System.Windows.Forms.Label();
+            this.createLocationInput = new System.Windows.Forms.TextBox();
+            this.createLocationLabel = new System.Windows.Forms.Label();
+            this.createTypeDropDown = new System.Windows.Forms.ComboBox();
+            this.createContactLabel = new System.Windows.Forms.Label();
+            this.createTypeLabel = new System.Windows.Forms.Label();
+            this.createStartTimeInput = new System.Windows.Forms.DateTimePicker();
+            this.createStartTimeLabel = new System.Windows.Forms.Label();
+            this.createEndTimeInput = new System.Windows.Forms.DateTimePicker();
+            this.createEndTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // createIdInput
+            // createTitleInput
             // 
-            this.createIdInput.Location = new System.Drawing.Point(143, 25);
-            this.createIdInput.Name = "createIdInput";
-            this.createIdInput.ReadOnly = true;
-            this.createIdInput.Size = new System.Drawing.Size(178, 20);
-            this.createIdInput.TabIndex = 38;
+            this.createTitleInput.Location = new System.Drawing.Point(115, 22);
+            this.createTitleInput.Name = "createTitleInput";
+            this.createTitleInput.ReadOnly = true;
+            this.createTitleInput.Size = new System.Drawing.Size(266, 20);
+            this.createTitleInput.TabIndex = 38;
+            this.createTitleInput.TextChanged += new System.EventHandler(this.createIdInput_TextChanged);
             // 
-            // upCustomerIDLabel
+            // createTitleLable
             // 
-            this.upCustomerIDLabel.AutoSize = true;
-            this.upCustomerIDLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upCustomerIDLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upCustomerIDLabel.Location = new System.Drawing.Point(16, 22);
-            this.upCustomerIDLabel.Name = "upCustomerIDLabel";
-            this.upCustomerIDLabel.Size = new System.Drawing.Size(111, 29);
-            this.upCustomerIDLabel.TabIndex = 37;
-            this.upCustomerIDLabel.Text = "Customer ID:";
+            this.createTitleLable.AutoSize = true;
+            this.createTitleLable.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createTitleLable.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createTitleLable.Location = new System.Drawing.Point(18, 22);
+            this.createTitleLable.Name = "createTitleLable";
+            this.createTitleLable.Size = new System.Drawing.Size(47, 29);
+            this.createTitleLable.TabIndex = 37;
+            this.createTitleLable.Text = "Title";
+            this.createTitleLable.Click += new System.EventHandler(this.createTitleLable_Click);
             // 
-            // upfnLabel
+            // createContactInput
             // 
-            this.upfnLabel.AutoSize = true;
-            this.upfnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upfnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.upfnLabel.Location = new System.Drawing.Point(16, 77);
-            this.upfnLabel.Name = "upfnLabel";
-            this.upfnLabel.Size = new System.Drawing.Size(97, 27);
-            this.upfnLabel.TabIndex = 39;
-            this.upfnLabel.Text = "First Name :";
+            this.createContactInput.Location = new System.Drawing.Point(115, 158);
+            this.createContactInput.Name = "createContactInput";
+            this.createContactInput.ReadOnly = true;
+            this.createContactInput.Size = new System.Drawing.Size(212, 20);
+            this.createContactInput.TabIndex = 42;
+            this.createContactInput.TextChanged += new System.EventHandler(this.createFnameInput_TextChanged);
             // 
-            // createLnameInput
+            // createLinkInput
             // 
-            this.createLnameInput.Location = new System.Drawing.Point(190, 107);
-            this.createLnameInput.Name = "createLnameInput";
-            this.createLnameInput.ReadOnly = true;
-            this.createLnameInput.Size = new System.Drawing.Size(131, 20);
-            this.createLnameInput.TabIndex = 40;
+            this.createLinkInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createLinkInput.Location = new System.Drawing.Point(116, 197);
+            this.createLinkInput.Name = "createLinkInput";
+            this.createLinkInput.Size = new System.Drawing.Size(212, 22);
+            this.createLinkInput.TabIndex = 44;
+            this.createLinkInput.TextChanged += new System.EventHandler(this.apptTypeBox_TextChanged);
             // 
-            // uplnLabel
+            // createLinkLabel
             // 
-            this.uplnLabel.AutoSize = true;
-            this.uplnLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uplnLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.uplnLabel.Location = new System.Drawing.Point(185, 77);
-            this.uplnLabel.Name = "uplnLabel";
-            this.uplnLabel.Size = new System.Drawing.Size(95, 27);
-            this.uplnLabel.TabIndex = 41;
-            this.uplnLabel.Text = "Last Name :";
+            this.createLinkLabel.AutoSize = true;
+            this.createLinkLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createLinkLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createLinkLabel.Location = new System.Drawing.Point(18, 196);
+            this.createLinkLabel.Name = "createLinkLabel";
+            this.createLinkLabel.Size = new System.Drawing.Size(45, 29);
+            this.createLinkLabel.TabIndex = 43;
+            this.createLinkLabel.Text = "Link";
+            this.createLinkLabel.Click += new System.EventHandler(this.createLinkLabel_Click);
             // 
-            // createFnameInput
+            // createDateTimeLabel
             // 
-            this.createFnameInput.Location = new System.Drawing.Point(21, 107);
-            this.createFnameInput.Name = "createFnameInput";
-            this.createFnameInput.ReadOnly = true;
-            this.createFnameInput.Size = new System.Drawing.Size(131, 20);
-            this.createFnameInput.TabIndex = 42;
+            this.createDateTimeLabel.AutoSize = true;
+            this.createDateTimeLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createDateTimeLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createDateTimeLabel.Location = new System.Drawing.Point(18, 278);
+            this.createDateTimeLabel.Name = "createDateTimeLabel";
+            this.createDateTimeLabel.Size = new System.Drawing.Size(53, 29);
+            this.createDateTimeLabel.TabIndex = 47;
+            this.createDateTimeLabel.Text = "Date ";
+            this.createDateTimeLabel.Click += new System.EventHandler(this.createDateTimeLabel_Click);
             // 
-            // apptTypeBox
+            // createDateTimeSelect
             // 
-            this.apptTypeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apptTypeBox.Location = new System.Drawing.Point(182, 171);
-            this.apptTypeBox.Name = "apptTypeBox";
-            this.apptTypeBox.Size = new System.Drawing.Size(178, 22);
-            this.apptTypeBox.TabIndex = 44;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(12, 170);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 29);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "Appointment Type :";
-            // 
-            // dateTime
-            // 
-            this.dateTime.AutoSize = true;
-            this.dateTime.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTime.ForeColor = System.Drawing.Color.Gainsboro;
-            this.dateTime.Location = new System.Drawing.Point(12, 227);
-            this.dateTime.Name = "dateTime";
-            this.dateTime.Size = new System.Drawing.Size(61, 29);
-            this.dateTime.TabIndex = 47;
-            this.dateTime.Text = "Date : ";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(98, 222);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(262, 35);
-            this.dateTimePicker1.TabIndex = 49;
+            this.createDateTimeSelect.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createDateTimeSelect.Location = new System.Drawing.Point(106, 276);
+            this.createDateTimeSelect.Name = "createDateTimeSelect";
+            this.createDateTimeSelect.Size = new System.Drawing.Size(276, 24);
+            this.createDateTimeSelect.TabIndex = 49;
+            this.createDateTimeSelect.ValueChanged += new System.EventHandler(this.createDateTimeSelect_ValueChanged);
             // 
             // CreateCancelButton
             // 
             this.CreateCancelButton.BackColor = System.Drawing.Color.Black;
             this.CreateCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateCancelButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.CreateCancelButton.Location = new System.Drawing.Point(247, 305);
+            this.CreateCancelButton.Location = new System.Drawing.Point(336, 477);
             this.CreateCancelButton.Name = "CreateCancelButton";
             this.CreateCancelButton.Size = new System.Drawing.Size(123, 60);
             this.CreateCancelButton.TabIndex = 51;
@@ -157,7 +142,7 @@ namespace ScheduleApp
             this.createApptButton.BackColor = System.Drawing.Color.Black;
             this.createApptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.createApptButton.Location = new System.Drawing.Point(40, 305);
+            this.createApptButton.Location = new System.Drawing.Point(12, 477);
             this.createApptButton.Name = "createApptButton";
             this.createApptButton.Size = new System.Drawing.Size(123, 60);
             this.createApptButton.TabIndex = 50;
@@ -165,28 +150,158 @@ namespace ScheduleApp
             this.createApptButton.UseVisualStyleBackColor = false;
             this.createApptButton.Click += new System.EventHandler(this.createApptButton_Click);
             // 
+            // createDescriptionInput
+            // 
+            this.createDescriptionInput.Location = new System.Drawing.Point(115, 54);
+            this.createDescriptionInput.Multiline = true;
+            this.createDescriptionInput.Name = "createDescriptionInput";
+            this.createDescriptionInput.ReadOnly = true;
+            this.createDescriptionInput.Size = new System.Drawing.Size(266, 53);
+            this.createDescriptionInput.TabIndex = 53;
+            this.createDescriptionInput.TextChanged += new System.EventHandler(this.createDescriptionInput_TextChanged);
+            // 
+            // createDescriptionLable
+            // 
+            this.createDescriptionLable.AutoSize = true;
+            this.createDescriptionLable.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createDescriptionLable.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createDescriptionLable.Location = new System.Drawing.Point(16, 69);
+            this.createDescriptionLable.Name = "createDescriptionLable";
+            this.createDescriptionLable.Size = new System.Drawing.Size(101, 29);
+            this.createDescriptionLable.TabIndex = 52;
+            this.createDescriptionLable.Text = "Description";
+            this.createDescriptionLable.Click += new System.EventHandler(this.createDescriptionLable_Click);
+            // 
+            // createLocationInput
+            // 
+            this.createLocationInput.Location = new System.Drawing.Point(116, 122);
+            this.createLocationInput.Name = "createLocationInput";
+            this.createLocationInput.ReadOnly = true;
+            this.createLocationInput.Size = new System.Drawing.Size(266, 20);
+            this.createLocationInput.TabIndex = 55;
+            this.createLocationInput.TextChanged += new System.EventHandler(this.createLocationInput_TextChanged);
+            // 
+            // createLocationLabel
+            // 
+            this.createLocationLabel.AutoSize = true;
+            this.createLocationLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createLocationLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createLocationLabel.Location = new System.Drawing.Point(16, 119);
+            this.createLocationLabel.Name = "createLocationLabel";
+            this.createLocationLabel.Size = new System.Drawing.Size(79, 29);
+            this.createLocationLabel.TabIndex = 54;
+            this.createLocationLabel.Text = "Location";
+            this.createLocationLabel.Click += new System.EventHandler(this.createLocationLabel_Click);
+            // 
+            // createTypeDropDown
+            // 
+            this.createTypeDropDown.FormattingEnabled = true;
+            this.createTypeDropDown.Location = new System.Drawing.Point(166, 410);
+            this.createTypeDropDown.Name = "createTypeDropDown";
+            this.createTypeDropDown.Size = new System.Drawing.Size(144, 21);
+            this.createTypeDropDown.TabIndex = 56;
+            this.createTypeDropDown.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // createContactLabel
+            // 
+            this.createContactLabel.AutoSize = true;
+            this.createContactLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createContactLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createContactLabel.Location = new System.Drawing.Point(18, 158);
+            this.createContactLabel.Name = "createContactLabel";
+            this.createContactLabel.Size = new System.Drawing.Size(70, 27);
+            this.createContactLabel.TabIndex = 39;
+            this.createContactLabel.Text = "Contact ";
+            // 
+            // createTypeLabel
+            // 
+            this.createTypeLabel.AutoSize = true;
+            this.createTypeLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createTypeLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createTypeLabel.Location = new System.Drawing.Point(16, 410);
+            this.createTypeLabel.Name = "createTypeLabel";
+            this.createTypeLabel.Size = new System.Drawing.Size(144, 27);
+            this.createTypeLabel.TabIndex = 57;
+            this.createTypeLabel.Text = "Appointment Type";
+            this.createTypeLabel.Click += new System.EventHandler(this.createTypeLabel_Click);
+            // 
+            // createStartTimeInput
+            // 
+            this.createStartTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createStartTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.createStartTimeInput.Location = new System.Drawing.Point(166, 319);
+            this.createStartTimeInput.Name = "createStartTimeInput";
+            this.createStartTimeInput.Size = new System.Drawing.Size(144, 24);
+            this.createStartTimeInput.TabIndex = 59;
+            this.createStartTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // createStartTimeLabel
+            // 
+            this.createStartTimeLabel.AutoSize = true;
+            this.createStartTimeLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createStartTimeLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createStartTimeLabel.Location = new System.Drawing.Point(18, 319);
+            this.createStartTimeLabel.Name = "createStartTimeLabel";
+            this.createStartTimeLabel.Size = new System.Drawing.Size(91, 29);
+            this.createStartTimeLabel.TabIndex = 58;
+            this.createStartTimeLabel.Text = "Start Time";
+            this.createStartTimeLabel.Click += new System.EventHandler(this.createStartTimeLabel_Click);
+            // 
+            // createEndTimeInput
+            // 
+            this.createEndTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createEndTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.createEndTimeInput.Location = new System.Drawing.Point(166, 358);
+            this.createEndTimeInput.Name = "createEndTimeInput";
+            this.createEndTimeInput.Size = new System.Drawing.Size(144, 24);
+            this.createEndTimeInput.TabIndex = 61;
+            this.createEndTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            // 
+            // createEndTimeLabel
+            // 
+            this.createEndTimeLabel.AutoSize = true;
+            this.createEndTimeLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createEndTimeLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.createEndTimeLabel.Location = new System.Drawing.Point(18, 353);
+            this.createEndTimeLabel.Name = "createEndTimeLabel";
+            this.createEndTimeLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.createEndTimeLabel.Size = new System.Drawing.Size(84, 29);
+            this.createEndTimeLabel.TabIndex = 60;
+            this.createEndTimeLabel.Text = "End Time";
+            this.createEndTimeLabel.Click += new System.EventHandler(this.createEndTimeLabel_Click);
+            // 
             // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(436, 386);
+            this.ClientSize = new System.Drawing.Size(471, 549);
+            this.Controls.Add(this.createEndTimeInput);
+            this.Controls.Add(this.createEndTimeLabel);
+            this.Controls.Add(this.createStartTimeInput);
+            this.Controls.Add(this.createStartTimeLabel);
+            this.Controls.Add(this.createTypeLabel);
+            this.Controls.Add(this.createTypeDropDown);
+            this.Controls.Add(this.createLocationInput);
+            this.Controls.Add(this.createLocationLabel);
+            this.Controls.Add(this.createDescriptionInput);
+            this.Controls.Add(this.createDescriptionLable);
             this.Controls.Add(this.CreateCancelButton);
             this.Controls.Add(this.createApptButton);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.dateTime);
-            this.Controls.Add(this.apptTypeBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.upfnLabel);
-            this.Controls.Add(this.createLnameInput);
-            this.Controls.Add(this.uplnLabel);
-            this.Controls.Add(this.createFnameInput);
-            this.Controls.Add(this.createIdInput);
-            this.Controls.Add(this.upCustomerIDLabel);
+            this.Controls.Add(this.createDateTimeSelect);
+            this.Controls.Add(this.createDateTimeLabel);
+            this.Controls.Add(this.createLinkInput);
+            this.Controls.Add(this.createLinkLabel);
+            this.Controls.Add(this.createContactLabel);
+            this.Controls.Add(this.createContactInput);
+            this.Controls.Add(this.createTitleInput);
+            this.Controls.Add(this.createTitleLable);
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateAppointment";
             this.Text = "Create Appointment";
+            this.Load += new System.EventHandler(this.CreateAppointment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,17 +309,25 @@ namespace ScheduleApp
 
         #endregion
 
-        private System.Windows.Forms.TextBox createIdInput;
-        private System.Windows.Forms.TextBox createLnameInput;
-        private System.Windows.Forms.TextBox createFnameInput;
-        private System.Windows.Forms.TextBox apptTypeBox;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox createTitleInput;
+        private System.Windows.Forms.TextBox createContactInput;
+        private System.Windows.Forms.TextBox createLinkInput;
+        private System.Windows.Forms.DateTimePicker createDateTimeSelect;
         private System.Windows.Forms.Button CreateCancelButton;
         private System.Windows.Forms.Button createApptButton;
-        private System.Windows.Forms.Label upCustomerIDLabel;
-        private System.Windows.Forms.Label upfnLabel;
-        private System.Windows.Forms.Label uplnLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label dateTime;
+        private System.Windows.Forms.Label createTitleLable;
+        private System.Windows.Forms.Label createLinkLabel;
+        private System.Windows.Forms.Label createDateTimeLabel;
+        private System.Windows.Forms.TextBox createDescriptionInput;
+        private System.Windows.Forms.Label createDescriptionLable;
+        private System.Windows.Forms.TextBox createLocationInput;
+        private System.Windows.Forms.Label createLocationLabel;
+        private System.Windows.Forms.ComboBox createTypeDropDown;
+        private System.Windows.Forms.Label createContactLabel;
+        private System.Windows.Forms.Label createTypeLabel;
+        private System.Windows.Forms.DateTimePicker createStartTimeInput;
+        private System.Windows.Forms.Label createStartTimeLabel;
+        private System.Windows.Forms.DateTimePicker createEndTimeInput;
+        private System.Windows.Forms.Label createEndTimeLabel;
     }
 }

@@ -21,7 +21,7 @@ namespace ScheduleApp
         
         private Customer _selectedCustomer;
         private Appointment _appointment;
-
+        
 
         public calendarForm(Customer selectedCustomer)
         {
@@ -36,6 +36,7 @@ namespace ScheduleApp
         public void loadData()
         {
             //_appointmentList = _appointmentData.FindAll(userId);
+            
             appointmentDataGrid.Columns.Add("appointmentStart", "Start Time");
             appointmentDataGrid.Columns.Add("appointmentEnd", "End Time");
             appointmentDataGrid.Columns.Add("appointmentTitle", "Title");
@@ -52,7 +53,61 @@ namespace ScheduleApp
 
             }
 
+            // bind the data table to the DataGrid DataSource so we can create views off of it.
+            // Here _selectedCustomer.AppointList has our data table in it.
+            //appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;
+
         }
+
+        //NEW STUFF
+        // Filter the DataGridView by today's date
+        
+        /*
+        private void FilterByToday()
+        {
+            DataView dv = ;
+            dv.RowFilter = $"StartDate >= #{DateTime.Today}# AND StartDate < #{DateTime.Today.AddDays(1)}#";
+        }
+
+        // Filter the DataGridView by this week
+        private void FilterByThisWeek()
+        {
+            DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);  // Start of the current week (Sunday)
+            DateTime endOfWeek = startOfWeek.AddDays(7);  // End of the current week
+
+            DataView dv = _appointment;
+            dv.RowFilter = $"StartDate >= #{startOfWeek}# AND StartDate < #{endOfWeek}#";
+        }
+
+        // Filter the DataGridView by this month
+        private void FilterByThisMonth()
+        {
+            DateTime startOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);  // Start of the month
+            DateTime startOfNextMonth = startOfMonth.AddMonths(1);  // Start of the next month
+
+            DataView dv = _appointment.DefaultView;
+            dv.RowFilter = $"StartDate >= #{startOfMonth}# AND StartDate < #{startOfNextMonth}#";
+        }
+
+        // Example of calling the filters based on radio button selection
+        private void FilterAppointmentsByDateRange(string filterType)
+        {
+            switch (filterType)
+            {
+                case "Today":
+                    FilterByToday();
+                    break;
+                case "ThisWeek":
+                    FilterByThisWeek();
+                    break;
+                case "ThisMonth":
+                    FilterByThisMonth();
+                    break;
+            }
+        }
+
+        //ENDNEWSTUFF
+        */
 
         private void addAppointmenttoDataGrid(Appointment appointment)
         {
