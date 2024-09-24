@@ -33,6 +33,8 @@ namespace ScheduleApp
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calendarForm));
             this.upCancelButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.deleteAppointmentButton = new System.Windows.Forms.Button();
+            this.allApptRadio = new System.Windows.Forms.RadioButton();
             this.dayViewRadio = new System.Windows.Forms.RadioButton();
             this.monthRadioButton = new System.Windows.Forms.RadioButton();
             this.weekRadioButton = new System.Windows.Forms.RadioButton();
@@ -49,7 +51,6 @@ namespace ScheduleApp
             this.customerDataButton = new System.Windows.Forms.Button();
             this.bindingWeekList = new System.Windows.Forms.BindingSource(this.components);
             this.bindingMonthList = new System.Windows.Forms.BindingSource(this.components);
-            this.allApptRadio = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingWeekList)).BeginInit();
@@ -61,9 +62,9 @@ namespace ScheduleApp
             this.upCancelButton.BackColor = System.Drawing.Color.Black;
             this.upCancelButton.Font = new System.Drawing.Font("Myanmar Text", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.upCancelButton.Location = new System.Drawing.Point(758, 645);
+            this.upCancelButton.Location = new System.Drawing.Point(732, 598);
             this.upCancelButton.Name = "upCancelButton";
-            this.upCancelButton.Size = new System.Drawing.Size(157, 60);
+            this.upCancelButton.Size = new System.Drawing.Size(183, 80);
             this.upCancelButton.TabIndex = 32;
             this.upCancelButton.Text = "Close";
             this.upCancelButton.UseVisualStyleBackColor = false;
@@ -72,6 +73,7 @@ namespace ScheduleApp
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.deleteAppointmentButton);
             this.panel1.Controls.Add(this.allApptRadio);
             this.panel1.Controls.Add(this.dayViewRadio);
             this.panel1.Controls.Add(this.monthRadioButton);
@@ -88,8 +90,34 @@ namespace ScheduleApp
             this.panel1.Controls.Add(this.createApptButton);
             this.panel1.Location = new System.Drawing.Point(13, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(905, 611);
+            this.panel1.Size = new System.Drawing.Size(905, 579);
             this.panel1.TabIndex = 34;
+            // 
+            // deleteAppointmentButton
+            // 
+            this.deleteAppointmentButton.BackColor = System.Drawing.Color.Black;
+            this.deleteAppointmentButton.Font = new System.Drawing.Font("Myanmar Text", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteAppointmentButton.ForeColor = System.Drawing.Color.IndianRed;
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(15, 353);
+            this.deleteAppointmentButton.Name = "deleteAppointmentButton";
+            this.deleteAppointmentButton.Size = new System.Drawing.Size(157, 60);
+            this.deleteAppointmentButton.TabIndex = 60;
+            this.deleteAppointmentButton.Text = "Delete";
+            this.deleteAppointmentButton.UseVisualStyleBackColor = false;
+            this.deleteAppointmentButton.Click += new System.EventHandler(this.deleteAppointmentButton_Click);
+            // 
+            // allApptRadio
+            // 
+            this.allApptRadio.AutoSize = true;
+            this.allApptRadio.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allApptRadio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.allApptRadio.Location = new System.Drawing.Point(38, 123);
+            this.allApptRadio.Name = "allApptRadio";
+            this.allApptRadio.Size = new System.Drawing.Size(139, 20);
+            this.allApptRadio.TabIndex = 59;
+            this.allApptRadio.TabStop = true;
+            this.allApptRadio.Text = "All Appointments";
+            this.allApptRadio.UseVisualStyleBackColor = true;
             // 
             // dayViewRadio
             // 
@@ -102,6 +130,7 @@ namespace ScheduleApp
             this.dayViewRadio.TabIndex = 58;
             this.dayViewRadio.Text = "Selected Day";
             this.dayViewRadio.UseVisualStyleBackColor = true;
+            this.dayViewRadio.CheckedChanged += new System.EventHandler(this.dayViewRadio_CheckedChanged);
             // 
             // monthRadioButton
             // 
@@ -174,7 +203,7 @@ namespace ScheduleApp
             // appointmentDataGrid
             // 
             this.appointmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.appointmentDataGrid.Location = new System.Drawing.Point(230, 149);
+            this.appointmentDataGrid.Location = new System.Drawing.Point(230, 167);
             this.appointmentDataGrid.MultiSelect = false;
             this.appointmentDataGrid.Name = "appointmentDataGrid";
             this.appointmentDataGrid.Size = new System.Drawing.Size(669, 380);
@@ -246,7 +275,7 @@ namespace ScheduleApp
             this.customerDataButton.BackColor = System.Drawing.Color.Black;
             this.customerDataButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerDataButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.customerDataButton.Location = new System.Drawing.Point(33, 625);
+            this.customerDataButton.Location = new System.Drawing.Point(16, 598);
             this.customerDataButton.Name = "customerDataButton";
             this.customerDataButton.Size = new System.Drawing.Size(189, 80);
             this.customerDataButton.TabIndex = 48;
@@ -261,19 +290,6 @@ namespace ScheduleApp
             // bindingMonthList
             // 
             this.bindingMonthList.CurrentChanged += new System.EventHandler(this.bindingMonthList_CurrentChanged);
-            // 
-            // allApptRadio
-            // 
-            this.allApptRadio.AutoSize = true;
-            this.allApptRadio.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allApptRadio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.allApptRadio.Location = new System.Drawing.Point(38, 123);
-            this.allApptRadio.Name = "allApptRadio";
-            this.allApptRadio.Size = new System.Drawing.Size(139, 20);
-            this.allApptRadio.TabIndex = 59;
-            this.allApptRadio.TabStop = true;
-            this.allApptRadio.Text = "All Appointments";
-            this.allApptRadio.UseVisualStyleBackColor = true;
             // 
             // calendarForm
             // 
@@ -318,5 +334,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton dayViewRadio;
         private System.Windows.Forms.RadioButton allApptRadio;
+        private System.Windows.Forms.Button deleteAppointmentButton;
     }
 }

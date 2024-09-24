@@ -18,14 +18,14 @@ namespace ScheduleApp
     public partial class calendarForm : Form
 
     {
-        
+        private User _user;
         private Customer _selectedCustomer;
         private Appointment _appointment;
-        
+        private readonly AppointmentData _appointmentData = new AppointmentData();
 
-        public calendarForm(Customer selectedCustomer)
+        public calendarForm(Customer selectedCustomer, User user)
         {
-            
+            _user = user;
             _selectedCustomer = selectedCustomer;
 
             InitializeComponent();
@@ -35,33 +35,69 @@ namespace ScheduleApp
 
         public void loadData()
         {
-            //_appointmentList = _appointmentData.FindAll(userId);
-            
+            // Clear existing columns to avoid duplication
+            appointmentDataGrid.Columns.Clear();
+
+            // Add necessary columns if they don't exist
+            appointmentDataGrid.Columns.Add("appointmentTitle", "Title");
+            appointmentDataGrid.Columns.Add("appointmentDescription", "Description");
+            appointmentDataGrid.Columns.Add("appointmentLocation", "Location");
+            appointmentDataGrid.Columns.Add("appointmentContact", "Contact");
+            appointmentDataGrid.Columns.Add("appointmentType", "Appointment Type");
             appointmentDataGrid.Columns.Add("appointmentStart", "Start Time");
             appointmentDataGrid.Columns.Add("appointmentEnd", "End Time");
-            appointmentDataGrid.Columns.Add("appointmentTitle", "Title");
-            appointmentDataGrid.Columns.Add("appointmentType", "Appointment Type");
-            appointmentDataGrid.Columns.Add("appointmentLocation", "Location");
-            appointmentDataGrid.Columns.Add("appointmentDescription", "Description");
-            appointmentDataGrid.Columns.Add("appointmentContact", "Contact");
             appointmentDataGrid.Columns.Add("appointmentID", "ID");
+
+            // Hide the ID column
             appointmentDataGrid.Columns["appointmentID"].Visible = false;
 
+            // Clear previous rows to avoid duplicates
+            appointmentDataGrid.Rows.Clear();
+
+            // Add each appointment to the DataGridView
             foreach (Appointment appointment in _selectedCustomer.AppointmentList)
             {
                 addAppointmenttoDataGrid(appointment);
-
             }
 
-            // bind the data table to the DataGrid DataSource so we can create views off of it.
-            // Here _selectedCustomer.AppointList has our data table in it.
-            //appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;
+            // Alternative: Bind the AppointmentList directly to the DataGridView
+            // This automatically creates columns and rows based on the AppointmentList
+            // appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;
+        }
+
+        // Helper method to add appointment details to the DataGridView
+        private void addAppointmenttoDataGrid(Appointment appointment)
+        {
+            appointmentDataGrid.Rows.Add(
+                appointment.Title,
+                appointment.Description,
+                appointment.Location,
+                appointment.Contact,
+                appointment.Type,
+                appointment.Start,
+                appointment.End,
+                appointment.ID
+            );
+        }
+
+        public void Delete(Appointment appointment)
+        {
+            selectRow();
+            if (_appointment != null)
+            {
+                _appointmentData.Delete(_appointment);
+                int rowIndex = appointmentDataGrid.SelectedRows[0].Index;
+                appointmentDataGrid.Rows.RemoveAt(rowIndex);
+
+                MessageBox.Show("Customer information ha been deleted.");
+            
+            }
 
         }
 
         //NEW STUFF
         // Filter the DataGridView by today's date
-        
+
         /*
         private void FilterByToday()
         {
@@ -109,19 +145,6 @@ namespace ScheduleApp
         //ENDNEWSTUFF
         */
 
-        private void addAppointmenttoDataGrid(Appointment appointment)
-        {
-            appointmentDataGrid.Rows.Add(
-                appointment.Start,
-                appointment.End,
-                appointment.Title,
-                appointment.Type,
-                appointment.Location,
-                appointment.Description,
-                appointment.Contact,
-                appointment.ID);
-        }
-
         private void selectRow()
 
         {
@@ -160,16 +183,12 @@ namespace ScheduleApp
 
         }
 
-        private void deleteApptButton_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            //CustomerInformationForm customer = new CustomerInformationForm();
-            // customer.Show();
+            
         }
 
 
@@ -182,7 +201,8 @@ namespace ScheduleApp
         private void createApptButton_Click(object sender, EventArgs e)
         {
 
-            CreateAppointment create = new CreateAppointment();
+            CreateAppointment create = new CreateAppointment(_selectedCustomer, _user);
+
             create.Show();
         }
 
@@ -199,6 +219,8 @@ namespace ScheduleApp
             else
             {
                 MessageBox.Show("No Appointment Selected!");
+                //TO-DO create a method for each radio button, fill the data table then call the correct Method in the SQL statement
+
             }
         }
 
@@ -258,6 +280,17 @@ namespace ScheduleApp
 
         private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void dayViewRadio_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteAppointmentButton_Click(object sender, EventArgs e)
+        {
+          //call delete method here
 
         }
     }

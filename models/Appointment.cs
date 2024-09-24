@@ -31,10 +31,11 @@ namespace ScheduleApp.models
         public string Description { get { return _description; } set { _description = value; } }
         public string Location { get { return _location; } set { _location = value; } }
         public string Contact { get { return _contact; } set { _contact = value; } }
-        public DateTime Start { get { return _start; } set { _start = value; } }
-        public DateTime End { get { return _end; } set { _end = value; } }
         public string Type { get { return _type; } set { _type = value; } }
         public string URL { get { return _url; } set { _url = value; } }
+        public DateTime Start { get { return _start; } set { _start = value; } }
+        public DateTime End { get { return _end; } set { _end = value; } }
+        
 
     }
 

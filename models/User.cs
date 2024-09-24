@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleApp
 {
-    class User
+   public class User
     {
 
         private int _Id;

@@ -21,10 +21,11 @@ namespace ScheduleApp
         private readonly User _user = new User();
 
 
-        public CustomerInformationForm(int userId)
+        public CustomerInformationForm(User user)
         {
+            _user = user;
             InitializeComponent();
-            loadData(userId);
+            loadData(user.ID);
             // could be made into a lambda - inner foreach becomes a if statement - .Any method
             DateTime quarterTime = DateTime.UtcNow.AddMinutes(15);
 
@@ -287,7 +288,7 @@ namespace ScheduleApp
             selectRow();
             if (_selectedCustomer != null)
             {
-                calendarForm calendar = new calendarForm(_selectedCustomer);
+                calendarForm calendar = new calendarForm(_selectedCustomer, _user);
                 calendar.Show();
             }
 

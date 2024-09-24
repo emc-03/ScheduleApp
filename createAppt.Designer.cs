@@ -56,7 +56,6 @@ namespace ScheduleApp
             // 
             this.createTitleInput.Location = new System.Drawing.Point(115, 22);
             this.createTitleInput.Name = "createTitleInput";
-            this.createTitleInput.ReadOnly = true;
             this.createTitleInput.Size = new System.Drawing.Size(266, 20);
             this.createTitleInput.TabIndex = 38;
             this.createTitleInput.TextChanged += new System.EventHandler(this.createIdInput_TextChanged);
@@ -77,7 +76,6 @@ namespace ScheduleApp
             // 
             this.createContactInput.Location = new System.Drawing.Point(115, 158);
             this.createContactInput.Name = "createContactInput";
-            this.createContactInput.ReadOnly = true;
             this.createContactInput.Size = new System.Drawing.Size(212, 20);
             this.createContactInput.TabIndex = 42;
             this.createContactInput.TextChanged += new System.EventHandler(this.createFnameInput_TextChanged);
@@ -155,7 +153,6 @@ namespace ScheduleApp
             this.createDescriptionInput.Location = new System.Drawing.Point(115, 54);
             this.createDescriptionInput.Multiline = true;
             this.createDescriptionInput.Name = "createDescriptionInput";
-            this.createDescriptionInput.ReadOnly = true;
             this.createDescriptionInput.Size = new System.Drawing.Size(266, 53);
             this.createDescriptionInput.TabIndex = 53;
             this.createDescriptionInput.TextChanged += new System.EventHandler(this.createDescriptionInput_TextChanged);
@@ -176,7 +173,6 @@ namespace ScheduleApp
             // 
             this.createLocationInput.Location = new System.Drawing.Point(116, 122);
             this.createLocationInput.Name = "createLocationInput";
-            this.createLocationInput.ReadOnly = true;
             this.createLocationInput.Size = new System.Drawing.Size(266, 20);
             this.createLocationInput.TabIndex = 55;
             this.createLocationInput.TextChanged += new System.EventHandler(this.createLocationInput_TextChanged);

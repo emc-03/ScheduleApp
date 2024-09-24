@@ -110,7 +110,7 @@ namespace ScheduleApp
               
                 // MessageBox.Show("Successful Login");
                 this.Hide();
-                CustomerInformationForm customerData = new CustomerInformationForm(user.ID);
+                CustomerInformationForm customerData = new CustomerInformationForm(user);
                 customerData.Show();
                 return;
             }

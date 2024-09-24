@@ -15,119 +15,160 @@ namespace ScheduleApp
     public partial class CreateAppointment : Form
     {
         private AppointmentData _appointmentData;
+        private Customer _customer;
+        private User _user;
+        private Appointment _createdAppointment = new Appointment(); 
+        public Appointment CreatedAppointment { get { return _createdAppointment; } }
 
-        public CreateAppointment()
+        // Constructor to accept an Appointment object
+        public CreateAppointment(Customer customer, User user)
         {
             _appointmentData = new AppointmentData();
+            _customer = customer;
+            _user = user;
             InitializeComponent();
         }
 
-        
+
 
         private void CreateCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-           
+
         }
 
         private void createApptButton_Click(object sender, EventArgs e)
         {
-            Appointment appointment = new Appointment();
+
+            _createdAppointment.UserID = _user.ID;
+            _createdAppointment.CustomerID = _customer.ID;
+
+            try
+            {
+
+                if (string.IsNullOrEmpty(createTitleInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createTitleInput.Clear();
+                    createTitleInput.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.Title = createTitleInput.Text;
+                }
+
+                if (string.IsNullOrEmpty(createDescriptionInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createLocationInput.Clear();
+                    createLocationInput.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.Description = createDescriptionInput.Text;
+                }
+                if (string.IsNullOrEmpty(createLocationInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createLocationInput.Clear();
+                    createLocationInput.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.Location = createLocationInput.Text;
+                }
+                if (string.IsNullOrEmpty(createContactInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createContactInput.Clear();
+                    createContactInput.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.Contact = createContactInput.Text;
+                }
+                if (string.IsNullOrEmpty(createTypeDropDown.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    //createTypeDropDown.Clear();
+                    createTypeDropDown.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.Type = createTypeDropDown.Text;
+                }
+
+                if (string.IsNullOrEmpty(createLinkInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createLinkInput.Clear();
+                    createLinkInput.Focus();
+                    return;
+                }
+                else
+                {
+                    _createdAppointment.URL = createLinkInput.Text;
+                }
+
+
+                //TODO - FIXME - adjust to handle datetime and hour/mins
+                /*
+                if (string.IsNullOrEmpty(createDateTimeSelect.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createDateTimeSelect.Clear();
+                    createDateTimeSelect.Focus();
+                    return;
+                }
+                else
+                {
+                    appointment.Contact = createDateTimeSelect.Text;
+                }
+                if (string.IsNullOrEmpty(createStartTimeInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createStartTimeInput.Clear();
+                    createStartTimeInput.Focus();
+                    return;
+                }
+                else
+                {
+                    appointment.Contact = createStartTimeInput.Text;
+                }
+
+                if (string.IsNullOrEmpty(createEndTimeInput.Text))
+
+                {
+                    MessageBox.Show("Fill in missing fields.");
+                    createEndTimeInput.Clear();
+                    createEndTimeInput.Focus();
+                    return;
+                }
+                else
+                {
+                    appointment.Contact = createEndTimeInput.Text;
+                }
+
+    */
+                _appointmentData.Add(_createdAppointment, _user.Name);
+
+            }
+            catch (Exception _) { MessageBox.Show("Appointment failed to save!"); }
             
-
-            if (string.IsNullOrEmpty(createTitleInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createTitleInput.Clear();
-                createTitleInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createTitleInput.Text;
-            }
-
-            if (string.IsNullOrEmpty(createDescriptionInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createLocationInput.Clear();
-                createLocationInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createDescriptionInput.Text;
-            }
-            if (string.IsNullOrEmpty(createLocationInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createLocationInput.Clear();
-                createLocationInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createLocationInput.Text;
-            }
-            if (string.IsNullOrEmpty(createContactInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createContactInput.Clear();
-                createContactInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createContactInput.Text;
-            }
-            //TODO - FIXME - adjust to handle datetime and hour/mins
-            /*
-            if (string.IsNullOrEmpty(createDateTimeSelect.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createDateTimeSelect.Clear();
-                createDateTimeSelect.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createDateTimeSelect.Text;
-            }
-            if (string.IsNullOrEmpty(createStartTimeInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createStartTimeInput.Clear();
-                createStartTimeInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createStartTimeInput.Text;
-            }
-
-            if (string.IsNullOrEmpty(createEndTimeInput.Text))
-
-            {
-                MessageBox.Show("Fill in missing fields.");
-                createEndTimeInput.Clear();
-                createEndTimeInput.Focus();
-                return;
-            }
-            else
-            {
-                appointment.Contact = createEndTimeInput.Text;
-            }
-
-*/
-            _appointmentData.Add(appointment);
-            
-
+            this.Close();
         }
 
         private void createIdInput_TextChanged(object sender, EventArgs e)
