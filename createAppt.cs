@@ -12,17 +12,20 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class CreateAppointment : Form
+    public partial class CreateAppointmentForm : Form
     {
         private AppointmentData _appointmentData;
         private Customer _customer;
         private User _user;
-        private Appointment _createdAppointment = new Appointment(); 
-        public Appointment CreatedAppointment { get { return _createdAppointment; } }
+        private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+        private Appointment _createdAppointment = new Appointment();
+        public event Action<Appointment> CreatedAppointment;
 
         // Constructor to accept an Appointment object
-        public CreateAppointment(Customer customer, User user)
+        public CreateAppointmentForm(Customer customer, User user)
         {
+            //save the customers appointmentlist to the AppointmentValidator class property
+            
             _appointmentData = new AppointmentData();
             _customer = customer;
             _user = user;
@@ -162,9 +165,11 @@ namespace ScheduleApp
                     appointment.Contact = createEndTimeInput.Text;
                 }
 
-    */
-                _appointmentData.Add(_createdAppointment, _user.Name);
-
+    */          
+                // call AppointmentValidator.ValidateAppointment
+                _createdAppointment = _appointmentData.Add(_createdAppointment, _user.Name);
+                
+                CreatedAppointment(_createdAppointment);
             }
             catch (Exception _) { MessageBox.Show("Appointment failed to save!"); }
             

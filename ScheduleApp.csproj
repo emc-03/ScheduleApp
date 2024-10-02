@@ -110,6 +110,7 @@
     <Compile Include="Database\UserData.cs" />
     <Compile Include="models\Address.cs" />
     <Compile Include="models\Appointment.cs" />
+    <Compile Include="models\AppointmentValidator.cs" />
     <Compile Include="models\Country.cs" />
     <Compile Include="models\City.cs" />
     <Compile Include="models\Customer.cs" />

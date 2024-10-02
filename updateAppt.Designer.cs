@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class updateAppt
+    partial class UpdateAppointmentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace ScheduleApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(updateAppt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateAppointmentForm));
             this.upApptCancelB = new System.Windows.Forms.Button();
             this.updateApptButton = new System.Windows.Forms.Button();
             this.updateTitleInput = new System.Windows.Forms.TextBox();

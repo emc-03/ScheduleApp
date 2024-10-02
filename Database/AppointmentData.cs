@@ -12,8 +12,9 @@ namespace ScheduleApp.Database
 {
     class AppointmentData
     {
-        private Appointment _selectedAppointment;
+        
         private List<Appointment> _appointmentList = new List<Appointment>();
+        private List<Appointment> _appointmentList2 = new List<Appointment>();
 
 
 
@@ -29,17 +30,18 @@ namespace ScheduleApp.Database
                 {
                     command.Parameters.AddWithValue("@userID", _userID);
                     command.Parameters.AddWithValue("@ID", _customerID);
-                    
+
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Appointment appointment = new Appointment();
-                            appointment.ID = (int)reader["appointmentId"];
+                            appointment.AppointmentID = (int)reader["appointmentId"];
                             appointment.CustomerID = _customerID;
                             appointment.UserID = _userID;
                             appointment.Title = reader["title"].ToString();
+                            appointment.Location = reader["location"].ToString();
                             appointment.Description = reader["description"].ToString();
                             appointment.Contact = reader["contact"].ToString();
                             appointment.URL = reader["url"].ToString();
@@ -69,8 +71,8 @@ namespace ScheduleApp.Database
                 throw new ArgumentException("Appointment title cannot be null or empty.");
             }
 
-            string newQueryAppointment = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdateBy) " +
-                                          "VALUES (@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end, @createDate, @createdBy, @lastUpdateBy)";
+            string newQueryAppointment = "INSERT INTO appointment ( customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdateBy) " +
+                                          "VALUES ( @customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end, @createDate, @createdBy, @lastUpdateBy)";
 
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
@@ -78,6 +80,7 @@ namespace ScheduleApp.Database
 
                 using (MySqlCommand command = new MySqlCommand(newQueryAppointment, connection))
                 {
+                    
                     command.Parameters.AddWithValue("@customerId", appointment.CustomerID);
                     command.Parameters.AddWithValue("@userId", appointment.UserID);
                     command.Parameters.AddWithValue("@title", appointment.Title);
@@ -91,10 +94,10 @@ namespace ScheduleApp.Database
                     command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
                     command.Parameters.AddWithValue("@createdBy", userName);
                     command.Parameters.AddWithValue("@lastUpdateBy", userName);
-                   
+
 
                     command.ExecuteNonQuery();
-                    appointment.ID = (int)command.LastInsertedId;
+                    appointment.AppointmentID = (int)command.LastInsertedId;
                 }
 
                 connection.Close();
@@ -108,8 +111,10 @@ namespace ScheduleApp.Database
         {
 
 
-            string updateQueryAppointment = "UPDATE appointment SET (title, description, location, contact, type, url, start, end)" +
-                "VALUES (@title, @description, @location, @contact, @type, @url, @start, @end)";
+            string updateQueryAppointment = "UPDATE appointment SET title = @title, description = @description, location = @location, contact = @contact, type = @type, url = @url, start = @start, end = @end" +
+              " WHERE appointmentId = @appointmentId";
+            
+
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
@@ -117,6 +122,7 @@ namespace ScheduleApp.Database
 
                     using (MySqlCommand command = new MySqlCommand(updateQueryAppointment, connection))
                     {
+                        command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
                         command.Parameters.AddWithValue("@title", appointment.Title);
                         command.Parameters.AddWithValue("@description", appointment.Description);
                         command.Parameters.AddWithValue("@location", appointment.Location);
@@ -128,7 +134,7 @@ namespace ScheduleApp.Database
 
 
                         command.ExecuteNonQuery();
-                        appointment.ID = (int)command.LastInsertedId;
+                        
                     }
                 }
                 connection.Close();
@@ -139,83 +145,21 @@ namespace ScheduleApp.Database
         public void Delete(Appointment appointment)
         {
 
-            string deleteAppointment = "DELETE FROM Appointment Where appointmentId = @appointmenId";
+            string deleteAppointment = "DELETE FROM Appointment Where appointmentId = @appointmentId";
 
             using (MySqlCommand command = new MySqlCommand(deleteAppointment, DB_Connection.conn))
             {
-                command.Parameters.AddWithValue("@appointmentId", appointment.ID);
+                command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
                 command.ExecuteNonQuery();
             }
-            AppointmentData appointmentData = new AppointmentData();
-            appointmentData.Delete(appointment);
+            
+            
         }
 
 
 
     }
 
-    //user and customer appointment list 
-    //SELECT FROM WHERE  userID == customerID 
-    //make list of an appointments, read one row at a time, creating a single appointment, set values, declare a list outside of the loop,
-    //then return all matching appointments 
 
 
-
-
-    //  public void loadDataGrid()
-    // {
-    //{
-    //    _calendarList = _customerData.FindAll();
-    //    BindingSource source = new BindingSource();
-    //    source.DataSource = _customerList;
-    //    dataGridCustomer.DataSource = source;
-
-
-    // TODO Binding list to make sure that when a row is selected that the full customer is available 
-
-
-    //    public void loadDataGrid()
-    //    {
-    //        if (monthRadioButton.Checked = true)
-    //        {
-
-    //            loadMonthView();
-    //        }
-    //        else if (weekRadioButton.Checked = true)
-    //        {
-    //            string getAppt = "SELECT * FROM appointment";
-
-
-
-    //            //loadWeekView();
-    //        }
-    //        SELECT * FROM client_schedule.appointment
-    //WHERE start >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) day AND start < CURDATE() - INTERVAL weekday(CURDATE()) day + interval 7 day;
-    //        {
-    //            //loadAll();
-    //        }
-    //    }
-
-    //    private void loadMonthView()
-    //    {
-    //SELECT* FROM client_schedule.appointment
-    //WHERE YEAR(start) = YEAR(CURDATE()) AND MONTH(CURDATE()) = MONTH(CURDATE());
-    //        DataTable dataTable = new DataTable();
-    //        dataTable.Columns.Add(""); //Date 
-    //        dataTable.Columns.Add(""); // Event 
-
-
-    //    }
-    //}
-
-    //private void loadWeekView()
-    //{
-
-    //}
-    //private void loadAll()
-    //{
-
-    //}
 }
-
-

@@ -11,7 +11,8 @@ namespace ScheduleApp.models
 {
    public class Appointment
     {
-        private int _id; 
+        
+        private int _appointmentID;
         private int _customerID;
         private int _userID;
         private string _title;
@@ -24,7 +25,8 @@ namespace ScheduleApp.models
         private string _url;
         
 
-        public int ID { get { return _id; } set { _id = value; } }
+        
+        public int AppointmentID { get { return _appointmentID; } set { _appointmentID = value; } }
         public int CustomerID { get { return _customerID; } set { _customerID = value; } }
         public int UserID { get { return _userID; } set { _userID = value; } }
         public string Title { get { return _title; } set { _title = value; } }

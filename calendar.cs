@@ -20,8 +20,8 @@ namespace ScheduleApp
     {
         private User _user;
         private Customer _selectedCustomer;
-        private Appointment _appointment;
-        private readonly AppointmentData _appointmentData = new AppointmentData();
+        private Appointment _selectedAppointment;
+        private AppointmentData _appointmentData = new AppointmentData();
 
         public calendarForm(Customer selectedCustomer, User user)
         {
@@ -29,101 +29,78 @@ namespace ScheduleApp
             _selectedCustomer = selectedCustomer;
 
             InitializeComponent();
-            loadData();
+            //loadData();
+            loadDataToList();
 
         }
 
-        public void loadData()
+        public void CreatedAppointmentListener(Appointment appointment)
         {
-            // Clear existing columns to avoid duplication
-            appointmentDataGrid.Columns.Clear();
-
-            // Add necessary columns if they don't exist
-            appointmentDataGrid.Columns.Add("appointmentTitle", "Title");
-            appointmentDataGrid.Columns.Add("appointmentDescription", "Description");
-            appointmentDataGrid.Columns.Add("appointmentLocation", "Location");
-            appointmentDataGrid.Columns.Add("appointmentContact", "Contact");
-            appointmentDataGrid.Columns.Add("appointmentType", "Appointment Type");
-            appointmentDataGrid.Columns.Add("appointmentStart", "Start Time");
-            appointmentDataGrid.Columns.Add("appointmentEnd", "End Time");
-            appointmentDataGrid.Columns.Add("appointmentID", "ID");
-
-            // Hide the ID column
-            appointmentDataGrid.Columns["appointmentID"].Visible = false;
-
-            // Clear previous rows to avoid duplicates
-            appointmentDataGrid.Rows.Clear();
-
-            // Add each appointment to the DataGridView
-            foreach (Appointment appointment in _selectedCustomer.AppointmentList)
-            {
-                addAppointmenttoDataGrid(appointment);
-            }
-
-            // Alternative: Bind the AppointmentList directly to the DataGridView
-            // This automatically creates columns and rows based on the AppointmentList
-            // appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;
+            _selectedCustomer.AppointmentList.Add(appointment);
+            loadDataToList();
         }
 
-        // Helper method to add appointment details to the DataGridView
-        private void addAppointmenttoDataGrid(Appointment appointment)
+        public void UpdatedAppointmentListener(Appointment appointment)
         {
-            appointmentDataGrid.Rows.Add(
-                appointment.Title,
-                appointment.Description,
-                appointment.Location,
-                appointment.Contact,
-                appointment.Type,
-                appointment.Start,
-                appointment.End,
-                appointment.ID
-            );
+            int updatedAppointmentIndex = _selectedCustomer.AppointmentList.FindIndex(a => a.AppointmentID == appointment.AppointmentID);
+            _selectedCustomer.AppointmentList[updatedAppointmentIndex] = appointment;
+            loadDataToList();
         }
-
-        public void Delete(Appointment appointment)
+        public void loadDataToList() //NEW
         {
-            selectRow();
-            if (_appointment != null)
-            {
-                _appointmentData.Delete(_appointment);
-                int rowIndex = appointmentDataGrid.SelectedRows[0].Index;
-                appointmentDataGrid.Rows.RemoveAt(rowIndex);
 
-                MessageBox.Show("Customer information ha been deleted.");
-            
-            }
-
+            // Rebind the list to the DataGridView to display the updated list
+            appointmentDataGrid.DataSource = null;  // Clear the existing data source
+            appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;// _appointmentList2;  // Bind the updated list
         }
 
-        //NEW STUFF
-        // Filter the DataGridView by today's date
 
-        /*
+
+
+
+        /////// New Filter logic for List instead of datatable
+        private void FilterByDate()
+        {
+            var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start.Date == dateTimePicker1.Value.Date);
+
+
+            // Bind the filtered list to the DataGridView
+            appointmentDataGrid.DataSource = filteredList;
+        }
+
         private void FilterByToday()
         {
-            DataView dv = ;
-            dv.RowFilter = $"StartDate >= #{DateTime.Today}# AND StartDate < #{DateTime.Today.AddDays(1)}#";
+            var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start == DateTime.Today);
+
+            // Bind the filtered list to the DataGridView
+            appointmentDataGrid.DataSource = filteredList;
         }
 
-        // Filter the DataGridView by this week
+        // Filter the list by this week
         private void FilterByThisWeek()
         {
             DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);  // Start of the current week (Sunday)
-            DateTime endOfWeek = startOfWeek.AddDays(7);  // End of the current week
+            DateTime endOfWeek = startOfWeek.AddDays(7);  // End of the current week (Saturday)
 
-            DataView dv = _appointment;
-            dv.RowFilter = $"StartDate >= #{startOfWeek}# AND StartDate < #{endOfWeek}#";
+            var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start >= startOfWeek && appointment.Start < endOfWeek);
+
+            // Bind the filtered list to the DataGridView
+            appointmentDataGrid.DataSource = filteredList;
         }
 
-        // Filter the DataGridView by this month
+        // Filter the list by this month
         private void FilterByThisMonth()
         {
             DateTime startOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);  // Start of the month
             DateTime startOfNextMonth = startOfMonth.AddMonths(1);  // Start of the next month
 
-            DataView dv = _appointment.DefaultView;
-            dv.RowFilter = $"StartDate >= #{startOfMonth}# AND StartDate < #{startOfNextMonth}#";
+            var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start >= startOfMonth && appointment.Start < startOfNextMonth);
+
+            // Bind the filtered list to the DataGridView
+            appointmentDataGrid.DataSource = filteredList;
         }
+
+
 
         // Example of calling the filters based on radio button selection
         private void FilterAppointmentsByDateRange(string filterType)
@@ -139,38 +116,51 @@ namespace ScheduleApp
                 case "ThisMonth":
                     FilterByThisMonth();
                     break;
+                case "ALL":
+                    loadDataToList();
+                    break;
+                case "SelectedDate":
+                    FilterByDate();
+                    break;
             }
         }
 
-        //ENDNEWSTUFF
-        */
+
 
         private void selectRow()
 
         {
 
-
-            Int32 rowCount = appointmentDataGrid.SelectedRows.Count;
-            // if more then 1 row was selected they can't update more than one customer at a time. 
+            Int32 rowCount = appointmentDataGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            // Int32 rowCount = appointmentDataGrid.SelectedRows.Count;
+            // if more then 1 row was selected they can't update more than one customer at a time. S
             if (rowCount > 0)
             {
-                int selectedAppointmentID = Convert.ToInt32(appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value);
-                Appointment selectedAppointment = _selectedCustomer.AppointmentList.FirstOrDefault(a => a.ID == selectedAppointmentID);
+                var rawSelectedAppointmentId = appointmentDataGrid.SelectedRows[0].Cells["appointmentId"].Value;
+                // int selectedAppointmentID = Convert.ToInt32(appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value);
+                if (rawSelectedAppointmentId == null || !int.TryParse(rawSelectedAppointmentId.ToString(), out int selectedAppointmentID))
 
-                if (selectedAppointment == null)
                 {
-
-                    MessageBox.Show("Could not find Customer in memory.");
+                    return;
+                }
+                // Check if the appointment with the selected ID exists in the list
+                if (_selectedCustomer.AppointmentList.Any(appointment => appointment.AppointmentID == selectedAppointmentID))
+                {
+                    _selectedAppointment = _selectedCustomer.AppointmentList.First(appointment => appointment.AppointmentID == selectedAppointmentID);
                 }
                 else
                 {
-                    _appointment = selectedAppointment;
+                    MessageBox.Show("Could not find Appointment in memory.");
                 }
+
             }
             else
             {
                 MessageBox.Show("No row selected.");
             }
+
+
+
 
         }
 
@@ -178,17 +168,15 @@ namespace ScheduleApp
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            // CustomerInformationForm custData = new CustomerInformationForm();
-            //custData.Show();
 
         }
 
-    
+
 
         private void upCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            
+
         }
 
 
@@ -200,10 +188,9 @@ namespace ScheduleApp
 
         private void createApptButton_Click(object sender, EventArgs e)
         {
-
-            CreateAppointment create = new CreateAppointment(_selectedCustomer, _user);
-
-            create.Show();
+            CreateAppointmentForm _createAppointmentForm = new CreateAppointmentForm(_selectedCustomer, _user);
+            _createAppointmentForm.CreatedAppointment += CreatedAppointmentListener;
+            _createAppointmentForm.Show();
         }
 
         private void updateApptButton_Click(object sender, EventArgs e)
@@ -211,15 +198,19 @@ namespace ScheduleApp
             selectRow();
 
 
-            if (_appointment != null)
+            if (_selectedAppointment != null)
             {
-                updateAppt update = new updateAppt(_appointment);
-                update.Show();
+                UpdateAppointmentForm updateAppointmentForm = new UpdateAppointmentForm(_selectedAppointment);
+                updateAppointmentForm.UpdatedAppointment += UpdatedAppointmentListener;
+
+
+                updateAppointmentForm.Show();
+                _selectedAppointment = null;
             }
             else
             {
                 MessageBox.Show("No Appointment Selected!");
-                //TO-DO create a method for each radio button, fill the data table then call the correct Method in the SQL statement
+
 
             }
         }
@@ -230,46 +221,28 @@ namespace ScheduleApp
 
         }
 
-
+        private void dayViewRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointmentsByDateRange("SelectedDate");
+        }
 
         private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-
+            FilterAppointmentsByDateRange("ThisWeek");
         }
 
         private void monthRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            FilterAppointmentsByDateRange("ThisMonth");
+        }
 
+        private void allApptRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointmentsByDateRange("ALL");
         }
 
         private void searchApptButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //string connectionString = "?";
-                //string searchAppt = TextBox.?; TODO What do I reference ? 
-
-                //using (MySqlConnection connection = new MySqlConnection(connectionString));
-                // search the query 
-
-            }
-            catch
-            {
-                MessageBox.Show("Appointment could not be found!");
-            }
-
-            // when monthRadioButton selected 
-            /*   string monthConnection = ConfigurationManager.ConnectionStrings["localDB"].ConnectionString; // table for test use - TODO  where to find the connection string?; 
-
-             create sql object 
-            gridConnection = new SqlConnection(monthConnection);
-             create dataAdapter object
-            adapter = new SqlDataAdapter("SELECT * FROM client_schedule", monthConnection);
-             create a Dataset Object 
-            data = new DataSet();
-            adapter.Fill(data, "client_schedule");
-            monthDataGrid.DataSource = data.Tables["client_schedule"];
-            */
 
         }
 
@@ -283,14 +256,40 @@ namespace ScheduleApp
 
         }
 
-        private void dayViewRadio_CheckedChanged(object sender, EventArgs e)
+
+        private void deleteAppointmentButton_Click(object sender, EventArgs e)
+        {
+            selectRow();
+            if (_selectedAppointment != null)
+            {
+                // delete from database
+                _appointmentData.Delete(_selectedAppointment);
+
+                // delete from customers appointments
+                int selectedAppointmentIndex = _selectedCustomer.AppointmentList.FindIndex(a => a.AppointmentID == _selectedAppointment.AppointmentID);
+                _selectedCustomer.AppointmentList.RemoveAt(selectedAppointmentIndex);
+                // update the datagrid with all new appointments
+                loadDataToList();
+                //delete was successful 
+                _selectedAppointment = null;
+
+                MessageBox.Show("Appointment has been deleted.");
+
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void deleteAppointmentButton_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
-          //call delete method here
+
+        }
+
+        private void apptViewLabel_Click(object sender, EventArgs e)
+        {
 
         }
     }

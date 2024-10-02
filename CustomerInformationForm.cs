@@ -237,6 +237,7 @@ namespace ScheduleApp
                 _customerData.Delete(_selectedCustomer);
                 int rowIndex = dataGridCustomer.SelectedRows[0].Index;
                 dataGridCustomer.Rows.RemoveAt(rowIndex);
+                _selectedCustomer = null;
 
                 MessageBox.Show("Customer information has been deleted.");
             }
@@ -346,6 +347,11 @@ namespace ScheduleApp
             {
                 UpdateCustomerForm updateCustomer = new UpdateCustomerForm(_selectedCustomer);
                 updateCustomer.Show();
+                _selectedCustomer = null;
+            }
+            else {
+
+                MessageBox.Show("No row selected.");
             }
             // else if the selectedCustomer is null then create a messagebox 
 
@@ -379,6 +385,11 @@ namespace ScheduleApp
         }
 
         private void CustomerInformationForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addressInput_TextChanged(object sender, EventArgs e)
         {
 
         }

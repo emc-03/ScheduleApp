@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class CreateAppointment
+    partial class CreateAppointmentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace ScheduleApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAppointment));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAppointmentForm));
             this.createTitleInput = new System.Windows.Forms.TextBox();
             this.createTitleLable = new System.Windows.Forms.Label();
             this.createContactInput = new System.Windows.Forms.TextBox();

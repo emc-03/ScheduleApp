@@ -14,31 +14,35 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class updateAppt : Form
+    public partial class UpdateAppointmentForm : Form
     {
         private Appointment _appointment;
-        private Appointment apptToUpdate = new Appointment();
+        private AppointmentValidator _appointmentValidator; // use for appointmentValidation method
 
-        public updateAppt(Appointment appointment)
+        public event Action<Appointment> UpdatedAppointment;
+
+        public UpdateAppointmentForm(Appointment appointment)
         {
+
             _appointment = appointment;
-            apptToUpdate = appointment;
             InitializeComponent();
             populateCustomerData();
         }
 
         private void populateCustomerData()
         {
-
-            // Populate the controls with customer data
-
-            updateTitleInput.Text = apptToUpdate.Title;
-            updateDescriptionInput.Text = apptToUpdate.Description;
-            updateLocationInput.Text = apptToUpdate.Location;
-            updateContactInput.Text = apptToUpdate.Contact;
-            updateLinkInput.Text = apptToUpdate.URL;
-            updateDateTimeSelect.MinDate = apptToUpdate.Start;// TODO needs to select the correct day/month/year 
-            updateTypeDropdown.Text = apptToUpdate.Type;
+            if (_appointment != null)
+            {
+                // Populate the controls with customer data
+                updateTitleInput.Text = _appointment.Title;
+                updateDescriptionInput.Text = _appointment.Description;
+                updateLocationInput.Text = _appointment.Location;
+                updateContactInput.Text = _appointment.Contact;
+                updateLinkInput.Text = _appointment.URL;
+                updateDateTimeSelect.MinDate = _appointment.Start;// TODO needs to select the correct day/month/year 
+                updateTypeDropdown.Text = _appointment.Type;
+            }
+            
 
         }
 
@@ -87,10 +91,12 @@ namespace ScheduleApp
         private void updateButton_Click(object sender, EventArgs e)
         {
             AppointmentData appointmentData = new AppointmentData();
-            apptToUpdate.Description = this.updateDescriptionInput.Text;
+            _appointment.Description = this.updateDescriptionInput.Text;
 
-            appointmentData.Update(apptToUpdate);
+            appointmentData.Update(_appointment);
             MessageBox.Show("Appointment successfully updated.");
+            //fire off event
+            UpdatedAppointment(_appointment);
             this.Close();
         }
 
