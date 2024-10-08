@@ -101,6 +101,8 @@ namespace ScheduleApp.Database
                 }
 
                 connection.Close();
+                _appointmentList.Add(appointment);
+                _appointmentList2.Add(appointment);
             }
 
             return appointment;
@@ -110,7 +112,7 @@ namespace ScheduleApp.Database
         public void Update(Appointment appointment)
         {
 
-
+            
             string updateQueryAppointment = "UPDATE appointment SET title = @title, description = @description, location = @location, contact = @contact, type = @type, url = @url, start = @start, end = @end" +
               " WHERE appointmentId = @appointmentId";
             
@@ -140,6 +142,10 @@ namespace ScheduleApp.Database
                 connection.Close();
             }
             //does not need a return, ID is being used to match the ID in the database 
+            _appointmentList.Remove(appointment);
+            _appointmentList2.Remove(appointment);
+            _appointmentList.Add(appointment);
+            _appointmentList2.Add(appointment);
         }
 
         public void Delete(Appointment appointment)
@@ -152,8 +158,9 @@ namespace ScheduleApp.Database
                 command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
                 command.ExecuteNonQuery();
             }
-            
-            
+            _appointmentList.Remove(appointment);
+            _appointmentList2.Remove(appointment);
+
         }
 
 

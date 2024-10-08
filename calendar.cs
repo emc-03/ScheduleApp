@@ -37,14 +37,14 @@ namespace ScheduleApp
         public void CreatedAppointmentListener(Appointment appointment)
         {
             _selectedCustomer.AppointmentList.Add(appointment);
-            loadDataToList();
+            FilterAppointmentByRadioButton();
         }
 
         public void UpdatedAppointmentListener(Appointment appointment)
         {
             int updatedAppointmentIndex = _selectedCustomer.AppointmentList.FindIndex(a => a.AppointmentID == appointment.AppointmentID);
             _selectedCustomer.AppointmentList[updatedAppointmentIndex] = appointment;
-            loadDataToList();
+            FilterAppointmentByRadioButton();
         }
         public void loadDataToList() //NEW
         {
@@ -68,14 +68,7 @@ namespace ScheduleApp
             appointmentDataGrid.DataSource = filteredList;
         }
 
-        private void FilterByToday()
-        {
-            var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start == DateTime.Today);
-
-            // Bind the filtered list to the DataGridView
-            appointmentDataGrid.DataSource = filteredList;
-        }
-
+       
         // Filter the list by this week
         private void FilterByThisWeek()
         {
@@ -107,9 +100,7 @@ namespace ScheduleApp
         {
             switch (filterType)
             {
-                case "Today":
-                    FilterByToday();
-                    break;
+               
                 case "ThisWeek":
                     FilterByThisWeek();
                     break;
@@ -126,8 +117,29 @@ namespace ScheduleApp
         }
 
 
+        private void FilterAppointmentByRadioButton()
+        {
+            if (dayRadioButton.Checked)
+            {
+                FilterByDate();
+            }
+            else if (weekRadioButton.Checked)
+            {
+                FilterByThisWeek();
+            }
+            else if (monthRadioButton.Checked)
+            {
+                FilterByThisMonth();
+            }
+            //if no radio button is selected or if all is checked
+            else 
+            {
+                loadDataToList();
+            }
+           
+        }
 
-        private void selectRow()
+            private void selectRow()
 
         {
 
@@ -269,7 +281,7 @@ namespace ScheduleApp
                 int selectedAppointmentIndex = _selectedCustomer.AppointmentList.FindIndex(a => a.AppointmentID == _selectedAppointment.AppointmentID);
                 _selectedCustomer.AppointmentList.RemoveAt(selectedAppointmentIndex);
                 // update the datagrid with all new appointments
-                loadDataToList();
+                FilterAppointmentByRadioButton();
                 //delete was successful 
                 _selectedAppointment = null;
 
@@ -280,7 +292,7 @@ namespace ScheduleApp
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-
+            FilterAppointmentByRadioButton();
         }
 
         private void label2_Click(object sender, EventArgs e)

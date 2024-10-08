@@ -17,7 +17,7 @@ namespace ScheduleApp
     public partial class UpdateAppointmentForm : Form
     {
         private Appointment _appointment;
-        private AppointmentValidator _appointmentValidator; // use for appointmentValidation method
+        //private AppointmentValidator _appointmentValidator; // use for appointmentValidation method
 
         public event Action<Appointment> UpdatedAppointment;
 
@@ -90,14 +90,30 @@ namespace ScheduleApp
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            AppointmentData appointmentData = new AppointmentData();
+            
+            _appointment.Title = this.updateTitleInput.Text;
+            _appointment.Location = this.updateLocationInput.Text;
             _appointment.Description = this.updateDescriptionInput.Text;
-
+            _appointment.Contact = this.updateContactInput.Text;
+            _appointment.URL = this.updateLinkInput.Text;
+            _appointment.Start = this.updateStartTimeInput.Value;
+            _appointment.End = this.updateEndTimeInput.Value;
+            _appointment.Type = this.updateTypeDropdown.Text;
+            // call validate appointment - inside 'try block' include lines this.Close();
+           
+            AppointmentData appointmentData = new AppointmentData();
             appointmentData.Update(_appointment);
+
+
+            //Loading appointment into appointment list
+            
+
+
             MessageBox.Show("Appointment successfully updated.");
             //fire off event
             UpdatedAppointment(_appointment);
             this.Close();
+            //this is where the catch block goes, to catch any exception thrown by validate appointment and show a messagebox 'validate appointment threw..."
         }
 
         private void upCancelButton_Click(object sender, EventArgs e)

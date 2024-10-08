@@ -10,9 +10,9 @@ using System.Windows.Forms;
 namespace ScheduleApp.models
 {
     
-        // put into customer class? 
+       
         //try - catch - where Validatemethod is called
-        // create and instance of this class in create & update form
+        // create an instance of this class in create & update forms
         public class AppointmentValidator
         {
             private readonly TimeSpan timeRangeStart = new TimeSpan(9, 0, 0); // 9 AM
@@ -23,6 +23,9 @@ namespace ScheduleApp.models
             private List<Appointment> appointments = new List<Appointment>();
 
             // Schedule a new appointment
+            // Call method before userinput to update datagridview - and any changes from user 
+            // include this call in 'try - block'
+
             public void ValidateAppointment(DateTime startTime, DateTime endTime)
             {
                 // Convert to EST if required
