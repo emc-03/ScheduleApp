@@ -16,6 +16,8 @@ namespace ScheduleApp
     public partial class UpdateCustomerForm : Form
     {
         private Customer customerToUpdate = new Customer();
+        public event Action<Customer> UpdatedCustomer;
+
         public UpdateCustomerForm(Customer customer)
         {
             customerToUpdate = customer;
@@ -38,15 +40,10 @@ namespace ScheduleApp
 
         private void upCancelButton_Click(object sender, EventArgs e)
         {
-            returnToParentForm();
+            this.Close();
         }
 
-        private void returnToParentForm()
-        {
-            this.Close();
-            //CustomerInformationForm customerDataForm = new CustomerInformationForm();
-            //customerDataForm.Show();
-        }
+       
 
         private void UpfnameInput_TextChanged(object sender, EventArgs e)
         {
@@ -56,7 +53,7 @@ namespace ScheduleApp
         private void updateCButton_Click(object sender, EventArgs e)
         {
 
-            CustomerData customerData = new CustomerData();
+            
             customerToUpdate.FirstName = this.UpfnameInput.Text;
             customerToUpdate.LastName = this.UplnameInput.Text;
             customerToUpdate.Address.Address1 = this.UpaddressInput.Text;
@@ -66,10 +63,26 @@ namespace ScheduleApp
             customerToUpdate.Address.City.Name = this.UpcityInput.Text;
             customerToUpdate.Address.City.Country.Name = this.UpcountryInput.Text;
 
-            customerData.Update(customerToUpdate);
+            try
+            {
+              
+                CustomerData customerData = new CustomerData();
+                customerData.Update(customerToUpdate);
+
+                MessageBox.Show("Customer successfully updated.");
+                //fire off event
+                UpdatedCustomer(customerToUpdate);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
             MessageBox.Show("Customer successfully updated.");
-            returnToParentForm();
-       
+
+            this.Close();
+
         }                           
 
         private void UpcustIdInput_TextChanged(object sender, EventArgs e)

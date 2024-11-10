@@ -110,7 +110,7 @@
     <Compile Include="Database\UserData.cs" />
     <Compile Include="models\Address.cs" />
     <Compile Include="models\Appointment.cs" />
-    <Compile Include="models\AppointmentValidator.cs" />
+    <Compile Include="Validator\AppointmentValidator.cs" />
     <Compile Include="models\Country.cs" />
     <Compile Include="models\City.cs" />
     <Compile Include="models\Customer.cs" />
@@ -149,6 +149,7 @@
       <DependentUpon>UpdateCustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="models\User.cs" />
+    <Compile Include="Validator\CustomerValidator.cs" />
     <EmbeddedResource Include="calendar.resx">
       <DependentUpon>calendar.cs</DependentUpon>
     </EmbeddedResource>

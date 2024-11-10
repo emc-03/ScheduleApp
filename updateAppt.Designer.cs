@@ -49,7 +49,7 @@ namespace ScheduleApp
             this.updateDateTimeSelect = new System.Windows.Forms.DateTimePicker();
             this.updateDateTimeLabel = new System.Windows.Forms.Label();
             this.updateTypeLabel = new System.Windows.Forms.Label();
-            this.updateTypeDropdown = new System.Windows.Forms.ComboBox();
+            this.updateApptType = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // upApptCancelB
@@ -80,6 +80,7 @@ namespace ScheduleApp
             // 
             // updateTitleInput
             // 
+            this.updateTitleInput.AcceptsTab = true;
             this.updateTitleInput.Location = new System.Drawing.Point(109, 20);
             this.updateTitleInput.Name = "updateTitleInput";
             this.updateTitleInput.Size = new System.Drawing.Size(266, 20);
@@ -99,6 +100,7 @@ namespace ScheduleApp
             // 
             // updateDescriptionInput
             // 
+            this.updateDescriptionInput.AcceptsTab = true;
             this.updateDescriptionInput.Location = new System.Drawing.Point(109, 46);
             this.updateDescriptionInput.Multiline = true;
             this.updateDescriptionInput.Name = "updateDescriptionInput";
@@ -119,6 +121,7 @@ namespace ScheduleApp
             // 
             // updateLocationInput
             // 
+            this.updateLocationInput.AcceptsTab = true;
             this.updateLocationInput.Location = new System.Drawing.Point(109, 114);
             this.updateLocationInput.Name = "updateLocationInput";
             this.updateLocationInput.Size = new System.Drawing.Size(266, 20);
@@ -149,6 +152,7 @@ namespace ScheduleApp
             // 
             // updateContactInput
             // 
+            this.updateContactInput.AcceptsTab = true;
             this.updateContactInput.Location = new System.Drawing.Point(109, 149);
             this.updateContactInput.Name = "updateContactInput";
             this.updateContactInput.Size = new System.Drawing.Size(212, 20);
@@ -157,6 +161,7 @@ namespace ScheduleApp
             // 
             // updateLinkInput
             // 
+            this.updateLinkInput.AcceptsTab = true;
             this.updateLinkInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateLinkInput.Location = new System.Drawing.Point(109, 181);
             this.updateLinkInput.Name = "updateLinkInput";
@@ -177,10 +182,12 @@ namespace ScheduleApp
             // 
             // updateEndTimeInput
             // 
+            this.updateEndTimeInput.CustomFormat = "hh:mm tt";
             this.updateEndTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateEndTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.updateEndTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.updateEndTimeInput.Location = new System.Drawing.Point(151, 328);
             this.updateEndTimeInput.Name = "updateEndTimeInput";
+            this.updateEndTimeInput.ShowUpDown = true;
             this.updateEndTimeInput.Size = new System.Drawing.Size(144, 24);
             this.updateEndTimeInput.TabIndex = 79;
             this.updateEndTimeInput.ValueChanged += new System.EventHandler(this.updateEndTimeInput_ValueChanged);
@@ -199,10 +206,12 @@ namespace ScheduleApp
             // 
             // updateStartTimeInput
             // 
+            this.updateStartTimeInput.CustomFormat = "hh:mm tt";
             this.updateStartTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateStartTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.updateStartTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.updateStartTimeInput.Location = new System.Drawing.Point(151, 292);
             this.updateStartTimeInput.Name = "updateStartTimeInput";
+            this.updateStartTimeInput.ShowUpDown = true;
             this.updateStartTimeInput.Size = new System.Drawing.Size(144, 24);
             this.updateStartTimeInput.TabIndex = 77;
             this.updateStartTimeInput.ValueChanged += new System.EventHandler(this.updateStartTimeInput_ValueChanged);
@@ -249,26 +258,24 @@ namespace ScheduleApp
             this.updateTypeLabel.TabIndex = 81;
             this.updateTypeLabel.Text = "Appointment Type";
             // 
-            // updateTypeDropdown
+            // updateApptType
             // 
-            this.updateTypeDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.updateTypeDropdown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.updateTypeDropdown.FormattingEnabled = true;
-            this.updateTypeDropdown.Location = new System.Drawing.Point(151, 366);
-            this.updateTypeDropdown.Name = "updateTypeDropdown";
-            this.updateTypeDropdown.Size = new System.Drawing.Size(144, 21);
-            this.updateTypeDropdown.TabIndex = 80;
-            this.updateTypeDropdown.SelectedIndexChanged += new System.EventHandler(this.updateTypeDropdown_SelectedIndexChanged);
+            this.updateApptType.AcceptsTab = true;
+            this.updateApptType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateApptType.Location = new System.Drawing.Point(157, 364);
+            this.updateApptType.Name = "updateApptType";
+            this.updateApptType.Size = new System.Drawing.Size(212, 22);
+            this.updateApptType.TabIndex = 82;
             // 
-            // updateAppt
+            // UpdateAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(457, 519);
+            this.Controls.Add(this.updateApptType);
             this.Controls.Add(this.updateTypeLabel);
-            this.Controls.Add(this.updateTypeDropdown);
             this.Controls.Add(this.updateEndTimeInput);
             this.Controls.Add(this.updateEndTimeLabel);
             this.Controls.Add(this.updateStartTimeInput);
@@ -289,7 +296,7 @@ namespace ScheduleApp
             this.Controls.Add(this.updateApptButton);
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "updateAppt";
+            this.Name = "UpdateAppointmentForm";
             this.Text = "Update Appt ";
             this.Load += new System.EventHandler(this.updateAppt_Load);
             this.ResumeLayout(false);
@@ -318,6 +325,6 @@ namespace ScheduleApp
         private System.Windows.Forms.DateTimePicker updateDateTimeSelect;
         private System.Windows.Forms.Label updateDateTimeLabel;
         private System.Windows.Forms.Label updateTypeLabel;
-        private System.Windows.Forms.ComboBox updateTypeDropdown;
+        private System.Windows.Forms.TextBox updateApptType;
     }
 }

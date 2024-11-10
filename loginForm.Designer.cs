@@ -81,6 +81,7 @@ namespace ScheduleApp
             // 
             // loginPanelMain
             // 
+            this.loginPanelMain.AutoSize = true;
             this.loginPanelMain.BackColor = System.Drawing.Color.Transparent;
             this.loginPanelMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.loginPanelMain.Controls.Add(this.loginButton);
@@ -88,6 +89,7 @@ namespace ScheduleApp
             this.loginPanelMain.Controls.Add(this.userInput);
             this.loginPanelMain.Controls.Add(this.passwordLabel);
             this.loginPanelMain.Controls.Add(this.userLabel);
+            this.loginPanelMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginPanelMain.Location = new System.Drawing.Point(0, 45);
             this.loginPanelMain.Name = "loginPanelMain";
             this.loginPanelMain.Size = new System.Drawing.Size(508, 490);
@@ -110,6 +112,8 @@ namespace ScheduleApp
             // 
             // passwordInput
             // 
+            this.passwordInput.AcceptsReturn = true;
+            this.passwordInput.AcceptsTab = true;
             this.passwordInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordInput.Location = new System.Drawing.Point(215, 172);
             this.passwordInput.Name = "passwordInput";
@@ -119,6 +123,8 @@ namespace ScheduleApp
             // 
             // userInput
             // 
+            this.userInput.AcceptsReturn = true;
+            this.userInput.AcceptsTab = true;
             this.userInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInput.Location = new System.Drawing.Point(215, 108);
             this.userInput.Name = "userInput";
@@ -164,6 +170,7 @@ namespace ScheduleApp
             this.loginPanelMain.ResumeLayout(false);
             this.loginPanelMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

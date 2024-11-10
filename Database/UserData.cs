@@ -11,12 +11,6 @@ namespace ScheduleApp.Database
     class UserData
     {
 
-        /*
-        public void Add(User user)
-        {
-            int MyUserID = user.ID;
-        }
-        */
         
         public User Get(string userName, string password) {
             User user = new User(); // declared but not initilized until line 28

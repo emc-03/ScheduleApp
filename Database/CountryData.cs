@@ -44,16 +44,20 @@ namespace ScheduleApp.Database
 
             string updateQueryCountry = "UPDATE country SET country = @country, lastUpdateBy = @lastUpdateBy" +
                 " WHERE countryId = @countryId";
-
-            using (MySqlCommand command = new MySqlCommand(updateQueryCountry, DB_Connection.conn))
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
-                command.Parameters.AddWithValue("@countryId", country.ID);
-                command.Parameters.AddWithValue("@country", country.Name);
-                command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(updateQueryCountry, DB_Connection.conn))
+                {
+                    command.Parameters.AddWithValue("@countryId", country.ID);
+                    command.Parameters.AddWithValue("@country", country.Name);
+                    command.Parameters.AddWithValue("@lastUpdateBy", "lastUpdatedBy");
 
-                // Execute the command to update the country
-                command.ExecuteNonQuery();
+                    // Execute the command to update the country
+                    command.ExecuteNonQuery();
 
+                }
+                connection.Close();
             }
         }
         public void Delete(Country country)
@@ -63,7 +67,9 @@ namespace ScheduleApp.Database
             using (MySqlCommand command = new MySqlCommand(deleteCountry, DB_Connection.conn))
             {
                 command.Parameters.AddWithValue("@ID", country.ID);
+                DB_Connection.conn.Open();
                 command.ExecuteNonQuery();
+                DB_Connection.conn.Close();
             }
         }
         public Country Get(int countryId)

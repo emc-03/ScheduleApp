@@ -9,24 +9,31 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace ScheduleApp
 {
     public partial class UpdateAppointmentForm : Form
     {
+        TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+        TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        TimeZoneInfo utcTimeZone = TimeZoneInfo.Utc;
         private Appointment _appointment;
-        //private AppointmentValidator _appointmentValidator; // use for appointmentValidation method
+        private AppointmentValidator _appointmentValidator;
 
         public event Action<Appointment> UpdatedAppointment;
 
-        public UpdateAppointmentForm(Appointment appointment)
+        public UpdateAppointmentForm(Appointment appointment, List<Appointment> appointments)
         {
-
+            _appointmentValidator = new AppointmentValidator(appointments);
             _appointment = appointment;
             InitializeComponent();
+
             populateCustomerData();
+
         }
 
         private void populateCustomerData()
@@ -39,10 +46,10 @@ namespace ScheduleApp
                 updateLocationInput.Text = _appointment.Location;
                 updateContactInput.Text = _appointment.Contact;
                 updateLinkInput.Text = _appointment.URL;
-                updateDateTimeSelect.MinDate = _appointment.Start;// TODO needs to select the correct day/month/year 
-                updateTypeDropdown.Text = _appointment.Type;
+                updateDateTimeSelect.MinDate = _appointment.Start;
+                updateApptType.Text = _appointment.Type;
             }
-            
+
 
         }
 
@@ -90,30 +97,106 @@ namespace ScheduleApp
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            
+
             _appointment.Title = this.updateTitleInput.Text;
             _appointment.Location = this.updateLocationInput.Text;
             _appointment.Description = this.updateDescriptionInput.Text;
             _appointment.Contact = this.updateContactInput.Text;
             _appointment.URL = this.updateLinkInput.Text;
-            _appointment.Start = this.updateStartTimeInput.Value;
-            _appointment.End = this.updateEndTimeInput.Value;
-            _appointment.Type = this.updateTypeDropdown.Text;
-            // call validate appointment - inside 'try block' include lines this.Close();
-           
-            AppointmentData appointmentData = new AppointmentData();
-            appointmentData.Update(_appointment);
+            TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+            _appointment.Start = TimeZoneInfo.ConvertTime(this.updateStartTimeInput.Value, estTimeZone);
+            _appointment.End = TimeZoneInfo.ConvertTime(this.updateEndTimeInput.Value, estTimeZone);
+            _appointment.Type = this.updateApptType.Text;
+
+            if (string.IsNullOrEmpty(updateTitleInput.Text))
+            {
+                MessageBox.Show("Fill in missing feilds.");
+                updateTitleInput.Clear();
+                updateTitleInput.Focus();
+                return;
+            }
+            else
+            {
+                _appointment.Title = updateTitleInput.Text;
+            }
 
 
-            //Loading appointment into appointment list
-            
+            if (string.IsNullOrEmpty(updateDescriptionInput.Text))
+            {
+                MessageBox.Show("Please fill in missing feilds.");
+                updateDescriptionInput.Clear();
+                updateDescriptionInput.Focus();
+                return;
+            }
+
+            else
+            {
+                _appointment.Description = updateDescriptionInput.Text;
+            }
+
+            if (string.IsNullOrEmpty(updateLocationInput.Text))
+            {
+                MessageBox.Show("Fill in missing feilds.");
+                updateLocationInput.Clear();
+                updateLocationInput.Focus();
+                return;
+            }
+            else
+            {
+                string locationPattern = @"^[a-zA-Z\s\-'.]+$"; // Allows letters, spaces, hyphens, apostrophes, and periods
+                if (Regex.IsMatch(updateLocationInput.Text, locationPattern))
+                {
+                    MessageBox.Show("Invalid location type! Check for typo, numbers are invalid.");
+
+                    updateLocationInput.Clear();
+                    updateLocationInput.Focus();
+                    return;
+                }
+                _appointment.Location = updateLocationInput.Text;
+            }
 
 
-            MessageBox.Show("Appointment successfully updated.");
-            //fire off event
-            UpdatedAppointment(_appointment);
-            this.Close();
-            //this is where the catch block goes, to catch any exception thrown by validate appointment and show a messagebox 'validate appointment threw..."
+            if (string.IsNullOrEmpty(updateContactInput.Text))
+            {
+
+                MessageBox.Show("Please fill in missing feilds");
+                updateContactInput.Clear();
+                updateContactInput.Focus();
+                return;
+            }
+            else
+            {
+                string contactPattern = @"[a-zA-Z\s\-'.]+$";
+                if (!Regex.IsMatch(updateContactInput.Text, contactPattern))
+                {
+                    MessageBox.Show("Check for typo, numbers are invalid.");
+
+                    updateContactInput.Clear();
+                    updateContactInput.Focus();
+                    return;
+                }
+
+                _appointment.Contact = updateContactInput.Text;
+            }
+
+            try
+            {
+                _appointmentValidator.ValidateAppointment(startTime: _appointment.Start, endTime: _appointment.End);
+
+                AppointmentData appointmentData = new AppointmentData();
+                appointmentData.Update(_appointment);
+
+                MessageBox.Show("Appointment successfully updated.");
+                //fire off event
+                UpdatedAppointment(_appointment);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void upCancelButton_Click(object sender, EventArgs e)
@@ -159,34 +242,22 @@ namespace ScheduleApp
 
         private void updateDateTimeSelect_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ConnectionString))
-                    if (connection.State == ConnectionState.Closed)
-                        connection.Open();
-                /* 
-     {
+            updateEndTimeInput.Value = new DateTime(
+                updateDateTimeSelect.Value.Year,
+                updateDateTimeSelect.Value.Month,
+                updateDateTimeSelect.Value.Day,
+                updateEndTimeInput.Value.Hour,
+                updateEndTimeInput.Value.Minute,
+                updateEndTimeInput.Value.Second);
 
-     using (DataTable dataTable = new DataTable("Appointment"))
-     using (MySqlDataReader reader = command.ExecuteReader())
-         {
-             // Read the results
-             while (reader.Read())
-             {
-                 // Assuming dateTimePicker1 is the first column (index 0)
-                 DateTime dateTimeValue = reader.GetDateTime(0);
-                 Console.WriteLine("DateTime value: " + dateTimeValue);
-             }
-         }
-     }
+            updateStartTimeInput.Value = new DateTime(
+               updateDateTimeSelect.Value.Year,
+               updateDateTimeSelect.Value.Month,
+               updateDateTimeSelect.Value.Day,
+               updateStartTimeInput.Value.Hour,
+               updateStartTimeInput.Value.Minute,
+               updateStartTimeInput.Value.Second);
 
- }
- */
-            }
-            catch (Exception except)
-            {
-                Console.WriteLine("An error occurred: " + except.Message);
-            }
 
         }
 

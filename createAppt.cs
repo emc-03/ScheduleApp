@@ -17,7 +17,7 @@ namespace ScheduleApp
         private AppointmentData _appointmentData;
         private Customer _customer;
         private User _user;
-        private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+        //private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
         private Appointment _createdAppointment = new Appointment();
         public event Action<Appointment> CreatedAppointment;
 

@@ -64,7 +64,9 @@ namespace ScheduleApp.Database
             using (MySqlCommand command = new MySqlCommand(deleteCity, DB_Connection.conn))
             {
                 command.Parameters.AddWithValue("@ID", city.ID);
+                DB_Connection.conn.Open();
                 command.ExecuteNonQuery();
+                DB_Connection.conn.Close();
             }
             CountryData countryData = new CountryData();
             countryData.Delete(city.Country);

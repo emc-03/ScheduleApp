@@ -23,6 +23,12 @@ namespace ScheduleApp
         private Appointment _selectedAppointment;
         private AppointmentData _appointmentData = new AppointmentData();
 
+        // we need something like this so that we can disaplay in the local timezone and in EST but reference in UTC.
+        // database is always in UTC but we need to display in EST by default and then allow for local
+        private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+        private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        private TimeZoneInfo utcTimeZone = TimeZoneInfo.Utc;
+
         public calendarForm(Customer selectedCustomer, User user)
         {
             _user = user;
@@ -51,14 +57,18 @@ namespace ScheduleApp
 
             // Rebind the list to the DataGridView to display the updated list
             appointmentDataGrid.DataSource = null;  // Clear the existing data source
-            appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;// _appointmentList2;  // Bind the updated list
+
+            //Create EST data source
+            //Need to either be able to convert the timezone on the fly or we need to create seperate timezones.
+
+            appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;// Bind the updated list
         }
 
 
 
 
 
-        /////// New Filter logic for List instead of datatable
+        // Filter logic for List - timedate
         private void FilterByDate()
         {
             var filteredList = _selectedCustomer.AppointmentList.FindAll(appointment => appointment.Start.Date == dateTimePicker1.Value.Date);
@@ -68,7 +78,7 @@ namespace ScheduleApp
             appointmentDataGrid.DataSource = filteredList;
         }
 
-       
+
         // Filter the list by this week
         private void FilterByThisWeek()
         {
@@ -93,14 +103,12 @@ namespace ScheduleApp
             appointmentDataGrid.DataSource = filteredList;
         }
 
-
-
         // Example of calling the filters based on radio button selection
         private void FilterAppointmentsByDateRange(string filterType)
         {
             switch (filterType)
             {
-               
+
                 case "ThisWeek":
                     FilterByThisWeek();
                     break;
@@ -132,14 +140,14 @@ namespace ScheduleApp
                 FilterByThisMonth();
             }
             //if no radio button is selected or if all is checked
-            else 
+            else
             {
                 loadDataToList();
             }
-           
+
         }
 
-            private void selectRow()
+        private void selectRow()
 
         {
 
@@ -171,19 +179,13 @@ namespace ScheduleApp
                 MessageBox.Show("No row selected.");
             }
 
-
-
-
         }
-
 
         private void customerDataButton_Click(object sender, EventArgs e)
         {
             this.Hide();
 
         }
-
-
 
         private void upCancelButton_Click(object sender, EventArgs e)
         {
@@ -212,9 +214,8 @@ namespace ScheduleApp
 
             if (_selectedAppointment != null)
             {
-                UpdateAppointmentForm updateAppointmentForm = new UpdateAppointmentForm(_selectedAppointment);
+                UpdateAppointmentForm updateAppointmentForm = new UpdateAppointmentForm(_selectedAppointment, _selectedCustomer.AppointmentList);
                 updateAppointmentForm.UpdatedAppointment += UpdatedAppointmentListener;
-
 
                 updateAppointmentForm.Show();
                 _selectedAppointment = null;
@@ -231,6 +232,23 @@ namespace ScheduleApp
         {
 
 
+        }
+
+        //Adding cell formatting for EST conversion
+        private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (appointmentDataGrid.Columns[e.ColumnIndex].Name == "Start" && e.Value != null)
+            {
+                DateTime utcDateTime = (DateTime)e.Value;
+                DateTime easternDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, estTimeZone);
+                e.Value = easternDateTime;
+            }
+            if (appointmentDataGrid.Columns[e.ColumnIndex].Name == "End" && e.Value != null)
+            {
+                DateTime utcDateTime = (DateTime)e.Value;
+                DateTime easternDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, estTimeZone);
+                e.Value = easternDateTime;
+            }
         }
 
         private void dayViewRadio_CheckedChanged(object sender, EventArgs e)

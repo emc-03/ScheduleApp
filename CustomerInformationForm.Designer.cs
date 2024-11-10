@@ -30,6 +30,8 @@ namespace ScheduleApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerInformationForm));
             this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
             this.custButtonPanel1 = new System.Windows.Forms.Panel();
@@ -39,8 +41,6 @@ namespace ScheduleApp
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridCustomer = new System.Windows.Forms.DataGridView();
             this.customberDataLabel = new System.Windows.Forms.Label();
-            this.customerSearch = new System.Windows.Forms.Button();
-            this.custSearchBox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.postalCodeLabel = new System.Windows.Forms.Label();
             this.postalCodeInput = new System.Windows.Forms.TextBox();
@@ -60,7 +60,6 @@ namespace ScheduleApp
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.apptList = new System.Windows.Forms.Label();
             this.apptLookup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).BeginInit();
             this.custButtonPanel1.SuspendLayout();
@@ -74,9 +73,9 @@ namespace ScheduleApp
             // 
             this.custButtonPanel1.Controls.Add(this.deleteCustButton);
             this.custButtonPanel1.Controls.Add(this.updateCustomerButton);
-            this.custButtonPanel1.Location = new System.Drawing.Point(1117, 134);
+            this.custButtonPanel1.Location = new System.Drawing.Point(606, 502);
             this.custButtonPanel1.Name = "custButtonPanel1";
-            this.custButtonPanel1.Size = new System.Drawing.Size(306, 93);
+            this.custButtonPanel1.Size = new System.Drawing.Size(688, 84);
             this.custButtonPanel1.TabIndex = 0;
             this.custButtonPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.custButtonPanel1_Paint);
             // 
@@ -87,7 +86,7 @@ namespace ScheduleApp
             this.deleteCustButton.BackColor = System.Drawing.Color.Black;
             this.deleteCustButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteCustButton.ForeColor = System.Drawing.Color.LightCoral;
-            this.deleteCustButton.Location = new System.Drawing.Point(201, 34);
+            this.deleteCustButton.Location = new System.Drawing.Point(606, 20);
             this.deleteCustButton.Name = "deleteCustButton";
             this.deleteCustButton.Size = new System.Drawing.Size(73, 39);
             this.deleteCustButton.TabIndex = 2;
@@ -100,7 +99,7 @@ namespace ScheduleApp
             this.updateCustomerButton.AutoSize = true;
             this.updateCustomerButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.updateCustomerButton.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.updateCustomerButton.Location = new System.Drawing.Point(3, 34);
+            this.updateCustomerButton.Location = new System.Drawing.Point(0, 20);
             this.updateCustomerButton.Name = "updateCustomerButton";
             this.updateCustomerButton.Size = new System.Drawing.Size(79, 39);
             this.updateCustomerButton.TabIndex = 3;
@@ -114,9 +113,9 @@ namespace ScheduleApp
             this.newCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.newCustomer.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newCustomer.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.newCustomer.Location = new System.Drawing.Point(23, 674);
+            this.newCustomer.Location = new System.Drawing.Point(35, 506);
             this.newCustomer.Name = "newCustomer";
-            this.newCustomer.Size = new System.Drawing.Size(649, 62);
+            this.newCustomer.Size = new System.Drawing.Size(330, 49);
             this.newCustomer.TabIndex = 0;
             this.newCustomer.Text = "Add Customer";
             this.newCustomer.UseVisualStyleBackColor = false;
@@ -126,25 +125,41 @@ namespace ScheduleApp
             // 
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.dataGridCustomer);
-            this.panel1.Location = new System.Drawing.Point(693, 220);
+            this.panel1.Location = new System.Drawing.Point(606, 128);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(936, 589);
+            this.panel1.Size = new System.Drawing.Size(679, 362);
             this.panel1.TabIndex = 1;
             // 
             // dataGridCustomer
             // 
             this.dataGridCustomer.AllowUserToResizeColumns = false;
+            this.dataGridCustomer.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.IndianRed;
+            this.dataGridCustomer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridCustomer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridCustomer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridCustomer.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dataGridCustomer.GridColor = System.Drawing.SystemColors.ControlText;
             this.dataGridCustomer.Location = new System.Drawing.Point(0, 0);
             this.dataGridCustomer.Name = "dataGridCustomer";
+            this.dataGridCustomer.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LemonChiffon;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.IndianRed;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridCustomer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dataGridCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridCustomer.Size = new System.Drawing.Size(936, 589);
+            this.dataGridCustomer.Size = new System.Drawing.Size(679, 362);
             this.dataGridCustomer.StandardTab = true;
             this.dataGridCustomer.TabIndex = 0;
             this.dataGridCustomer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCustomer_CellContentClick);
@@ -154,40 +169,11 @@ namespace ScheduleApp
             this.customberDataLabel.AutoSize = true;
             this.customberDataLabel.Font = new System.Drawing.Font("Myanmar Text", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customberDataLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.customberDataLabel.Location = new System.Drawing.Point(993, 71);
+            this.customberDataLabel.Location = new System.Drawing.Point(860, 72);
             this.customberDataLabel.Name = "customberDataLabel";
-            this.customberDataLabel.Size = new System.Drawing.Size(244, 39);
+            this.customberDataLabel.Size = new System.Drawing.Size(185, 39);
             this.customberDataLabel.TabIndex = 2;
-            this.customberDataLabel.Text = "Current Customer List";
-            // 
-            // customerSearch
-            // 
-            this.customerSearch.AutoSize = true;
-            this.customerSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.customerSearch.BackColor = System.Drawing.Color.Black;
-            this.customerSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.customerSearch.Font = new System.Drawing.Font("Myanmar Text", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerSearch.ForeColor = System.Drawing.Color.Gainsboro;
-            this.customerSearch.Location = new System.Drawing.Point(738, 177);
-            this.customerSearch.Name = "customerSearch";
-            this.customerSearch.Size = new System.Drawing.Size(69, 34);
-            this.customerSearch.TabIndex = 3;
-            this.customerSearch.Text = "SEARCH";
-            this.customerSearch.UseVisualStyleBackColor = false;
-            this.customerSearch.Click += new System.EventHandler(this.customerSearch_Click);
-            // 
-            // custSearchBox
-            // 
-            this.custSearchBox.Font = new System.Drawing.Font("Mongolian Baiti", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.custSearchBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.custSearchBox.Location = new System.Drawing.Point(859, 183);
-            this.custSearchBox.Name = "custSearchBox";
-            this.custSearchBox.Size = new System.Drawing.Size(234, 22);
-            this.custSearchBox.TabIndex = 4;
-            this.custSearchBox.Text = "customer id";
-            this.custSearchBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.custSearchBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.custSearchBox_MouseClick);
-            this.custSearchBox.TextChanged += new System.EventHandler(this.custSearchBox_TextChanged);
+            this.customberDataLabel.Text = "CUSTOMER LIST";
             // 
             // panel2
             // 
@@ -208,49 +194,52 @@ namespace ScheduleApp
             this.panel2.Controls.Add(this.lastNameLable);
             this.panel2.Controls.Add(this.firstNameLabel);
             this.panel2.Controls.Add(this.newCustomer);
-            this.panel2.Location = new System.Drawing.Point(12, 154);
+            this.panel2.Location = new System.Drawing.Point(35, 15);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(675, 789);
+            this.panel2.Size = new System.Drawing.Size(426, 578);
             this.panel2.TabIndex = 5;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // postalCodeLabel
             // 
             this.postalCodeLabel.AutoSize = true;
-            this.postalCodeLabel.Location = new System.Drawing.Point(-5, 544);
+            this.postalCodeLabel.Location = new System.Drawing.Point(24, 407);
             this.postalCodeLabel.Name = "postalCodeLabel";
-            this.postalCodeLabel.Size = new System.Drawing.Size(111, 29);
+            this.postalCodeLabel.Size = new System.Drawing.Size(107, 29);
             this.postalCodeLabel.TabIndex = 18;
-            this.postalCodeLabel.Text = "Postal Code :";
+            this.postalCodeLabel.Text = "Postal Code ";
             // 
             // postalCodeInput
             // 
-            this.postalCodeInput.Location = new System.Drawing.Point(215, 534);
+            this.postalCodeInput.AcceptsTab = true;
+            this.postalCodeInput.Location = new System.Drawing.Point(154, 398);
             this.postalCodeInput.Name = "postalCodeInput";
             this.postalCodeInput.Size = new System.Drawing.Size(211, 38);
             this.postalCodeInput.TabIndex = 17;
             // 
             // addressInput2
             // 
-            this.addressInput2.Location = new System.Drawing.Point(188, 370);
+            this.addressInput2.AcceptsTab = true;
+            this.addressInput2.Location = new System.Drawing.Point(154, 286);
             this.addressInput2.Name = "addressInput2";
-            this.addressInput2.Size = new System.Drawing.Size(350, 38);
+            this.addressInput2.Size = new System.Drawing.Size(198, 38);
             this.addressInput2.TabIndex = 16;
             this.addressInput2.TextChanged += new System.EventHandler(this.addressInput2_TextChanged);
             // 
             // addCustomerLabel
             // 
             this.addCustomerLabel.AutoSize = true;
-            this.addCustomerLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCustomerLabel.Location = new System.Drawing.Point(204, -6);
+            this.addCustomerLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCustomerLabel.Location = new System.Drawing.Point(109, 19);
             this.addCustomerLabel.Name = "addCustomerLabel";
-            this.addCustomerLabel.Size = new System.Drawing.Size(121, 29);
+            this.addCustomerLabel.Size = new System.Drawing.Size(163, 34);
             this.addCustomerLabel.TabIndex = 15;
-            this.addCustomerLabel.Text = "Add Customer";
+            this.addCustomerLabel.Text = "ADD CUSTOMER";
             // 
             // countryInput
             // 
-            this.countryInput.Location = new System.Drawing.Point(215, 617);
+            this.countryInput.AcceptsTab = true;
+            this.countryInput.Location = new System.Drawing.Point(154, 443);
             this.countryInput.Name = "countryInput";
             this.countryInput.Size = new System.Drawing.Size(211, 38);
             this.countryInput.TabIndex = 12;
@@ -258,74 +247,80 @@ namespace ScheduleApp
             // Country
             // 
             this.Country.AutoSize = true;
-            this.Country.Location = new System.Drawing.Point(3, 620);
+            this.Country.Location = new System.Drawing.Point(24, 452);
             this.Country.Name = "Country";
-            this.Country.Size = new System.Drawing.Size(82, 29);
+            this.Country.Size = new System.Drawing.Size(78, 29);
             this.Country.TabIndex = 11;
-            this.Country.Text = "Country :";
+            this.Country.Text = "Country ";
             // 
             // cityInput
             // 
-            this.cityInput.Location = new System.Drawing.Point(89, 447);
+            this.cityInput.AcceptsTab = true;
+            this.cityInput.Location = new System.Drawing.Point(154, 353);
             this.cityInput.Name = "cityInput";
-            this.cityInput.Size = new System.Drawing.Size(337, 38);
+            this.cityInput.Size = new System.Drawing.Size(185, 38);
             this.cityInput.TabIndex = 10;
             // 
             // cityNameLabel
             // 
             this.cityNameLabel.AutoSize = true;
-            this.cityNameLabel.Location = new System.Drawing.Point(6, 457);
+            this.cityNameLabel.Location = new System.Drawing.Point(30, 362);
             this.cityNameLabel.Name = "cityNameLabel";
-            this.cityNameLabel.Size = new System.Drawing.Size(51, 29);
+            this.cityNameLabel.Size = new System.Drawing.Size(47, 29);
             this.cityNameLabel.TabIndex = 9;
-            this.cityNameLabel.Text = "City :";
+            this.cityNameLabel.Text = "City ";
             // 
             // addressInput
             // 
-            this.addressInput.Location = new System.Drawing.Point(188, 298);
+            this.addressInput.AcceptsTab = true;
+            this.addressInput.Location = new System.Drawing.Point(154, 242);
             this.addressInput.Name = "addressInput";
-            this.addressInput.Size = new System.Drawing.Size(350, 38);
+            this.addressInput.Size = new System.Drawing.Size(198, 38);
             this.addressInput.TabIndex = 8;
             this.addressInput.TextChanged += new System.EventHandler(this.addressInput_TextChanged);
             // 
             // lnameInput
             // 
-            this.lnameInput.Location = new System.Drawing.Point(146, 123);
+            this.lnameInput.AcceptsTab = true;
+            this.lnameInput.Location = new System.Drawing.Point(162, 124);
             this.lnameInput.Name = "lnameInput";
-            this.lnameInput.Size = new System.Drawing.Size(392, 38);
+            this.lnameInput.Size = new System.Drawing.Size(240, 38);
             this.lnameInput.TabIndex = 2;
             this.lnameInput.TextChanged += new System.EventHandler(this.lnameInput_TextChanged);
             // 
             // addressLabel
             // 
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(-5, 308);
+            this.addressLabel.Location = new System.Drawing.Point(20, 251);
             this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(130, 29);
+            this.addressLabel.Size = new System.Drawing.Size(126, 29);
             this.addressLabel.TabIndex = 7;
-            this.addressLabel.Text = "Street Address :";
+            this.addressLabel.Text = "Street Address ";
             // 
             // phoneInput
             // 
-            this.phoneInput.Location = new System.Drawing.Point(197, 222);
+            this.phoneInput.AcceptsTab = true;
+            this.phoneInput.Location = new System.Drawing.Point(162, 172);
             this.phoneInput.Name = "phoneInput";
-            this.phoneInput.Size = new System.Drawing.Size(341, 38);
+            this.phoneInput.Size = new System.Drawing.Size(240, 38);
             this.phoneInput.TabIndex = 6;
+            this.phoneInput.TextChanged += new System.EventHandler(this.phoneInput_TextChanged);
             // 
             // phoneLabel
             // 
             this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(-5, 225);
+            this.phoneLabel.Location = new System.Drawing.Point(20, 181);
             this.phoneLabel.Name = "phoneLabel";
-            this.phoneLabel.Size = new System.Drawing.Size(137, 29);
+            this.phoneLabel.Size = new System.Drawing.Size(133, 29);
             this.phoneLabel.TabIndex = 5;
-            this.phoneLabel.Text = "Phone Number :";
+            this.phoneLabel.Text = "Phone Number ";
             // 
             // fnameInput
             // 
-            this.fnameInput.Location = new System.Drawing.Point(149, 40);
+            this.fnameInput.AcceptsTab = true;
+            this.fnameInput.Location = new System.Drawing.Point(163, 76);
             this.fnameInput.Name = "fnameInput";
-            this.fnameInput.Size = new System.Drawing.Size(389, 38);
+            this.fnameInput.Size = new System.Drawing.Size(237, 38);
             this.fnameInput.TabIndex = 4;
             this.fnameInput.TextChanged += new System.EventHandler(this.fnameInput_TextChanged);
             // 
@@ -333,7 +328,7 @@ namespace ScheduleApp
             // 
             this.lastNameLable.AutoSize = true;
             this.lastNameLable.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastNameLable.Location = new System.Drawing.Point(4, 127);
+            this.lastNameLable.Location = new System.Drawing.Point(20, 128);
             this.lastNameLable.Name = "lastNameLable";
             this.lastNameLable.Size = new System.Drawing.Size(91, 27);
             this.lastNameLable.TabIndex = 3;
@@ -343,7 +338,7 @@ namespace ScheduleApp
             // 
             this.firstNameLabel.AutoSize = true;
             this.firstNameLabel.Font = new System.Drawing.Font("Myanmar Text", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstNameLabel.Location = new System.Drawing.Point(7, 44);
+            this.firstNameLabel.Location = new System.Drawing.Point(24, 80);
             this.firstNameLabel.Name = "firstNameLabel";
             this.firstNameLabel.Size = new System.Drawing.Size(93, 27);
             this.firstNameLabel.TabIndex = 1;
@@ -356,7 +351,7 @@ namespace ScheduleApp
             this.exitButton.BackColor = System.Drawing.Color.Black;
             this.exitButton.Font = new System.Drawing.Font("Myanmar Text", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.exitButton.Location = new System.Drawing.Point(1477, 815);
+            this.exitButton.Location = new System.Drawing.Point(1178, 618);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(116, 49);
             this.exitButton.TabIndex = 6;
@@ -366,30 +361,20 @@ namespace ScheduleApp
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.apptList);
             this.panel3.Controls.Add(this.apptLookup);
-            this.panel3.Location = new System.Drawing.Point(12, 1);
+            this.panel3.Location = new System.Drawing.Point(32, 596);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(675, 147);
+            this.panel3.Size = new System.Drawing.Size(426, 91);
             this.panel3.TabIndex = 7;
-            // 
-            // apptList
-            // 
-            this.apptList.AutoSize = true;
-            this.apptList.Location = new System.Drawing.Point(204, 13);
-            this.apptList.Name = "apptList";
-            this.apptList.Size = new System.Drawing.Size(199, 29);
-            this.apptList.TabIndex = 8;
-            this.apptList.Text = "Customer Appointments";
             // 
             // apptLookup
             // 
             this.apptLookup.AutoSize = true;
             this.apptLookup.BackColor = System.Drawing.Color.CornflowerBlue;
             this.apptLookup.ForeColor = System.Drawing.Color.Black;
-            this.apptLookup.Location = new System.Drawing.Point(11, 59);
+            this.apptLookup.Location = new System.Drawing.Point(28, 15);
             this.apptLookup.Name = "apptLookup";
-            this.apptLookup.Size = new System.Drawing.Size(661, 67);
+            this.apptLookup.Size = new System.Drawing.Size(356, 56);
             this.apptLookup.TabIndex = 0;
             this.apptLookup.Text = "Appointment Calendar";
             this.apptLookup.UseVisualStyleBackColor = false;
@@ -403,11 +388,9 @@ namespace ScheduleApp
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1646, 910);
+            this.ClientSize = new System.Drawing.Size(1330, 696);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.custSearchBox);
-            this.Controls.Add(this.customerSearch);
             this.Controls.Add(this.customberDataLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.custButtonPanel1);
@@ -445,8 +428,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Button newCustomer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label customberDataLabel;
-        private System.Windows.Forms.Button customerSearch;
-        private System.Windows.Forms.TextBox custSearchBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox countryInput;
         private System.Windows.Forms.Label Country;
@@ -463,7 +444,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button apptLookup;
-        private System.Windows.Forms.Label apptList;
         private System.Windows.Forms.Label addCustomerLabel;
         private System.Windows.Forms.TextBox addressInput2;
         private System.Windows.Forms.Label postalCodeLabel;

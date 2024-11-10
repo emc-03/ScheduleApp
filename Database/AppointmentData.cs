@@ -15,7 +15,7 @@ namespace ScheduleApp.Database
         
         private List<Appointment> _appointmentList = new List<Appointment>();
         private List<Appointment> _appointmentList2 = new List<Appointment>();
-
+        
 
 
         public List<Appointment> FindAllApptList(int _userID, int _customerID)
@@ -45,8 +45,8 @@ namespace ScheduleApp.Database
                             appointment.Description = reader["description"].ToString();
                             appointment.Contact = reader["contact"].ToString();
                             appointment.URL = reader["url"].ToString();
-                            appointment.Start = (DateTime)reader["start"];
-                            appointment.End = (DateTime)reader["end"];
+                            appointment.Start = DateTime.SpecifyKind((DateTime)reader["start"], DateTimeKind.Utc);//Updated to add UTC
+                            appointment.End = DateTime.SpecifyKind((DateTime)reader["end"], DateTimeKind.Utc);//Updated to add UTC
                             appointment.Type = reader["type"].ToString();
 
                             allAppointments.Add(appointment);
@@ -64,6 +64,11 @@ namespace ScheduleApp.Database
             if (appointment == null)
             {
                 throw new ArgumentNullException(nameof(appointment), "Appointment cannot be null.");
+            }
+
+            if (userName == null)
+            {
+                throw new ArgumentNullException(nameof(userName), "Username cannot be null.");
             }
 
             if (string.IsNullOrEmpty(appointment.Title))
@@ -162,6 +167,38 @@ namespace ScheduleApp.Database
             _appointmentList2.Remove(appointment);
 
         }
+        // Might still need to delete these from Memory as well.
+        public void DeleteAppointmentsByCustomer(int customerId)
+        {
+            string deleteAppointmentsQuery = "DELETE FROM Appointment WHERE customerId = @customerId;";
+
+            using (MySqlCommand command = new MySqlCommand(deleteAppointmentsQuery, DB_Connection.conn))
+            {
+                command.Parameters.AddWithValue("@customerId", customerId);
+
+                try
+                {
+                    //DB_Connection.conn.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred while deleting appointments: " + ex.Message);
+                    throw;
+                }
+                finally
+                {
+
+                    if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Close();
+                    }
+                    
+                }
+                
+            }
+        }
+
 
 
 

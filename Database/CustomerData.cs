@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using ScheduleApp.models;
+using ScheduleApp.Validator;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,10 +12,18 @@ using System.Windows.Forms;
 
 namespace ScheduleApp.Database
 {
-    class CustomerData
+    public class CustomerData
     {
+
+
+        private List<Customer> _customerList = new List<Customer>();
+        private CustomerValidator _validator = new CustomerValidator();
+
         public Customer Add(Customer customer)
         {
+            // Validate customer data using CustomerValidator
+            _validator.ValidateCustomer(customer);
+
             AddressData addressData = new AddressData();
             addressData.Add(customer.Address);
 
@@ -22,8 +32,6 @@ namespace ScheduleApp.Database
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
-
-
 
                 using (MySqlCommand command = new MySqlCommand(newQueryCustomer, connection))
                 {
@@ -39,7 +47,9 @@ namespace ScheduleApp.Database
                 }
 
                 connection.Close();
+
             }
+            _customerList.Add(customer);
             return customer;
         }
 
@@ -97,25 +107,53 @@ namespace ScheduleApp.Database
                     command.ExecuteNonQuery();
                 }
             }
+            _customerList.Remove(customer);
+            _customerList.Add(customer);
         }
 
         public void Delete(Customer customer)
         {
-            // create new class for appt in database folder 'appointment data' - add methods,
-            // delete method and call on any appointments with customerId, before I can delete the customer itself.
-            string deleteCustomer = "DELETE FROM Customer Where customerId = @customerId";
+            // Delete any appointments associated with the customer
+            AppointmentData appointmentData = new AppointmentData();
+            appointmentData.DeleteAppointmentsByCustomer(customer.ID); // Deletes all appointments with this customer ID
 
+            // Delete customer from the database
+            string deleteCustomerQuery = "DELETE FROM Customer WHERE customerId = @customerId";
+
+            using (MySqlCommand command = new MySqlCommand(deleteCustomerQuery, DB_Connection.conn))
             {
+                // Add the customer ID
+                command.Parameters.AddWithValue("@customerId", customer.ID);
 
-                using (MySqlCommand command = new MySqlCommand(deleteCustomer, DB_Connection.conn))
+                // Execute the delete command
+                try
                 {
-                    command.Parameters.AddWithValue("@customerId", customer.ID);
+                    DB_Connection.conn.Open();
                     command.ExecuteNonQuery();
                 }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    throw;
+                }
+                finally
+                {
+
+                    if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Close();
+                    }
+                }
             }
+
+            //  Delete the customer's address (assuming a separate Address table)
             AddressData addressData = new AddressData();
             addressData.Delete(customer.Address);
+            _customerList.Remove(customer);
+
         }
+
 
         public List<Customer> FindAll(int userId)
         {
@@ -163,5 +201,6 @@ namespace ScheduleApp.Database
 
 
     }
+
 }
 
