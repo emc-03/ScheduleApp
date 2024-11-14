@@ -1,4 +1,8 @@
 ﻿
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace ScheduleApp
 {
     public partial class UpdateCustomerForm
@@ -22,6 +26,40 @@ namespace ScheduleApp
         private System.Windows.Forms.Label updateHeader;
         private System.Windows.Forms.Label postalCLabel;
         private System.Windows.Forms.TextBox postalCodeInput;
+
+        private void HighlightError(Control control)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke((Action)(() =>
+                {
+                    control.BackColor = Color.Pink;  // Change background color to pink for errors
+                    control.ForeColor = Color.Red;    // Set text color to red to emphasize error
+                }));
+            }
+            else
+            {
+                control.BackColor = Color.Pink;
+                control.ForeColor = Color.Red;
+            }
+        }
+
+        private void ResetInput(Control control)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke((Action)(() =>
+                {
+                    control.BackColor = Color.White;  // Reset background color to white
+                    control.ForeColor = Color.Black;  // Reset text color to black
+                }));
+            }
+            else
+            {
+                control.BackColor = Color.White;
+                control.ForeColor = Color.Black;
+            }
+        }
 
         /// <summary>
         /// Required designer variable.
@@ -50,7 +88,6 @@ namespace ScheduleApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateCustomerForm));
-            //UpdateCustomerForm updateCustomerForm = this;
             this.UpcountryInput = new System.Windows.Forms.TextBox();
             this.upCountryLabel = new System.Windows.Forms.Label();
             this.UpcityInput = new System.Windows.Forms.TextBox();
@@ -79,7 +116,6 @@ namespace ScheduleApp
             this.UpcountryInput.Name = "UpcountryInput";
             this.UpcountryInput.Size = new System.Drawing.Size(202, 38);
             this.UpcountryInput.TabIndex = 26;
-            //updateCustomerForm.UpcountryInput.Text = updateCustomerForm.customerToUpdate.Address.City.Country.Name;
             // 
             // upCountryLabel
             // 
@@ -97,7 +133,6 @@ namespace ScheduleApp
             this.UpcityInput.Name = "UpcityInput";
             this.UpcityInput.Size = new System.Drawing.Size(202, 38);
             this.UpcityInput.TabIndex = 24;
-            //updateCustomerForm.UpcityInput.Text = updateCustomerForm.customerToUpdate.Address.City.Name;
             // 
             // upCityLabel
             // 
@@ -115,7 +150,6 @@ namespace ScheduleApp
             this.UpaddressInput.Name = "UpaddressInput";
             this.UpaddressInput.Size = new System.Drawing.Size(223, 38);
             this.UpaddressInput.TabIndex = 22;
-            //updateCustomerForm.UpaddressInput.Text = updateCustomerForm.customerToUpdate.Address.Address1;
             // 
             // upAddressLabel
             // 
@@ -133,7 +167,6 @@ namespace ScheduleApp
             this.Upaddress2Input.Name = "Upaddress2Input";
             this.Upaddress2Input.Size = new System.Drawing.Size(223, 38);
             this.Upaddress2Input.TabIndex = 22;
-            //updateCustomerForm.Upaddress2Input.Text = updateCustomerForm.customerToUpdate.Address.Address2;
             // 
             // UpPhoneInput
             // 
@@ -142,7 +175,6 @@ namespace ScheduleApp
             this.UpPhoneInput.Size = new System.Drawing.Size(223, 38);
             this.UpPhoneInput.TabIndex = 20;
             this.UpPhoneInput.TextChanged += new System.EventHandler(this.UpPhoneInput_TextChanged);
-            //updateCustomerForm.UpPhoneInput.Text = updateCustomerForm.customerToUpdate.Address.PhoneNumber;
             // 
             // upPhoneLabel
             // 
@@ -161,7 +193,6 @@ namespace ScheduleApp
             this.UpfnameInput.Size = new System.Drawing.Size(168, 38);
             this.UpfnameInput.TabIndex = 18;
             this.UpfnameInput.TextChanged += new System.EventHandler(this.UpfnameInput_TextChanged);
-            //updateCustomerForm.UpfnameInput.Text = updateCustomerForm.customerToUpdate.FirstName;
             // 
             // uplnLabel
             // 
@@ -180,7 +211,6 @@ namespace ScheduleApp
             this.UplnameInput.Name = "UplnameInput";
             this.UplnameInput.Size = new System.Drawing.Size(168, 38);
             this.UplnameInput.TabIndex = 16;
-            //updateCustomerForm.UplnameInput.Text = updateCustomerForm.customerToUpdate.LastName;
             // 
             // upfnLabel
             // 
@@ -234,7 +264,7 @@ namespace ScheduleApp
             this.postalCodeInput.Name = "postalCodeInput";
             this.postalCodeInput.Size = new System.Drawing.Size(202, 38);
             this.postalCodeInput.TabIndex = 32;
-            //updateCustomerForm.postalCodeInput.Text = updateCustomerForm.customerToUpdate.Address.PostalCode;
+            this.postalCodeInput.TextChanged += new System.EventHandler(this.postalCodeInput_TextChanged);
             // 
             // upCancelButton
             // 

@@ -37,7 +37,9 @@ namespace ScheduleApp
                 }
                 foreach (Appointment appointment in customer.AppointmentList)
                 {
+                    //TODO Remove before submission -testing purposes only 'Console.WriteLine"
                     Console.WriteLine("Start : " + appointment.Start + "quarterTime : " + quarterTime + " UTCNow : " + DateTime.UtcNow);
+                    // edit the breakpoint conditions to match the appointment time 
                     if (appointment.Start <= quarterTime && appointment.Start >= DateTime.UtcNow)
                     {
                         // add a currenttime var and add additional if statemtent 
@@ -77,7 +79,7 @@ namespace ScheduleApp
                 customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
         }
 
-        //END Commenting out to hopefully move to data source
+
         private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -97,7 +99,7 @@ namespace ScheduleApp
             Customer customer = new Customer
             {
                 Address = new Address(),
-                //Address = { City = new City(), City = { Country = new Country() } }
+
             };
 
             // First Name Validation
@@ -215,8 +217,6 @@ namespace ScheduleApp
                 return;
             }
 
-
-
             else
             {
                 // validate that the city name contains only valid characters
@@ -236,7 +236,6 @@ namespace ScheduleApp
 
                 customer.Address.City.Name = cityInput.Text;
             }
-
 
             // Postal Code Validation
             if (string.IsNullOrEmpty(postalCodeInput.Text))
@@ -294,7 +293,6 @@ namespace ScheduleApp
                 customer.Address.City.Country.Name = countryInput.Text;
             }
 
-
             try
             {
                 // Reassigning the customer so it has an ID from the database
@@ -332,7 +330,6 @@ namespace ScheduleApp
 
             }
         }
-
 
 
         private void deleteCustButton_Click(object sender, EventArgs e)
@@ -383,7 +380,6 @@ namespace ScheduleApp
 
 
 
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -404,13 +400,10 @@ namespace ScheduleApp
         }
 
 
-
-
         private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
 
 
         private void fnameInput_TextChanged(object sender, EventArgs e)

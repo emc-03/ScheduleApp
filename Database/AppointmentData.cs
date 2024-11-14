@@ -178,7 +178,12 @@ namespace ScheduleApp.Database
 
                 try
                 {
-                    //DB_Connection.conn.Open();
+                    // Ensure connection is open
+                    if (DB_Connection.conn.State == System.Data.ConnectionState.Closed)
+                    {
+                        DB_Connection.conn.Open();
+                    }
+
                     command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -188,22 +193,21 @@ namespace ScheduleApp.Database
                 }
                 finally
                 {
-
                     if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
                     {
                         DB_Connection.conn.Close();
                     }
-                    
                 }
-                
             }
         }
-
-
-
 
     }
 
 
 
+
 }
+
+
+
+

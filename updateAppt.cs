@@ -134,7 +134,7 @@ namespace ScheduleApp
             {
                 _appointment.Description = updateDescriptionInput.Text;
             }
-
+            // TODO LOCATION THROWS INCORRECT ERROR -- ALSO IN CREATE FORM 
             if (string.IsNullOrEmpty(updateLocationInput.Text))
             {
                 MessageBox.Show("Fill in missing feilds.");

@@ -106,7 +106,7 @@
     <Compile Include="Database\CityData.cs" />
     <Compile Include="Database\CountryData.cs" />
     <Compile Include="Database\CustomerData.cs" />
-    <Compile Include="Database\Datahelper.cs" />
+    <Compile Include="Utilities\Datahelper.cs" />
     <Compile Include="Database\UserData.cs" />
     <Compile Include="models\Address.cs" />
     <Compile Include="models\Appointment.cs" />

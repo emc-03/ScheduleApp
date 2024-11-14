@@ -17,12 +17,11 @@ namespace ScheduleApp.Database
 
 
         private List<Customer> _customerList = new List<Customer>();
-        private CustomerValidator _validator = new CustomerValidator();
+       
 
         public Customer Add(Customer customer)
         {
-            // Validate customer data using CustomerValidator
-            _validator.ValidateCustomer(customer);
+            
 
             AddressData addressData = new AddressData();
             addressData.Add(customer.Address);

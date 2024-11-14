@@ -89,33 +89,43 @@ namespace ScheduleApp.models
             return false;
         }
 
-
+        //TODO Error in Create Method -- Unable to update Appointment 
         public bool appointmentConflictExists(DateTime startTime, DateTime endTime)
         {
-            throw new NotImplementedException();
-
             foreach (var existingAppointment in _appointments)
-
             {
-                //check if the appointments start time is inbetween
-                if (startTime > existingAppointment.Start
-                    && startTime < existingAppointment.End)
+                // Check if the new appointment's start time is within an existing appointment's time range
+                if (startTime >= existingAppointment.Start && startTime < existingAppointment.End)
                 {
-                    // conflicts found, no conflicts found return false
-                    return true;
+                    return true; // Conflict found with start time
                 }
-                return false;
 
+                // Check if the new appointment's end time is within an existing appointment's time range
+                if (endTime > existingAppointment.Start && endTime <= existingAppointment.End)
+                {
+                    return true; // Conflict found with end time
+                }
+
+                // Check if the new appointment fully overlaps with an existing appointment
+                if (startTime < existingAppointment.Start && endTime > existingAppointment.End)
+                {
+                    return true; // Conflict found with full overlap
+                }
             }
-            //foreach over the appointments list
-            //is the startTime inbetween the start and end for the current appointment 
-            // if YES - return true 
-            // is the endTime inbetween the start and end for the current appointment 
-            // if YES -return true
-            // if the loop completes without any conflicts then return false
+
+            // No conflicts found
+            return false;
         }
 
+        //foreach over the appointments list
+        //is the startTime inbetween the start and end for the current appointment 
+        // if YES - return true 
+        // is the endTime inbetween the start and end for the current appointment 
+        // if YES -return true
+        // if the loop completes without any conflicts then return false
     }
+
+}
      
     
-}
+

@@ -23,7 +23,7 @@ namespace ScheduleApp
         private Appointment _selectedAppointment;
         private AppointmentData _appointmentData = new AppointmentData();
 
-        // we need something like this so that we can disaplay in the local timezone and in EST but reference in UTC.
+     
         // database is always in UTC but we need to display in EST by default and then allow for local
         private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
         private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
@@ -55,18 +55,13 @@ namespace ScheduleApp
         public void loadDataToList() //NEW
         {
 
-            // Rebind the list to the DataGridView to display the updated list
+           
             appointmentDataGrid.DataSource = null;  // Clear the existing data source
 
             //Create EST data source
-            //Need to either be able to convert the timezone on the fly or we need to create seperate timezones.
-
+  
             appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;// Bind the updated list
         }
-
-
-
-
 
         // Filter logic for List - timedate
         private void FilterByDate()

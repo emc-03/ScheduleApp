@@ -1,5 +1,6 @@
 ﻿using ScheduleApp.Database;
 using ScheduleApp.models;
+using ScheduleApp.Validator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,16 +18,29 @@ namespace ScheduleApp
         private AppointmentData _appointmentData;
         private Customer _customer;
         private User _user;
-        //private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+        private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+        private CustomerValidator _customerValidation;
         private Appointment _createdAppointment = new Appointment();
         public event Action<Appointment> CreatedAppointment;
+
+        // A method to validate if the appointment is within the next 15 minutes
+        private bool IsAppointmentWithin15Minutes(Appointment appointment)
+        {
+            DateTime currentUtcTime = DateTime.UtcNow;
+            DateTime quarterTime = currentUtcTime.AddMinutes(15);
+
+            // Check if the appointment start time is within the next 15 minutes
+            return appointment.Start <= quarterTime && appointment.Start >= currentUtcTime;
+        }
 
         // Constructor to accept an Appointment object
         public CreateAppointmentForm(Customer customer, User user)
         {
             //save the customers appointmentlist to the AppointmentValidator class property
-            
+
             _appointmentData = new AppointmentData();
+           // _appointmentValidator = new AppointmentValidator();
+            _customerValidation = new CustomerValidator();
             _customer = customer;
             _user = user;
             InitializeComponent();
@@ -40,17 +54,17 @@ namespace ScheduleApp
 
         }
 
+
+        // TODO adjust validation into validation helper
         private void createApptButton_Click(object sender, EventArgs e)
         {
-
             _createdAppointment.UserID = _user.ID;
             _createdAppointment.CustomerID = _customer.ID;
 
             try
             {
-
+                // Validate Title
                 if (string.IsNullOrEmpty(createTitleInput.Text))
-
                 {
                     MessageBox.Show("Fill in missing fields.");
                     createTitleInput.Clear();
@@ -62,20 +76,21 @@ namespace ScheduleApp
                     _createdAppointment.Title = createTitleInput.Text;
                 }
 
+                // Validate Description
                 if (string.IsNullOrEmpty(createDescriptionInput.Text))
-
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    createLocationInput.Clear();
-                    createLocationInput.Focus();
+                    createDescriptionInput.Clear();
+                    createDescriptionInput.Focus();
                     return;
                 }
                 else
                 {
                     _createdAppointment.Description = createDescriptionInput.Text;
                 }
-                if (string.IsNullOrEmpty(createLocationInput.Text))
 
+                // Validate Location
+                if (string.IsNullOrEmpty(createLocationInput.Text))
                 {
                     MessageBox.Show("Fill in missing fields.");
                     createLocationInput.Clear();
@@ -86,8 +101,9 @@ namespace ScheduleApp
                 {
                     _createdAppointment.Location = createLocationInput.Text;
                 }
-                if (string.IsNullOrEmpty(createContactInput.Text))
 
+                // Validate Contact
+                if (string.IsNullOrEmpty(createContactInput.Text))
                 {
                     MessageBox.Show("Fill in missing fields.");
                     createContactInput.Clear();
@@ -98,11 +114,11 @@ namespace ScheduleApp
                 {
                     _createdAppointment.Contact = createContactInput.Text;
                 }
-                if (string.IsNullOrEmpty(createTypeDropDown.Text))
 
+                // Validate Type
+                if (string.IsNullOrEmpty(createTypeDropDown.Text))
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    //createTypeDropDown.Clear();
                     createTypeDropDown.Focus();
                     return;
                 }
@@ -111,8 +127,8 @@ namespace ScheduleApp
                     _createdAppointment.Type = createTypeDropDown.Text;
                 }
 
+                // Validate URL
                 if (string.IsNullOrEmpty(createLinkInput.Text))
-
                 {
                     MessageBox.Show("Fill in missing fields.");
                     createLinkInput.Clear();
@@ -124,57 +140,72 @@ namespace ScheduleApp
                     _createdAppointment.URL = createLinkInput.Text;
                 }
 
+                // Validate Date and Time
+                DateTime appointmentDate, startTime, endTime;
 
-                //TODO - FIXME - adjust to handle datetime and hour/mins
-                /*
-                if (string.IsNullOrEmpty(createDateTimeSelect.Text))
-
+                if (createDateTimeSelect.Value == null)
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    createDateTimeSelect.Clear();
                     createDateTimeSelect.Focus();
                     return;
                 }
                 else
                 {
-                    appointment.Contact = createDateTimeSelect.Text;
+                    appointmentDate = createDateTimeSelect.Value;
                 }
-                if (string.IsNullOrEmpty(createStartTimeInput.Text))
 
+                if (createStartTimeInput.Value == null)
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    createStartTimeInput.Clear();
                     createStartTimeInput.Focus();
                     return;
                 }
                 else
                 {
-                    appointment.Contact = createStartTimeInput.Text;
+                    startTime = createStartTimeInput.Value;
                 }
 
-                if (string.IsNullOrEmpty(createEndTimeInput.Text))
-
+                if (createEndTimeInput.Value == null)
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    createEndTimeInput.Clear();
                     createEndTimeInput.Focus();
                     return;
                 }
                 else
                 {
-                    appointment.Contact = createEndTimeInput.Text;
+                    endTime = createEndTimeInput.Value;
                 }
 
-    */          
-                // call AppointmentValidator.ValidateAppointment
+                // Combine date and time using Utilities method
+                DateTime startTimeDate, endTimeDate;
+                Utilities.BuildStartEndDateFromInputs(appointmentDate, startTime, endTime, out startTimeDate, out endTimeDate);
+
+                // Manually validate the time range
+                if (startTimeDate >= endTimeDate)
+                {
+                    MessageBox.Show("Start time must be earlier than end time.");
+                    return;
+                }
+
+                // Assign the validated start and end times to the appointment
+                _createdAppointment.Start = startTimeDate;
+                _createdAppointment.End = endTimeDate;
+
+                // Call Add method to save the appointment
                 _createdAppointment = _appointmentData.Add(_createdAppointment, _user.Name);
-                
+
+                // Notify user that the appointment was created successfully
                 CreatedAppointment(_createdAppointment);
             }
-            catch (Exception _) { MessageBox.Show("Appointment failed to save!"); }
-            
+            catch (Exception)
+            {
+                MessageBox.Show("Appointment failed to save!");
+            }
+
             this.Close();
         }
+
+
 
         private void createIdInput_TextChanged(object sender, EventArgs e)
         {
