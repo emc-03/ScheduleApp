@@ -105,8 +105,8 @@ namespace ScheduleApp
             _appointment.URL = this.updateLinkInput.Text;
             TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
-            _appointment.Start = TimeZoneInfo.ConvertTime(this.updateStartTimeInput.Value, estTimeZone);
-            _appointment.End = TimeZoneInfo.ConvertTime(this.updateEndTimeInput.Value, estTimeZone);
+            _appointment.Start = TimeZoneInfo.ConvertTimeToUtc(this.updateStartTimeInput.Value); //previous code for EST - moving to go from Local to UTC for writing to database // TimeZoneInfo.ConvertTime(this.updateStartTimeInput.Value, estTimeZone);
+            _appointment.End = TimeZoneInfo.ConvertTimeToUtc(this.updateEndTimeInput.Value); //previous code for EST - moving to go from Local to UTC for writing to database // TimeZoneInfo.ConvertTime(this.updateEndTimeInput.Value, estTimeZone);
             _appointment.Type = this.updateApptType.Text;
 
             if (string.IsNullOrEmpty(updateTitleInput.Text))
@@ -134,10 +134,9 @@ namespace ScheduleApp
             {
                 _appointment.Description = updateDescriptionInput.Text;
             }
-            // TODO LOCATION THROWS INCORRECT ERROR -- ALSO IN CREATE FORM 
             if (string.IsNullOrEmpty(updateLocationInput.Text))
             {
-                MessageBox.Show("Fill in missing feilds.");
+                MessageBox.Show("Fill in missing fields.");
                 updateLocationInput.Clear();
                 updateLocationInput.Focus();
                 return;
@@ -147,13 +146,17 @@ namespace ScheduleApp
                 string locationPattern = @"^[a-zA-Z\s\-'.]+$"; // Allows letters, spaces, hyphens, apostrophes, and periods
                 if (Regex.IsMatch(updateLocationInput.Text, locationPattern))
                 {
+                    _appointment.Location = updateLocationInput.Text;
+
+                }
+                else
+                {
                     MessageBox.Show("Invalid location type! Check for typo, numbers are invalid.");
 
                     updateLocationInput.Clear();
                     updateLocationInput.Focus();
                     return;
-                }
-                _appointment.Location = updateLocationInput.Text;
+                }    
             }
 
 

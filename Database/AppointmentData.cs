@@ -15,7 +15,8 @@ namespace ScheduleApp.Database
         
         private List<Appointment> _appointmentList = new List<Appointment>();
         private List<Appointment> _appointmentList2 = new List<Appointment>();
-        
+        //private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+
 
 
         public List<Appointment> FindAllApptList(int _userID, int _customerID)
@@ -45,8 +46,8 @@ namespace ScheduleApp.Database
                             appointment.Description = reader["description"].ToString();
                             appointment.Contact = reader["contact"].ToString();
                             appointment.URL = reader["url"].ToString();
-                            appointment.Start = DateTime.SpecifyKind((DateTime)reader["start"], DateTimeKind.Utc);//Updated to add UTC
-                            appointment.End = DateTime.SpecifyKind((DateTime)reader["end"], DateTimeKind.Utc);//Updated to add UTC
+                            appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind((DateTime)reader["start"], DateTimeKind.Utc),TimeZoneInfo.Local);//Updated to add UTC //Convert to LocalTime
+                            appointment.End = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind((DateTime)reader["end"], DateTimeKind.Utc),TimeZoneInfo.Local);//Updated to add UTC //Convert to LocalTime
                             appointment.Type = reader["type"].ToString();
 
                             allAppointments.Add(appointment);

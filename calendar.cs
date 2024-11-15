@@ -25,9 +25,9 @@ namespace ScheduleApp
 
      
         // database is always in UTC but we need to display in EST by default and then allow for local
-        private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
-        private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-        private TimeZoneInfo utcTimeZone = TimeZoneInfo.Utc;
+        //private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+        //private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        //private TimeZoneInfo utcTimeZone = TimeZoneInfo.Utc;
 
         public calendarForm(Customer selectedCustomer, User user)
         {
@@ -202,6 +202,7 @@ namespace ScheduleApp
             _createAppointmentForm.Show();
         }
 
+        // TODO Need to write in logic to ensure that Date and Time from the appointment are getting loaded into the inputs
         private void updateApptButton_Click(object sender, EventArgs e)
         {
             selectRow();
@@ -232,6 +233,7 @@ namespace ScheduleApp
         //Adding cell formatting for EST conversion
         private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            /*
             if (appointmentDataGrid.Columns[e.ColumnIndex].Name == "Start" && e.Value != null)
             {
                 DateTime utcDateTime = (DateTime)e.Value;
@@ -244,7 +246,9 @@ namespace ScheduleApp
                 DateTime easternDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, estTimeZone);
                 e.Value = easternDateTime;
             }
+            */
         }
+
 
         private void dayViewRadio_CheckedChanged(object sender, EventArgs e)
         {

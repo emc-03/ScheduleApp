@@ -13,7 +13,7 @@ namespace ScheduleApp.Validator
         public bool IsValidFirstName(string firstName)
         {
             return !string.IsNullOrWhiteSpace(firstName) &&
-                   Regex.IsMatch(firstName, @"^[a-zA-Z\s]+$S") &&
+                   Regex.IsMatch(firstName, @"^[a-zA-Z\s]+$") &&
                    firstName.Length >= 2 && firstName.Length <= 25;
         }
 

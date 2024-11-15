@@ -188,8 +188,8 @@ namespace ScheduleApp
                 }
 
                 // Assign the validated start and end times to the appointment
-                _createdAppointment.Start = startTimeDate;
-                _createdAppointment.End = endTimeDate;
+                _createdAppointment.Start = TimeZoneInfo.ConvertTimeToUtc(startTimeDate);
+                _createdAppointment.End = TimeZoneInfo.ConvertTimeToUtc(endTimeDate);
 
                 // Call Add method to save the appointment
                 _createdAppointment = _appointmentData.Add(_createdAppointment, _user.Name);

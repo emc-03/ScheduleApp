@@ -26,7 +26,7 @@ namespace ScheduleApp
             //loadData(user.ID);
             loadData(user.ID);
             // could be made into a lambda - inner foreach becomes a if statement - .Any method
-            DateTime quarterTime = DateTime.UtcNow.AddMinutes(15);
+            DateTime quarterTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(15),TimeZoneInfo.Local);
 
             bool foundAppointment = false;
             foreach (Customer customer in _customerList)
@@ -38,9 +38,10 @@ namespace ScheduleApp
                 foreach (Appointment appointment in customer.AppointmentList)
                 {
                     //TODO Remove before submission -testing purposes only 'Console.WriteLine"
-                    Console.WriteLine("Start : " + appointment.Start + "quarterTime : " + quarterTime + " UTCNow : " + DateTime.UtcNow);
+                    //No longer needed as this has been tested to work correctly
+                    //Console.WriteLine("Start : " + appointment.Start + " quarterTime : " + quarterTime + " UTCNow : " + DateTime.UtcNow);
                     // edit the breakpoint conditions to match the appointment time 
-                    if (appointment.Start <= quarterTime && appointment.Start >= DateTime.UtcNow)
+                    if (appointment.Start <= quarterTime && appointment.Start >= TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,TimeZoneInfo.Local))
                     {
                         // add a currenttime var and add additional if statemtent 
                         MessageBox.Show("You have an appointment within the next 15 minutes.");
