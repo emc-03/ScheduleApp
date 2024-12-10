@@ -116,15 +116,15 @@ namespace ScheduleApp
                 }
 
                 // Validate Type
-                if (string.IsNullOrEmpty(createTypeDropDown.Text))
+                if (string.IsNullOrEmpty(createApptTypeInput.Text))
                 {
                     MessageBox.Show("Fill in missing fields.");
-                    createTypeDropDown.Focus();
+                    createApptTypeInput.Focus();
                     return;
                 }
                 else
                 {
-                    _createdAppointment.Type = createTypeDropDown.Text;
+                    _createdAppointment.Type = createApptTypeInput.Text;
                 }
 
                 // Validate URL
@@ -294,6 +294,11 @@ namespace ScheduleApp
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createApptTypeInput_TextChanged(object sender, EventArgs e)
         {
 
         }

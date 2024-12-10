@@ -101,11 +101,36 @@
     <Compile Include="calendar.Designer.cs">
       <DependentUpon>calendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateByReportMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateByReportMain.Designer.cs">
+      <DependentUpon>CreateByReportMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\AddressData.cs" />
     <Compile Include="Database\AppointmentData.cs" />
     <Compile Include="Database\CityData.cs" />
     <Compile Include="Database\CountryData.cs" />
     <Compile Include="Database\CustomerData.cs" />
+    <Compile Include="MonthlyReportMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MonthlyReportMain.Designer.cs">
+      <DependentUpon>MonthlyReportMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportHelper.cs" />
+    <Compile Include="UserReportMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserReportMain.Designer.cs">
+      <DependentUpon>UserReportMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Datahelper.cs" />
     <Compile Include="Database\UserData.cs" />
     <Compile Include="models\Address.cs" />
@@ -153,11 +178,20 @@
     <EmbeddedResource Include="calendar.resx">
       <DependentUpon>calendar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateByReportMain.resx">
+      <DependentUpon>CreateByReportMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerInformationForm.resx">
       <DependentUpon>CustomerInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="createAppt.resx">
       <DependentUpon>createAppt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonthlyReportMain.resx">
+      <DependentUpon>MonthlyReportMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.cs</DependentUpon>
@@ -176,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateCustomerForm.resx">
       <DependentUpon>UpdateCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserReportMain.resx">
+      <DependentUpon>UserReportMain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

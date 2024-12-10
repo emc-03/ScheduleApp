@@ -54,9 +54,27 @@ namespace ScheduleApp
         }
         public void loadDataToList() //NEW
         {
+            //TODO FIX Update Appt data - to load correct information, then check calendar for the Create method 
+            // Possible Example -- Should this go in the appointment Validator ? 
+            //try
+            //{
+            //    connection.Open();
+            //    var result = command.ExecuteScalar();
 
-           
-            appointmentDataGrid.DataSource = null;  // Clear the existing data source
+            //    if (result != null && result is DateTime dbUtcDateTime)
+            //    {
+            //        // Convert to local time if necessary
+            //        DateTime localDateTime = dbUtcDateTime.ToLocalTime();
+
+            //        // Set DateTimePicker to the correct date and time
+            //        dateTimePicker.Value = localDateTime;
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("No appointment date found or invalid date format.");
+            //    }
+
+                appointmentDataGrid.DataSource = null;  // Clear the existing data source
 
             //Create EST data source
   
@@ -202,7 +220,7 @@ namespace ScheduleApp
             _createAppointmentForm.Show();
         }
 
-        // TODO Need to write in logic to ensure that Date and Time from the appointment are getting loaded into the inputs
+        
         private void updateApptButton_Click(object sender, EventArgs e)
         {
             selectRow();
@@ -318,6 +336,11 @@ namespace ScheduleApp
         }
 
         private void apptViewLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

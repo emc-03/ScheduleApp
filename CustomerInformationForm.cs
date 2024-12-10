@@ -1,5 +1,6 @@
 ﻿using ScheduleApp.Database;
 using ScheduleApp.models;
+using ScheduleApp.Validator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace ScheduleApp
         private Customer _selectedCustomer;
         private readonly CustomerData _customerData = new CustomerData();
         private List<Customer> _customerList = new List<Customer>();
+        private CustomerValidator _customerValidation;
         private readonly User _user = new User();
 
 
@@ -25,10 +27,12 @@ namespace ScheduleApp
             InitializeComponent();
             //loadData(user.ID);
             loadData(user.ID);
-            // could be made into a lambda - inner foreach becomes a if statement - .Any method
+           
             DateTime quarterTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(15),TimeZoneInfo.Local);
+                                                  
 
             bool foundAppointment = false;
+
             foreach (Customer customer in _customerList)
             {
                 if (foundAppointment)
@@ -100,11 +104,12 @@ namespace ScheduleApp
             Customer customer = new Customer
             {
                 Address = new Address(),
-
+             
             };
-
-            // First Name Validation
-            if (string.IsNullOrWhiteSpace(fnameInput.Text))
+            _customerValidation = new CustomerValidator();
+            var validationResult = _customerValidation.Valid(customer);
+           
+            if (_customerValidation)
             {
                 MessageBox.Show("Fill in missing fields.");
                 fnameInput.Clear();

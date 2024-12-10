@@ -77,6 +77,7 @@ namespace ScheduleApp
             this.updateApptButton.Text = "UPDATE";
             this.updateApptButton.UseVisualStyleBackColor = false;
             this.updateApptButton.Click += new System.EventHandler(this.updateButton_Click);
+            
             // 
             // updateTitleInput
             // 
@@ -84,7 +85,7 @@ namespace ScheduleApp
             this.updateTitleInput.Location = new System.Drawing.Point(109, 20);
             this.updateTitleInput.Name = "updateTitleInput";
             this.updateTitleInput.Size = new System.Drawing.Size(266, 20);
-            this.updateTitleInput.TabIndex = 65;
+            this.updateTitleInput.TabIndex = 0;
             this.updateTitleInput.TextChanged += new System.EventHandler(this.updateTitleInput_TextChanged);
             // 
             // updateTitleLabel
@@ -105,7 +106,7 @@ namespace ScheduleApp
             this.updateDescriptionInput.Multiline = true;
             this.updateDescriptionInput.Name = "updateDescriptionInput";
             this.updateDescriptionInput.Size = new System.Drawing.Size(266, 53);
-            this.updateDescriptionInput.TabIndex = 67;
+            this.updateDescriptionInput.TabIndex = 1;
             this.updateDescriptionInput.TextChanged += new System.EventHandler(this.updateDescriptionInput_TextChanged);
             // 
             // updateDescriptionLable
@@ -125,7 +126,7 @@ namespace ScheduleApp
             this.updateLocationInput.Location = new System.Drawing.Point(109, 114);
             this.updateLocationInput.Name = "updateLocationInput";
             this.updateLocationInput.Size = new System.Drawing.Size(266, 20);
-            this.updateLocationInput.TabIndex = 69;
+            this.updateLocationInput.TabIndex = 2;
             this.updateLocationInput.TextChanged += new System.EventHandler(this.updateLocationInput_TextChanged);
             // 
             // updateLocationLabel
@@ -156,7 +157,7 @@ namespace ScheduleApp
             this.updateContactInput.Location = new System.Drawing.Point(109, 149);
             this.updateContactInput.Name = "updateContactInput";
             this.updateContactInput.Size = new System.Drawing.Size(212, 20);
-            this.updateContactInput.TabIndex = 71;
+            this.updateContactInput.TabIndex = 3;
             this.updateContactInput.TextChanged += new System.EventHandler(this.updateContactInput_TextChanged);
             // 
             // updateLinkInput
@@ -166,7 +167,7 @@ namespace ScheduleApp
             this.updateLinkInput.Location = new System.Drawing.Point(109, 181);
             this.updateLinkInput.Name = "updateLinkInput";
             this.updateLinkInput.Size = new System.Drawing.Size(212, 22);
-            this.updateLinkInput.TabIndex = 73;
+            this.updateLinkInput.TabIndex = 4;
             this.updateLinkInput.TextChanged += new System.EventHandler(this.createLinkInput_TextChanged);
             // 
             // createLinkLabel
@@ -189,8 +190,9 @@ namespace ScheduleApp
             this.updateEndTimeInput.Name = "updateEndTimeInput";
             this.updateEndTimeInput.ShowUpDown = true;
             this.updateEndTimeInput.Size = new System.Drawing.Size(144, 24);
-            this.updateEndTimeInput.TabIndex = 79;
+            this.updateEndTimeInput.TabIndex = 7;
             this.updateEndTimeInput.ValueChanged += new System.EventHandler(this.updateEndTimeInput_ValueChanged);
+            
             // 
             // updateEndTimeLabel
             // 
@@ -213,8 +215,9 @@ namespace ScheduleApp
             this.updateStartTimeInput.Name = "updateStartTimeInput";
             this.updateStartTimeInput.ShowUpDown = true;
             this.updateStartTimeInput.Size = new System.Drawing.Size(144, 24);
-            this.updateStartTimeInput.TabIndex = 77;
+            this.updateStartTimeInput.TabIndex = 6;
             this.updateStartTimeInput.ValueChanged += new System.EventHandler(this.updateStartTimeInput_ValueChanged);
+            
             // 
             // updateStartTimeLabel
             // 
@@ -233,8 +236,9 @@ namespace ScheduleApp
             this.updateDateTimeSelect.Location = new System.Drawing.Point(86, 256);
             this.updateDateTimeSelect.Name = "updateDateTimeSelect";
             this.updateDateTimeSelect.Size = new System.Drawing.Size(274, 24);
-            this.updateDateTimeSelect.TabIndex = 75;
+            this.updateDateTimeSelect.TabIndex = 5;
             this.updateDateTimeSelect.ValueChanged += new System.EventHandler(this.updateDateTimeSelect_ValueChanged);
+          
             // 
             // updateDateTimeLabel
             // 
@@ -265,7 +269,8 @@ namespace ScheduleApp
             this.updateApptType.Location = new System.Drawing.Point(157, 364);
             this.updateApptType.Name = "updateApptType";
             this.updateApptType.Size = new System.Drawing.Size(212, 22);
-            this.updateApptType.TabIndex = 82;
+            this.updateApptType.TabIndex = 8;
+            this.updateApptType.TextChanged += new System.EventHandler(this.updateApptType_TextChanged);
             // 
             // UpdateAppointmentForm
             // 

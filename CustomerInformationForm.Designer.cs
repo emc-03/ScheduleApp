@@ -33,7 +33,6 @@ namespace ScheduleApp
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerInformationForm));
-            this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
             this.custButtonPanel1 = new System.Windows.Forms.Panel();
             this.deleteCustButton = new System.Windows.Forms.Button();
             this.updateCustomerButton = new System.Windows.Forms.Button();
@@ -61,12 +60,13 @@ namespace ScheduleApp
             this.exitButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.apptLookup = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).BeginInit();
+            this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
             this.custButtonPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).BeginInit();
             this.SuspendLayout();
             // 
             // custButtonPanel1
@@ -86,9 +86,10 @@ namespace ScheduleApp
             this.deleteCustButton.BackColor = System.Drawing.Color.Black;
             this.deleteCustButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteCustButton.ForeColor = System.Drawing.Color.LightCoral;
-            this.deleteCustButton.Location = new System.Drawing.Point(606, 20);
+            this.deleteCustButton.Location = new System.Drawing.Point(586, 19);
             this.deleteCustButton.Name = "deleteCustButton";
-            this.deleteCustButton.Size = new System.Drawing.Size(73, 39);
+            this.deleteCustButton.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.deleteCustButton.Size = new System.Drawing.Size(93, 49);
             this.deleteCustButton.TabIndex = 2;
             this.deleteCustButton.Text = "Delete";
             this.deleteCustButton.UseVisualStyleBackColor = false;
@@ -99,9 +100,10 @@ namespace ScheduleApp
             this.updateCustomerButton.AutoSize = true;
             this.updateCustomerButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.updateCustomerButton.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.updateCustomerButton.Location = new System.Drawing.Point(0, 20);
+            this.updateCustomerButton.Location = new System.Drawing.Point(17, 19);
             this.updateCustomerButton.Name = "updateCustomerButton";
-            this.updateCustomerButton.Size = new System.Drawing.Size(79, 39);
+            this.updateCustomerButton.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.updateCustomerButton.Size = new System.Drawing.Size(99, 49);
             this.updateCustomerButton.TabIndex = 3;
             this.updateCustomerButton.Text = "Update";
             this.updateCustomerButton.Click += new System.EventHandler(this.updateCustomerButton_Click);
@@ -215,7 +217,7 @@ namespace ScheduleApp
             this.postalCodeInput.Location = new System.Drawing.Point(154, 398);
             this.postalCodeInput.Name = "postalCodeInput";
             this.postalCodeInput.Size = new System.Drawing.Size(211, 38);
-            this.postalCodeInput.TabIndex = 17;
+            this.postalCodeInput.TabIndex = 6;
             // 
             // addressInput2
             // 
@@ -223,7 +225,7 @@ namespace ScheduleApp
             this.addressInput2.Location = new System.Drawing.Point(154, 286);
             this.addressInput2.Name = "addressInput2";
             this.addressInput2.Size = new System.Drawing.Size(198, 38);
-            this.addressInput2.TabIndex = 16;
+            this.addressInput2.TabIndex = 4;
             this.addressInput2.TextChanged += new System.EventHandler(this.addressInput2_TextChanged);
             // 
             // addCustomerLabel
@@ -242,7 +244,7 @@ namespace ScheduleApp
             this.countryInput.Location = new System.Drawing.Point(154, 443);
             this.countryInput.Name = "countryInput";
             this.countryInput.Size = new System.Drawing.Size(211, 38);
-            this.countryInput.TabIndex = 12;
+            this.countryInput.TabIndex = 7;
             // 
             // Country
             // 
@@ -256,10 +258,10 @@ namespace ScheduleApp
             // cityInput
             // 
             this.cityInput.AcceptsTab = true;
-            this.cityInput.Location = new System.Drawing.Point(154, 353);
+            this.cityInput.Location = new System.Drawing.Point(154, 354);
             this.cityInput.Name = "cityInput";
             this.cityInput.Size = new System.Drawing.Size(185, 38);
-            this.cityInput.TabIndex = 10;
+            this.cityInput.TabIndex = 5;
             // 
             // cityNameLabel
             // 
@@ -276,7 +278,7 @@ namespace ScheduleApp
             this.addressInput.Location = new System.Drawing.Point(154, 242);
             this.addressInput.Name = "addressInput";
             this.addressInput.Size = new System.Drawing.Size(198, 38);
-            this.addressInput.TabIndex = 8;
+            this.addressInput.TabIndex = 3;
             this.addressInput.TextChanged += new System.EventHandler(this.addressInput_TextChanged);
             // 
             // lnameInput
@@ -285,7 +287,7 @@ namespace ScheduleApp
             this.lnameInput.Location = new System.Drawing.Point(162, 124);
             this.lnameInput.Name = "lnameInput";
             this.lnameInput.Size = new System.Drawing.Size(240, 38);
-            this.lnameInput.TabIndex = 2;
+            this.lnameInput.TabIndex = 1;
             this.lnameInput.TextChanged += new System.EventHandler(this.lnameInput_TextChanged);
             // 
             // addressLabel
@@ -303,7 +305,7 @@ namespace ScheduleApp
             this.phoneInput.Location = new System.Drawing.Point(162, 172);
             this.phoneInput.Name = "phoneInput";
             this.phoneInput.Size = new System.Drawing.Size(240, 38);
-            this.phoneInput.TabIndex = 6;
+            this.phoneInput.TabIndex = 2;
             this.phoneInput.TextChanged += new System.EventHandler(this.phoneInput_TextChanged);
             // 
             // phoneLabel
@@ -321,7 +323,7 @@ namespace ScheduleApp
             this.fnameInput.Location = new System.Drawing.Point(163, 76);
             this.fnameInput.Name = "fnameInput";
             this.fnameInput.Size = new System.Drawing.Size(237, 38);
-            this.fnameInput.TabIndex = 4;
+            this.fnameInput.TabIndex = 0;
             this.fnameInput.TextChanged += new System.EventHandler(this.fnameInput_TextChanged);
             // 
             // lastNameLable
@@ -405,7 +407,6 @@ namespace ScheduleApp
             this.Name = "CustomerInformationForm";
             this.Text = "CUSTOMER INFORMATION";
             this.Load += new System.EventHandler(this.CustomerInformationForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).EndInit();
             this.custButtonPanel1.ResumeLayout(false);
             this.custButtonPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -414,6 +415,7 @@ namespace ScheduleApp
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

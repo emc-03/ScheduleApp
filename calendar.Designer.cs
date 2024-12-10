@@ -86,6 +86,7 @@ namespace ScheduleApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1273, 578);
             this.panel1.TabIndex = 34;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // apptViewLabel
             // 
@@ -167,6 +168,7 @@ namespace ScheduleApp
             // 
             // userNamePrint
             // 
+            this.userNamePrint.BackColor = System.Drawing.SystemColors.ControlDark;
             this.userNamePrint.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNamePrint.Location = new System.Drawing.Point(1087, 11);
             this.userNamePrint.Name = "userNamePrint";
@@ -183,7 +185,7 @@ namespace ScheduleApp
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(120, 26);
             this.dateTimePicker1.TabIndex = 52;
-            this.dateTimePicker1.Value = System.DateTime.UtcNow;
+            this.dateTimePicker1.Value = new System.DateTime(2024, 11, 19, 0, 22, 52, 344);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // appointmentDataGrid
@@ -193,6 +195,7 @@ namespace ScheduleApp
             this.appointmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.appointmentDataGrid.Location = new System.Drawing.Point(220, 120);
             this.appointmentDataGrid.Name = "appointmentDataGrid";
+            this.appointmentDataGrid.ReadOnly = true;
             this.appointmentDataGrid.RowHeadersWidth = 62;
             this.appointmentDataGrid.Size = new System.Drawing.Size(1037, 398);
             this.appointmentDataGrid.TabIndex = 51;

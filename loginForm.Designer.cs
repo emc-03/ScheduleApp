@@ -104,8 +104,7 @@ namespace ScheduleApp
             this.loginButton.Location = new System.Drawing.Point(95, 282);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(333, 54);
-            this.loginButton.TabIndex = 4;
-            this.loginButton.TabStop = false;
+            this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
@@ -117,8 +116,9 @@ namespace ScheduleApp
             this.passwordInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordInput.Location = new System.Drawing.Point(215, 172);
             this.passwordInput.Name = "passwordInput";
+            this.passwordInput.PasswordChar = '*';
             this.passwordInput.Size = new System.Drawing.Size(213, 38);
-            this.passwordInput.TabIndex = 3;
+            this.passwordInput.TabIndex = 1;
             this.passwordInput.TextChanged += new System.EventHandler(this.passwordInput_TextChanged);
             // 
             // userInput
@@ -129,7 +129,7 @@ namespace ScheduleApp
             this.userInput.Location = new System.Drawing.Point(215, 108);
             this.userInput.Name = "userInput";
             this.userInput.Size = new System.Drawing.Size(213, 38);
-            this.userInput.TabIndex = 2;
+            this.userInput.TabIndex = 0;
             this.userInput.TextChanged += new System.EventHandler(this.userInput_TextChanged);
             // 
             // passwordLabel

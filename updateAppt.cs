@@ -31,11 +31,17 @@ namespace ScheduleApp
             _appointmentValidator = new AppointmentValidator(appointments);
             _appointment = appointment;
             InitializeComponent();
-
+            assignValuesToDatePickers();
             populateCustomerData();
 
         }
 
+        private void assignValuesToDatePickers()
+        {
+            this.updateEndTimeInput.Value = _appointment.End;
+            this.updateStartTimeInput.Value = _appointment.Start;
+            this.updateDateTimeSelect.Value = _appointment.End;
+        }
         private void populateCustomerData()
         {
             if (_appointment != null)
@@ -103,10 +109,9 @@ namespace ScheduleApp
             _appointment.Description = this.updateDescriptionInput.Text;
             _appointment.Contact = this.updateContactInput.Text;
             _appointment.URL = this.updateLinkInput.Text;
-            TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-
-            _appointment.Start = TimeZoneInfo.ConvertTimeToUtc(this.updateStartTimeInput.Value); //previous code for EST - moving to go from Local to UTC for writing to database // TimeZoneInfo.ConvertTime(this.updateStartTimeInput.Value, estTimeZone);
-            _appointment.End = TimeZoneInfo.ConvertTimeToUtc(this.updateEndTimeInput.Value); //previous code for EST - moving to go from Local to UTC for writing to database // TimeZoneInfo.ConvertTime(this.updateEndTimeInput.Value, estTimeZone);
+           
+            _appointment.Start = this.updateStartTimeInput.Value; 
+            _appointment.End = this.updateEndTimeInput.Value; 
             _appointment.Type = this.updateApptType.Text;
 
             if (string.IsNullOrEmpty(updateTitleInput.Text))
@@ -185,7 +190,7 @@ namespace ScheduleApp
 
             try
             {
-                _appointmentValidator.ValidateAppointment(startTime: _appointment.Start, endTime: _appointment.End);
+                _appointmentValidator.ValidateAppointment(userStartTime: _appointment.Start, userEndTime: _appointment.End);
 
                 AppointmentData appointmentData = new AppointmentData();
                 appointmentData.Update(_appointment);
@@ -251,7 +256,7 @@ namespace ScheduleApp
                 updateDateTimeSelect.Value.Day,
                 updateEndTimeInput.Value.Hour,
                 updateEndTimeInput.Value.Minute,
-                updateEndTimeInput.Value.Second);
+                0, 0);
 
             updateStartTimeInput.Value = new DateTime(
                updateDateTimeSelect.Value.Year,
@@ -259,7 +264,7 @@ namespace ScheduleApp
                updateDateTimeSelect.Value.Day,
                updateStartTimeInput.Value.Hour,
                updateStartTimeInput.Value.Minute,
-               updateStartTimeInput.Value.Second);
+               0, 0);
 
 
         }
@@ -275,6 +280,11 @@ namespace ScheduleApp
         }
 
         private void updateTypeDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateApptType_TextChanged(object sender, EventArgs e)
         {
 
         }

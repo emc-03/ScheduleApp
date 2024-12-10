@@ -46,8 +46,8 @@ namespace ScheduleApp.Database
                             appointment.Description = reader["description"].ToString();
                             appointment.Contact = reader["contact"].ToString();
                             appointment.URL = reader["url"].ToString();
-                            appointment.Start = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind((DateTime)reader["start"], DateTimeKind.Utc),TimeZoneInfo.Local);//Updated to add UTC //Convert to LocalTime
-                            appointment.End = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind((DateTime)reader["end"], DateTimeKind.Utc),TimeZoneInfo.Local);//Updated to add UTC //Convert to LocalTime
+                            appointment.Start = ((DateTime)reader["start"]).ToLocalTime(); //Updated to add UTC //Convert to LocalTime
+                            appointment.End = ((DateTime)reader["end"]).ToLocalTime();//Updated to add UTC //Convert to LocalTime
                             appointment.Type = reader["type"].ToString();
 
                             allAppointments.Add(appointment);
@@ -94,8 +94,8 @@ namespace ScheduleApp.Database
                     command.Parameters.AddWithValue("@location", appointment.Location);
                     command.Parameters.AddWithValue("@contact", appointment.Contact);
                     command.Parameters.AddWithValue("@url", appointment.URL);
-                    command.Parameters.AddWithValue("@start", appointment.Start);
-                    command.Parameters.AddWithValue("@end", appointment.End);
+                    command.Parameters.AddWithValue("@start", appointment.Start.ToUniversalTime());
+                    command.Parameters.AddWithValue("@end", appointment.End.ToUniversalTime());
                     command.Parameters.AddWithValue("@type", appointment.Type);
                     command.Parameters.AddWithValue("@createDate", DateTime.UtcNow);
                     command.Parameters.AddWithValue("@createdBy", userName);
@@ -136,8 +136,8 @@ namespace ScheduleApp.Database
                         command.Parameters.AddWithValue("@location", appointment.Location);
                         command.Parameters.AddWithValue("@contact", appointment.Contact);
                         command.Parameters.AddWithValue("@url", appointment.URL);
-                        command.Parameters.AddWithValue("@start", appointment.Start);
-                        command.Parameters.AddWithValue("@end", appointment.End);
+                        command.Parameters.AddWithValue("@start", appointment.Start.ToUniversalTime());
+                        command.Parameters.AddWithValue("@end", appointment.End.ToUniversalTime());
                         command.Parameters.AddWithValue("@type", appointment.Type);
 
 

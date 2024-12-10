@@ -11,12 +11,11 @@ namespace ScheduleApp.models
 {
 
 
-    //try - catch - where Validatemethod is called
-    // create an instance of this class in create & update forms
     public class AppointmentValidator
     {
         private readonly TimeSpan _timeRangeStart = new TimeSpan(9, 0, 0); // 9 AM
         private readonly TimeSpan _timeRangeEnd = new TimeSpan(17, 0, 0);  // 5 PM
+        private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
         private List<Appointment> _appointments = new List<Appointment>();
 
@@ -27,31 +26,39 @@ namespace ScheduleApp.models
         }
 
 
-        public void ValidateAppointment(DateTime startTime, DateTime endTime)
-        {
-
-
+        public void ValidateAppointment(DateTime userStartTime, DateTime userEndTime)
+            {
+        //    DateTime originalDateTime = DateTime.Now; //need to adjust to correct time per appointment
+        //    DateTime dateTimeRefresh = new DateTime(
+        //        originalDateTime.Year,
+        //        originalDateTime.Month,
+        //        originalDateTime.Day,
+        //        originalDateTime.Hour, 0, 0
+        //        );
+            DateTime startEST = TimeZoneInfo.ConvertTime(userStartTime, estTimeZone);
+            DateTime endEST = TimeZoneInfo.ConvertTime(userEndTime, estTimeZone);
+            bool isNotWithinTimeRange = !isWithinTimeRange(startEST, endEST);
             // Check if within business hours
-            if (!isWithinTimeRange(startTime, endTime))
+            if(isNotWithinTimeRange)
             {
                 throw new Exception("Error Appointment must be between 9 AM - 5 PM EST.");
             }
 
             // Check if in working week
-            if (!isWithinWorkWeek(startTime))
+            if (!isWithinWorkWeek(startEST))
             {
                 throw new Exception("Error: Appointment is not within the work week.");
             }
 
             // Check for overlapping appointments >> also needs to check specific date - can't just be time frame
-            if (isStartTimeAfterEndTime(startTime, endTime))
-            { 
+            if (isStartTimeAfterEndTime(startEST, endEST))
+            {
                 throw new Exception("Error: Appointment's start time is after the end time.");
             }
 
             //Validate that there's not a conflicting appointment
-            if (appointmentConflictExists(startTime, endTime))
-            { 
+            if (appointmentConflictExists(startEST, endEST))
+            {
 
             }
 
@@ -59,14 +66,18 @@ namespace ScheduleApp.models
         }
 
 
-
-
-
         // Check if the appointment is within 9-5 range
         private bool isWithinTimeRange(DateTime estStart, DateTime estEnd)
         {
             // Ensure the appointment is scheduled within range
-            return estStart.TimeOfDay >= _timeRangeStart && estEnd.TimeOfDay <= _timeRangeEnd; //
+            //return estStart.TimeOfDay >= _timeRangeStart && estEnd.TimeOfDay <= _timeRangeEnd; 
+            int startCompareResult = _timeRangeStart.CompareTo(estStart.TimeOfDay);
+            int endCompareResult = _timeRangeEnd.CompareTo(estEnd.TimeOfDay);
+            bool startIsValid = startCompareResult <= 0;
+            bool endIsValid = endCompareResult >= 0;
+
+            return startIsValid && endIsValid;
+
         }
 
 
@@ -89,8 +100,9 @@ namespace ScheduleApp.models
             return false;
         }
 
-        //TODO Error in Create Method -- Unable to update Appointment 
+
         public bool appointmentConflictExists(DateTime startTime, DateTime endTime)
+
         {
             foreach (var existingAppointment in _appointments)
             {
@@ -126,6 +138,6 @@ namespace ScheduleApp.models
     }
 
 }
-     
-    
+
+
 

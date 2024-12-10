@@ -68,7 +68,7 @@ namespace ScheduleApp.Database
 
         public void Delete(Address address)
         {
-            
+
             string deleteAddress = "DELETE FROM Address Where addressId = @ID";
             using (MySqlCommand command = new MySqlCommand(deleteAddress, DB_Connection.conn))
             {
@@ -76,7 +76,7 @@ namespace ScheduleApp.Database
                 DB_Connection.conn.Open();
                 command.ExecuteNonQuery();
                 DB_Connection.conn.Close();
-                
+
             }
             CityData cityData = new CityData();
             cityData.Delete(address.City);
@@ -89,8 +89,6 @@ namespace ScheduleApp.Database
 
             string getAddressQuery = "SELECT * FROM address WHERE addressId = @addressId";
 
-            // TODO Create a using statment to open a new connection - same thing in city and country class
-            // replace end of line 85 with new connection parameter
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();

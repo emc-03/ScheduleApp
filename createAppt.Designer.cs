@@ -43,13 +43,13 @@ namespace ScheduleApp
             this.createDescriptionLable = new System.Windows.Forms.Label();
             this.createLocationInput = new System.Windows.Forms.TextBox();
             this.createLocationLabel = new System.Windows.Forms.Label();
-            this.createTypeDropDown = new System.Windows.Forms.ComboBox();
             this.createContactLabel = new System.Windows.Forms.Label();
             this.createTypeLabel = new System.Windows.Forms.Label();
             this.createStartTimeInput = new System.Windows.Forms.DateTimePicker();
             this.createStartTimeLabel = new System.Windows.Forms.Label();
             this.createEndTimeInput = new System.Windows.Forms.DateTimePicker();
             this.createEndTimeLabel = new System.Windows.Forms.Label();
+            this.createApptTypeInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // createTitleInput
@@ -57,7 +57,7 @@ namespace ScheduleApp
             this.createTitleInput.Location = new System.Drawing.Point(115, 22);
             this.createTitleInput.Name = "createTitleInput";
             this.createTitleInput.Size = new System.Drawing.Size(266, 20);
-            this.createTitleInput.TabIndex = 38;
+            this.createTitleInput.TabIndex = 0;
             this.createTitleInput.TextChanged += new System.EventHandler(this.createIdInput_TextChanged);
             // 
             // createTitleLable
@@ -77,7 +77,7 @@ namespace ScheduleApp
             this.createContactInput.Location = new System.Drawing.Point(115, 158);
             this.createContactInput.Name = "createContactInput";
             this.createContactInput.Size = new System.Drawing.Size(212, 20);
-            this.createContactInput.TabIndex = 42;
+            this.createContactInput.TabIndex = 3;
             this.createContactInput.TextChanged += new System.EventHandler(this.createFnameInput_TextChanged);
             // 
             // createLinkInput
@@ -86,7 +86,7 @@ namespace ScheduleApp
             this.createLinkInput.Location = new System.Drawing.Point(116, 197);
             this.createLinkInput.Name = "createLinkInput";
             this.createLinkInput.Size = new System.Drawing.Size(212, 22);
-            this.createLinkInput.TabIndex = 44;
+            this.createLinkInput.TabIndex = 4;
             this.createLinkInput.TextChanged += new System.EventHandler(this.apptTypeBox_TextChanged);
             // 
             // createLinkLabel
@@ -119,18 +119,19 @@ namespace ScheduleApp
             this.createDateTimeSelect.Location = new System.Drawing.Point(106, 276);
             this.createDateTimeSelect.Name = "createDateTimeSelect";
             this.createDateTimeSelect.Size = new System.Drawing.Size(276, 24);
-            this.createDateTimeSelect.TabIndex = 49;
+            this.createDateTimeSelect.TabIndex = 5;
             this.createDateTimeSelect.ValueChanged += new System.EventHandler(this.createDateTimeSelect_ValueChanged);
             // 
             // CreateCancelButton
             // 
             this.CreateCancelButton.BackColor = System.Drawing.Color.Black;
+            this.CreateCancelButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CreateCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateCancelButton.ForeColor = System.Drawing.Color.IndianRed;
             this.CreateCancelButton.Location = new System.Drawing.Point(336, 477);
             this.CreateCancelButton.Name = "CreateCancelButton";
             this.CreateCancelButton.Size = new System.Drawing.Size(123, 60);
-            this.CreateCancelButton.TabIndex = 51;
+            this.CreateCancelButton.TabIndex = 10;
             this.CreateCancelButton.Text = "CANCEL";
             this.CreateCancelButton.UseVisualStyleBackColor = false;
             this.CreateCancelButton.Click += new System.EventHandler(this.CreateCancelButton_Click);
@@ -138,12 +139,13 @@ namespace ScheduleApp
             // createApptButton
             // 
             this.createApptButton.BackColor = System.Drawing.Color.Black;
+            this.createApptButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createApptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
             this.createApptButton.Location = new System.Drawing.Point(12, 477);
             this.createApptButton.Name = "createApptButton";
             this.createApptButton.Size = new System.Drawing.Size(123, 60);
-            this.createApptButton.TabIndex = 50;
+            this.createApptButton.TabIndex = 9;
             this.createApptButton.Text = "SAVE";
             this.createApptButton.UseVisualStyleBackColor = false;
             this.createApptButton.Click += new System.EventHandler(this.createApptButton_Click);
@@ -154,7 +156,7 @@ namespace ScheduleApp
             this.createDescriptionInput.Multiline = true;
             this.createDescriptionInput.Name = "createDescriptionInput";
             this.createDescriptionInput.Size = new System.Drawing.Size(266, 53);
-            this.createDescriptionInput.TabIndex = 53;
+            this.createDescriptionInput.TabIndex = 1;
             this.createDescriptionInput.TextChanged += new System.EventHandler(this.createDescriptionInput_TextChanged);
             // 
             // createDescriptionLable
@@ -174,7 +176,7 @@ namespace ScheduleApp
             this.createLocationInput.Location = new System.Drawing.Point(116, 122);
             this.createLocationInput.Name = "createLocationInput";
             this.createLocationInput.Size = new System.Drawing.Size(266, 20);
-            this.createLocationInput.TabIndex = 55;
+            this.createLocationInput.TabIndex = 2;
             this.createLocationInput.TextChanged += new System.EventHandler(this.createLocationInput_TextChanged);
             // 
             // createLocationLabel
@@ -188,15 +190,6 @@ namespace ScheduleApp
             this.createLocationLabel.TabIndex = 54;
             this.createLocationLabel.Text = "Location";
             this.createLocationLabel.Click += new System.EventHandler(this.createLocationLabel_Click);
-            // 
-            // createTypeDropDown
-            // 
-            this.createTypeDropDown.FormattingEnabled = true;
-            this.createTypeDropDown.Location = new System.Drawing.Point(166, 410);
-            this.createTypeDropDown.Name = "createTypeDropDown";
-            this.createTypeDropDown.Size = new System.Drawing.Size(144, 21);
-            this.createTypeDropDown.TabIndex = 56;
-            this.createTypeDropDown.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // createContactLabel
             // 
@@ -228,7 +221,7 @@ namespace ScheduleApp
             this.createStartTimeInput.Location = new System.Drawing.Point(166, 319);
             this.createStartTimeInput.Name = "createStartTimeInput";
             this.createStartTimeInput.Size = new System.Drawing.Size(144, 24);
-            this.createStartTimeInput.TabIndex = 59;
+            this.createStartTimeInput.TabIndex = 6;
             this.createStartTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // createStartTimeLabel
@@ -250,7 +243,7 @@ namespace ScheduleApp
             this.createEndTimeInput.Location = new System.Drawing.Point(166, 358);
             this.createEndTimeInput.Name = "createEndTimeInput";
             this.createEndTimeInput.Size = new System.Drawing.Size(144, 24);
-            this.createEndTimeInput.TabIndex = 61;
+            this.createEndTimeInput.TabIndex = 7;
             this.createEndTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // createEndTimeLabel
@@ -266,19 +259,29 @@ namespace ScheduleApp
             this.createEndTimeLabel.Text = "End Time";
             this.createEndTimeLabel.Click += new System.EventHandler(this.createEndTimeLabel_Click);
             // 
-            // CreateAppointment
+            // createApptTypeInput
+            // 
+            this.createApptTypeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createApptTypeInput.Location = new System.Drawing.Point(166, 410);
+            this.createApptTypeInput.Name = "createApptTypeInput";
+            this.createApptTypeInput.Size = new System.Drawing.Size(212, 22);
+            this.createApptTypeInput.TabIndex = 8;
+            this.createApptTypeInput.TabStop = false;
+            this.createApptTypeInput.TextChanged += new System.EventHandler(this.createApptTypeInput_TextChanged);
+            // 
+            // CreateAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(471, 549);
+            this.Controls.Add(this.createApptTypeInput);
             this.Controls.Add(this.createEndTimeInput);
             this.Controls.Add(this.createEndTimeLabel);
             this.Controls.Add(this.createStartTimeInput);
             this.Controls.Add(this.createStartTimeLabel);
             this.Controls.Add(this.createTypeLabel);
-            this.Controls.Add(this.createTypeDropDown);
             this.Controls.Add(this.createLocationInput);
             this.Controls.Add(this.createLocationLabel);
             this.Controls.Add(this.createDescriptionInput);
@@ -295,7 +298,7 @@ namespace ScheduleApp
             this.Controls.Add(this.createTitleLable);
             this.ForeColor = System.Drawing.Color.Gainsboro;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "CreateAppointment";
+            this.Name = "CreateAppointmentForm";
             this.Text = "Create Appointment";
             this.Load += new System.EventHandler(this.CreateAppointment_Load);
             this.ResumeLayout(false);
@@ -318,12 +321,12 @@ namespace ScheduleApp
         private System.Windows.Forms.Label createDescriptionLable;
         private System.Windows.Forms.TextBox createLocationInput;
         private System.Windows.Forms.Label createLocationLabel;
-        private System.Windows.Forms.ComboBox createTypeDropDown;
         private System.Windows.Forms.Label createContactLabel;
         private System.Windows.Forms.Label createTypeLabel;
         private System.Windows.Forms.DateTimePicker createStartTimeInput;
         private System.Windows.Forms.Label createStartTimeLabel;
         private System.Windows.Forms.DateTimePicker createEndTimeInput;
         private System.Windows.Forms.Label createEndTimeLabel;
+        private System.Windows.Forms.TextBox createApptTypeInput;
     }
 }

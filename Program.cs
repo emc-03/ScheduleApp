@@ -17,8 +17,8 @@ namespace ScheduleApp
         [STAThread]
         static void Main()
         {
-          
-               
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -28,7 +28,3 @@ namespace ScheduleApp
         }
     }
 }
-// Order of Forms - Login - Calendar - Customer Data - 
-// From Calendar - New / Update / Delete Appt --- Button to link Customer Data
-// From Customer Data - New/ Update / Delete Cust. --- Button to link Calendar 
-//TODO Ensure all cancel / exit buttons on each form are functional
