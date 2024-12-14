@@ -17,36 +17,28 @@ namespace ScheduleApp
 {
     public partial class MonthlyReportMain : Form
     {
-        private User _user;
-        private Customer _selectedCustomer;
-        private Appointment _selectedAppointment;
+    
         private AppointmentData _appointmentData = new AppointmentData();
 
-        // TODO - update to grab all appointments as we need data for ALL users
         public MonthlyReportMain()
         {
             InitializeComponent();
-        }
-        public MonthlyReportMain(Customer selectedCustomer, User user)
-        {
-            _user = user;
-            _selectedCustomer = selectedCustomer;
 
-            loadDataToList();
         }
+      
 
         public void loadDataToList() //NEW
         {
-            var appointmentSummary = _selectedCustomer.AppointmentList
-            // assign to correct type from DatePicker
-            .GroupBy(a => new { Year = a.Start.Year, Month = a.Start.Month, Type = a.Type }) 
-            .OrderBy(a => a.Year)
-            .ThenBy(a => a.Month)
-            .ToList();
+            // 1) Use the private field for AppointmentData to call FindAll() to get a list of all of the appointments from the database.
+            // Store this in a variable of type List<Appointment>
+            //2) Assign column names to the DataGridView, such as "Appointment Type", "January", "February", "March", etc.
+            //3) Group the Appointments, first by appointment type, and then by month
+            //Go through the groups and count the appointments in each month and use it to populate the row values.
+            //Remember that the first column should display the type.
+            //Then you add the count values after that in order of the month they happened in
 
-            dataGridMonthlyReport.DataSource = null;  // Clear the existing data source
+           List<Appointments> allDataAppointments = _appointmentData.FindAllAppt();
 
-            dataGridMonthlyReport.DataSource = appointmentSummary;// Bind the updated list
 
         }
             private void MonthlyReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)

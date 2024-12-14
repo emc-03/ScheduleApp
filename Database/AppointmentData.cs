@@ -15,8 +15,48 @@ namespace ScheduleApp.Database
         
         private List<Appointment> _appointmentList = new List<Appointment>();
         private List<Appointment> _appointmentList2 = new List<Appointment>();
-        //private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+        private List<Appointment> _reportAppointments = new List<Appointment>();
 
+
+        //1) In AppointmentData class,
+        //make a FindAll() method that takes no parameters and still returns a List<Appointment>
+        //The query should just say "SELECT * from appointment"
+        //Then, just populate the list with what the database reader gives you and return the list when it is all done.
+
+        public List<Appointment> FindAllAppt()
+        {
+            _reportAppointments.Clear(); // Clear the list before populating it
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM appointment"; // SQL query to fetch all records
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Appointment appointment = new Appointment
+                            {
+                                AppointmentID = (int)reader["appointmentId"],
+                                Title = reader["title"].ToString(),
+                                Description = reader["description"].ToString(),
+                                Start = ((DateTime)reader["start"]).ToLocalTime(), // Convert UTC to local time
+                                End = ((DateTime)reader["end"]).ToLocalTime(), // Convert UTC to local time
+                                Type = reader["type"].ToString()
+                            };
+
+                            _reportAppointments.Add(appointment);
+                        }
+                    }
+                }
+            }
+
+            return _reportAppointments;
+        }
 
 
         public List<Appointment> FindAllApptList(int _userID, int _customerID)
