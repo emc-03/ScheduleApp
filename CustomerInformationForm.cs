@@ -27,9 +27,9 @@ namespace ScheduleApp
             InitializeComponent();
             //loadData(user.ID);
             loadData(user.ID);
-           
-            DateTime quarterTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(15),TimeZoneInfo.Local);
-                                                  
+
+            DateTime quarterTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(15), TimeZoneInfo.Local);
+
 
             bool foundAppointment = false;
 
@@ -41,11 +41,8 @@ namespace ScheduleApp
                 }
                 foreach (Appointment appointment in customer.AppointmentList)
                 {
-                    //TODO Remove before submission -testing purposes only 'Console.WriteLine"
-                    //No longer needed as this has been tested to work correctly
-                    //Console.WriteLine("Start : " + appointment.Start + " quarterTime : " + quarterTime + " UTCNow : " + DateTime.UtcNow);
-                    // edit the breakpoint conditions to match the appointment time 
-                    if (appointment.Start <= quarterTime && appointment.Start >= TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,TimeZoneInfo.Local))
+
+                    if (appointment.Start <= quarterTime && appointment.Start >= TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local))
                     {
                         // add a currenttime var and add additional if statemtent 
                         MessageBox.Show("You have an appointment within the next 15 minutes.");
@@ -57,8 +54,6 @@ namespace ScheduleApp
 
         }
 
-
-        //List<T>
         public void loadData(int userId)
         {
             _customerList = _customerData.FindAll(userId);
@@ -100,18 +95,13 @@ namespace ScheduleApp
 
         private void newCustomer_Click(object sender, EventArgs e)
         {
-            // Initialize customer
-            Customer customer = new Customer
+
+            Customer customer = new Customer();
+
+            //FirstName
+            if (string.IsNullOrEmpty(fnameInput.Text))
             {
-                Address = new Address(),
-             
-            };
-            _customerValidation = new CustomerValidator();
-            var validationResult = _customerValidation.Valid(customer);
-           
-            if (_customerValidation)
-            {
-                MessageBox.Show("Fill in missing fields.");
+                MessageBox.Show("First Name is required");
                 fnameInput.Clear();
                 fnameInput.Focus();
                 return;
@@ -124,7 +114,7 @@ namespace ScheduleApp
             // Last Name Validation
             if (string.IsNullOrEmpty(lnameInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.");
+                MessageBox.Show("Last Name is required.");
                 lnameInput.Clear();
                 lnameInput.Focus();
                 return;
@@ -137,87 +127,46 @@ namespace ScheduleApp
             // Phone Number Validation
             if (string.IsNullOrEmpty(phoneInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.");
+                MessageBox.Show("Phone number is required.");
                 phoneInput.Clear();
                 phoneInput.Focus();
                 return;
             }
             else
             {
-                string phonePattern = @"^[\d-]+$"; // Allows only digits and dashes
-                if (!Regex.IsMatch(phoneInput.Text, phonePattern))
-                {
-                    MessageBox.Show("Invalid phone number! Only digits and dashes are allowed.");
-                    phoneInput.Clear();
-                    phoneInput.Focus();
-                    return;
-                }
-
                 customer.Address.PhoneNumber = phoneInput.Text;
             }
 
             // Address Line 1 Validation
             if (string.IsNullOrEmpty(addressInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Address is required");
                 addressInput.Clear();
                 addressInput.Focus();
                 return;
             }
             else
             {
-                //  validate a street address (letters, numbers, spaces, commas, periods, hyphens)
-                string addressPattern = @"^[a-zA-Z0-9\s,.-]+$";
-
-                if (!Regex.IsMatch(addressInput.Text, addressPattern))
-                {
-                    // If the address doesn't match the pattern
-                    MessageBox.Show("Invalid street address! Please use only letters, numbers, spaces, commas, periods, and hyphens.",
-                                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    addressInput.Clear();
-                    addressInput.Focus();
-                    return;
-                }
-
-                // assign it to the customer object
                 customer.Address.Address1 = addressInput.Text;
             }
+
             // Address Line 2 Validation
             if (string.IsNullOrEmpty(addressInput2.Text))
             {
-                MessageBox.Show("Fill in missing fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Address is required");
                 addressInput2.Clear();
                 addressInput2.Focus();
                 return;
-
             }
-
             else
             {
-                // validate a street address (letters, numbers, spaces, commas, periods, hyphens)
-                string addressPattern = @"^[a-zA-Z0-9\s,.-]+$";
-
-                if (!Regex.IsMatch(addressInput2.Text, addressPattern))
-                {
-                    // If the address doesn't match the pattern, show an error message
-                    MessageBox.Show("Invalid street address! Please use only letters, numbers, spaces, commas, periods, and hyphens.",
-                                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    addressInput2.Clear();
-                    addressInput2.Focus();
-                    return;
-                }
-
-
                 customer.Address.Address2 = addressInput2.Text;
             }
-
 
             // City Validation
             if (string.IsNullOrEmpty(cityInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("City is required");
                 cityInput.Clear();
                 cityInput.Focus();
                 return;
@@ -225,48 +174,19 @@ namespace ScheduleApp
 
             else
             {
-                // validate that the city name contains only valid characters
-                string cityPattern = @"^[a-zA-Z\s\-'.]+$"; // Allows letters, spaces, hyphens, apostrophes, and periods
-
-                if (!Regex.IsMatch(cityInput.Text, cityPattern))
-                {
-                    // Show an error message if the city name is invalid
-                    MessageBox.Show("Invalid city name! Please use only letters, spaces, hyphens, apostrophes, and periods.",
-                                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    cityInput.Clear();
-                    cityInput.Focus();
-                    return;
-                }
-
-
                 customer.Address.City.Name = cityInput.Text;
             }
 
             // Postal Code Validation
             if (string.IsNullOrEmpty(postalCodeInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Postal Code is required");
                 postalCodeInput.Clear();
                 postalCodeInput.Focus();
                 return;
             }
             else
             {
-                //  postal code contains only numbers
-                string postalCodePattern = @"^\d+$";
-
-                if (!Regex.IsMatch(postalCodeInput.Text, postalCodePattern))
-                {
-                    // Show an error message if the postal code is invalid
-                    MessageBox.Show("Postal Code Invalid, please only use numbers!",
-                                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    postalCodeInput.Clear();
-                    postalCodeInput.Focus();
-                    return;
-                }
-
                 //  assign it to the customer object
                 customer.Address.PostalCode = postalCodeInput.Text;
             }
@@ -274,38 +194,28 @@ namespace ScheduleApp
             // Country Validation
             if (string.IsNullOrEmpty(countryInput.Text))
             {
-                MessageBox.Show("Fill in missing fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Country is required");
                 countryInput.Clear();
                 countryInput.Focus();
                 return;
             }
             else
             {
-                // Allows letters, spaces, hyphens, apostrophes, and periods
-                string countryPattern = @"^[a-zA-Z\s\-'.]+$";
-                if (!Regex.IsMatch(countryInput.Text, countryPattern))
-                {
-                    //  country name is invalid
-                    MessageBox.Show("Invalid country name! Please use only letters, spaces, hyphens, apostrophes, and periods.",
-                                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    countryInput.Clear();
-                    countryInput.Focus();
-                    return;
-                }
-
-
-                // If the country name is valid, assign it to the customer object
-                customer.Address.City.Country.Name = countryInput.Text;
+                      customer.Address.City.Country.Name = countryInput.Text;
             }
 
             try
             {
+                _customerValidation = new CustomerValidator();
+                _customerValidation.ValidateCustomer(customer);
+
                 // Reassigning the customer so it has an ID from the database
                 customer = _customerData.Add(customer);
 
                 // Add customer to DataGrid == removing as we are now using a data source
                 //addCustomertoDataGrid(customer);
+                _customerList.Add(customer);
+                loadData(_user.ID);
 
                 Console.WriteLine("Data inserted successfully.");
                 this.fnameInput.Clear();
@@ -316,25 +226,13 @@ namespace ScheduleApp
                 this.cityInput.Clear();
                 this.postalCodeInput.Clear();
                 this.countryInput.Clear();
+   
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                MessageBox.Show("Value does not meet parameters");
+                MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                //dataGridCustomer.DataSource = GetDataFromDatabase(); // Fetch updated data
-                //dataGridCustomer.Refresh();
-                _customerList.Add(customer);
-                loadData(_user.ID);
-
-                if (DB_Connection.conn.State == ConnectionState.Open)
-                {
-                    DB_Connection.conn.Close();
-                }
-
-            }
+            
         }
 
 

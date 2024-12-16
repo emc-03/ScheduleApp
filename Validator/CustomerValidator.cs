@@ -26,19 +26,24 @@ namespace ScheduleApp.Validator
 
         public bool IsValidPhoneNumber(string phoneNumber)
         {
-            return phoneNumber.All(char.IsDigit) && phoneNumber.Length == 10;
+            string phonePattern = @"^[\d-]+$"; // Allows only digits and dashes
+            return Regex.IsMatch(phoneNumber, phonePattern) &&
+            phoneNumber.All(char.IsDigit) && phoneNumber.Length == 10;
         }
 
         public bool IsValidAddress(string address)
         {
-            return !string.IsNullOrWhiteSpace(address);
+            //  validate a street address (letters, numbers, spaces, commas, periods, hyphens)
+            string addressPattern = @"^[a-zA-Z0-9\s,.-]+$";
+            return Regex.IsMatch(address, addressPattern) &&
+                !string.IsNullOrWhiteSpace(address);
         }
 
-        public bool IsValidCity(string city)
+        public bool IsValidCity(string cityName)
         {
-            return !string.IsNullOrWhiteSpace(city) &&
-                   Regex.IsMatch(city, @"^[a-zA-Z\s]+$") &&
-                   city.Length >= 2 && city.Length <= 50;
+            return !string.IsNullOrWhiteSpace(cityName) &&
+                   Regex.IsMatch(cityName, @"^[a-zA-Z\s]+$") &&
+                   cityName.Length >= 2 && cityName.Length <= 50;
         }
 
         public bool IsValidPostalCode(string postalCode)
@@ -46,21 +51,22 @@ namespace ScheduleApp.Validator
             return Regex.IsMatch(postalCode, @"^\d{5}(-\d{4})?$");
         }
 
-        public bool IsValidCountry(string country)
+        public bool IsValidCountry(string countryName)
         {
-            return !string.IsNullOrWhiteSpace(country) &&
-                   Regex.IsMatch(country, @"^[a-zA-Z\s]+$");
+            return !string.IsNullOrWhiteSpace(countryName) &&
+                   Regex.IsMatch(countryName, @"^[a-zA-Z\s]+$");
         }
 
-        public void ValidateCustomer(string firstName, string lastName, string address1, string address2, string postalCode, string phoneNumber, string city, string country)
+        public void ValidateCustomer(Customer customer)
         {
-            if (!IsValidFirstName(firstName)) throw new Exception("Invalid first name, only letters or spaces.");
-            if (!IsValidLastName(lastName)) throw new Exception("Invalid last name, only letters or spaces.");
-            if (!IsValidAddress(address1)) throw new Exception("Invalid address.");
-            if (!IsValidPostalCode(postalCode)) throw new Exception("Invalid postal code, only 1 - 5 digits allowed.");
-            if (!IsValidPhoneNumber(phoneNumber)) throw new Exception("Invalid phone number, no special characters.");
-            if (!IsValidCity(city)) throw new Exception("Invalid city, check for typos.");
-            if (!IsValidCountry(country)) throw new Exception("Invalid country, check for typos.");
+            if (!IsValidFirstName(customer.FirstName)) throw new Exception("Invalid first name, only letters or spaces.");
+            if (!IsValidLastName(customer.LastName)) throw new Exception("Invalid last name, only letters or spaces.");
+            if (!IsValidAddress(customer.Address.Address1)) throw new Exception("Invalid address.");
+            if (!IsValidAddress(customer.Address.Address2)) throw new Exception("Invalid address.");
+            if (!IsValidPostalCode(customer.Address.PostalCode)) throw new Exception("Invalid postal code, only 1 - 5 digits allowed.");
+            if (!IsValidPhoneNumber(customer.Address.PhoneNumber)) throw new Exception("Invalid phone number! Only digits and dashes are allowed.");
+            if (!IsValidCity(customer.Address.City.Name)) throw new Exception("Invalid city, check for typos.");
+            if (!IsValidCountry(customer.Address.City.Country.Name)) throw new Exception("Invalid country, check for typos.");
         }
     }
 }

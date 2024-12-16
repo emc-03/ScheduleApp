@@ -12,10 +12,9 @@ namespace ScheduleApp.Database
 {
     class AppointmentData
     {
-        
-        private List<Appointment> _appointmentList = new List<Appointment>();
-        private List<Appointment> _appointmentList2 = new List<Appointment>();
-        private List<Appointment> _reportAppointments = new List<Appointment>();
+       
+       // List<Appointment> _appointmentList2 = new List<Appointment>();
+
 
 
         //1) In AppointmentData class,
@@ -25,7 +24,7 @@ namespace ScheduleApp.Database
 
         public List<Appointment> FindAllAppt()
         {
-            _reportAppointments.Clear(); // Clear the list before populating it
+            List<Appointment> _reportAppointments = new List<Appointment>();
 
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
@@ -102,6 +101,7 @@ namespace ScheduleApp.Database
         }
         public Appointment Add(Appointment appointment, string userName)
         {
+            List<Appointment> _appointmentList = new List<Appointment>();
             if (appointment == null)
             {
                 throw new ArgumentNullException(nameof(appointment), "Appointment cannot be null.");
@@ -126,7 +126,7 @@ namespace ScheduleApp.Database
 
                 using (MySqlCommand command = new MySqlCommand(newQueryAppointment, connection))
                 {
-                    
+
                     command.Parameters.AddWithValue("@customerId", appointment.CustomerID);
                     command.Parameters.AddWithValue("@userId", appointment.UserID);
                     command.Parameters.AddWithValue("@title", appointment.Title);
@@ -148,7 +148,7 @@ namespace ScheduleApp.Database
 
                 connection.Close();
                 _appointmentList.Add(appointment);
-                _appointmentList2.Add(appointment);
+               // _appointmentList2.Add(appointment);
             }
 
             return appointment;
@@ -158,10 +158,10 @@ namespace ScheduleApp.Database
         public void Update(Appointment appointment)
         {
 
-            
+            List<Appointment> _appointmentList = new List<Appointment>();
             string updateQueryAppointment = "UPDATE appointment SET title = @title, description = @description, location = @location, contact = @contact, type = @type, url = @url, start = @start, end = @end" +
               " WHERE appointmentId = @appointmentId";
-            
+
 
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
@@ -182,21 +182,21 @@ namespace ScheduleApp.Database
 
 
                         command.ExecuteNonQuery();
-                        
+
                     }
                 }
                 connection.Close();
             }
             //does not need a return, ID is being used to match the ID in the database 
             _appointmentList.Remove(appointment);
-            _appointmentList2.Remove(appointment);
+           // _appointmentList2.Remove(appointment);
             _appointmentList.Add(appointment);
-            _appointmentList2.Add(appointment);
+          //  _appointmentList2.Add(appointment);
         }
 
         public void Delete(Appointment appointment)
         {
-
+            
             string deleteAppointment = "DELETE FROM Appointment Where appointmentId = @appointmentId";
 
             using (MySqlCommand command = new MySqlCommand(deleteAppointment, DB_Connection.conn))
@@ -204,11 +204,11 @@ namespace ScheduleApp.Database
                 command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
                 command.ExecuteNonQuery();
             }
-            _appointmentList.Remove(appointment);
-            _appointmentList2.Remove(appointment);
+            
+           // _appointmentList2.Remove(appointment);
 
         }
-        // Might still need to delete these from Memory as well.
+        
         public void DeleteAppointmentsByCustomer(int customerId)
         {
             string deleteAppointmentsQuery = "DELETE FROM Appointment WHERE customerId = @customerId;";
@@ -216,29 +216,8 @@ namespace ScheduleApp.Database
             using (MySqlCommand command = new MySqlCommand(deleteAppointmentsQuery, DB_Connection.conn))
             {
                 command.Parameters.AddWithValue("@customerId", customerId);
+                command.ExecuteNonQuery();
 
-                try
-                {
-                    // Ensure connection is open
-                    if (DB_Connection.conn.State == System.Data.ConnectionState.Closed)
-                    {
-                        DB_Connection.conn.Open();
-                    }
-
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("An error occurred while deleting appointments: " + ex.Message);
-                    throw;
-                }
-                finally
-                {
-                    if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
-                    {
-                        DB_Connection.conn.Close();
-                    }
-                }
             }
         }
 
