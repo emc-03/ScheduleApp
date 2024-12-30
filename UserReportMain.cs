@@ -1,4 +1,6 @@
-﻿using ScheduleApp.models;
+﻿using MySql.Data.MySqlClient;
+using ScheduleApp.Database;
+using ScheduleApp.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,26 +17,40 @@ namespace ScheduleApp
     {
 
         private List<Appointment> _appointmentsUserReport;
+        private AppointmentData _appointmentData = new AppointmentData();
+        // adjust loadappointment data to use the Appointmentdata class
 
         public UserReportMain()
         {
             InitializeComponent();
             LoadAppointmentData();
-            BindDataToGrid();
+            PopulateUserReportGrid()
+            
 
         }
 
         private void LoadAppointmentData()
         {
-            _appointmentsUserReport = new List<Appointment>;
-            {
-                //fetch appointments from DB 
-            }
+            _appointmentsUserReport = _appointmentData.FindAllAppt();
+            
+            // Add the appointment to the list
+            // add conditional checks for null values in each column / row 
+               
+        }
+
+        private void PopulateUserReportGrid()
+        {
+            userReportDataGrid.Columns.Clear();
+            userReportDataGrid.Columns.Add("Type", "User");
+            userReportDataGrid.Columns.Add("Type", "Title");
+            userReportDataGrid.Columns.Add("Type", "Description");
+            userReportDataGrid.Columns.Add("Type", "Appointment Date");
+            userReportDataGrid.Columns.Add("Type", "Appointment Time");
+            userReportDataGrid.Columns.Add("Type", "Location");
 
         }
 
-        private void BindDataToGrid()
-        { }
+     
 
         private void UserReportMain_Load(object sender, EventArgs e)
         {
@@ -42,6 +58,11 @@ namespace ScheduleApp
         }
 
         private void userReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void userReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

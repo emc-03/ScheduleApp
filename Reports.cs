@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class Reports : Form
+    public partial class ReportForm : Form
     {
-        public Reports()
+        public ReportForm()
         {
             InitializeComponent();
         }
@@ -24,17 +24,11 @@ namespace ScheduleApp
 
         private void userReport_Click(object sender, EventArgs e)
         {
-            try
-            {
+          
                 UserReportMain userReport = new UserReportMain();
                 userReport.Show();
                 this.Hide();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"Failed to open User Report: {ex.Message}");
-            }
+           
           
 
         }

@@ -344,5 +344,11 @@ namespace ScheduleApp
         {
 
         }
+
+        private void runReports_Click(object sender, EventArgs e)
+        {
+            ReportForm reportForm = new ReportForm();
+            reportForm.Show();
+        }
     }
 }

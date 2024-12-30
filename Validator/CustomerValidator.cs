@@ -57,7 +57,7 @@ namespace ScheduleApp.Validator
                    Regex.IsMatch(countryName, @"^[a-zA-Z\s]+$");
         }
 
-        public void ValidateCustomer(Customer customer)
+        public bool ValidateCustomer(Customer customer)
         {
             if (!IsValidFirstName(customer.FirstName)) throw new Exception("Invalid first name, only letters or spaces.");
             if (!IsValidLastName(customer.LastName)) throw new Exception("Invalid last name, only letters or spaces.");
@@ -67,6 +67,8 @@ namespace ScheduleApp.Validator
             if (!IsValidPhoneNumber(customer.Address.PhoneNumber)) throw new Exception("Invalid phone number! Only digits and dashes are allowed.");
             if (!IsValidCity(customer.Address.City.Name)) throw new Exception("Invalid city, check for typos.");
             if (!IsValidCountry(customer.Address.City.Country.Name)) throw new Exception("Invalid country, check for typos.");
+
+            return true; // all validation passed 
         }
     }
 }

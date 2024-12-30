@@ -49,6 +49,7 @@ namespace ScheduleApp
             this.createApptButton = new System.Windows.Forms.Button();
             this.bindingWeekList = new System.Windows.Forms.BindingSource(this.components);
             this.bindingMonthList = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingWeekList)).BeginInit();
@@ -92,7 +93,7 @@ namespace ScheduleApp
             // 
             this.apptViewLabel.AutoSize = true;
             this.apptViewLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apptViewLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.apptViewLabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.apptViewLabel.Location = new System.Drawing.Point(3, 7);
             this.apptViewLabel.Name = "apptViewLabel";
             this.apptViewLabel.Size = new System.Drawing.Size(203, 34);
@@ -205,7 +206,7 @@ namespace ScheduleApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Myanmar Text", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label1.Location = new System.Drawing.Point(637, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(174, 34);
@@ -229,7 +230,7 @@ namespace ScheduleApp
             this.deleteAppointmentButton.BackColor = System.Drawing.Color.Black;
             this.deleteAppointmentButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteAppointmentButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.deleteAppointmentButton.Location = new System.Drawing.Point(407, 610);
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(12, 607);
             this.deleteAppointmentButton.Name = "deleteAppointmentButton";
             this.deleteAppointmentButton.Size = new System.Drawing.Size(157, 60);
             this.deleteAppointmentButton.TabIndex = 60;
@@ -242,7 +243,7 @@ namespace ScheduleApp
             this.updateApptButton.BackColor = System.Drawing.Color.Black;
             this.updateApptButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.updateApptButton.Location = new System.Drawing.Point(47, 608);
+            this.updateApptButton.Location = new System.Drawing.Point(186, 607);
             this.updateApptButton.Name = "updateApptButton";
             this.updateApptButton.Size = new System.Drawing.Size(162, 60);
             this.updateApptButton.TabIndex = 41;
@@ -255,7 +256,7 @@ namespace ScheduleApp
             this.createApptButton.BackColor = System.Drawing.Color.Black;
             this.createApptButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.createApptButton.Location = new System.Drawing.Point(227, 609);
+            this.createApptButton.Location = new System.Drawing.Point(354, 607);
             this.createApptButton.Name = "createApptButton";
             this.createApptButton.Size = new System.Drawing.Size(162, 60);
             this.createApptButton.TabIndex = 43;
@@ -271,12 +272,26 @@ namespace ScheduleApp
             // 
             this.bindingMonthList.CurrentChanged += new System.EventHandler(this.bindingMonthList_CurrentChanged);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.button1.Location = new System.Drawing.Point(522, 607);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 60);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "Reports";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.runReports_Click);
+            // 
             // calendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1282, 689);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.deleteAppointmentButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.upCancelButton);
@@ -315,5 +330,6 @@ namespace ScheduleApp
         private System.Windows.Forms.RadioButton dayRadioButton;
         private System.Windows.Forms.RadioButton allRadioButton;
         private System.Windows.Forms.Button deleteAppointmentButton;
+        private System.Windows.Forms.Button button1;
     }
 }

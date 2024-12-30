@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class Reports
+    partial class ReportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@ namespace ScheduleApp
             this.createByReport.AutoSize = true;
             this.createByReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.createByReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createByReport.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.createByReport.ForeColor = System.Drawing.Color.LemonChiffon;
             this.createByReport.Location = new System.Drawing.Point(60, 187);
             this.createByReport.Name = "createByReport";
             this.createByReport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -74,7 +74,7 @@ namespace ScheduleApp
             this.userReport.AutoSize = true;
             this.userReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.userReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userReport.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.userReport.ForeColor = System.Drawing.Color.LemonChiffon;
             this.userReport.Location = new System.Drawing.Point(84, 69);
             this.userReport.Name = "userReport";
             this.userReport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -88,7 +88,7 @@ namespace ScheduleApp
             this.monthlyreport.AutoSize = true;
             this.monthlyreport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.monthlyreport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthlyreport.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.monthlyreport.ForeColor = System.Drawing.Color.LemonChiffon;
             this.monthlyreport.Location = new System.Drawing.Point(72, 128);
             this.monthlyreport.Name = "monthlyreport";
             this.monthlyreport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -101,6 +101,7 @@ namespace ScheduleApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Sans Serif Collection", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label1.Location = new System.Drawing.Point(34, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(258, 37);
@@ -108,7 +109,7 @@ namespace ScheduleApp
             this.label1.Text = "Select Report Option";
             this.label1.Click += new System.EventHandler(this.exitReport_Click);
             // 
-            // Reports
+            // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -120,7 +121,7 @@ namespace ScheduleApp
             this.Controls.Add(this.exitReport_Button);
             this.Controls.Add(this.createByReport);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Name = "Reports";
+            this.Name = "ReportForm";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

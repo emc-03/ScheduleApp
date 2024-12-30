@@ -10,7 +10,7 @@ namespace ScheduleApp.Database
 {
     class UserData
     {
-
+        // create get method to return username by userID
         
         public User Get(string userName, string password) {
             User user = new User(); // declared but not initilized until line 28
