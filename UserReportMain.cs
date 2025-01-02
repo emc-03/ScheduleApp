@@ -24,7 +24,7 @@ namespace ScheduleApp
         {
             InitializeComponent();
             LoadAppointmentData();
-            PopulateUserReportGrid()
+            PopulateUserReportGrid();
             
 
         }
@@ -48,6 +48,19 @@ namespace ScheduleApp
             userReportDataGrid.Columns.Add("Type", "Appointment Time");
             userReportDataGrid.Columns.Add("Type", "Location");
 
+            foreach (Appointment appointment in _appointmentsUserReport)
+            {
+                addAppointmentToUserReport(appointment);
+            }
+
+        }
+
+        private void addAppointmentToUserReport(Appointment appointment)
+
+        {
+            userReportDataGrid.Rows.Add
+                (appointment.AppointmentID, appointment.UserID, appointment.Title,
+                appointment.Description, appointment.Start, appointment.Location);
         }
 
      
@@ -65,6 +78,11 @@ namespace ScheduleApp
         private void userReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void exitReport_Button_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

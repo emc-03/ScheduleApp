@@ -29,9 +29,10 @@ namespace ScheduleApp
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exitReport_Button = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridCreateByReport = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCreateByReport)).BeginInit();
             this.SuspendLayout();
             // 
             // exitReport_Button
@@ -49,14 +50,25 @@ namespace ScheduleApp
             this.exitReport_Button.TabIndex = 5;
             this.exitReport_Button.Text = "Exit";
             this.exitReport_Button.UseVisualStyleBackColor = false;
+            this.exitReport_Button.Click += new System.EventHandler(this.exitReport_Button_Click);
             // 
-            // dataGridView1
+            // dataGridCreateByReport
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(636, 354);
-            this.dataGridView1.TabIndex = 6;
+            this.dataGridCreateByReport.AllowUserToResizeColumns = false;
+            this.dataGridCreateByReport.AllowUserToResizeRows = false;
+            this.dataGridCreateByReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridCreateByReport.Location = new System.Drawing.Point(12, 12);
+            this.dataGridCreateByReport.Name = "dataGridCreateByReport";
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LemonChiffon;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridCreateByReport.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridCreateByReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridCreateByReport.Size = new System.Drawing.Size(636, 354);
+            this.dataGridCreateByReport.TabIndex = 6;
+            this.dataGridCreateByReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCreateByReport_CellContentClick);
             // 
             // CreateByReportMain
             // 
@@ -64,12 +76,12 @@ namespace ScheduleApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(661, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridCreateByReport);
             this.Controls.Add(this.exitReport_Button);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Name = "CreateByReportMain";
             this.Text = "CreateByReport";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCreateByReport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -78,6 +90,6 @@ namespace ScheduleApp
         #endregion
 
         private System.Windows.Forms.Button exitReport_Button;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridCreateByReport;
     }
 }

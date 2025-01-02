@@ -11,8 +11,30 @@ namespace ScheduleApp.Database
     class UserData
     {
         // create get method to return username by userID
-        
-        public User Get(string userName, string password) {
+        // create custom columns to pass the correct appointment information when populating the datagrid 
+        public User GetUserNameById(int userId)
+        {
+            var userDictionary = new Dictionary<int, string>
+            {
+                // retrieve from Database 
+                string searchUser = "Select * From user Where username =@username";
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(searchRow, connection))
+                {
+
+                }
+                return userDictionary.TryGetValue(userId, out string username) ? username : "Unknown User";
+            }
+            
+        }
+
+
+
+        public User Get(string userName, string password)
+        {
             User user = new User(); // declared but not initilized until line 28
 
             string searchRow = "SELECT * From user WHERE username = @username AND password = @password";
@@ -45,16 +67,16 @@ namespace ScheduleApp.Database
                             {
                                 MessageBox.Show("User isActive value is invalid.");
                             }
-                              
+
                         }
-                        
+
                     }
-                    
+
                 }
-                
+
             }
             return user;
         }
-        
+
     }
 }

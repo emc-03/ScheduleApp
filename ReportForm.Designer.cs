@@ -54,6 +54,7 @@ namespace ScheduleApp
             this.exitReport_Button.TabIndex = 4;
             this.exitReport_Button.Text = "Exit";
             this.exitReport_Button.UseVisualStyleBackColor = false;
+            this.exitReport_Button.Click += new System.EventHandler(this.exitReport_Button_Click);
             // 
             // createByReport
             // 

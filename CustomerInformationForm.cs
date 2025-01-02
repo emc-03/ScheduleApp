@@ -75,8 +75,10 @@ namespace ScheduleApp
 
         private void addCustomertoDataGrid(Customer customer)
         {
-            dataGridCustomer.Rows.Add(customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
-                customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, customer.Address.City.Country.Name, customer.ID);
+            dataGridCustomer.Rows.Add
+                (customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
+                customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, 
+                customer.Address.City.Country.Name, customer.ID);
         }
 
 
