@@ -16,41 +16,43 @@ namespace ScheduleApp
     {
         private AppointmentData _appointmentData = new AppointmentData();
         private List<Appointment> _appointments;
-        private Dictionary<string, string> _userIdDictionary = new Dictionary<string, string>(); 
-        
+        private Dictionary<int, string> _userIdDictionary = new Dictionary<int, string>();
+
 
         public CreateByReportMain()
         {
             InitializeComponent();
+            loadDatatoCreateByReport();
+            populateCreateByDataGrid();
         }
 
-        public string loadDatatoCreateByReport(User userID)
+        public void loadDatatoCreateByReport()
         {
             // retrieve all appointments from db
+            // use lambda in this method - each of the report methods needs to have a lambda expression
             _appointments = _appointmentData.FindAllAppt();
 
             // validate and populate userId Dictionary 
             foreach (var appointment in _appointments)
             {
-                if(appointment.UserID > -1) // change to 0 ?  needs to be greater then 0 .. but if the userId is 0 ? 
+                if (appointment.UserID > -1)
                 {
                     //checks to see if the userId is in the dictionary and ensures it was not duplicated
-                    if(!_userIdDictionary.ContainsKey(appointment.UserID.ToString()))
+                    if (!_userIdDictionary.ContainsKey(appointment.UserID))
                     {
-                        _userIdDictionary[appointment.UserID.ToString()] = string.Empty;
+                        _userIdDictionary[appointment.UserID] = string.Empty;
                     }
                 }
             }
-
+            // populate dictionary with usernames 
             UserData userData = new UserData();
-            foreach (var userIdKey in _userIdDictionary.Keys.ToList())
+            _userIdDictionary.Keys.ToList().ForEach(key =>
             {
                 //check for get function in UserData
-                string username = userData.GetUserNamebyID(int.Parse(userIdKey));
-                _userIdDictionary[userIdKey = username]; 
+                _userIdDictionary[key] = userData.GetUserNameById(key);
                 // update the dictionary with the username.... needs to be used in the datagrid
             }
-
+            );
 
 
         }
@@ -59,12 +61,39 @@ namespace ScheduleApp
         {
             dataGridCreateByReport.Columns.Clear();
 
-            dataGridCreateByReport.Columns.Add("Type", "Username");
-            dataGridCreateByReport.Columns.Add("Type", "Title");
-            dataGridCreateByReport.Columns.Add("Type", "Description");
-            dataGridCreateByReport.Columns.Add("Type", "Appointment Date");
-            dataGridCreateByReport.Columns.Add("Type", "Appointment Time");
-            dataGridCreateByReport.Columns.Add("Type", "Location");
+            dataGridCreateByReport.Columns.Add("Username", "Username");
+            dataGridCreateByReport.Columns.Add("Title", "Title");
+            dataGridCreateByReport.Columns.Add("Description", "Description");
+            dataGridCreateByReport.Columns.Add("AppointmentDate", "Appointment Date");
+            dataGridCreateByReport.Columns.Add("AppointmentTime", "Appointment Time");
+            dataGridCreateByReport.Columns.Add("Location", "Location");
+
+            // list of rows
+            var rows = new List<object[]>();
+
+            // add values and populate rows 
+            foreach (var appointment in _appointments)
+            {
+                if (_userIdDictionary.TryGetValue(appointment.UserID, out var username))
+                {
+                    rows.Add(new object[]
+                        {
+                            username,
+                            appointment.Title,
+                            appointment.Description,
+                            appointment.Start.ToString("MM/yyyy"),
+                            appointment.Start.ToString("hh:mm"),
+                            appointment.Location
+                        });
+                }
+
+                // populate datagrid
+                foreach (var row in rows)
+                {
+                    dataGridCreateByReport.Rows.Add(row);
+                }
+            }
+
         }
         private void exitReport_Button_Click(object sender, EventArgs e)
         {

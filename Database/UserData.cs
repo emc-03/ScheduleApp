@@ -12,23 +12,31 @@ namespace ScheduleApp.Database
     {
         // create get method to return username by userID
         // create custom columns to pass the correct appointment information when populating the datagrid 
-        public User GetUserNameById(int userId)
+        public string GetUserNameById(int userId)
         {
-            var userDictionary = new Dictionary<int, string>
-            {
-                // retrieve from Database 
-                string searchUser = "Select * From user Where username =@username";
+            string username = string.Empty;
 
+            string searchRow = "SELECT userName From user WHERE userId = @userId";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand(searchRow, connection))
                 {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            username = reader["userName"].ToString();
+                        }
+
+                    }
 
                 }
-                return userDictionary.TryGetValue(userId, out string username) ? username : "Unknown User";
+
             }
-            
+            return username;
         }
 
 

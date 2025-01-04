@@ -8,7 +8,7 @@ namespace ScheduleApp.models
 {
     public class City
     {
-        private int id;
+        private int id = -1;
         private string name;
         private Country country =  new Country();
 

@@ -40,12 +40,14 @@ namespace ScheduleApp.Database
                         {
                             Appointment appointment = new Appointment
                             {
+                                UserID = (int)reader["userId"],
                                 AppointmentID = (int)reader["appointmentId"],
                                 Title = reader["title"].ToString(),
                                 Description = reader["description"].ToString(),
+                                Location = reader["location"].ToString(),
+                                Type = reader["type"].ToString(),
                                 Start = ((DateTime)reader["start"]).ToLocalTime(), // Convert UTC to local time
                                 End = ((DateTime)reader["end"]).ToLocalTime(), // Convert UTC to local time
-                                Type = reader["type"].ToString()
                             };
 
                             _reportAppointments.Add(appointment);

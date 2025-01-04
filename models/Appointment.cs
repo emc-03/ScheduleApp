@@ -14,7 +14,7 @@ namespace ScheduleApp.models
         
         private int _appointmentID;
         private int _customerID;
-        private int _userID;
+        private int _userID = -1;
         private string _title;
         private string _description;
         private string _location;

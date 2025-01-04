@@ -13,7 +13,7 @@ namespace ScheduleApp
     public class Customer
     {
 
-        private int id;
+        private int id = -1;
         private bool isActive;
         private string firstName;
         private string lastName;

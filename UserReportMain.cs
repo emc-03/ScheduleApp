@@ -25,17 +25,17 @@ namespace ScheduleApp
             InitializeComponent();
             LoadAppointmentData();
             PopulateUserReportGrid();
-            
+
 
         }
 
         private void LoadAppointmentData()
         {
             _appointmentsUserReport = _appointmentData.FindAllAppt();
-            
+
             // Add the appointment to the list
             // add conditional checks for null values in each column / row 
-               
+
         }
 
         private void PopulateUserReportGrid()
@@ -59,11 +59,15 @@ namespace ScheduleApp
 
         {
             userReportDataGrid.Rows.Add
-                (appointment.AppointmentID, appointment.UserID, appointment.Title,
-                appointment.Description, appointment.Start, appointment.Location);
+                (appointment.UserID,
+                appointment.Title,
+                appointment.Description,
+                appointment.Start.ToString("MM/dd/yyyy"),
+                appointment.Start.ToString("hh:mm"),
+                appointment.Location);
         }
 
-     
+
 
         private void UserReportMain_Load(object sender, EventArgs e)
         {

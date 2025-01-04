@@ -10,7 +10,7 @@ namespace ScheduleApp
    public class User
     {
 
-        private int _Id;
+        private int _Id = -1;
         private string _name;
         private string _password;
         private bool _isActive;
