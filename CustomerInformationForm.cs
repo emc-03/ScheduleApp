@@ -329,7 +329,8 @@ namespace ScheduleApp
             ReportForm reportForm = new ReportForm();
             reportForm.Show();
         }
-
+        private void CustomerInformationForm_Load(object sender, EventArgs e) { }
+      
         private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void button2_Click(object sender, EventArgs e) { }

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace ScheduleApp
 {
     partial class CustomerInformationForm
@@ -468,6 +470,7 @@ namespace ScheduleApp
 
         }
 
+     
         #endregion
 
         private System.Windows.Forms.BindingSource customerDataSource;
