@@ -33,27 +33,6 @@ namespace ScheduleApp
 
         }
 
-        private void DisplayCurrentUsername(int userId)
-        {
-            try
-            {
-                UserData userData = new UserData();
-                string username = userData.GetUserNameById(userId);
-
-                if (!string.IsNullOrEmpty(username))
-                {
-                    userNamePrint.Text = username;
-                }
-                else
-                {
-                    userNamePrint.Text = "User not found";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error fetching username: {ex.Message}");
-            }
-        }
         public void CreatedAppointmentListener(Appointment appointment)
         {
             _selectedCustomer.AppointmentList.Add(appointment);
@@ -277,19 +256,7 @@ namespace ScheduleApp
 
         }
 
-        private void userNamePrint_TextChanged(object sender, EventArgs e)
-        {
-
-            // Validate and retrieve userId
-            if (int.TryParse(userNamePrint.Text, out int userId))
-            {
-                DisplayCurrentUsername(userId);
-            }
-            else
-            {
-                userNamePrint.Text = "Invalid username";
-            }
-        }
+       
         private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) { }
         private void searchApptButton_Click(object sender, EventArgs e) { }
@@ -299,8 +266,8 @@ namespace ScheduleApp
         private void label2_Click(object sender, EventArgs e) { }
         private void apptViewLabel_Click(object sender, EventArgs e) { }
         private void panel1_Paint(object sender, PaintEventArgs e) { }
-
-
+        private void calendarForm_Load(object sender, EventArgs e) { }
+      
     }
 }
 

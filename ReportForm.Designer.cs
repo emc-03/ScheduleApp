@@ -62,12 +62,12 @@ namespace ScheduleApp
             this.customerReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.customerReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerReport.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.customerReport.Location = new System.Drawing.Point(60, 187);
+            this.customerReport.Location = new System.Drawing.Point(72, 188);
             this.customerReport.Name = "customerReport";
             this.customerReport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.customerReport.Size = new System.Drawing.Size(182, 44);
+            this.customerReport.Size = new System.Drawing.Size(166, 44);
             this.customerReport.TabIndex = 5;
-            this.customerReport.Text = "Customer Report";
+            this.customerReport.Text = "Country Report";
             this.customerReport.Click += new System.EventHandler(this.customerReport_Click);
             // 
             // userReport
@@ -114,6 +114,7 @@ namespace ScheduleApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(315, 333);
             this.Controls.Add(this.label1);

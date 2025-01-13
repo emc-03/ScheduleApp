@@ -104,6 +104,8 @@ namespace ScheduleApp
         private void passwordInput_TextChanged(object sender, EventArgs e) { }
    
         private void loginPanelMain_Paint(object sender, PaintEventArgs e) { }
-     
+
+        private void menuBarPanel_Paint(object sender, PaintEventArgs e) { }
+       
     }
 }

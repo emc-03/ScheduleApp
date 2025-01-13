@@ -47,7 +47,7 @@ namespace ScheduleApp
             this.logExitButton.BackColor = System.Drawing.Color.Black;
             this.logExitButton.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logExitButton.ForeColor = System.Drawing.Color.LightCoral;
-            this.logExitButton.Location = new System.Drawing.Point(452, 2);
+            this.logExitButton.Location = new System.Drawing.Point(448, 2);
             this.logExitButton.Name = "logExitButton";
             this.logExitButton.Size = new System.Drawing.Size(43, 35);
             this.logExitButton.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace ScheduleApp
             this.loginLabel.AutoSize = true;
             this.loginLabel.Font = new System.Drawing.Font("Myanmar Text", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.loginLabel.Location = new System.Drawing.Point(208, 2);
+            this.loginLabel.Location = new System.Drawing.Point(207, 2);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(83, 37);
             this.loginLabel.TabIndex = 1;
@@ -69,6 +69,7 @@ namespace ScheduleApp
             // 
             // menuBarPanel
             // 
+            this.menuBarPanel.AutoSize = true;
             this.menuBarPanel.BackColor = System.Drawing.Color.RoyalBlue;
             this.menuBarPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.menuBarPanel.Controls.Add(this.logExitButton);
@@ -76,8 +77,9 @@ namespace ScheduleApp
             this.menuBarPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.menuBarPanel.Location = new System.Drawing.Point(0, 1);
             this.menuBarPanel.Name = "menuBarPanel";
-            this.menuBarPanel.Size = new System.Drawing.Size(508, 45);
+            this.menuBarPanel.Size = new System.Drawing.Size(502, 46);
             this.menuBarPanel.TabIndex = 2;
+            this.menuBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.menuBarPanel_Paint);
             // 
             // loginPanelMain
             // 
@@ -92,7 +94,7 @@ namespace ScheduleApp
             this.loginPanelMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginPanelMain.Location = new System.Drawing.Point(0, 45);
             this.loginPanelMain.Name = "loginPanelMain";
-            this.loginPanelMain.Size = new System.Drawing.Size(508, 490);
+            this.loginPanelMain.Size = new System.Drawing.Size(502, 355);
             this.loginPanelMain.TabIndex = 3;
             this.loginPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.loginPanelMain_Paint);
             // 
@@ -101,8 +103,9 @@ namespace ScheduleApp
             this.loginButton.BackColor = System.Drawing.Color.RoyalBlue;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.loginButton.Location = new System.Drawing.Point(95, 282);
+            this.loginButton.Location = new System.Drawing.Point(75, 254);
             this.loginButton.Name = "loginButton";
+            this.loginButton.Padding = new System.Windows.Forms.Padding(5);
             this.loginButton.Size = new System.Drawing.Size(333, 54);
             this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Login";
@@ -114,7 +117,7 @@ namespace ScheduleApp
             this.passwordInput.AcceptsReturn = true;
             this.passwordInput.AcceptsTab = true;
             this.passwordInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordInput.Location = new System.Drawing.Point(215, 172);
+            this.passwordInput.Location = new System.Drawing.Point(166, 172);
             this.passwordInput.Name = "passwordInput";
             this.passwordInput.PasswordChar = '*';
             this.passwordInput.Size = new System.Drawing.Size(213, 38);
@@ -126,7 +129,7 @@ namespace ScheduleApp
             this.userInput.AcceptsReturn = true;
             this.userInput.AcceptsTab = true;
             this.userInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInput.Location = new System.Drawing.Point(215, 108);
+            this.userInput.Location = new System.Drawing.Point(166, 108);
             this.userInput.Name = "userInput";
             this.userInput.Size = new System.Drawing.Size(213, 38);
             this.userInput.TabIndex = 0;
@@ -137,7 +140,7 @@ namespace ScheduleApp
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.passwordLabel.Location = new System.Drawing.Point(90, 176);
+            this.passwordLabel.Location = new System.Drawing.Point(31, 176);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(105, 34);
             this.passwordLabel.TabIndex = 1;
@@ -148,7 +151,7 @@ namespace ScheduleApp
             this.userLabel.AutoSize = true;
             this.userLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.userLabel.Location = new System.Drawing.Point(89, 108);
+            this.userLabel.Location = new System.Drawing.Point(27, 108);
             this.userLabel.Name = "userLabel";
             this.userLabel.Size = new System.Drawing.Size(109, 34);
             this.userLabel.TabIndex = 0;
@@ -158,8 +161,10 @@ namespace ScheduleApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(508, 534);
+            this.ClientSize = new System.Drawing.Size(505, 399);
             this.Controls.Add(this.loginPanelMain);
             this.Controls.Add(this.menuBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

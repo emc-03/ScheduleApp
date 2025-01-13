@@ -42,7 +42,6 @@ namespace ScheduleApp
             this.dayRadioButton = new System.Windows.Forms.RadioButton();
             this.monthRadioButton = new System.Windows.Forms.RadioButton();
             this.weekRadioButton = new System.Windows.Forms.RadioButton();
-            this.userNamePrint = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.appointmentDataGrid = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,10 +62,10 @@ namespace ScheduleApp
             this.upCancelButton.BackColor = System.Drawing.Color.Black;
             this.upCancelButton.Font = new System.Drawing.Font("Myanmar Text", 12.75F, System.Drawing.FontStyle.Bold);
             this.upCancelButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.upCancelButton.Location = new System.Drawing.Point(1211, 737);
+            this.upCancelButton.Location = new System.Drawing.Point(1110, 581);
             this.upCancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.upCancelButton.Name = "upCancelButton";
-            this.upCancelButton.Size = new System.Drawing.Size(244, 98);
+            this.upCancelButton.Size = new System.Drawing.Size(213, 74);
             this.upCancelButton.TabIndex = 32;
             this.upCancelButton.Text = "Close";
             this.upCancelButton.UseVisualStyleBackColor = false;
@@ -75,12 +74,12 @@ namespace ScheduleApp
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.apptViewLabel);
             this.panel1.Controls.Add(this.allRadioButton);
             this.panel1.Controls.Add(this.dayRadioButton);
             this.panel1.Controls.Add(this.monthRadioButton);
             this.panel1.Controls.Add(this.weekRadioButton);
-            this.panel1.Controls.Add(this.userNamePrint);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.appointmentDataGrid);
             this.panel1.Controls.Add(this.label1);
@@ -89,7 +88,7 @@ namespace ScheduleApp
             this.panel1.Location = new System.Drawing.Point(13, 13);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1442, 704);
+            this.panel1.Size = new System.Drawing.Size(1310, 560);
             this.panel1.TabIndex = 34;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -164,20 +163,6 @@ namespace ScheduleApp
             this.weekRadioButton.UseVisualStyleBackColor = true;
             this.weekRadioButton.CheckedChanged += new System.EventHandler(this.weekRadioButton_CheckedChanged);
             // 
-            // userNamePrint
-            // 
-            this.userNamePrint.AcceptsReturn = true;
-            this.userNamePrint.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.userNamePrint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userNamePrint.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNamePrint.Location = new System.Drawing.Point(1213, 17);
-            this.userNamePrint.Margin = new System.Windows.Forms.Padding(4);
-            this.userNamePrint.Name = "userNamePrint";
-            this.userNamePrint.ReadOnly = true;
-            this.userNamePrint.Size = new System.Drawing.Size(212, 26);
-            this.userNamePrint.TabIndex = 53;
-            this.userNamePrint.TextChanged += new System.EventHandler(this.userNamePrint_TextChanged);
-            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -222,7 +207,7 @@ namespace ScheduleApp
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.appointmentDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.appointmentDataGrid.Location = new System.Drawing.Point(205, 148);
+            this.appointmentDataGrid.Location = new System.Drawing.Point(209, 47);
             this.appointmentDataGrid.Margin = new System.Windows.Forms.Padding(4);
             this.appointmentDataGrid.Name = "appointmentDataGrid";
             this.appointmentDataGrid.ReadOnly = true;
@@ -236,7 +221,7 @@ namespace ScheduleApp
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.appointmentDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.appointmentDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.appointmentDataGrid.Size = new System.Drawing.Size(1210, 361);
+            this.appointmentDataGrid.Size = new System.Drawing.Size(1097, 435);
             this.appointmentDataGrid.TabIndex = 51;
             this.appointmentDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.appointmentDataGrid_CellContentClick);
             // 
@@ -245,7 +230,7 @@ namespace ScheduleApp
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Myanmar Text", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label1.Location = new System.Drawing.Point(842, 110);
+            this.label1.Location = new System.Drawing.Point(709, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(174, 34);
@@ -257,7 +242,7 @@ namespace ScheduleApp
             this.apptTaskLabel.AutoSize = true;
             this.apptTaskLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apptTaskLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.apptTaskLabel.Location = new System.Drawing.Point(264, 670);
+            this.apptTaskLabel.Location = new System.Drawing.Point(209, 526);
             this.apptTaskLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.apptTaskLabel.Name = "apptTaskLabel";
             this.apptTaskLabel.Size = new System.Drawing.Size(187, 34);
@@ -270,7 +255,7 @@ namespace ScheduleApp
             this.deleteAppointmentButton.BackColor = System.Drawing.Color.Black;
             this.deleteAppointmentButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteAppointmentButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.deleteAppointmentButton.Location = new System.Drawing.Point(16, 747);
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(11, 590);
             this.deleteAppointmentButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteAppointmentButton.Name = "deleteAppointmentButton";
             this.deleteAppointmentButton.Size = new System.Drawing.Size(209, 74);
@@ -284,7 +269,7 @@ namespace ScheduleApp
             this.updateApptButton.BackColor = System.Drawing.Color.Black;
             this.updateApptButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.updateApptButton.Location = new System.Drawing.Point(233, 747);
+            this.updateApptButton.Location = new System.Drawing.Point(225, 590);
             this.updateApptButton.Margin = new System.Windows.Forms.Padding(4);
             this.updateApptButton.Name = "updateApptButton";
             this.updateApptButton.Size = new System.Drawing.Size(216, 74);
@@ -298,7 +283,7 @@ namespace ScheduleApp
             this.createApptButton.BackColor = System.Drawing.Color.Black;
             this.createApptButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createApptButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.createApptButton.Location = new System.Drawing.Point(457, 747);
+            this.createApptButton.Location = new System.Drawing.Point(446, 590);
             this.createApptButton.Margin = new System.Windows.Forms.Padding(4);
             this.createApptButton.Name = "createApptButton";
             this.createApptButton.Size = new System.Drawing.Size(216, 74);
@@ -322,7 +307,7 @@ namespace ScheduleApp
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1465, 848);
+            this.ClientSize = new System.Drawing.Size(1333, 673);
             this.Controls.Add(this.deleteAppointmentButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.upCancelButton);
@@ -332,7 +317,9 @@ namespace ScheduleApp
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "calendarForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Username Disply";
+            this.Load += new System.EventHandler(this.calendarForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).EndInit();
@@ -355,7 +342,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Label apptTaskLabel;
         private System.Windows.Forms.RadioButton monthRadioButton;
         private System.Windows.Forms.RadioButton weekRadioButton;
-        private System.Windows.Forms.TextBox userNamePrint;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridView appointmentDataGrid;
         private System.Windows.Forms.Label label1;
