@@ -12,13 +12,14 @@ using System.Windows.Forms;
 using ScheduleApp.Database;
 using System.Configuration;
 using System.Globalization;
+using ScheduleApp.models;
 
 namespace ScheduleApp
 {
     public partial class loginForm : Form
     {
 
-        private string loginError = "Password and Username do not match.";
+        private string loginError = "Login failed. Please check your username and password.";
 
         public loginForm()
         {
@@ -35,11 +36,11 @@ namespace ScheduleApp
         // default in english
         private void spanishLanguage()
         {
-            loginLabel.Text = "Acceso";
+            loginLabel.Text = "Pantalla de inicio de sesión";
             userLabel.Text = "Nombre de usuario";
             passwordLabel.Text = "Contraseña";
-            loginButton.Text = "Acceso";
-            loginError = "inicio de sesión fallido";
+            loginButton.Text = "Iniciar sesión";
+            loginError = "Inicio de sesión fallado. Verifique el nombre de usuario y la contraseña.";
         }
 
         private void logExitButton_Click(object sender, EventArgs e)
@@ -47,6 +48,8 @@ namespace ScheduleApp
             this.Close();
             Application.Exit();
         }
+
+      
 
         private void loginButton_Click(object sender, EventArgs e)
         {
@@ -60,7 +63,7 @@ namespace ScheduleApp
                 User user = userData.Get(loginName, password);
                 if (user == null)
                 {
-                    MessageBox.Show("Login failed. Please check your username and password.");
+                    MessageBox.Show(loginError);
                     return;
                 }
 

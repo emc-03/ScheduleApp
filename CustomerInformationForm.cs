@@ -23,10 +23,9 @@ namespace ScheduleApp
         {
             _user = user;
             InitializeComponent();
-            //loadData(user.ID);
             loadData(user.ID);
 
-            DateTime quarterTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(15), TimeZoneInfo.Local);
+            DateTime quarterTime = DateTime.Now.AddMinutes(15);
 
 
             bool foundAppointment = false;
@@ -40,7 +39,7 @@ namespace ScheduleApp
                 foreach (Appointment appointment in customer.AppointmentList)
                 {
 
-                    if (appointment.Start <= quarterTime && appointment.Start >= TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local))
+                    if (appointment.Start <= quarterTime && appointment.Start >= DateTime.Now)
                     {
                         MessageBox.Show("You have an appointment within the next 15 minutes.");
                         foundAppointment = true;

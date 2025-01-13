@@ -20,28 +20,15 @@ namespace ScheduleApp
         private Customer _customer;
         private User _user;
         private AppointmentValidator _appointmentValidator; // Use for validation and use this logic in the update appointment form.
-        private CustomerValidator _customerValidation;
         private Appointment _createdAppointment;
         public event Action<Appointment> CreatedAppointment;
-
-        // A method to validate if the appointment is within the next 15 minutes
-        private bool IsAppointmentWithin15Minutes(Appointment appointment)
-        {
-            DateTime currentUtcTime = DateTime.UtcNow;
-            DateTime quarterTime = currentUtcTime.AddMinutes(15);
-
-            return appointment.Start <= quarterTime && appointment.Start >= currentUtcTime;
-        }
+        
 
         // Constructor to accept an Appointment object
         public CreateAppointmentForm(Customer customer, User user)
         {
             _appointmentData = new AppointmentData();
-            _appointmentValidator = new AppointmentValidator()
-            {
-              Appointment = customerAp
-            };
-            _customerValidation = new CustomerValidator();
+            _appointmentValidator = new AppointmentValidator(customer.AppointmentList);
             _customer = customer;
             _user = user;
             _createdAppointment = new Appointment();
@@ -85,40 +72,23 @@ namespace ScheduleApp
                 DateTime startTime = createStartTimeInput.Value;
                 DateTime endTime = createEndTimeInput.Value;
 
-                if (startTime >= endTime)
-                {
-                    MessageBox.Show("Start time must be earlier than end time.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
                 DateTime startTimeDate, endTimeDate;
                 Utilities.BuildStartEndDateFromInputs(appointmentDate, startTime, endTime, out startTimeDate, out endTimeDate);
 
-                newAppointment.Start = TimeZoneInfo.ConvertTimeToUtc(startTimeDate);
-                newAppointment.End = TimeZoneInfo.ConvertTimeToUtc(endTimeDate);
-
-                var validationResults = _appointmentValidator.ValidateAppointment();
-                if (!validationResults.IsValid)
-                {
-                    MessageBox.Show(string.Join("\n", validationResults.Errors), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (!IsAppointmentWithin15Minutes(newAppointment))
-                {
-                    MessageBox.Show("The appointment must be within the next 15 minutes.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
+                _appointmentValidator.ValidateAppointment(startTimeDate, endTimeDate);
+                newAppointment.Start = startTimeDate;
+                newAppointment.End = endTimeDate;
+                // grabs the userId and the apptId
                 _createdAppointment = _appointmentData.Add(newAppointment, _user.Name);
 
-                CreatedAppointment?.Invoke(_createdAppointment);
+                CreatedAppointment(_createdAppointment);
                 MessageBox.Show("Appointment created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("Appointment failed to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message);
             }
         }
 

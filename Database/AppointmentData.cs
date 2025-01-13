@@ -94,7 +94,7 @@ namespace ScheduleApp.Database
         }
         public Appointment Add(Appointment appointment, string userName)
         {
-            List<Appointment> _appointmentList = new List<Appointment>();
+            
             if (appointment == null)
             {
                 throw new ArgumentNullException(nameof(appointment), "Appointment cannot be null.");
@@ -140,7 +140,7 @@ namespace ScheduleApp.Database
                 }
 
                 connection.Close();
-                _appointmentList.Add(appointment);
+                
             }
 
             return appointment;
