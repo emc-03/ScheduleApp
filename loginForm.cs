@@ -49,8 +49,6 @@ namespace ScheduleApp
             Application.Exit();
         }
 
-      
-
         private void loginButton_Click(object sender, EventArgs e)
         {
             try

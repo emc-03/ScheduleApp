@@ -101,11 +101,11 @@
     <Compile Include="calendar.Designer.cs">
       <DependentUpon>calendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerReportMain.cs">
+    <Compile Include="CountryReportMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomerReportMain.Designer.cs">
-      <DependentUpon>CustomerReportMain.cs</DependentUpon>
+    <Compile Include="CountryReportMain.Designer.cs">
+      <DependentUpon>CountryReportMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\AddressData.cs" />
     <Compile Include="Database\AppointmentData.cs" />
@@ -176,8 +176,8 @@
     <EmbeddedResource Include="calendar.resx">
       <DependentUpon>calendar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomerReportMain.resx">
-      <DependentUpon>CustomerReportMain.cs</DependentUpon>
+    <EmbeddedResource Include="CountryReportMain.resx">
+      <DependentUpon>CountryReportMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerInformationForm.resx">
       <DependentUpon>CustomerInformationForm.cs</DependentUpon>

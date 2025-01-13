@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class CustomerReportMain
+    partial class CountryReportMain
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,10 @@ namespace ScheduleApp
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exitReport_Button = new System.Windows.Forms.Button();
-            this.dataCustomerReport = new System.Windows.Forms.DataGridView();
+            this.dataCountryReport = new System.Windows.Forms.DataGridView();
             this.selectedCountryLabel = new System.Windows.Forms.Label();
             this.customerDropDown = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataCustomerReport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataCountryReport)).BeginInit();
             this.SuspendLayout();
             // 
             // exitReport_Button
@@ -56,21 +56,21 @@ namespace ScheduleApp
             // 
             // dataCustomerReport
             // 
-            this.dataCustomerReport.AllowUserToResizeColumns = false;
-            this.dataCustomerReport.AllowUserToResizeRows = false;
-            this.dataCustomerReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataCustomerReport.Location = new System.Drawing.Point(12, 66);
-            this.dataCustomerReport.Name = "dataCustomerReport";
+            this.dataCountryReport.AllowUserToResizeColumns = false;
+            this.dataCountryReport.AllowUserToResizeRows = false;
+            this.dataCountryReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataCountryReport.Location = new System.Drawing.Point(12, 66);
+            this.dataCountryReport.Name = "dataCountryReport";
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LemonChiffon;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataCustomerReport.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataCustomerReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataCustomerReport.Size = new System.Drawing.Size(557, 300);
-            this.dataCustomerReport.TabIndex = 6;
-            this.dataCustomerReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCreateByReport_CellContentClick);
+            this.dataCountryReport.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataCountryReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataCountryReport.Size = new System.Drawing.Size(557, 300);
+            this.dataCountryReport.TabIndex = 6;
+            this.dataCountryReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCreateByReport_CellContentClick);
             // 
             // selectedCountryLabel
             // 
@@ -89,7 +89,7 @@ namespace ScheduleApp
             this.customerDropDown.Name = "customerDropDown";
             this.customerDropDown.Size = new System.Drawing.Size(121, 21);
             this.customerDropDown.TabIndex = 7;
-            this.customerDropDown.SelectedIndexChanged += new System.EventHandler(this.customerDropDown_SelectedIndexChanged);
+            this.customerDropDown.SelectedIndexChanged += new System.EventHandler(this.countryDropDown_SelectedIndexChanged);
             // 
             // CustomerReportMain
             // 
@@ -101,13 +101,13 @@ namespace ScheduleApp
             this.ClientSize = new System.Drawing.Size(587, 450);
             this.Controls.Add(this.selectedCountryLabel);
             this.Controls.Add(this.customerDropDown);
-            this.Controls.Add(this.dataCustomerReport);
+            this.Controls.Add(this.dataCountryReport);
             this.Controls.Add(this.exitReport_Button);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Name = "CustomerReportMain";
-            this.Text = "Customer Report";
-            this.Load += new System.EventHandler(this.CustomerReportMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataCustomerReport)).EndInit();
+            this.Name = "CountryReportMain";
+            this.Text = "Country Report";
+            this.Load += new System.EventHandler(this.CountryReportMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataCountryReport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,7 +116,7 @@ namespace ScheduleApp
         #endregion
 
         private System.Windows.Forms.Button exitReport_Button;
-        private System.Windows.Forms.DataGridView dataCustomerReport;
+        private System.Windows.Forms.DataGridView dataCountryReport;
         private System.Windows.Forms.Label selectedCountryLabel;
         private System.Windows.Forms.ComboBox customerDropDown;
     }

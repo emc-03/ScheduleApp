@@ -48,7 +48,7 @@ namespace ScheduleApp
         {
             try
             {
-                CustomerReportMain customerReport = new CustomerReportMain();
+                CountryReportMain customerReport = new CountryReportMain();
                 customerReport.Show();
                 this.Hide();
             }

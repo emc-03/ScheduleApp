@@ -68,7 +68,7 @@ namespace ScheduleApp
                     { appointment};
                 }
             }
-            //Clear and prep the datagridview to calculate monthly types
+            //prep the datagridview to calculate monthly types
 
             dataGridMonthlyReport.Columns.Clear();
             dataGridMonthlyReport.Columns.Add("Type", "Appointment Type");
@@ -95,10 +95,9 @@ namespace ScheduleApp
                 var rowValues = new object[13];
                 rowValues[0] = type; // first column for column type
 
-                Array.Copy(monthlyCounts, 0, rowValues, 1, 12); // copy montly counts into the array
+                Array.Copy(monthlyCounts, 0, rowValues, 1, 12); // copy monthly counts into the array
 
                 //add the row to the DataGridView
-
                 dataGridMonthlyReport.Rows.Add(rowValues);
 
             }
@@ -110,9 +109,8 @@ namespace ScheduleApp
         }
 
         private void MonthlyReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-     
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-
+        private void MonthlyCurrentYearReport_Load(object sender, EventArgs e) { }
+     
     }
 }

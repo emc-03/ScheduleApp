@@ -269,7 +269,6 @@ namespace ScheduleApp
 
         }
 
-
         private void apptLookup_Click(object sender, EventArgs e)//object sender, EventArgs e)
         {
 
@@ -281,7 +280,6 @@ namespace ScheduleApp
             }
 
         }
-
 
         public void UpdatedCustomerListener(Customer customer)
         {
@@ -299,7 +297,6 @@ namespace ScheduleApp
 
         private void updateCustomerButton_Click(object sender, EventArgs e)
         {
-
 
             selectRow();
 
@@ -320,7 +317,6 @@ namespace ScheduleApp
 
                 MessageBox.Show("No row selected.");
             }
-
 
         }
         private void reportForm_Click(object sender, EventArgs e)

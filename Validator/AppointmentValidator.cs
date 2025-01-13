@@ -24,8 +24,6 @@ namespace ScheduleApp.models
             _appointments = appointments;
 
         }
-
-
         public void ValidateAppointment(DateTime userStartTime, DateTime userEndTime)
             {
        
@@ -55,11 +53,7 @@ namespace ScheduleApp.models
             {
                 throw new Exception("Error: Appointment overlaps, existing appointment found.");
             }
-
-
         }
-
-
         // Check if the appointment is within 9-5 range
         private bool isWithinTimeRange(DateTime estStart, DateTime estEnd)
         {
@@ -73,13 +67,11 @@ namespace ScheduleApp.models
 
         }
 
-
         private bool isWithinWorkWeek(DateTime apptDate)
         {
             // Ensure the appointment is scheduled M-F
             return apptDate.DayOfWeek != DayOfWeek.Saturday && apptDate.DayOfWeek != DayOfWeek.Sunday;
         }
-
 
 
         private bool isStartTimeAfterEndTime(DateTime startTime, DateTime endTime)

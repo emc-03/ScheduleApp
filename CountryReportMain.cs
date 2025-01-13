@@ -12,17 +12,17 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 {
-    public partial class CustomerReportMain : Form
+    public partial class CountryReportMain : Form
     {
        
         private Dictionary<int, string> _customerIdDictionary = new Dictionary<int, string>();
         int customerId;
 
 
-        public CustomerReportMain()
+        public CountryReportMain()
         {
             InitializeComponent();
-            populateDatatoCustomerReportGrid();
+            populateDatatoCountryReportGrid();
             LoadCountryToDropdown(customerId);
         }
 
@@ -59,31 +59,19 @@ namespace ScheduleApp
             }
         }
 
-        public void populateDatatoCustomerReportGrid()
-        {
-
-            dataCustomerReport.Columns.Clear();
-            dataCustomerReport.Columns.Add("CustomerName", "Customer Name");
-
-        }
+        
 
         private void addListToCustomerReport(Customer customer)
         {
             if (customer != null)
             {
-                dataCustomerReport.Rows.Add
+                dataCountryReport.Rows.Add
                     (customer.FirstName + " " + customer.LastName);
             }
 
         }
 
-        private void exitReport_Button_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-        private void customerDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        private void countryDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             Country selectedCountry = customerDropDown.SelectedItem as Country;
             if (selectedCountry == null)
@@ -93,8 +81,8 @@ namespace ScheduleApp
             CustomerData customerData = new CustomerData();
             List<Customer> customer2 = customerData.FindAll(customerId);
 
-            dataCustomerReport.Rows.Clear();
-            foreach (var customer in customer2)
+            dataCountryReport.Rows.Clear();
+            foreach (Customer customer in customer2)
             {
                 if (customer.Address.City.Country.ID == selectedCountry.ID)
                 {
@@ -102,10 +90,20 @@ namespace ScheduleApp
                 }
             }
         }
+
+        public void populateDatatoCountryReportGrid()
+        {
+
+            dataCountryReport.Columns.Clear();
+            dataCountryReport.Columns.Add("customerName", "Name");
+
+        }
+        private void exitReport_Button_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         private void dataGridCreateByReport_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-
-
-        private void CustomerReportMain_Load(object sender, EventArgs e) { }
+        private void CountryReportMain_Load(object sender, EventArgs e) { }
 
     }
 

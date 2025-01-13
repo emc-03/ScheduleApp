@@ -84,7 +84,6 @@ namespace ScheduleApp
             appointmentDataGrid.DataSource = filteredList;
         }
 
-
         // Filter the list by this week
         private void FilterByThisWeek()
         {
@@ -130,7 +129,6 @@ namespace ScheduleApp
             }
         }
 
-
         private void FilterAppointmentByRadioButton()
         {
             if (dayRadioButton.Checked)
@@ -158,12 +156,11 @@ namespace ScheduleApp
         {
 
             Int32 rowCount = appointmentDataGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            // Int32 rowCount = appointmentDataGrid.SelectedRows.Count;
-            // if more then 1 row was selected they can't update more than one customer at a time. S
+            // if more then 1 row was selected they can't update more than one customer at a time. 
             if (rowCount > 0)
             {
                 var rawSelectedAppointmentId = appointmentDataGrid.SelectedRows[0].Cells["appointmentId"].Value;
-                // int selectedAppointmentID = Convert.ToInt32(appointmentDataGrid.SelectedRows[0].Cells["appointmentID"].Value);
+
                 if (rawSelectedAppointmentId == null || !int.TryParse(rawSelectedAppointmentId.ToString(), out int selectedAppointmentID))
 
                 {
@@ -200,19 +197,12 @@ namespace ScheduleApp
         }
 
 
-
-        private void apptTaskLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void createApptButton_Click(object sender, EventArgs e)
         {
             CreateAppointmentForm _createAppointmentForm = new CreateAppointmentForm(_selectedCustomer, _user);
             _createAppointmentForm.CreatedAppointment += CreatedAppointmentListener;
             _createAppointmentForm.Show();
         }
-
 
         private void updateApptButton_Click(object sender, EventArgs e)
         {
@@ -230,8 +220,6 @@ namespace ScheduleApp
             else
             {
                 MessageBox.Show("No Appointment Selected!");
-
-
             }
         }
 
@@ -259,8 +247,6 @@ namespace ScheduleApp
             FilterAppointmentsByDateRange("ALL");
         }
 
-
-
         private void deleteAppointmentButton_Click(object sender, EventArgs e)
         {
             selectRow();
@@ -268,7 +254,6 @@ namespace ScheduleApp
             {
                 // delete from database
                 _appointmentData.Delete(_selectedAppointment);
-
                 // delete from customers appointments
                 int selectedAppointmentIndex = _selectedCustomer.AppointmentList.FindIndex(a => a.AppointmentID == _selectedAppointment.AppointmentID);
                 _selectedCustomer.AppointmentList.RemoveAt(selectedAppointmentIndex);
@@ -295,7 +280,6 @@ namespace ScheduleApp
         private void userNamePrint_TextChanged(object sender, EventArgs e)
         {
 
-
             // Validate and retrieve userId
             if (int.TryParse(userNamePrint.Text, out int userId))
             {
@@ -309,6 +293,7 @@ namespace ScheduleApp
         private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) { }
         private void searchApptButton_Click(object sender, EventArgs e) { }
+        private void apptTaskLabel_Click(object sender, EventArgs e) { }
         private void bindingMonthList_CurrentChanged(object sender, EventArgs e) { }
         private void bindingWeekList_CurrentChanged(object sender, EventArgs e) { }
         private void label2_Click(object sender, EventArgs e) { }

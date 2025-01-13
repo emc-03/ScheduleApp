@@ -82,7 +82,7 @@ namespace ScheduleApp
                 UpdatedCustomer(customerToUpdate);
                 this.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Catch validation exception and handle error highlighting
                 if (!_validator.IsValidFirstName(customerToUpdate.FirstName))
@@ -136,19 +136,10 @@ namespace ScheduleApp
             }
         }
         private void UpfnameInput_TextChanged(object sender, EventArgs e) { }
-
-
         private void UpcustIdInput_TextChanged(object sender, EventArgs e) { }
-
-
         private void UpPhoneInput_TextChanged(object sender, EventArgs e) { }
-
         private void UpdateCustomerForm_Load(object sender, EventArgs e) { }
-
-
         private void postalCodeInput_TextChanged(object sender, EventArgs e) { }
-
-
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
     }
