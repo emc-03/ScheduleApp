@@ -30,6 +30,8 @@ namespace ScheduleApp
 
         public void loadDataToList() 
         {
+            // Lambda is shorthand version to conveys the filtering logic and doesn't require a sepearate method.
+            //appointments, where the start date is in the current year
             _appointments = _appointmentData.FindAllAppt().FindAll(a => a.Start.Year == DateTime.Now.Year);
         }
         private void PopulateDataGridView()

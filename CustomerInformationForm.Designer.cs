@@ -64,9 +64,9 @@ namespace ScheduleApp
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.apptLookup = new System.Windows.Forms.Button();
             this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.custButtonPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
@@ -404,19 +404,6 @@ namespace ScheduleApp
             this.panel3.Size = new System.Drawing.Size(426, 91);
             this.panel3.TabIndex = 7;
             // 
-            // apptLookup
-            // 
-            this.apptLookup.AutoSize = true;
-            this.apptLookup.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.apptLookup.ForeColor = System.Drawing.Color.Black;
-            this.apptLookup.Location = new System.Drawing.Point(17, 15);
-            this.apptLookup.Name = "apptLookup";
-            this.apptLookup.Size = new System.Drawing.Size(197, 65);
-            this.apptLookup.TabIndex = 0;
-            this.apptLookup.Text = "Appointment Calendar";
-            this.apptLookup.UseVisualStyleBackColor = false;
-            this.apptLookup.Click += new System.EventHandler(this.apptLookup_Click);
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
@@ -430,6 +417,19 @@ namespace ScheduleApp
             this.button1.Text = "Reports";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.reportForm_Click);
+            // 
+            // apptLookup
+            // 
+            this.apptLookup.AutoSize = true;
+            this.apptLookup.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.apptLookup.ForeColor = System.Drawing.Color.Black;
+            this.apptLookup.Location = new System.Drawing.Point(17, 15);
+            this.apptLookup.Name = "apptLookup";
+            this.apptLookup.Size = new System.Drawing.Size(197, 65);
+            this.apptLookup.TabIndex = 0;
+            this.apptLookup.Text = "Appointment Calendar";
+            this.apptLookup.UseVisualStyleBackColor = false;
+            this.apptLookup.Click += new System.EventHandler(this.apptLookup_Click);
             // 
             // CustomerInformationForm
             // 
@@ -454,6 +454,7 @@ namespace ScheduleApp
             this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.MinimumSize = new System.Drawing.Size(26, 60);
             this.Name = "CustomerInformationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CUSTOMER INFORMATION";
             this.Load += new System.EventHandler(this.CustomerInformationForm_Load);
             this.custButtonPanel1.ResumeLayout(false);

@@ -29,7 +29,7 @@ namespace ScheduleApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.exitReport_Button = new System.Windows.Forms.Button();
             this.dataCountryReport = new System.Windows.Forms.DataGridView();
             this.selectedCountryLabel = new System.Windows.Forms.Label();
@@ -54,19 +54,19 @@ namespace ScheduleApp
             this.exitReport_Button.UseVisualStyleBackColor = false;
             this.exitReport_Button.Click += new System.EventHandler(this.exitReport_Button_Click);
             // 
-            // dataCustomerReport
+            // dataCountryReport
             // 
             this.dataCountryReport.AllowUserToResizeColumns = false;
             this.dataCountryReport.AllowUserToResizeRows = false;
             this.dataCountryReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataCountryReport.Location = new System.Drawing.Point(12, 66);
             this.dataCountryReport.Name = "dataCountryReport";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LemonChiffon;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataCountryReport.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LemonChiffon;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataCountryReport.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataCountryReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataCountryReport.Size = new System.Drawing.Size(557, 300);
             this.dataCountryReport.TabIndex = 6;
@@ -91,7 +91,7 @@ namespace ScheduleApp
             this.customerDropDown.TabIndex = 7;
             this.customerDropDown.SelectedIndexChanged += new System.EventHandler(this.countryDropDown_SelectedIndexChanged);
             // 
-            // CustomerReportMain
+            // CountryReportMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -105,6 +105,7 @@ namespace ScheduleApp
             this.Controls.Add(this.exitReport_Button);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Name = "CountryReportMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Country Report";
             this.Load += new System.EventHandler(this.CountryReportMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataCountryReport)).EndInit();

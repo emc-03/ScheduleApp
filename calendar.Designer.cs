@@ -318,7 +318,7 @@ namespace ScheduleApp
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "calendarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Username Disply";
+            this.Text = "Appointment Calendar";
             this.Load += new System.EventHandler(this.calendarForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

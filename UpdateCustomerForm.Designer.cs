@@ -315,6 +315,7 @@ namespace ScheduleApp
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.Name = "UpdateCustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update Customer";
             this.Load += new System.EventHandler(this.UpdateCustomerForm_Load);
             this.panel1.ResumeLayout(false);

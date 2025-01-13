@@ -42,24 +42,24 @@ namespace ScheduleApp
                     return;
                 }
 
-                foreach (Country country in countryList)
-                {
-                    customerDropDown.Items.Add(country); // adds user directly
-                }
+                // Use a lambda to add countries to the dropdown, it improves readability of the foreach loop 
+                countryList.ForEach(country => customerDropDown.Items.Add(country));
+
                 customerDropDown.DisplayMember = "Name";
 
                 if (customerDropDown.Items.Count > 0)
                 {
-                    customerDropDown.SelectedIndex = 0; // Select the first user by default
+                    customerDropDown.SelectedIndex = 0; // Select the first country by default
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading users: {ex.Message}");
+                MessageBox.Show($"Error loading countries: {ex.Message}");
             }
         }
 
-        
+
+
 
         private void addListToCustomerReport(Customer customer)
         {

@@ -86,11 +86,10 @@ namespace ScheduleApp
                     return;
                 }
 
-                foreach (User user in users)
-                {
-                    userDropDown.Items.Add(user); // adds user directly
-                }
-                userDropDown.DisplayMember = "Name";
+                // Use a lambda expression with ForEach to add users to the dropdown
+                // Lambda makes it clear that adding items to the dropdown is directly tied to the processing of the users list.
+                users.ForEach(user => userDropDown.Items.Add(user));
+
 
                 if (userDropDown.Items.Count > 0)
                 {
