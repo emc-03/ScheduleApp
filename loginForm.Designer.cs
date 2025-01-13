@@ -47,7 +47,7 @@ namespace ScheduleApp
             this.logExitButton.BackColor = System.Drawing.Color.Black;
             this.logExitButton.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logExitButton.ForeColor = System.Drawing.Color.LightCoral;
-            this.logExitButton.Location = new System.Drawing.Point(448, 2);
+            this.logExitButton.Location = new System.Drawing.Point(412, 3);
             this.logExitButton.Name = "logExitButton";
             this.logExitButton.Size = new System.Drawing.Size(43, 35);
             this.logExitButton.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace ScheduleApp
             this.loginLabel.AutoSize = true;
             this.loginLabel.Font = new System.Drawing.Font("Myanmar Text", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.loginLabel.Location = new System.Drawing.Point(207, 2);
+            this.loginLabel.Location = new System.Drawing.Point(189, 5);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(83, 37);
             this.loginLabel.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace ScheduleApp
             this.menuBarPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.menuBarPanel.Location = new System.Drawing.Point(0, 1);
             this.menuBarPanel.Name = "menuBarPanel";
-            this.menuBarPanel.Size = new System.Drawing.Size(502, 46);
+            this.menuBarPanel.Size = new System.Drawing.Size(468, 46);
             this.menuBarPanel.TabIndex = 2;
             this.menuBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.menuBarPanel_Paint);
             // 
@@ -94,7 +94,7 @@ namespace ScheduleApp
             this.loginPanelMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginPanelMain.Location = new System.Drawing.Point(0, 45);
             this.loginPanelMain.Name = "loginPanelMain";
-            this.loginPanelMain.Size = new System.Drawing.Size(502, 355);
+            this.loginPanelMain.Size = new System.Drawing.Size(468, 355);
             this.loginPanelMain.TabIndex = 3;
             this.loginPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.loginPanelMain_Paint);
             // 
@@ -164,11 +164,12 @@ namespace ScheduleApp
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(505, 399);
+            this.ClientSize = new System.Drawing.Size(469, 399);
             this.Controls.Add(this.loginPanelMain);
             this.Controls.Add(this.menuBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "loginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.menuBarPanel.ResumeLayout(false);
             this.menuBarPanel.PerformLayout();

@@ -90,6 +90,7 @@ namespace ScheduleApp
                 // Lambda makes it clear that adding items to the dropdown is directly tied to the processing of the users list.
                 users.ForEach(user => userDropDown.Items.Add(user));
 
+                userDropDown.DisplayMember = "Name";
 
                 if (userDropDown.Items.Count > 0)
                 {
