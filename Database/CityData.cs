@@ -32,7 +32,7 @@ namespace ScheduleApp.Database
                     // Execute the command to insert into the 'city' table
                     command.ExecuteNonQuery();
 
-                    // Retrieve the last inserted ID (if using auto-increment)
+                    // Retrieve the last inserted ID 
                     city.ID = (int)command.LastInsertedId;
                 }
                 connection.Close();

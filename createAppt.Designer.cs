@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace ScheduleApp
 {
     partial class CreateAppointmentForm
@@ -274,6 +276,7 @@ namespace ScheduleApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(471, 549);
             this.Controls.Add(this.createApptTypeInput);
@@ -305,6 +308,8 @@ namespace ScheduleApp
             this.PerformLayout();
 
         }
+
+     
 
         #endregion
 

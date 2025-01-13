@@ -101,22 +101,22 @@
     <Compile Include="calendar.Designer.cs">
       <DependentUpon>calendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateByReportMain.cs">
+    <Compile Include="CustomerReportMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateByReportMain.Designer.cs">
-      <DependentUpon>CreateByReportMain.cs</DependentUpon>
+    <Compile Include="CustomerReportMain.Designer.cs">
+      <DependentUpon>CustomerReportMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\AddressData.cs" />
     <Compile Include="Database\AppointmentData.cs" />
     <Compile Include="Database\CityData.cs" />
     <Compile Include="Database\CountryData.cs" />
     <Compile Include="Database\CustomerData.cs" />
-    <Compile Include="MonthlyReportMain.cs">
+    <Compile Include="MonthlyCurrentYearReportMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MonthlyReportMain.Designer.cs">
-      <DependentUpon>MonthlyReportMain.cs</DependentUpon>
+    <Compile Include="MonthlyCurrentYearReportMain.Designer.cs">
+      <DependentUpon>MonthlyCurrentYearReportMain.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForm.cs">
       <SubType>Form</SubType>
@@ -124,7 +124,6 @@
     <Compile Include="ReportForm.Designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportHelper.cs" />
     <Compile Include="UserReportMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,7 +151,6 @@
       <DependentUpon>createAppt.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\DB_Connection.cs" />
-    <Compile Include="languageHelper.cs" />
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,8 +176,8 @@
     <EmbeddedResource Include="calendar.resx">
       <DependentUpon>calendar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateByReportMain.resx">
-      <DependentUpon>CreateByReportMain.cs</DependentUpon>
+    <EmbeddedResource Include="CustomerReportMain.resx">
+      <DependentUpon>CustomerReportMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerInformationForm.resx">
       <DependentUpon>CustomerInformationForm.cs</DependentUpon>
@@ -187,8 +185,8 @@
     <EmbeddedResource Include="createAppt.resx">
       <DependentUpon>createAppt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MonthlyReportMain.resx">
-      <DependentUpon>MonthlyReportMain.cs</DependentUpon>
+    <EmbeddedResource Include="MonthlyCurrentYearReportMain.resx">
+      <DependentUpon>MonthlyCurrentYearReportMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>

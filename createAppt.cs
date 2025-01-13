@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ScheduleApp
 {
     public partial class CreateAppointmentForm : Form
@@ -18,9 +19,9 @@ namespace ScheduleApp
         private AppointmentData _appointmentData;
         private Customer _customer;
         private User _user;
-        private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+        private AppointmentValidator _appointmentValidator; // Use for validation and use this logic in the update appointment form.
         private CustomerValidator _customerValidation;
-        private Appointment _createdAppointment = new Appointment();
+        private Appointment _createdAppointment;
         public event Action<Appointment> CreatedAppointment;
 
         // A method to validate if the appointment is within the next 15 minutes
@@ -29,278 +30,190 @@ namespace ScheduleApp
             DateTime currentUtcTime = DateTime.UtcNow;
             DateTime quarterTime = currentUtcTime.AddMinutes(15);
 
-            // Check if the appointment start time is within the next 15 minutes
             return appointment.Start <= quarterTime && appointment.Start >= currentUtcTime;
         }
 
         // Constructor to accept an Appointment object
         public CreateAppointmentForm(Customer customer, User user)
         {
-            //save the customers appointmentlist to the AppointmentValidator class property
-
             _appointmentData = new AppointmentData();
-           // _appointmentValidator = new AppointmentValidator();
+            _appointmentValidator = new AppointmentValidator()
+            {
+              Appointment = customerAp
+            };
             _customerValidation = new CustomerValidator();
             _customer = customer;
             _user = user;
+            _createdAppointment = new Appointment();
             InitializeComponent();
         }
-
-
 
         private void CreateCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
-
-        // TODO adjust validation into validation helper
-        private void createApptButton_Click(object sender, EventArgs e)
+        // validate and create appointment
+        private void ValidateAndCreateAppointment()
         {
-            _createdAppointment.UserID = _user.ID;
-            _createdAppointment.CustomerID = _customer.ID;
-
             try
             {
-                // Validate Title
-                if (string.IsNullOrEmpty(createTitleInput.Text))
+                Appointment newAppointment = new Appointment
                 {
-                    MessageBox.Show("Fill in missing fields.");
-                    createTitleInput.Clear();
-                    createTitleInput.Focus();
+                    Title = createTitleInput.Text,
+                    Description = createDescriptionInput.Text,
+                    Location = createLocationInput.Text,
+                    Contact = createContactInput.Text,
+                    Type = createApptTypeInput.Text,
+                    URL = createLinkInput.Text,
+                    CustomerID = _customer.ID,
+                    UserID = _user.ID
+                };
+
+                if (string.IsNullOrWhiteSpace(newAppointment.Title) ||
+                    string.IsNullOrWhiteSpace(newAppointment.Description) ||
+                    string.IsNullOrWhiteSpace(newAppointment.Location) ||
+                    string.IsNullOrWhiteSpace(newAppointment.Contact) ||
+                    string.IsNullOrWhiteSpace(newAppointment.Type) ||
+                    string.IsNullOrWhiteSpace(newAppointment.URL))
+                {
+                    MessageBox.Show("All fields are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                else
-                {
-                    _createdAppointment.Title = createTitleInput.Text;
-                }
 
-                // Validate Description
-                if (string.IsNullOrEmpty(createDescriptionInput.Text))
+                DateTime appointmentDate = createDateTimeSelect.Value;
+                DateTime startTime = createStartTimeInput.Value;
+                DateTime endTime = createEndTimeInput.Value;
+
+                if (startTime >= endTime)
                 {
-                    MessageBox.Show("Fill in missing fields.");
-                    createDescriptionInput.Clear();
-                    createDescriptionInput.Focus();
+                    MessageBox.Show("Start time must be earlier than end time.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                else
-                {
-                    _createdAppointment.Description = createDescriptionInput.Text;
-                }
 
-                // Validate Location
-                if (string.IsNullOrEmpty(createLocationInput.Text))
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createLocationInput.Clear();
-                    createLocationInput.Focus();
-                    return;
-                }
-                else
-                {
-                    _createdAppointment.Location = createLocationInput.Text;
-                }
-
-                // Validate Contact
-                if (string.IsNullOrEmpty(createContactInput.Text))
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createContactInput.Clear();
-                    createContactInput.Focus();
-                    return;
-                }
-                else
-                {
-                    _createdAppointment.Contact = createContactInput.Text;
-                }
-
-                // Validate Type
-                if (string.IsNullOrEmpty(createApptTypeInput.Text))
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createApptTypeInput.Focus();
-                    return;
-                }
-                else
-                {
-                    _createdAppointment.Type = createApptTypeInput.Text;
-                }
-
-                // Validate URL
-                if (string.IsNullOrEmpty(createLinkInput.Text))
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createLinkInput.Clear();
-                    createLinkInput.Focus();
-                    return;
-                }
-                else
-                {
-                    _createdAppointment.URL = createLinkInput.Text;
-                }
-
-                // Validate Date and Time
-                DateTime appointmentDate, startTime, endTime;
-
-                if (createDateTimeSelect.Value == null)
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createDateTimeSelect.Focus();
-                    return;
-                }
-                else
-                {
-                    appointmentDate = createDateTimeSelect.Value;
-                }
-
-                if (createStartTimeInput.Value == null)
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createStartTimeInput.Focus();
-                    return;
-                }
-                else
-                {
-                    startTime = createStartTimeInput.Value;
-                }
-
-                if (createEndTimeInput.Value == null)
-                {
-                    MessageBox.Show("Fill in missing fields.");
-                    createEndTimeInput.Focus();
-                    return;
-                }
-                else
-                {
-                    endTime = createEndTimeInput.Value;
-                }
-
-                // Combine date and time using Utilities method
                 DateTime startTimeDate, endTimeDate;
                 Utilities.BuildStartEndDateFromInputs(appointmentDate, startTime, endTime, out startTimeDate, out endTimeDate);
 
-                // Manually validate the time range
-                if (startTimeDate >= endTimeDate)
+                newAppointment.Start = TimeZoneInfo.ConvertTimeToUtc(startTimeDate);
+                newAppointment.End = TimeZoneInfo.ConvertTimeToUtc(endTimeDate);
+
+                var validationResults = _appointmentValidator.ValidateAppointment();
+                if (!validationResults.IsValid)
                 {
-                    MessageBox.Show("Start time must be earlier than end time.");
+                    MessageBox.Show(string.Join("\n", validationResults.Errors), "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Assign the validated start and end times to the appointment
-                _createdAppointment.Start = TimeZoneInfo.ConvertTimeToUtc(startTimeDate);
-                _createdAppointment.End = TimeZoneInfo.ConvertTimeToUtc(endTimeDate);
+                if (!IsAppointmentWithin15Minutes(newAppointment))
+                {
+                    MessageBox.Show("The appointment must be within the next 15 minutes.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                // Call Add method to save the appointment
-                _createdAppointment = _appointmentData.Add(_createdAppointment, _user.Name);
+                _createdAppointment = _appointmentData.Add(newAppointment, _user.Name);
 
-                // Notify user that the appointment was created successfully
-                CreatedAppointment(_createdAppointment);
+                CreatedAppointment?.Invoke(_createdAppointment);
+                MessageBox.Show("Appointment created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (Exception)
             {
-                MessageBox.Show("Appointment failed to save!");
+                MessageBox.Show("Appointment failed to save!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            this.Close();
         }
 
-
-
-        private void createIdInput_TextChanged(object sender, EventArgs e)
+        private void createApptButton_Click(object sender, EventArgs e)
         {
-
+            ValidateAndCreateAppointment();
         }
 
-
-        private void createDescriptionInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CreateAppointment_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createDescriptionLable_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createLocationLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createLocationInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createFnameInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createLinkLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createTitleLable_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void apptTypeBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createDateTimeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createDateTimeSelect_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createStartTimeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createEndTimeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createTypeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createApptTypeInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void createIdInput_TextChanged(object sender, EventArgs e) { }
+        private void createDescriptionInput_TextChanged(object sender, EventArgs e) { }
+        private void CreateAppointment_Load(object sender, EventArgs e) { }
+        private void createDescriptionLable_Click(object sender, EventArgs e) { }
+        private void createLocationLabel_Click(object sender, EventArgs e) { }
+        private void createLocationInput_TextChanged(object sender, EventArgs e) { }
+        private void createFnameInput_TextChanged(object sender, EventArgs e) { }
+        private void createLinkLabel_Click(object sender, EventArgs e) { }
+        private void createTitleLable_Click(object sender, EventArgs e) { }
+        private void apptTypeBox_TextChanged(object sender, EventArgs e) { }
+        private void createDateTimeLabel_Click(object sender, EventArgs e) { }
+        private void createDateTimeSelect_ValueChanged(object sender, EventArgs e) { }
+        private void createStartTimeLabel_Click(object sender, EventArgs e) { }
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) { }
+        private void createEndTimeLabel_Click(object sender, EventArgs e) { }
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e) { }
+        private void createTypeLabel_Click(object sender, EventArgs e) { }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void createApptTypeInput_TextChanged(object sender, EventArgs e) { }
     }
 }
+
+//namespace ScheduleApp
+//{
+//    public partial class CreateAppointmentForm : Form
+//    {
+//        private AppointmentData _appointmentData;
+//        private Customer _customer;
+//        private User _user;
+//        private AppointmentValidator _appointmentValidator; // use for validation and use this login in the update appointment form. 
+//        private CustomerValidator _customerValidation;
+//        private Appointment _createdAppointment = new Appointment();
+//        public event Action<Appointment> CreatedAppointment;
+
+//        // A method to validate if the appointment is within the next 15 minutes
+//        private bool IsAppointmentWithin15Minutes(Appointment appointment)
+//        {
+//            DateTime currentUtcTime = DateTime.UtcNow;
+//            DateTime quarterTime = currentUtcTime.AddMinutes(15);
+
+//            // Check if the appointment start time is within the next 15 minutes
+//            return appointment.Start <= quarterTime && appointment.Start >= currentUtcTime;
+//        }
+
+//        // Constructor to accept an Appointment object
+//        public CreateAppointmentForm(Customer customer, User user)
+//        {
+//            //save the customers appointmentlist to the AppointmentValidator class property
+//            _appointmentData = new AppointmentData();
+//            //_appointmentValidator = new AppointmentValidator();
+//            _customerValidation = new CustomerValidator();
+//            _customer = customer;
+//            _user = user;
+//            InitializeComponent();
+//        }
+//        private void createApptButton_Click(object sender, EventArgs e) 
+//        {
+
+//        }
+
+//        private void CreateCancelButton_Click(object sender, EventArgs e)
+//        {
+//            this.Close();
+
+//        }
+
+//        private void createIdInput_TextChanged(object sender, EventArgs e) { }
+//        private void createDescriptionInput_TextChanged(object sender, EventArgs e) { }
+//        private void CreateAppointment_Load(object sender, EventArgs e) { }
+//        private void createDescriptionLable_Click(object sender, EventArgs e) { }
+//        private void createLocationLabel_Click(object sender, EventArgs e) { }
+//        private void createLocationInput_TextChanged(object sender, EventArgs e) { }
+//        private void createFnameInput_TextChanged(object sender, EventArgs e) { }
+//        private void createLinkLabel_Click(object sender, EventArgs e) { }
+//        private void createTitleLable_Click(object sender, EventArgs e) { }
+//        private void apptTypeBox_TextChanged(object sender, EventArgs e) { }
+//        private void createDateTimeLabel_Click(object sender, EventArgs e) { }
+//        private void createDateTimeSelect_ValueChanged(object sender, EventArgs e) { }
+//        private void createStartTimeLabel_Click(object sender, EventArgs e) { }
+//        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) { }
+//        private void createEndTimeLabel_Click(object sender, EventArgs e) { }
+//        private void dateTimePicker2_ValueChanged(object sender, EventArgs e) { }
+//        private void createTypeLabel_Click(object sender, EventArgs e) { }
+//        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
+//        private void createApptTypeInput_TextChanged(object sender, EventArgs e) { }
+
+
+
+//    }
+//    }

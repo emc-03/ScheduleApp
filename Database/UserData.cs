@@ -10,13 +10,13 @@ namespace ScheduleApp.Database
 {
     class UserData
     {
-        // create get method to return username by userID
-        // create custom columns to pass the correct appointment information when populating the datagrid 
+        //  return username by userID
+       
         public string GetUserNameById(int userId)
         {
             string username = string.Empty;
 
-            string searchRow = "SELECT userName From user WHERE userId = @userId";
+            string searchRow = "SELECT userName FROM user WHERE userId = @userId";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
@@ -39,13 +39,39 @@ namespace ScheduleApp.Database
             return username;
         }
 
+        public List<User> GetAllUsers()
+        {
+            List<User> users = new List<User>();
+            string userQuery = "SELECT * FROM user";
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(userQuery, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            User user = new User(); // Create new User object for each row
+                            user.Name = reader["userName"].ToString(); // Assign the username from the reader
+                            user.ID = (int)reader["userId"];
+                            users.Add(user); // Add the user to the list
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return users; // Return the list of users
+                   }
+
 
 
         public User Get(string userName, string password)
         {
             User user = new User(); // declared but not initilized until line 28
 
-            string searchRow = "SELECT * From user WHERE username = @username AND password = @password";
+            string searchRow = "SELECT * FROM user WHERE username = @username AND password = @password";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
             {
                 connection.Open();
@@ -58,7 +84,7 @@ namespace ScheduleApp.Database
                     {
                         if (reader.Read())
                         {
-                            user = new User(); // if it returns a null user,
+                            user = new User(); 
                             user.ID = (int)reader["userId"];
                             user.Name = userName;
                             user.Password = password;

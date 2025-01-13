@@ -29,14 +29,13 @@ namespace ScheduleApp.Database
                     // Execute the command to insert into the 'country' table
                     command.ExecuteNonQuery();
 
-                    // Retrieve the last inserted ID (if using auto-increment)
+                    // Retrieve the last inserted ID 
                     country.ID = (int)command.LastInsertedId;
 
                 }
 
                 connection.Close();
             }
-
 
         }
         public void Update(Country country)
@@ -101,6 +100,41 @@ namespace ScheduleApp.Database
             }
             return country;
         }
+
+        public List<Country> FindAllCountry(int customerId)
+        {
+            List<Country> countryList = new List<Country>();
+            string getCountry = "SELECT * FROM country";
+            AddressData addressData = new AddressData();
+
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(getCountry, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            Country country = new Country();
+
+                            country.Name = reader["country"].ToString();
+                            country.ID = (int)reader["countryId"];
+                            if (!string.IsNullOrEmpty(country.Name) && !countryList.Any(c => c.Name == country.Name))
+                            {
+                                countryList.Add(country); // Add the Country to the list
+                            }
+
+                        }
+                    }
+                }
+                connection.Close();
+            }
+
+            return countryList;
+        }
+
 
     }
 

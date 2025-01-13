@@ -15,13 +15,12 @@ namespace ScheduleApp.Database
     public class CustomerData
     {
 
-
         private List<Customer> _customerList = new List<Customer>();
-       
+
 
         public Customer Add(Customer customer)
         {
-            
+
 
             AddressData addressData = new AddressData();
             addressData.Add(customer.Address);
@@ -85,6 +84,33 @@ namespace ScheduleApp.Database
             return customer;
         }
 
+        public string GetCustomerNameById(int customerId)
+        {
+            string customerName = string.Empty;
+
+            string searchRow = "SELECT customerName FROM customer WHERE customerId = @customerId";
+            using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(searchRow, connection))
+                {
+                    command.Parameters.AddWithValue("@customerId", customerId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            customerName = reader["customerName"].ToString();
+                        }
+
+                    }
+
+                }
+
+            }
+            return customerName;
+        }
+
         public void Update(Customer customer)
         {
             AddressData addressData = new AddressData();
@@ -146,18 +172,18 @@ namespace ScheduleApp.Database
                 }
             }
 
-            //  Delete the customer's address (assuming a separate Address table)
+            //  Delete the customer's address (assume a separate Address table)
             AddressData addressData = new AddressData();
             addressData.Delete(customer.Address);
             _customerList.Remove(customer);
 
         }
 
-
+        // Find all customers by userId - set into a list
         public List<Customer> FindAll(int userId)
         {
             List<Customer> customerFindAllList = new List<Customer>();
-            string getCustomer = "SELECT * FROM customer"; // Not filtering by userId
+            string getCustomer = "SELECT * FROM customer"; 
             AddressData addressData = new AddressData();
             AppointmentData appointmentData = new AppointmentData();
 
@@ -172,6 +198,7 @@ namespace ScheduleApp.Database
                         {
                             Customer customer = new Customer();
                             customer.ID = (int)reader["customerId"];
+                            // split first and last name to read correctly in the GUI
                             string[] name = reader["customerName"].ToString().Split(' ');
                             if (name.Length < 2)
                             {

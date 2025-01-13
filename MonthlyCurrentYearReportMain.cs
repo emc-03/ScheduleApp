@@ -13,17 +13,14 @@ using System.Windows.Forms;
 
 namespace ScheduleApp
 
-
 {
-    public partial class MonthlyReportMain : Form
+    public partial class MonthlyCurrentYearReport : Form
     {
 
         private AppointmentData _appointmentData = new AppointmentData();
         private List<Appointment> _appointments;
 
-
-
-        public MonthlyReportMain()
+        public MonthlyCurrentYearReport()
         {
             InitializeComponent();
             loadDataToList();
@@ -31,17 +28,9 @@ namespace ScheduleApp
 
         }
 
-
-        public void loadDataToList() //NEW
+        public void loadDataToList() 
         {
-            // 1) Use the private field for AppointmentData to call FindAll() to get a list of all of the appointments from the database.
-            // Store this in a variable of type List<Appointment>
-            //2) Assign column names to the DataGridView, such as "Appointment Type", "January", "February", "March", etc.
-            //3) Group the Appointments, first by appointment type, and then by month
-            //Go through the groups and count the appointments in each month and use it to populate the row values.
-            //Remember that the first column should display the type.
-            //Then you add the count values after that in order of the month they happened in
-            _appointments = _appointmentData.FindAllAppt();
+            _appointments = _appointmentData.FindAllAppt().FindAll(a => a.Start.Year == DateTime.Now.Year);
         }
         private void PopulateDataGridView()
         {
@@ -79,23 +68,14 @@ namespace ScheduleApp
                     { appointment};
                 }
             }
-            //Clear and prep the datagridview to calculate montly types
+            //Clear and prep the datagridview to calculate monthly types
 
             dataGridMonthlyReport.Columns.Clear();
             dataGridMonthlyReport.Columns.Add("Type", "Appointment Type");
-            /*foreach loop over _appointments 
-            add to the dictionary
-            1) Check if the dictionary has the appointment type as a key already
-            2) If so, grab the list of appointments(the value associated with that key) for that appointment type from the dictionary
-            and add the current appointment to it
-            3) If not, add the key and assign the value as a new List<Appointment> with the current appointment as the only one in the list
-                use appt type as key *dictionary 
-                put  the apptdata from a list to a dictionary 
-            */
+
             for (int i = 0; i < 12; i++)
             {
-                // add column to DataGridView ** change to ROW ? 
-                // dataGridMonthlyReport.Columns.Add(i.ToString(), new DateTime())
+
                 dataGridMonthlyReport.Columns.Add((i + 1).ToString(), new DateTime(1, i + 1, 1).ToString("MMMM"));
 
             }
@@ -120,30 +100,19 @@ namespace ScheduleApp
                 //add the row to the DataGridView
 
                 dataGridMonthlyReport.Rows.Add(rowValues);
-                /*Pass the array of values directly, ensuring it matches the column count and data types expected by the DataGridView, hopefully \_''_/ */
-                // if this doesn't work - explicitly conver the rowValues to DataGridViewRow 
-                /* var dataGridViewRow = new DataGridViewRow();
-                 * dataGridViewRow.CreateCells(dataGridMontlyReport, rowValues);
-                 * dataGridMonthlyReport.Rows.Add(dataGridViewRow);*/
 
             }
 
-
         }
-
-        private void MonthlyReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void exitReport_Button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void MonthlyReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+     
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
     }
 }

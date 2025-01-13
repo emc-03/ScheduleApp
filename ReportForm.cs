@@ -17,66 +17,52 @@ namespace ScheduleApp
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void userReport_Click(object sender, EventArgs e)
         {
           
                 UserReportMain userReport = new UserReportMain();
                 userReport.Show();
                 this.Hide();
-           
-          
-
         }
 
         private void exitReport_Click(object sender, EventArgs e)
         {
             this.Close();
-           
         }
-
 
         private void monthlyreport_Click(object sender, EventArgs e)
         {
             try
             {
-                MonthlyReportMain monthlyReportForm = new MonthlyReportMain();
+                MonthlyCurrentYearReport monthlyReportForm = new MonthlyCurrentYearReport();
                 monthlyReportForm.Show();
                 this.Hide();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to open Monthly report: {ex.Message}");
-                
             }
-            
-           
         }
 
-
-        private void createByReport_Click(object sender, EventArgs e)
+        private void customerReport_Click(object sender, EventArgs e)
         {
             try
             {
-                CreateByReportMain createByReport = new CreateByReportMain();
-                createByReport.Show();
+                CustomerReportMain customerReport = new CustomerReportMain();
+                customerReport.Show();
                 this.Hide();
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show($"Failed to open CreateBy Report: {ex.Message}");
+                MessageBox.Show($"Failed to open Customer Report: {ex.Message}");
             }
-         
         }
 
         private void exitReport_Button_Click(object sender, EventArgs e)
         {
                 this.Close();
         }
+        private void Form1_Load(object sender, EventArgs e) { }
     }
 }

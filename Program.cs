@@ -18,13 +18,12 @@ namespace ScheduleApp
         static void Main()
         {
 
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             DB_Connection.startConnection();
             Application.Run(new loginForm());
-            DB_Connection.closeConnection(); // TODO Remove closeConnection 
+            DB_Connection.closeConnection(); 
         }
     }
 }

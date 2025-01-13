@@ -247,6 +247,7 @@ namespace ScheduleApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 607);
             this.panel1.TabIndex = 29;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // postalCLabel
             // 
@@ -305,6 +306,8 @@ namespace ScheduleApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(429, 620);
             this.Controls.Add(this.panel1);

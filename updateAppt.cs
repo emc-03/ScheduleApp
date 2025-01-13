@@ -59,48 +59,6 @@ namespace ScheduleApp
 
         }
 
-        private void UpcustIdInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void upCustomerIDLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UplnameInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void uplnLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UpfnameInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void apptTypeBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTime_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void updateButton_Click(object sender, EventArgs e)
         {
 
@@ -213,41 +171,6 @@ namespace ScheduleApp
 
         }
 
-        private void updateAppt_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void upHourBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateTitleInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateDescriptionInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateLocationInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateContactInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void createLinkInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void updateDateTimeSelect_ValueChanged(object sender, EventArgs e)
         {
             updateEndTimeInput.Value = new DateTime(
@@ -268,25 +191,25 @@ namespace ScheduleApp
 
 
         }
+        private void UpcustIdInput_TextChanged(object sender, EventArgs e) { }
+        private void upCustomerIDLabel_Click(object sender, EventArgs e) { }
+        private void UplnameInput_TextChanged(object sender, EventArgs e) { }
+        private void uplnLabel_Click(object sender, EventArgs e) { }
+        private void UpfnameInput_TextChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void apptTypeBox_TextChanged(object sender, EventArgs e) { }
+        private void dateTime_Click(object sender, EventArgs e) { }
+        private void updateAppt_Load(object sender, EventArgs e) { }
+        private void upHourBox_TextChanged(object sender, EventArgs e) { }
+        private void updateTitleInput_TextChanged(object sender, EventArgs e) { }
+        private void updateDescriptionInput_TextChanged(object sender, EventArgs e) { }
+        private void updateLocationInput_TextChanged(object sender, EventArgs e) { }
+        private void updateContactInput_TextChanged(object sender, EventArgs e) { }
+        private void createLinkInput_TextChanged(object sender, EventArgs e) { }
+        private void updateStartTimeInput_ValueChanged(object sender, EventArgs e) { }
+        private void updateEndTimeInput_ValueChanged(object sender, EventArgs e) { }
+        private void updateTypeDropdown_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void updateApptType_TextChanged(object sender, EventArgs e) { }
 
-        private void updateStartTimeInput_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateEndTimeInput_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateTypeDropdown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateApptType_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

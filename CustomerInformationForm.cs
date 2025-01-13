@@ -13,13 +13,11 @@ namespace ScheduleApp
 {
     public partial class CustomerInformationForm : Form
     {
-
         private Customer _selectedCustomer;
         private readonly CustomerData _customerData = new CustomerData();
         private List<Customer> _customerList = new List<Customer>();
         private CustomerValidator _customerValidation;
         private readonly User _user = new User();
-
 
         public CustomerInformationForm(User user)
         {
@@ -44,7 +42,6 @@ namespace ScheduleApp
 
                     if (appointment.Start <= quarterTime && appointment.Start >= TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local))
                     {
-                        // add a currenttime var and add additional if statemtent 
                         MessageBox.Show("You have an appointment within the next 15 minutes.");
                         foundAppointment = true;
                         break;
@@ -77,14 +74,8 @@ namespace ScheduleApp
         {
             dataGridCustomer.Rows.Add
                 (customer.FirstName + " " + customer.LastName, customer.Address.PhoneNumber,
-                customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name, 
+                customer.Address.Address1, customer.Address.Address2, customer.Address.City.Name,
                 customer.Address.City.Country.Name, customer.ID);
-        }
-
-
-        private void custButtonPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -203,7 +194,7 @@ namespace ScheduleApp
             }
             else
             {
-                      customer.Address.City.Country.Name = countryInput.Text;
+                customer.Address.City.Country.Name = countryInput.Text;
             }
 
             try
@@ -214,8 +205,6 @@ namespace ScheduleApp
                 // Reassigning the customer so it has an ID from the database
                 customer = _customerData.Add(customer);
 
-                // Add customer to DataGrid == removing as we are now using a data source
-                //addCustomertoDataGrid(customer);
                 _customerList.Add(customer);
                 loadData(_user.ID);
 
@@ -228,15 +217,14 @@ namespace ScheduleApp
                 this.cityInput.Clear();
                 this.postalCodeInput.Clear();
                 this.countryInput.Clear();
-   
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
-        }
 
+        }
 
         private void deleteCustButton_Click(object sender, EventArgs e)
         {
@@ -244,8 +232,6 @@ namespace ScheduleApp
             if (_selectedCustomer != null)
             {
                 _customerData.Delete(_selectedCustomer);
-                //int rowIndex = dataGridCustomer.SelectedRows[0].Index;
-                //dataGridCustomer.Rows.RemoveAt(rowIndex);
                 _customerList.Remove(_selectedCustomer);
                 loadData(_user.ID);
                 _selectedCustomer = null;
@@ -254,13 +240,11 @@ namespace ScheduleApp
             }
         }
 
-
         private void selectRow()
 
         {
-            //int rowCount = dataGridCustomer.SelectedRows.Count;
             Int32 rowCount = dataGridCustomer.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            // if more then 1 row was selected they can't update more than one customer at a time. 
+            //only updates 1 row at a time 
             if (rowCount > 0)
             {
                 var rawSelectedCustomerID = dataGridCustomer.SelectedRows[0].Cells["customerId"].Value;
@@ -284,14 +268,8 @@ namespace ScheduleApp
                 MessageBox.Show("No row selected.");
             }
 
-
-
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void apptLookup_Click(object sender, EventArgs e)//object sender, EventArgs e)
         {
@@ -306,17 +284,6 @@ namespace ScheduleApp
         }
 
 
-        private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-        private void fnameInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         public void UpdatedCustomerListener(Customer customer)
         {
             int updatedCustomerIndex = _customerList.FindIndex(c => c.ID == customer.ID);
@@ -328,7 +295,6 @@ namespace ScheduleApp
                 addCustomertoDataGrid(c);
 
             }
-
 
         }
 
@@ -346,56 +312,46 @@ namespace ScheduleApp
                 updateCustomerForm.Show();
                 _selectedCustomer = null;
             }
+            else if (_selectedCustomer == null)
+            {
+                MessageBox.Show("No customer found.");
+            }
             else
             {
 
                 MessageBox.Show("No row selected.");
             }
-            // else if the selectedCustomer is null then create a messagebox 
-
 
 
         }
-
-        private void custIdInput_TextChanged(object sender, EventArgs e)
+        private void reportForm_Click(object sender, EventArgs e)
         {
-
+            ReportForm reportForm = new ReportForm();
+            reportForm.Show();
         }
 
-        private void addressInput2_TextChanged(object sender, EventArgs e)
-        {
+        private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
-        }
+        private void button2_Click(object sender, EventArgs e) { }
 
-        private void lnameInput_TextChanged(object sender, EventArgs e)
-        {
+        private void fnameInput_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void custButtonPanel1_Paint(object sender, PaintEventArgs e) { }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
+        private void custIdInput_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void addressInput2_TextChanged(object sender, EventArgs e) { }
 
-        private void custSearchBox_TextChanged(object sender, EventArgs e)
-        {
+        private void lnameInput_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
 
-        private void CustomerInformationForm_Load(object sender, EventArgs e)
-        {
+        private void custSearchBox_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void addressInput_TextChanged(object sender, EventArgs e) { }
 
-        private void addressInput_TextChanged(object sender, EventArgs e)
-        {
+        private void phoneInput_TextChanged(object sender, EventArgs e) { }
 
-        }
-
-        private void phoneInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

@@ -64,6 +64,7 @@ namespace ScheduleApp
             this.panel3 = new System.Windows.Forms.Panel();
             this.apptLookup = new System.Windows.Forms.Button();
             this.customerDataSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.custButtonPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
@@ -152,7 +153,7 @@ namespace ScheduleApp
             this.dataGridCustomer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LemonChiffon;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
@@ -161,8 +162,8 @@ namespace ScheduleApp
             this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gainsboro;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LemonChiffon;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -175,7 +176,7 @@ namespace ScheduleApp
             this.dataGridCustomer.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LemonChiffon;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.IndianRed;
@@ -394,6 +395,7 @@ namespace ScheduleApp
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.apptLookup);
             this.panel3.Location = new System.Drawing.Point(32, 596);
             this.panel3.Name = "panel3";
@@ -405,13 +407,27 @@ namespace ScheduleApp
             this.apptLookup.AutoSize = true;
             this.apptLookup.BackColor = System.Drawing.Color.CornflowerBlue;
             this.apptLookup.ForeColor = System.Drawing.Color.Black;
-            this.apptLookup.Location = new System.Drawing.Point(28, 15);
+            this.apptLookup.Location = new System.Drawing.Point(17, 15);
             this.apptLookup.Name = "apptLookup";
-            this.apptLookup.Size = new System.Drawing.Size(356, 56);
+            this.apptLookup.Size = new System.Drawing.Size(197, 65);
             this.apptLookup.TabIndex = 0;
             this.apptLookup.Text = "Appointment Calendar";
             this.apptLookup.UseVisualStyleBackColor = false;
             this.apptLookup.Click += new System.EventHandler(this.apptLookup_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.button1.Location = new System.Drawing.Point(248, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(155, 65);
+            this.button1.TabIndex = 62;
+            this.button1.Text = "Reports";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.reportForm_Click);
             // 
             // CustomerInformationForm
             // 
@@ -482,5 +498,6 @@ namespace ScheduleApp
         private System.Windows.Forms.Label postalCodeLabel;
         private System.Windows.Forms.TextBox postalCodeInput;
         private System.Windows.Forms.DataGridView dataGridCustomer;
+        private System.Windows.Forms.Button button1;
     }
 }

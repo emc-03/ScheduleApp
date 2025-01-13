@@ -23,23 +23,37 @@ namespace ScheduleApp
         private Appointment _selectedAppointment;
         private AppointmentData _appointmentData = new AppointmentData();
 
-     
-        // database is always in UTC but we need to display in EST by default and then allow for local
-        //private TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
-        //private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-        //private TimeZoneInfo utcTimeZone = TimeZoneInfo.Utc;
-
         public calendarForm(Customer selectedCustomer, User user)
         {
             _user = user;
             _selectedCustomer = selectedCustomer;
 
             InitializeComponent();
-            //loadData();
             loadDataToList();
 
         }
 
+        private void DisplayCurrentUsername(int userId)
+        {
+            try
+            {
+                UserData userData = new UserData();
+                string username = userData.GetUserNameById(userId);
+
+                if (!string.IsNullOrEmpty(username))
+                {
+                    userNamePrint.Text = username;
+                }
+                else
+                {
+                    userNamePrint.Text = "User not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching username: {ex.Message}");
+            }
+        }
         public void CreatedAppointmentListener(Appointment appointment)
         {
             _selectedCustomer.AppointmentList.Add(appointment);
@@ -54,30 +68,9 @@ namespace ScheduleApp
         }
         public void loadDataToList() //NEW
         {
-            //TODO FIX Update Appt data - to load correct information, then check calendar for the Create method 
-            // Possible Example -- Should this go in the appointment Validator ? 
-            //try
-            //{
-            //    connection.Open();
-            //    var result = command.ExecuteScalar();
 
-            //    if (result != null && result is DateTime dbUtcDateTime)
-            //    {
-            //        // Convert to local time if necessary
-            //        DateTime localDateTime = dbUtcDateTime.ToLocalTime();
+            appointmentDataGrid.DataSource = null;  // Clear the existing data source
 
-            //        // Set DateTimePicker to the correct date and time
-            //        dateTimePicker.Value = localDateTime;
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("No appointment date found or invalid date format.");
-            //    }
-
-                appointmentDataGrid.DataSource = null;  // Clear the existing data source
-
-            //Create EST data source
-  
             appointmentDataGrid.DataSource = _selectedCustomer.AppointmentList;// Bind the updated list
         }
 
@@ -116,7 +109,7 @@ namespace ScheduleApp
             appointmentDataGrid.DataSource = filteredList;
         }
 
-        // Example of calling the filters based on radio button selection
+        // filters based on radio button selection
         private void FilterAppointmentsByDateRange(string filterType)
         {
             switch (filterType)
@@ -220,7 +213,7 @@ namespace ScheduleApp
             _createAppointmentForm.Show();
         }
 
-        
+
         private void updateApptButton_Click(object sender, EventArgs e)
         {
             selectRow();
@@ -242,35 +235,13 @@ namespace ScheduleApp
             }
         }
 
-        private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-        }
-
-        //Adding cell formatting for EST conversion
-        private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            /*
-            if (appointmentDataGrid.Columns[e.ColumnIndex].Name == "Start" && e.Value != null)
-            {
-                DateTime utcDateTime = (DateTime)e.Value;
-                DateTime easternDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, estTimeZone);
-                e.Value = easternDateTime;
-            }
-            if (appointmentDataGrid.Columns[e.ColumnIndex].Name == "End" && e.Value != null)
-            {
-                DateTime utcDateTime = (DateTime)e.Value;
-                DateTime easternDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, estTimeZone);
-                e.Value = easternDateTime;
-            }
-            */
-        }
-
-
         private void dayViewRadio_CheckedChanged(object sender, EventArgs e)
         {
-            FilterAppointmentsByDateRange("SelectedDate");
+            if (dayRadioButton.Checked)
+            {
+                FilterAppointmentsByDateRange("SelectedDate");
+            }
+
         }
 
         private void weekRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -288,20 +259,6 @@ namespace ScheduleApp
             FilterAppointmentsByDateRange("ALL");
         }
 
-        private void searchApptButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bindingMonthList_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bindingWeekList_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
         private void deleteAppointmentButton_Click(object sender, EventArgs e)
@@ -327,28 +284,39 @@ namespace ScheduleApp
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            FilterAppointmentByRadioButton();
+            if (dayRadioButton != null)
+            {
+                dayRadioButton.Checked = true;
+                FilterAppointmentByRadioButton();
+            }
+
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void userNamePrint_TextChanged(object sender, EventArgs e)
         {
 
+
+            // Validate and retrieve userId
+            if (int.TryParse(userNamePrint.Text, out int userId))
+            {
+                DisplayCurrentUsername(userId);
+            }
+            else
+            {
+                userNamePrint.Text = "Invalid username";
+            }
         }
+        private void appointmentDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void appointmentDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) { }
+        private void searchApptButton_Click(object sender, EventArgs e) { }
+        private void bindingMonthList_CurrentChanged(object sender, EventArgs e) { }
+        private void bindingWeekList_CurrentChanged(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void apptViewLabel_Click(object sender, EventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
-        private void apptViewLabel_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void runReports_Click(object sender, EventArgs e)
-        {
-            ReportForm reportForm = new ReportForm();
-            reportForm.Show();
-        }
     }
 }
+
+

@@ -18,13 +18,16 @@ namespace ScheduleApp
 
         private List<Appointment> _appointmentsUserReport;
         private AppointmentData _appointmentData = new AppointmentData();
-        // adjust loadappointment data to use the Appointmentdata class
+
 
         public UserReportMain()
         {
             InitializeComponent();
+
+
             LoadAppointmentData();
             PopulateUserReportGrid();
+            LoadUsersToDropdown();
 
 
         }
@@ -33,60 +36,97 @@ namespace ScheduleApp
         {
             _appointmentsUserReport = _appointmentData.FindAllAppt();
 
-            // Add the appointment to the list
-            // add conditional checks for null values in each column / row 
-
+            if (_appointmentsUserReport == null || !_appointmentsUserReport.Any())
+            {
+                MessageBox.Show("No appointments found.");
+                _appointmentsUserReport = new List<Appointment>(); // empty list
+            }
         }
 
         private void PopulateUserReportGrid()
         {
             userReportDataGrid.Columns.Clear();
-            userReportDataGrid.Columns.Add("Type", "User");
-            userReportDataGrid.Columns.Add("Type", "Title");
-            userReportDataGrid.Columns.Add("Type", "Description");
-            userReportDataGrid.Columns.Add("Type", "Appointment Date");
-            userReportDataGrid.Columns.Add("Type", "Appointment Time");
-            userReportDataGrid.Columns.Add("Type", "Location");
-
-            foreach (Appointment appointment in _appointmentsUserReport)
-            {
-                addAppointmentToUserReport(appointment);
-            }
+            userReportDataGrid.Columns.Add("Title", "Title");
+            userReportDataGrid.Columns.Add("Description", "Description");
+            userReportDataGrid.Columns.Add("Start", "Appointment Date");
+            userReportDataGrid.Columns.Add("Start", "Appointment Time");
+            userReportDataGrid.Columns.Add("Location", "Location");
 
         }
 
         private void addAppointmentToUserReport(Appointment appointment)
 
         {
-            userReportDataGrid.Rows.Add
-                (appointment.UserID,
-                appointment.Title,
-                appointment.Description,
-                appointment.Start.ToString("MM/dd/yyyy"),
-                appointment.Start.ToString("hh:mm"),
-                appointment.Location);
+            if (appointment != null)
+            {
+                userReportDataGrid.Rows.Add
+                    (
+                    appointment.Title,
+                    appointment.Description,
+                    appointment.Start.ToString("MM/dd/yyyy"),
+                    appointment.Start.ToString("hh:mm"),
+                    appointment.Location
+                    );
+            }
         }
 
-
-
-        private void UserReportMain_Load(object sender, EventArgs e)
+        private void LoadUsersToDropdown()
         {
 
-        }
+            try
+            {
+                userDropDown.Items.Clear();
 
-        private void userReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+                UserData userData = new UserData();
+                List<User> users = userData.GetAllUsers();
 
-        }
+                if (users == null || users.Count <= 0)
+                {
+                    MessageBox.Show("No users found.");
+                    return;
+                }
 
-        private void userReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+                foreach (User user in users)
+                {
+                    userDropDown.Items.Add(user); // adds user directly
+                }
+                userDropDown.DisplayMember = "Name";
 
+                if (userDropDown.Items.Count > 0)
+                {
+                    userDropDown.SelectedIndex = 0; // Select the first user by default
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading users: {ex.Message}");
+            }
         }
 
         private void exitReport_Button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void userDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            User selectedUser = userDropDown.SelectedItem as User;
+            userReportDataGrid.Rows.Clear();
+            foreach (Appointment appointment in _appointmentsUserReport)
+            {
+                if (appointment.UserID == selectedUser.ID)
+                {
+                    addAppointmentToUserReport(appointment);
+                }
+
+            }
+
+        }
+        private void UserReportMain_Load(object sender, EventArgs e) { }
+        private void userReportDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void userReportDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+       
     }
 }
+

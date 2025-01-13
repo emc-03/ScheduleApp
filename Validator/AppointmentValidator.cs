@@ -28,13 +28,7 @@ namespace ScheduleApp.models
 
         public void ValidateAppointment(DateTime userStartTime, DateTime userEndTime)
             {
-        //    DateTime originalDateTime = DateTime.Now; //need to adjust to correct time per appointment
-        //    DateTime dateTimeRefresh = new DateTime(
-        //        originalDateTime.Year,
-        //        originalDateTime.Month,
-        //        originalDateTime.Day,
-        //        originalDateTime.Hour, 0, 0
-        //        );
+       
             DateTime startEST = TimeZoneInfo.ConvertTime(userStartTime, estTimeZone);
             DateTime endEST = TimeZoneInfo.ConvertTime(userEndTime, estTimeZone);
             bool isNotWithinTimeRange = !isWithinTimeRange(startEST, endEST);
@@ -50,7 +44,7 @@ namespace ScheduleApp.models
                 throw new Exception("Error: Appointment is not within the work week.");
             }
 
-            // Check for overlapping appointments >> also needs to check specific date - can't just be time frame
+            // Check for overlapping appointments >> also needs to check specific date, including timeframe
             if (isStartTimeAfterEndTime(startEST, endEST))
             {
                 throw new Exception("Error: Appointment's start time is after the end time.");
@@ -59,7 +53,7 @@ namespace ScheduleApp.models
             //Validate that there's not a conflicting appointment
             if (appointmentConflictExists(startEST, endEST))
             {
-
+                throw new Exception("Error: Appointment overlaps, existing appointment found.");
             }
 
 
@@ -70,7 +64,6 @@ namespace ScheduleApp.models
         private bool isWithinTimeRange(DateTime estStart, DateTime estEnd)
         {
             // Ensure the appointment is scheduled within range
-            //return estStart.TimeOfDay >= _timeRangeStart && estEnd.TimeOfDay <= _timeRangeEnd; 
             int startCompareResult = _timeRangeStart.CompareTo(estStart.TimeOfDay);
             int endCompareResult = _timeRangeEnd.CompareTo(estEnd.TimeOfDay);
             bool startIsValid = startCompareResult <= 0;
@@ -107,19 +100,19 @@ namespace ScheduleApp.models
             foreach (var existingAppointment in _appointments)
             {
                 // Check if the new appointment's start time is within an existing appointment's time range
-                if (startTime >= existingAppointment.Start && startTime < existingAppointment.End)
+                if (startTime >= existingAppointment.Start && startTime <= existingAppointment.End)
                 {
                     return true; // Conflict found with start time
                 }
 
                 // Check if the new appointment's end time is within an existing appointment's time range
-                if (endTime > existingAppointment.Start && endTime <= existingAppointment.End)
+                if (endTime >= existingAppointment.Start && endTime <= existingAppointment.End)
                 {
                     return true; // Conflict found with end time
                 }
 
                 // Check if the new appointment fully overlaps with an existing appointment
-                if (startTime < existingAppointment.Start && endTime > existingAppointment.End)
+                if (startTime <= existingAppointment.Start && endTime >= existingAppointment.End)
                 {
                     return true; // Conflict found with full overlap
                 }
@@ -129,12 +122,7 @@ namespace ScheduleApp.models
             return false;
         }
 
-        //foreach over the appointments list
-        //is the startTime inbetween the start and end for the current appointment 
-        // if YES - return true 
-        // is the endTime inbetween the start and end for the current appointment 
-        // if YES -return true
-        // if the loop completes without any conflicts then return false
+       
     }
 
 }

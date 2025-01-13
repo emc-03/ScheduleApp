@@ -23,9 +23,8 @@ namespace ScheduleApp.models
         private DateTime _end;
         private string _type;
         private string _url;
-        
+        private string _createdBy;
 
-        
         public int AppointmentID { get { return _appointmentID; } set { _appointmentID = value; } }
         public int CustomerID { get { return _customerID; } set { _customerID = value; } }
         public int UserID { get { return _userID; } set { _userID = value; } }
@@ -37,8 +36,8 @@ namespace ScheduleApp.models
         public string URL { get { return _url; } set { _url = value; } }
         public DateTime Start { get { return _start; } set { _start = value; } }
         public DateTime End { get { return _end; } set { _end = value; } }
-        
 
+        public string CreatedBy { get { return _createdBy; } set { _createdBy = value; } }
     }
 
 }

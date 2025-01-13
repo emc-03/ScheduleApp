@@ -77,7 +77,6 @@ namespace ScheduleApp
             this.updateApptButton.Text = "UPDATE";
             this.updateApptButton.UseVisualStyleBackColor = false;
             this.updateApptButton.Click += new System.EventHandler(this.updateButton_Click);
-            
             // 
             // updateTitleInput
             // 
@@ -192,7 +191,6 @@ namespace ScheduleApp
             this.updateEndTimeInput.Size = new System.Drawing.Size(144, 24);
             this.updateEndTimeInput.TabIndex = 7;
             this.updateEndTimeInput.ValueChanged += new System.EventHandler(this.updateEndTimeInput_ValueChanged);
-            
             // 
             // updateEndTimeLabel
             // 
@@ -217,7 +215,6 @@ namespace ScheduleApp
             this.updateStartTimeInput.Size = new System.Drawing.Size(144, 24);
             this.updateStartTimeInput.TabIndex = 6;
             this.updateStartTimeInput.ValueChanged += new System.EventHandler(this.updateStartTimeInput_ValueChanged);
-            
             // 
             // updateStartTimeLabel
             // 
@@ -238,7 +235,6 @@ namespace ScheduleApp
             this.updateDateTimeSelect.Size = new System.Drawing.Size(274, 24);
             this.updateDateTimeSelect.TabIndex = 5;
             this.updateDateTimeSelect.ValueChanged += new System.EventHandler(this.updateDateTimeSelect_ValueChanged);
-          
             // 
             // updateDateTimeLabel
             // 
@@ -277,6 +273,7 @@ namespace ScheduleApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(457, 519);
             this.Controls.Add(this.updateApptType);

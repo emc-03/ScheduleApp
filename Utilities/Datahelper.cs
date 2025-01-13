@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace ScheduleApp
 {
-    public static class Utilities 
+    public static class Utilities
     {
         public static void BuildStartEndDateFromInputs(
             //inputs
-            DateTime appointmentDate, 
-            DateTime startTime, 
-            DateTime endTime, 
+            DateTime appointmentDate,
+            DateTime startTime,
+            DateTime endTime,
             //outputs
-            out DateTime startTimeDate, 
+            out DateTime startTimeDate,
             out DateTime endTimeDate)
         {
             startTimeDate = new DateTime(
@@ -38,10 +38,8 @@ namespace ScheduleApp
                 endTime.Hour,
                 endTime.Minute,
                 endTime.Second);
-           
+
         }
-
-
     }
- 
+
 }

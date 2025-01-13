@@ -33,7 +33,7 @@ namespace ScheduleApp.Validator
 
         public bool IsValidAddress(string address)
         {
-            //  validate a street address (letters, numbers, spaces, commas, periods, hyphens)
+            // validate a street address (letters, numbers, spaces, commas, periods, hyphens)
             string addressPattern = @"^[a-zA-Z0-9\s,.-]+$";
             return Regex.IsMatch(address, addressPattern) &&
                 !string.IsNullOrWhiteSpace(address);

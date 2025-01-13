@@ -31,7 +31,7 @@ namespace ScheduleApp
         {
             this.components = new System.ComponentModel.Container();
             this.exitReport_Button = new System.Windows.Forms.Button();
-            this.createByReport = new System.Windows.Forms.Button();
+            this.customerReport = new System.Windows.Forms.Button();
             this.userReport = new System.Windows.Forms.Button();
             this.monthlyreport = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -56,19 +56,19 @@ namespace ScheduleApp
             this.exitReport_Button.UseVisualStyleBackColor = false;
             this.exitReport_Button.Click += new System.EventHandler(this.exitReport_Button_Click);
             // 
-            // createByReport
+            // customerReport
             // 
-            this.createByReport.AutoSize = true;
-            this.createByReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.createByReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createByReport.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.createByReport.Location = new System.Drawing.Point(60, 187);
-            this.createByReport.Name = "createByReport";
-            this.createByReport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.createByReport.Size = new System.Drawing.Size(188, 44);
-            this.createByReport.TabIndex = 5;
-            this.createByReport.Text = "CreatedBy Report";
-            this.createByReport.Click += new System.EventHandler(this.createByReport_Click);
+            this.customerReport.AutoSize = true;
+            this.customerReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.customerReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerReport.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.customerReport.Location = new System.Drawing.Point(60, 187);
+            this.customerReport.Name = "customerReport";
+            this.customerReport.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.customerReport.Size = new System.Drawing.Size(182, 44);
+            this.customerReport.TabIndex = 5;
+            this.customerReport.Text = "Customer Report";
+            this.customerReport.Click += new System.EventHandler(this.customerReport_Click);
             // 
             // userReport
             // 
@@ -120,7 +120,7 @@ namespace ScheduleApp
             this.Controls.Add(this.monthlyreport);
             this.Controls.Add(this.userReport);
             this.Controls.Add(this.exitReport_Button);
-            this.Controls.Add(this.createByReport);
+            this.Controls.Add(this.customerReport);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Name = "ReportForm";
             this.Text = "Reports";
@@ -134,7 +134,7 @@ namespace ScheduleApp
         #endregion
 
         private System.Windows.Forms.Button exitReport_Button;
-        private System.Windows.Forms.Button createByReport;
+        private System.Windows.Forms.Button customerReport;
         private System.Windows.Forms.Button userReport;
         private System.Windows.Forms.Button monthlyreport;
         private System.Windows.Forms.BindingSource bindingSource1;

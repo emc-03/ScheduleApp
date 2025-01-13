@@ -12,16 +12,6 @@ namespace ScheduleApp.Database
 {
     class AppointmentData
     {
-       
-       // List<Appointment> _appointmentList2 = new List<Appointment>();
-
-
-
-        //1) In AppointmentData class,
-        //make a FindAll() method that takes no parameters and still returns a List<Appointment>
-        //The query should just say "SELECT * from appointment"
-        //Then, just populate the list with what the database reader gives you and return the list when it is all done.
-
         public List<Appointment> FindAllAppt()
         {
             List<Appointment> _reportAppointments = new List<Appointment>();
@@ -48,6 +38,7 @@ namespace ScheduleApp.Database
                                 Type = reader["type"].ToString(),
                                 Start = ((DateTime)reader["start"]).ToLocalTime(), // Convert UTC to local time
                                 End = ((DateTime)reader["end"]).ToLocalTime(), // Convert UTC to local time
+                                CreatedBy = reader["createdBy"].ToString()
                             };
 
                             _reportAppointments.Add(appointment);
@@ -150,7 +141,6 @@ namespace ScheduleApp.Database
 
                 connection.Close();
                 _appointmentList.Add(appointment);
-               // _appointmentList2.Add(appointment);
             }
 
             return appointment;
@@ -191,14 +181,13 @@ namespace ScheduleApp.Database
             }
             //does not need a return, ID is being used to match the ID in the database 
             _appointmentList.Remove(appointment);
-           // _appointmentList2.Remove(appointment);
             _appointmentList.Add(appointment);
-          //  _appointmentList2.Add(appointment);
+
         }
 
         public void Delete(Appointment appointment)
         {
-            
+
             string deleteAppointment = "DELETE FROM Appointment Where appointmentId = @appointmentId";
 
             using (MySqlCommand command = new MySqlCommand(deleteAppointment, DB_Connection.conn))
@@ -206,11 +195,9 @@ namespace ScheduleApp.Database
                 command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
                 command.ExecuteNonQuery();
             }
-            
-           // _appointmentList2.Remove(appointment);
 
         }
-        
+
         public void DeleteAppointmentsByCustomer(int customerId)
         {
             string deleteAppointmentsQuery = "DELETE FROM Appointment WHERE customerId = @customerId;";
@@ -224,9 +211,6 @@ namespace ScheduleApp.Database
         }
 
     }
-
-
-
 
 }
 

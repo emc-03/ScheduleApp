@@ -13,7 +13,6 @@ namespace ScheduleApp.Database
         public void Add(Address address)
         {
 
-
             CityData cityData = new CityData();
             cityData.Add(address.City);
 
@@ -37,7 +36,7 @@ namespace ScheduleApp.Database
                     // Execute the command to insert into the 'address' table
                     command.ExecuteNonQuery();
 
-                    // Retrieve the last inserted ID (if using auto-increment)
+                    // Retrieve the last inserted ID 
                     address.ID = (int)command.LastInsertedId;
                 }
                 connection.Close();

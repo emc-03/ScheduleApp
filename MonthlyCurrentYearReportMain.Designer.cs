@@ -1,7 +1,7 @@
 ﻿
 namespace ScheduleApp
 {
-    partial class MonthlyReportMain
+    partial class MonthlyCurrentYearReport
     {
         /// <summary>
         /// Required designer variable.
@@ -114,17 +114,19 @@ namespace ScheduleApp
             this.dataGridMonthlyReport.TabIndex = 0;
             this.dataGridMonthlyReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // MonthlyReportMain
+            // MonthlyCurrentYearReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(479, 429);
             this.Controls.Add(this.dataGridMonthlyReport);
             this.Controls.Add(this.exitReport_Button);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "MonthlyReportMain";
-            this.Text = "MonthlyReportMain";
+            this.Name = "MonthlyCurrentYearReport";
+            this.Text = "Monthly Current Year Report";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMonthlyReport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

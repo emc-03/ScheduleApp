@@ -23,7 +23,6 @@ namespace ScheduleApp
         private CustomerValidator _validator = new CustomerValidator();
         public UpdateCustomerForm(Customer customer)
 
-      
         {
             _customerToUpdate = customer;
             InitializeComponent();
@@ -47,15 +46,6 @@ namespace ScheduleApp
         {
             this.Close();
         }
-
-
-
-        private void UpfnameInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         private void updateCButton_Click(object sender, EventArgs e)
         {
@@ -82,7 +72,7 @@ namespace ScheduleApp
             try
             {
                 // Validate customer data 
-                _validator.ValidateCustomer(customerToUpdate);  // Use customerToUpdate here
+                _validator.ValidateCustomer(customerToUpdate);
 
                 // If validation passes, update the customer and close the form
                 CustomerData customerData = new CustomerData();
@@ -113,7 +103,7 @@ namespace ScheduleApp
                     HighlightError(UpaddressInput);
                     UpaddressInput.Focus();
                 }
-                else if (!_validator.IsValidAddress(customerToUpdate.Address.Address2)) // Optional
+                else if (!_validator.IsValidAddress(customerToUpdate.Address.Address2))
                 {
                     MessageBox.Show("Invalid secondary address.");
                     HighlightError(Upaddress2Input);
@@ -145,26 +135,21 @@ namespace ScheduleApp
                 }
             }
         }
+        private void UpfnameInput_TextChanged(object sender, EventArgs e) { }
 
 
-        private void UpcustIdInput_TextChanged(object sender, EventArgs e)
-        {
+        private void UpcustIdInput_TextChanged(object sender, EventArgs e) { }
 
-        }
 
-        private void UpPhoneInput_TextChanged(object sender, EventArgs e)
-        {
+        private void UpPhoneInput_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void UpdateCustomerForm_Load(object sender, EventArgs e) { }
 
-        private void UpdateCustomerForm_Load(object sender, EventArgs e)
-        {
 
-        }
+        private void postalCodeInput_TextChanged(object sender, EventArgs e) { }
 
-        private void postalCodeInput_TextChanged(object sender, EventArgs e)
-        {
 
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+
     }
 }
