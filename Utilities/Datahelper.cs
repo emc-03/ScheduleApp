@@ -27,7 +27,7 @@ namespace ScheduleApp
                 //start time input from user
                 startTime.Hour,
                 startTime.Minute,
-                startTime.Second);
+                0, 0);
 
             endTimeDate = new DateTime(
                 //date input from user form
@@ -37,7 +37,7 @@ namespace ScheduleApp
                 //end time input from user
                 endTime.Hour,
                 endTime.Minute,
-                endTime.Second);
+                0, 0);
 
         }
     }

@@ -218,10 +218,12 @@ namespace ScheduleApp
             // 
             // createStartTimeInput
             // 
+            this.createStartTimeInput.CustomFormat = "hh:mm tt";
             this.createStartTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createStartTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.createStartTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.createStartTimeInput.Location = new System.Drawing.Point(166, 319);
             this.createStartTimeInput.Name = "createStartTimeInput";
+            this.createStartTimeInput.ShowUpDown = true;
             this.createStartTimeInput.Size = new System.Drawing.Size(144, 24);
             this.createStartTimeInput.TabIndex = 6;
             this.createStartTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
@@ -240,10 +242,12 @@ namespace ScheduleApp
             // 
             // createEndTimeInput
             // 
+            this.createEndTimeInput.CustomFormat = "hh:mm tt";
             this.createEndTimeInput.Font = new System.Drawing.Font("Source Code Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createEndTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.createEndTimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.createEndTimeInput.Location = new System.Drawing.Point(166, 358);
             this.createEndTimeInput.Name = "createEndTimeInput";
+            this.createEndTimeInput.ShowUpDown = true;
             this.createEndTimeInput.Size = new System.Drawing.Size(144, 24);
             this.createEndTimeInput.TabIndex = 7;
             this.createEndTimeInput.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);

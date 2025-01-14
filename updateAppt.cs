@@ -56,7 +56,6 @@ namespace ScheduleApp
                 updateApptType.Text = _appointment.Type;
             }
 
-
         }
 
         private void updateButton_Click(object sender, EventArgs e)
@@ -67,89 +66,23 @@ namespace ScheduleApp
             _appointment.Description = this.updateDescriptionInput.Text;
             _appointment.Contact = this.updateContactInput.Text;
             _appointment.URL = this.updateLinkInput.Text;
-           
-            _appointment.Start = this.updateStartTimeInput.Value; 
-            _appointment.End = this.updateEndTimeInput.Value; 
             _appointment.Type = this.updateApptType.Text;
 
-            if (string.IsNullOrEmpty(updateTitleInput.Text))
-            {
-                MessageBox.Show("Fill in missing feilds.");
-                updateTitleInput.Clear();
-                updateTitleInput.Focus();
-                return;
-            }
-            else
-            {
-                _appointment.Title = updateTitleInput.Text;
-            }
-
-
-            if (string.IsNullOrEmpty(updateDescriptionInput.Text))
-            {
-                MessageBox.Show("Please fill in missing feilds.");
-                updateDescriptionInput.Clear();
-                updateDescriptionInput.Focus();
-                return;
-            }
-
-            else
-            {
-                _appointment.Description = updateDescriptionInput.Text;
-            }
-            if (string.IsNullOrEmpty(updateLocationInput.Text))
-            {
-                MessageBox.Show("Fill in missing fields.");
-                updateLocationInput.Clear();
-                updateLocationInput.Focus();
-                return;
-            }
-            else
-            {
-                string locationPattern = @"^[a-zA-Z\s\-'.]+$"; // Allows letters, spaces, hyphens, apostrophes, and periods
-                if (Regex.IsMatch(updateLocationInput.Text, locationPattern))
-                {
-                    _appointment.Location = updateLocationInput.Text;
-
-                }
-                else
-                {
-                    MessageBox.Show("Invalid location type! Check for typo, numbers are invalid.");
-
-                    updateLocationInput.Clear();
-                    updateLocationInput.Focus();
-                    return;
-                }    
-            }
-
-
-            if (string.IsNullOrEmpty(updateContactInput.Text))
-            {
-
-                MessageBox.Show("Please fill in missing feilds");
-                updateContactInput.Clear();
-                updateContactInput.Focus();
-                return;
-            }
-            else
-            {
-                string contactPattern = @"[a-zA-Z\s\-'.]+$";
-                if (!Regex.IsMatch(updateContactInput.Text, contactPattern))
-                {
-                    MessageBox.Show("Check for typo, numbers are invalid.");
-
-                    updateContactInput.Clear();
-                    updateContactInput.Focus();
-                    return;
-                }
-
-                _appointment.Contact = updateContactInput.Text;
-            }
-
+           
             try
             {
-                _appointmentValidator.ValidateAppointment(userStartTime: _appointment.Start, userEndTime: _appointment.End);
+                DateTime appointmentDate = updateDateTimeSelect.Value;
+                DateTime startTime = updateStartTimeInput.Value;
+                DateTime endTime = updateEndTimeInput.Value;
 
+                DateTime startTimeDate, endTimeDate;
+                Utilities.BuildStartEndDateFromInputs(appointmentDate, startTime, endTime, out startTimeDate, out endTimeDate);
+
+                _appointmentValidator.ValidateAppointmentTime(startTimeDate, endTimeDate);
+                _appointment.Start = startTimeDate;
+                _appointment.End = endTimeDate;
+
+                _appointmentValidator.ValidateCustomerDetails(_appointment);
                 AppointmentData appointmentData = new AppointmentData();
                 appointmentData.Update(_appointment);
 
@@ -171,26 +104,7 @@ namespace ScheduleApp
 
         }
 
-        private void updateDateTimeSelect_ValueChanged(object sender, EventArgs e)
-        {
-            updateEndTimeInput.Value = new DateTime(
-                updateDateTimeSelect.Value.Year,
-                updateDateTimeSelect.Value.Month,
-                updateDateTimeSelect.Value.Day,
-                updateEndTimeInput.Value.Hour,
-                updateEndTimeInput.Value.Minute,
-                0, 0);
-
-            updateStartTimeInput.Value = new DateTime(
-               updateDateTimeSelect.Value.Year,
-               updateDateTimeSelect.Value.Month,
-               updateDateTimeSelect.Value.Day,
-               updateStartTimeInput.Value.Hour,
-               updateStartTimeInput.Value.Minute,
-               0, 0);
-
-
-        }
+        private void updateDateTimeSelect_ValueChanged(object sender, EventArgs e) { }
         private void UpcustIdInput_TextChanged(object sender, EventArgs e) { }
         private void upCustomerIDLabel_Click(object sender, EventArgs e) { }
         private void UplnameInput_TextChanged(object sender, EventArgs e) { }
