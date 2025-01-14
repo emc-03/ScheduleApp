@@ -138,12 +138,17 @@ namespace ScheduleApp.Database
 
         public void Delete(Customer customer)
         {
+            if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
+            {
+                DB_Connection.conn.Close();
+            }
+
             // Delete any appointments associated with the customer
             AppointmentData appointmentData = new AppointmentData();
             appointmentData.DeleteAppointmentsByCustomer(customer.ID); // Deletes all appointments with this customer ID
 
             // Delete customer from the database
-            string deleteCustomerQuery = "DELETE FROM Customer WHERE customerId = @customerId";
+            string deleteCustomerQuery = "DELETE FROM customer WHERE customerId = @customerId";
 
             using (MySqlCommand command = new MySqlCommand(deleteCustomerQuery, DB_Connection.conn))
             {

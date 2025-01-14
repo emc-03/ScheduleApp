@@ -94,7 +94,7 @@ namespace ScheduleApp.Database
         }
         public Appointment Add(Appointment appointment, string userName)
         {
-            
+
             if (appointment == null)
             {
                 throw new ArgumentNullException(nameof(appointment), "Appointment cannot be null.");
@@ -140,7 +140,7 @@ namespace ScheduleApp.Database
                 }
 
                 connection.Close();
-                
+
             }
 
             return appointment;
@@ -187,28 +187,112 @@ namespace ScheduleApp.Database
 
         public void Delete(Appointment appointment)
         {
+            // Show confirmation message box
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this appointment?",
+                "Delete Appointment",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            string deleteAppointment = "DELETE FROM Appointment Where appointmentId = @appointmentId";
-
-            using (MySqlCommand command = new MySqlCommand(deleteAppointment, DB_Connection.conn))
+            // If user confirms, proceed with the deletion
+            if (result == DialogResult.Yes)
             {
-                command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
-                command.ExecuteNonQuery();
-            }
+                string deleteAppointment = "DELETE FROM Appointment WHERE appointmentId = @appointmentId";
 
+                try
+                {
+                    // Ensure the connection is open
+                    if (DB_Connection.conn.State != System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Open();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(deleteAppointment, DB_Connection.conn))
+                    {
+                        command.Parameters.AddWithValue("@appointmentId", appointment.AppointmentID);
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Appointment deleted successfully.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    MessageBox.Show("An error occurred while deleting the appointment.");
+                    throw;
+                }
+                finally
+                {
+                    // close connection
+                    if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Close();
+                    }
+                }
+            }
+            else
+            {
+                // do nothing if user clicks cancel
+                MessageBox.Show("Appointment deletion canceled.");
+            }
         }
 
         public void DeleteAppointmentsByCustomer(int customerId)
         {
-            string deleteAppointmentsQuery = "DELETE FROM Appointment WHERE customerId = @customerId;";
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete all appointments for this customer?",
+                "Delete Appointments",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            using (MySqlCommand command = new MySqlCommand(deleteAppointmentsQuery, DB_Connection.conn))
+            // User confirms 'yes' then delete
+            if (result == DialogResult.Yes)
             {
-                command.Parameters.AddWithValue("@customerId", customerId);
-                command.ExecuteNonQuery();
+                string deleteAppointmentsQuery = "DELETE FROM Appointment WHERE customerId = @customerId;";
 
+                try
+                {
+                    // Ensure the connection is open
+                    if (DB_Connection.conn.State != System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Open();
+                    }
+
+                    using (MySqlCommand command = new MySqlCommand(deleteAppointmentsQuery, DB_Connection.conn))
+                    {
+                        command.Parameters.AddWithValue("@customerId", customerId);
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("All appointments for this customer have been deleted.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    MessageBox.Show("An error occurred while deleting appointments.");
+                    throw;
+                }
+                finally
+                {
+                    //checks for closed connection
+                    if (DB_Connection.conn.State == System.Data.ConnectionState.Open)
+                    {
+                        DB_Connection.conn.Close();
+                    }
+                }
+            }
+            else
+            {
+                // do nothing if user clicks cancel
+                MessageBox.Show("Appointment deletion canceled.");
             }
         }
+
+
 
     }
 

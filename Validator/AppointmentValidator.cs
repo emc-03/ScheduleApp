@@ -16,7 +16,6 @@ namespace ScheduleApp.models
         private readonly TimeSpan _timeRangeStart = new TimeSpan(9, 0, 0); // 9 AM
         private readonly TimeSpan _timeRangeEnd = new TimeSpan(17, 0, 0);  // 5 PM
         private TimeZoneInfo estTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-
         private List<Appointment> _appointments = new List<Appointment>();
 
         public AppointmentValidator(List<Appointment> appointments)
@@ -24,10 +23,8 @@ namespace ScheduleApp.models
             _appointments = appointments;
 
         }
-        //TODO - FIX startEST / endEST
         public void ValidateAppointmentTime(DateTime userStartTime, DateTime userEndTime)
         {
-
             DateTime startEST = TimeZoneInfo.ConvertTime(userStartTime, estTimeZone);
             DateTime endEST = TimeZoneInfo.ConvertTime(userEndTime, estTimeZone);
             bool isNotWithinTimeRange = !isAppointmentWithinRange(startEST, endEST);
@@ -37,7 +34,7 @@ namespace ScheduleApp.models
                 throw new Exception("Error Appointment must be between 9 AM - 5 PM EST.");
             }
 
-            // Check if in working week
+            // Check if within working week
             if (!isWithinWorkWeek(startEST))
             {
                 throw new Exception("Error: Appointment is not within the work week.");
@@ -56,7 +53,6 @@ namespace ScheduleApp.models
             }
 
         }
-
 
         // Check if the appointment is within 9-5 range
         private bool isAppointmentWithinRange(DateTime estStart, DateTime estEnd)
@@ -91,7 +87,6 @@ namespace ScheduleApp.models
             }
             return false;
         }
-
 
         public bool appointmentConflictExists(DateTime startTime, DateTime endTime)
 
@@ -128,38 +123,38 @@ namespace ScheduleApp.models
                    Regex.IsMatch(title, titlePattern) &&
                    title.Length >= 2 && title.Length <= 25;
         }
-        public bool IsValidDescriptionInput(string description) 
+        public bool IsValidDescriptionInput(string description)
         {
             string descriptionPattern = @"^[a-zA-Z0-9\s,.-]+$";
             return !string.IsNullOrWhiteSpace(description) &&
                    Regex.IsMatch(description, descriptionPattern) &&
                    description.Length >= 2 && description.Length <= 100;
-               
+
         }
-        public bool IsValidLocation(string location) 
+        public bool IsValidLocation(string location)
         {
             string locationPattern = @"^[a-zA-Z\s]+$";
             return !string.IsNullOrWhiteSpace(location) &&
                    Regex.IsMatch(location, locationPattern) &&
                    location.Length >= 2 && location.Length <= 50;
         }
-        public bool IsValidContact(string contact) 
+        public bool IsValidContact(string contact)
         {
             string contactPattern = @"^[a-zA-Z0-9\s,.-]+$";
             return !string.IsNullOrWhiteSpace(contact) &&
                    Regex.IsMatch(contact, contactPattern) &&
                    contact.Length >= 2 && contact.Length <= 50;
         }
-        public bool IsValidType(string type) 
+        public bool IsValidType(string type)
         {
             string typePattern = @"^[a-zA-Z\s]+$";
             return !string.IsNullOrWhiteSpace(type) &&
                    Regex.IsMatch(type, typePattern) &&
                    type.Length >= 2 && type.Length <= 25;
         }
-        public bool IsValidURL(string url) 
-        { 
-            string  urlPattern = @"^[a-zA-Z0-9\s,.-]+$";
+        public bool IsValidURL(string url)
+        {
+            string urlPattern = @"^[a-zA-Z0-9\s,.-]+$";
             return !string.IsNullOrWhiteSpace(url) &&
                    Regex.IsMatch(url, urlPattern) &&
                    url.Length >= 2 && url.Length <= 50;

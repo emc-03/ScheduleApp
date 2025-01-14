@@ -251,6 +251,7 @@ namespace ScheduleApp
             this.postalCodeInput.Name = "postalCodeInput";
             this.postalCodeInput.Size = new System.Drawing.Size(211, 38);
             this.postalCodeInput.TabIndex = 6;
+            this.postalCodeInput.TextChanged += new System.EventHandler(this.postalCodeInput_TextChanged);
             // 
             // addressInput2
             // 

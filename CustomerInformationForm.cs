@@ -53,21 +53,29 @@ namespace ScheduleApp
         public void loadData(int userId)
         {
             _customerList = _customerData.FindAll(userId);
-            dataGridCustomer.Columns.Add("customerName", "Name");
-            dataGridCustomer.Columns.Add("customerPhone", "Phone");
-            dataGridCustomer.Columns.Add("customerAddress1", "Primary Address");
-            dataGridCustomer.Columns.Add("customerAddress2", "Secondary Address");
-            dataGridCustomer.Columns.Add("customerCity", "City");
-            dataGridCustomer.Columns.Add("customerCountry", "Country");
-            dataGridCustomer.Columns.Add("customerID", "ID");
-            dataGridCustomer.Columns["customerID"].Visible = false;
+
+            // Add columns only if they do not already exist
+            if (dataGridCustomer.Columns.Count == 0)
+            {
+                dataGridCustomer.Columns.Add("customerName", "Name");
+                dataGridCustomer.Columns.Add("customerPhone", "Phone");
+                dataGridCustomer.Columns.Add("customerAddress1", "Primary Address");
+                dataGridCustomer.Columns.Add("customerAddress2", "Secondary Address");
+                dataGridCustomer.Columns.Add("customerCity", "City");
+                dataGridCustomer.Columns.Add("customerCountry", "Country");
+                dataGridCustomer.Columns.Add("customerID", "ID");
+                dataGridCustomer.Columns["customerID"].Visible = false;
+            }
+
+            // Clear existing rows before adding new ones
+            dataGridCustomer.Rows.Clear();
+
             foreach (Customer customer in _customerList)
             {
                 addCustomertoDataGrid(customer);
-
             }
-
         }
+
 
         private void addCustomertoDataGrid(Customer customer)
         {
@@ -89,112 +97,14 @@ namespace ScheduleApp
         {
 
             Customer customer = new Customer();
-
-            //FirstName
-            if (string.IsNullOrEmpty(fnameInput.Text))
-            {
-                MessageBox.Show("First Name is required");
-                fnameInput.Clear();
-                fnameInput.Focus();
-                return;
-            }
-            else
-            {
-                customer.FirstName = fnameInput.Text;
-            }
-
-            // Last Name Validation
-            if (string.IsNullOrEmpty(lnameInput.Text))
-            {
-                MessageBox.Show("Last Name is required.");
-                lnameInput.Clear();
-                lnameInput.Focus();
-                return;
-            }
-            else
-            {
-                customer.LastName = lnameInput.Text;
-            }
-
-            // Phone Number Validation
-            if (string.IsNullOrEmpty(phoneInput.Text))
-            {
-                MessageBox.Show("Phone number is required.");
-                phoneInput.Clear();
-                phoneInput.Focus();
-                return;
-            }
-            else
-            {
-                customer.Address.PhoneNumber = phoneInput.Text;
-            }
-
-            // Address Line 1 Validation
-            if (string.IsNullOrEmpty(addressInput.Text))
-            {
-                MessageBox.Show("Address is required");
-                addressInput.Clear();
-                addressInput.Focus();
-                return;
-            }
-            else
-            {
-                customer.Address.Address1 = addressInput.Text;
-            }
-
-            // Address Line 2 Validation
-            if (string.IsNullOrEmpty(addressInput2.Text))
-            {
-                MessageBox.Show("Address is required");
-                addressInput2.Clear();
-                addressInput2.Focus();
-                return;
-            }
-            else
-            {
-                customer.Address.Address2 = addressInput2.Text;
-            }
-
-            // City Validation
-            if (string.IsNullOrEmpty(cityInput.Text))
-            {
-                MessageBox.Show("City is required");
-                cityInput.Clear();
-                cityInput.Focus();
-                return;
-            }
-
-            else
-            {
-                customer.Address.City.Name = cityInput.Text;
-            }
-
-            // Postal Code Validation
-            if (string.IsNullOrEmpty(postalCodeInput.Text))
-            {
-                MessageBox.Show("Postal Code is required");
-                postalCodeInput.Clear();
-                postalCodeInput.Focus();
-                return;
-            }
-            else
-            {
-                //  assign it to the customer object
-                customer.Address.PostalCode = postalCodeInput.Text;
-            }
-
-            // Country Validation
-            if (string.IsNullOrEmpty(countryInput.Text))
-            {
-                MessageBox.Show("Country is required");
-                countryInput.Clear();
-                countryInput.Focus();
-                return;
-            }
-            else
-            {
-                customer.Address.City.Country.Name = countryInput.Text;
-            }
+            customer.FirstName = fnameInput.Text;
+            customer.LastName = lnameInput.Text;
+            customer.Address.PhoneNumber = phoneInput.Text;
+            customer.Address.Address1 = addressInput.Text;
+            customer.Address.Address2 = addressInput2.Text;
+            customer.Address.City.Name = cityInput.Text;
+            customer.Address.PostalCode = postalCodeInput.Text;
+            customer.Address.City.Country.Name = countryInput.Text;
 
             try
             {
@@ -207,7 +117,6 @@ namespace ScheduleApp
                 _customerList.Add(customer);
                 loadData(_user.ID);
 
-                Console.WriteLine("Data inserted successfully.");
                 this.fnameInput.Clear();
                 this.lnameInput.Clear();
                 this.phoneInput.Clear();
@@ -217,9 +126,12 @@ namespace ScheduleApp
                 this.postalCodeInput.Clear();
                 this.countryInput.Clear();
 
+                MessageBox.Show("Customer information has been created.");
+
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show(ex.Message);
             }
 
@@ -238,6 +150,7 @@ namespace ScheduleApp
                 MessageBox.Show("Customer information has been deleted.");
             }
         }
+
 
         private void selectRow()
 
@@ -295,6 +208,7 @@ namespace ScheduleApp
 
         }
 
+
         private void updateCustomerButton_Click(object sender, EventArgs e)
         {
 
@@ -325,7 +239,7 @@ namespace ScheduleApp
             reportForm.Show();
         }
         private void CustomerInformationForm_Load(object sender, EventArgs e) { }
-      
+
         private void dataGridCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void button2_Click(object sender, EventArgs e) { }
@@ -348,6 +262,10 @@ namespace ScheduleApp
 
         private void phoneInput_TextChanged(object sender, EventArgs e) { }
 
+        private void postalCodeInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
