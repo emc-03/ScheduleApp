@@ -11,7 +11,7 @@ namespace ScheduleApp.Database
     class UserData
     {
         //  return username by userID
-       
+
         public string GetUserNameById(int userId)
         {
             string username = string.Empty;
@@ -28,7 +28,7 @@ namespace ScheduleApp.Database
                         if (reader.Read())
                         {
 
-                            username = reader["userName"].ToString();
+                            username = reader["userName"].ToString().Trim();
                         }
 
                     }
@@ -54,18 +54,18 @@ namespace ScheduleApp.Database
                         while (reader.Read())
                         {
                             User user = new User(); // Create new User object for each row
-                            user.Name = reader["userName"].ToString(); // Assign the username from the reader
+                            user.Name = reader["userName"].ToString().Trim(); // Assign the username from the reader
                             user.ID = (int)reader["userId"];
                             users.Add(user); // Add the user to the list
                         }
+
                     }
+
                 }
                 connection.Close();
             }
             return users; // Return the list of users
-                   }
-
-
+        }
 
         public User Get(string userName, string password)
         {
@@ -84,7 +84,7 @@ namespace ScheduleApp.Database
                     {
                         if (reader.Read())
                         {
-                            user = new User(); 
+                            user = new User();
                             user.ID = (int)reader["userId"];
                             user.Name = userName;
                             user.Password = password;
@@ -101,6 +101,7 @@ namespace ScheduleApp.Database
                             {
                                 MessageBox.Show("User isActive value is invalid.");
                             }
+                            TrimFeilds(user);
 
                         }
 
@@ -110,6 +111,24 @@ namespace ScheduleApp.Database
 
             }
             return user;
+        }
+
+        //trim feilds methods
+        public void TrimFeilds(User user)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+
+                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
+                {
+                    string currentValue = (string)property.GetValue(this);
+
+                    if (currentValue != null)
+                    {
+                        property.SetValue(this, currentValue.Trim());
+                    }
+                }
+            }
         }
 
     }

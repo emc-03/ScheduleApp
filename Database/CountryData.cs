@@ -13,7 +13,7 @@ namespace ScheduleApp.Database
     {
         public void Add(Country country)
         {
-
+            TrimFeilds(country);
             string newQueryCountry = "INSERT INTO country (country, createDate, createdBy, lastUpdateBy)" +
                    " VALUES (@country, @createDate, @createdBy, @lastUpdateBy)";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
@@ -40,7 +40,7 @@ namespace ScheduleApp.Database
         }
         public void Update(Country country)
         {
-
+            TrimFeilds(country);
             string updateQueryCountry = "UPDATE country SET country = @country, lastUpdateBy = @lastUpdateBy" +
                 " WHERE countryId = @countryId";
             using (MySqlConnection connection = new MySqlConnection(DB_Connection.ConnectionString))
@@ -61,7 +61,7 @@ namespace ScheduleApp.Database
         }
         public void Delete(Country country)
         {
-
+            TrimFeilds(country);
             string deleteCountry = "DELETE FROM Country Where countryId = @ID";
             using (MySqlCommand command = new MySqlCommand(deleteCountry, DB_Connection.conn))
             {
@@ -73,8 +73,8 @@ namespace ScheduleApp.Database
         }
         public Country Get(int countryId)
         {
+            
             Country country = new Country();
-
 
             string getCountryQuery = "SELECT * FROM country WHERE countryId = @countryId";
 
@@ -93,6 +93,7 @@ namespace ScheduleApp.Database
                             country.Name = reader["country"].ToString();
 
                         }
+                        TrimFeilds(country);
                     }
 
                 }
@@ -125,6 +126,7 @@ namespace ScheduleApp.Database
                             {
                                 countryList.Add(country); // Add the Country to the list
                             }
+                            TrimFeilds(country);
 
                         }
                     }
@@ -133,6 +135,25 @@ namespace ScheduleApp.Database
             }
 
             return countryList;
+        }
+
+
+        //trim feilds methods
+        public void TrimFeilds(Country country)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+
+                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
+                {
+                    string currentValue = (string)property.GetValue(this);
+
+                    if (currentValue != null)
+                    {
+                        property.SetValue(this, currentValue.Trim());
+                    }
+                }
+            }
         }
 
 

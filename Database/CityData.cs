@@ -12,6 +12,7 @@ namespace ScheduleApp.Database
     {
         public void Add(City city)
         {
+            TrimFeilds(city);
             CountryData countryData = new CountryData();
             countryData.Add(city.Country);
 
@@ -40,6 +41,7 @@ namespace ScheduleApp.Database
         }
         public void Update(City city)
         {
+            TrimFeilds(city);
             CountryData countryData = new CountryData();
             countryData.Update(city.Country);
 
@@ -94,6 +96,7 @@ namespace ScheduleApp.Database
                             city.Country = countryData.Get((int)reader["countryId"]);
 
                         }
+                        TrimFeilds(city);
                     }
 
                 }
@@ -101,6 +104,24 @@ namespace ScheduleApp.Database
             }
             return city;
 
+        }
+
+        //trim feilds methods
+        public void TrimFeilds(City city)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+
+                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
+                {
+                    string currentValue = (string)property.GetValue(this);
+
+                    if (currentValue != null)
+                    {
+                        property.SetValue(this, currentValue.Trim());
+                    }
+                }
+            }
         }
     }
 }

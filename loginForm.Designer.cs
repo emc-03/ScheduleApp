@@ -44,12 +44,14 @@ namespace ScheduleApp
             // 
             // logExitButton
             // 
+            this.logExitButton.AutoSize = true;
             this.logExitButton.BackColor = System.Drawing.Color.Black;
             this.logExitButton.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logExitButton.ForeColor = System.Drawing.Color.LightCoral;
-            this.logExitButton.Location = new System.Drawing.Point(396, 3);
+            this.logExitButton.Location = new System.Drawing.Point(421, 13);
             this.logExitButton.Name = "logExitButton";
-            this.logExitButton.Size = new System.Drawing.Size(43, 35);
+            this.logExitButton.Padding = new System.Windows.Forms.Padding(5);
+            this.logExitButton.Size = new System.Drawing.Size(55, 54);
             this.logExitButton.TabIndex = 0;
             this.logExitButton.Text = "X";
             this.logExitButton.UseVisualStyleBackColor = false;
@@ -57,12 +59,15 @@ namespace ScheduleApp
             // 
             // loginLabel
             // 
+            this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginLabel.AutoSize = true;
             this.loginLabel.Font = new System.Drawing.Font("Myanmar Text", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.loginLabel.Location = new System.Drawing.Point(189, 5);
+            this.loginLabel.Location = new System.Drawing.Point(13, 16);
+            this.loginLabel.Margin = new System.Windows.Forms.Padding(5);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(83, 37);
+            this.loginLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.loginLabel.Size = new System.Drawing.Size(93, 47);
             this.loginLabel.TabIndex = 1;
             this.loginLabel.Text = "LOGIN";
             this.loginLabel.Click += new System.EventHandler(this.loginLabel_Click);
@@ -71,44 +76,51 @@ namespace ScheduleApp
             // 
             this.menuBarPanel.AutoSize = true;
             this.menuBarPanel.BackColor = System.Drawing.Color.RoyalBlue;
-            this.menuBarPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.menuBarPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.menuBarPanel.Controls.Add(this.logExitButton);
             this.menuBarPanel.Controls.Add(this.loginLabel);
-            this.menuBarPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuBarPanel.Location = new System.Drawing.Point(0, 1);
+            this.menuBarPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.menuBarPanel.Location = new System.Drawing.Point(0, -2);
             this.menuBarPanel.Name = "menuBarPanel";
-            this.menuBarPanel.Size = new System.Drawing.Size(457, 46);
+            this.menuBarPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.menuBarPanel.Size = new System.Drawing.Size(488, 77);
             this.menuBarPanel.TabIndex = 2;
             this.menuBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.menuBarPanel_Paint);
             // 
             // loginPanelMain
             // 
+            this.loginPanelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.loginPanelMain.AutoSize = true;
             this.loginPanelMain.BackColor = System.Drawing.Color.Transparent;
-            this.loginPanelMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.loginPanelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loginPanelMain.Controls.Add(this.loginButton);
             this.loginPanelMain.Controls.Add(this.passwordInput);
             this.loginPanelMain.Controls.Add(this.userInput);
             this.loginPanelMain.Controls.Add(this.passwordLabel);
             this.loginPanelMain.Controls.Add(this.userLabel);
             this.loginPanelMain.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.loginPanelMain.Location = new System.Drawing.Point(0, 45);
+            this.loginPanelMain.Location = new System.Drawing.Point(0, 72);
+            this.loginPanelMain.Margin = new System.Windows.Forms.Padding(5);
             this.loginPanelMain.Name = "loginPanelMain";
-            this.loginPanelMain.Size = new System.Drawing.Size(457, 358);
+            this.loginPanelMain.Padding = new System.Windows.Forms.Padding(5);
+            this.loginPanelMain.Size = new System.Drawing.Size(488, 331);
             this.loginPanelMain.TabIndex = 3;
             this.loginPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.loginPanelMain_Paint);
             // 
             // loginButton
             // 
+            this.loginButton.AutoSize = true;
             this.loginButton.BackColor = System.Drawing.Color.RoyalBlue;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.loginButton.Location = new System.Drawing.Point(75, 254);
+            this.loginButton.Location = new System.Drawing.Point(78, 243);
             this.loginButton.Name = "loginButton";
             this.loginButton.Padding = new System.Windows.Forms.Padding(5);
             this.loginButton.Size = new System.Drawing.Size(333, 54);
             this.loginButton.TabIndex = 2;
-            this.loginButton.Text = "Login";
+            this.loginButton.Text = "Submit";
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
@@ -117,7 +129,7 @@ namespace ScheduleApp
             this.passwordInput.AcceptsReturn = true;
             this.passwordInput.AcceptsTab = true;
             this.passwordInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordInput.Location = new System.Drawing.Point(166, 172);
+            this.passwordInput.Location = new System.Drawing.Point(138, 182);
             this.passwordInput.Name = "passwordInput";
             this.passwordInput.PasswordChar = '*';
             this.passwordInput.Size = new System.Drawing.Size(213, 38);
@@ -129,7 +141,7 @@ namespace ScheduleApp
             this.userInput.AcceptsReturn = true;
             this.userInput.AcceptsTab = true;
             this.userInput.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInput.Location = new System.Drawing.Point(166, 108);
+            this.userInput.Location = new System.Drawing.Point(138, 94);
             this.userInput.Name = "userInput";
             this.userInput.Size = new System.Drawing.Size(213, 38);
             this.userInput.TabIndex = 0;
@@ -140,22 +152,24 @@ namespace ScheduleApp
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.passwordLabel.Location = new System.Drawing.Point(31, 176);
+            this.passwordLabel.Location = new System.Drawing.Point(185, 135);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(105, 34);
+            this.passwordLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.passwordLabel.Size = new System.Drawing.Size(110, 44);
             this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password:";
+            this.passwordLabel.Text = "Password";
             // 
             // userLabel
             // 
             this.userLabel.AutoSize = true;
             this.userLabel.Font = new System.Drawing.Font("Myanmar Text", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.userLabel.Location = new System.Drawing.Point(27, 108);
+            this.userLabel.Location = new System.Drawing.Point(185, 47);
             this.userLabel.Name = "userLabel";
-            this.userLabel.Size = new System.Drawing.Size(109, 34);
+            this.userLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.userLabel.Size = new System.Drawing.Size(114, 44);
             this.userLabel.TabIndex = 0;
-            this.userLabel.Text = "Username:";
+            this.userLabel.Text = "Username";
             // 
             // loginForm
             // 
@@ -164,7 +178,7 @@ namespace ScheduleApp
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(456, 404);
+            this.ClientSize = new System.Drawing.Size(486, 404);
             this.Controls.Add(this.loginPanelMain);
             this.Controls.Add(this.menuBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

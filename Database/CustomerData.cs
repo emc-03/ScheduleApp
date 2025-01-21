@@ -16,11 +16,11 @@ namespace ScheduleApp.Database
     {
 
         private List<Customer> _customerList = new List<Customer>();
-
+       
 
         public Customer Add(Customer customer)
         {
-
+            TrimFeilds(customer);
 
             AddressData addressData = new AddressData();
             addressData.Add(customer.Address);
@@ -47,12 +47,14 @@ namespace ScheduleApp.Database
                 connection.Close();
 
             }
+         
             _customerList.Add(customer);
             return customer;
         }
 
         public Customer Get(int customerID)
         {
+            
             Customer customer = new Customer();
             AddressData addressData = new AddressData();
 
@@ -78,6 +80,7 @@ namespace ScheduleApp.Database
                             int addressId = (int)reader["addressId"];
                             customer.Address = addressData.Get(addressId);
                         }
+                        TrimFeilds(customer);
                     }
                 }
             }
@@ -100,7 +103,7 @@ namespace ScheduleApp.Database
                         if (reader.Read())
                         {
 
-                            customerName = reader["customerName"].ToString();
+                            customerName = reader["customerName"].ToString().Trim();
                         }
 
                     }
@@ -113,6 +116,8 @@ namespace ScheduleApp.Database
 
         public void Update(Customer customer)
         {
+            TrimFeilds(customer);
+
             AddressData addressData = new AddressData();
             addressData.Update(customer.Address);
 
@@ -219,6 +224,9 @@ namespace ScheduleApp.Database
                             customer.Address = addressData.Get((int)reader["addressId"]);
                             customer.AppointmentList = appointmentData.FindAllApptList(userId, customer.ID); // Use customer ID
 
+                            //trim fields after retrieval to ensure all fields are clean from the db
+                            TrimFeilds(customer);
+
                             customerFindAllList.Add(customer);
                         }
                     }
@@ -229,7 +237,23 @@ namespace ScheduleApp.Database
             return customerFindAllList;
         }
 
+        //trim feilds methods
+        public void TrimFeilds(Customer customer)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+                //needs to account for DateTime, include all feilds
+                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
+                {
+                    string currentValue = (string)property.GetValue(this);
 
+                    if (currentValue != null)
+                    {
+                        property.SetValue(this, currentValue.Trim());
+                    }
+                }
+            }
+        }
 
     }
 

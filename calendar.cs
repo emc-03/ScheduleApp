@@ -22,11 +22,13 @@ namespace ScheduleApp
         private Customer _selectedCustomer;
         private Appointment _selectedAppointment;
         private AppointmentData _appointmentData = new AppointmentData();
+     
 
         public calendarForm(Customer selectedCustomer, User user)
         {
             _user = user;
             _selectedCustomer = selectedCustomer;
+            
 
             InitializeComponent();
             loadDataToList();

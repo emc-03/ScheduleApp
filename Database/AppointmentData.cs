@@ -40,7 +40,7 @@ namespace ScheduleApp.Database
                                 End = ((DateTime)reader["end"]).ToLocalTime(), // Convert UTC to local time
                                 CreatedBy = reader["createdBy"].ToString()
                             };
-
+                             TrimFeilds(appointment);
                             _reportAppointments.Add(appointment);
                         }
                     }
@@ -53,6 +53,7 @@ namespace ScheduleApp.Database
 
         public List<Appointment> FindAllApptList(int _userID, int _customerID)
         {
+           
             List<Appointment> allAppointments = new List<Appointment>();
             string apptQuery = "SELECT * FROM appointment WHERE userId = @userID AND customerId = @ID";
 
@@ -82,6 +83,7 @@ namespace ScheduleApp.Database
                             appointment.End = ((DateTime)reader["end"]).ToLocalTime();//Updated to add UTC //Convert to LocalTime
                             appointment.Type = reader["type"].ToString();
 
+                            TrimFeilds(appointment);
                             allAppointments.Add(appointment);
                         }
 
@@ -94,6 +96,7 @@ namespace ScheduleApp.Database
         }
         public Appointment Add(Appointment appointment, string userName)
         {
+            TrimFeilds(appointment);
 
             if (appointment == null)
             {
@@ -149,7 +152,7 @@ namespace ScheduleApp.Database
 
         public void Update(Appointment appointment)
         {
-
+            TrimFeilds(appointment);
             List<Appointment> _appointmentList = new List<Appointment>();
             string updateQueryAppointment = "UPDATE appointment SET title = @title, description = @description, location = @location, contact = @contact, type = @type, url = @url, start = @start, end = @end" +
               " WHERE appointmentId = @appointmentId";
@@ -292,6 +295,23 @@ namespace ScheduleApp.Database
             }
         }
 
+        //trim feilds methods
+        public void TrimFeilds(Appointment appointment)
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+
+                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
+                {
+                    string currentValue = (string)property.GetValue(this);
+
+                    if (currentValue != null)
+                    {
+                        property.SetValue(this, currentValue.Trim());
+                    }
+                }
+            }
+        }
 
 
     }

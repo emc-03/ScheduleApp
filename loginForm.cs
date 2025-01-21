@@ -20,11 +20,12 @@ namespace ScheduleApp
     {
 
         private string loginError = "Login failed. Please check your username and password.";
-
+        
         public loginForm()
         {
             InitializeComponent();
 
+            // CultureInfo.CurrentCulture = new CultureInfo("es"); // for testing purposes only 
 
             if (CultureInfo.CurrentCulture.Name == "es")
             {
@@ -49,17 +50,18 @@ namespace ScheduleApp
             Application.Exit();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void Login(string loginName, string enteredPassword)
         {
             try
             {
+
                 UserData userData = new UserData();
-                string loginName = userInput.Text;
-                string password = passwordInput.Text;
+
 
                 // Retrieve user by login and password
-                User user = userData.Get(loginName, password);
-                if (user == null)
+                User user = userData.Get(loginName, enteredPassword);
+
+                if (user == null || enteredPassword != user.Password)
                 {
                     MessageBox.Show(loginError);
                     return;
@@ -68,7 +70,11 @@ namespace ScheduleApp
                 try
                 {
 
-                    File.AppendAllText("Login_History.txt", "User: " + (user.Name ?? "Unknown") + " | Last Login: " + DateTime.UtcNow + Environment.NewLine);
+                    File.AppendAllText
+                        (
+                        "Login_History.txt", "User: " + (user.Name ?? "Unknown") + " " +
+                        "| Last Login: " + DateTime.UtcNow + Environment.NewLine
+                        );
 
                 }
                 catch (UnauthorizedAccessException)
@@ -96,16 +102,31 @@ namespace ScheduleApp
             {
                 MessageBox.Show("An unexpected error occurred: " + ex.Message);
             }
+        
+
         }
-        private void loginLabel_Click(object sender, EventArgs e) { }
-      
-        private void userInput_TextChanged(object sender, EventArgs e) { }
 
-        private void passwordInput_TextChanged(object sender, EventArgs e) { }
-   
-        private void loginPanelMain_Paint(object sender, PaintEventArgs e) { }
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            // Perform login
 
-        private void menuBarPanel_Paint(object sender, PaintEventArgs e) { }
+            // Get the user input
+            string loginName = userInput.Text;
+            string enteredpassword = passwordInput.Text;
+
+            Login(loginName, enteredpassword);
+
+
+        }
+private void loginLabel_Click(object sender, EventArgs e) { }
+
+private void userInput_TextChanged(object sender, EventArgs e) { }
+
+private void passwordInput_TextChanged(object sender, EventArgs e) { }
+
+private void loginPanelMain_Paint(object sender, PaintEventArgs e) { }
+
+private void menuBarPanel_Paint(object sender, PaintEventArgs e) { }
        
     }
 }
