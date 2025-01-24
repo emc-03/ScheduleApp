@@ -1,18 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ScheduleApp.Database;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ScheduleApp.Database;
-using System.Configuration;
 using System.Globalization;
-using ScheduleApp.models;
+using System.IO;
+using System.Windows.Forms;
 
 namespace ScheduleApp
 {
@@ -25,7 +15,7 @@ namespace ScheduleApp
         {
             InitializeComponent();
 
-            // CultureInfo.CurrentCulture = new CultureInfo("es"); // for testing purposes only 
+            //CultureInfo.CurrentCulture = new CultureInfo("es"); // for testing purposes only 
 
             if (CultureInfo.CurrentCulture.Name == "es")
             {
@@ -109,14 +99,11 @@ namespace ScheduleApp
         private void loginButton_Click(object sender, EventArgs e)
         {
             // Perform login
-
             // Get the user input
-            string loginName = userInput.Text;
-            string enteredpassword = passwordInput.Text;
+            string loginName = userInput.Text.Trim();
+            string enteredpassword = passwordInput.Text.Trim();
 
             Login(loginName, enteredpassword);
-
-
         }
 private void loginLabel_Click(object sender, EventArgs e) { }
 

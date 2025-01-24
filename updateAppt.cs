@@ -61,12 +61,12 @@ namespace ScheduleApp
         private void updateButton_Click(object sender, EventArgs e)
         {
 
-            _appointment.Title = this.updateTitleInput.Text;
-            _appointment.Location = this.updateLocationInput.Text;
-            _appointment.Description = this.updateDescriptionInput.Text;
-            _appointment.Contact = this.updateContactInput.Text;
-            _appointment.URL = this.updateLinkInput.Text;
-            _appointment.Type = this.updateApptType.Text;
+            _appointment.Title = this.updateTitleInput.Text.Trim();
+            _appointment.Location = this.updateLocationInput.Text.Trim();
+            _appointment.Description = this.updateDescriptionInput.Text.Trim();
+            _appointment.Contact = this.updateContactInput.Text.Trim();
+            _appointment.URL = this.updateLinkInput.Text.Trim();
+            _appointment.Type = this.updateApptType.Text.Trim();
 
            
             try

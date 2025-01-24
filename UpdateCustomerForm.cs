@@ -53,18 +53,18 @@ namespace ScheduleApp
             Customer customerToUpdate = new Customer
             {
                 ID = _customerToUpdate.ID,
-                FirstName = UpfnameInput.Text,
-                LastName = UplnameInput.Text,
+                FirstName = UpfnameInput.Text.Trim(),
+                LastName = UplnameInput.Text.Trim(),
                 Address = new Address
                 {
-                    Address1 = UpaddressInput.Text,
-                    Address2 = Upaddress2Input.Text,
-                    PostalCode = postalCodeInput.Text,
-                    PhoneNumber = UpPhoneInput.Text,
+                    Address1 = UpaddressInput.Text.Trim(),
+                    Address2 = Upaddress2Input.Text.Trim(),
+                    PostalCode = postalCodeInput.Text.Trim(),
+                    PhoneNumber = UpPhoneInput.Text.Trim(),
                     City = new City
                     {
-                        Name = UpcityInput.Text,
-                        Country = new Country { Name = UpcountryInput.Text }
+                        Name = UpcityInput.Text.Trim(),
+                        Country = new Country { Name = UpcountryInput.Text.Trim() }
                     }
                 }
             };

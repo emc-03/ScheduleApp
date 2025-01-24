@@ -101,7 +101,7 @@ namespace ScheduleApp.Database
                             {
                                 MessageBox.Show("User isActive value is invalid.");
                             }
-                            TrimFeilds(user);
+                            
 
                         }
 
@@ -113,23 +113,6 @@ namespace ScheduleApp.Database
             return user;
         }
 
-        //trim feilds methods
-        public void TrimFeilds(User user)
-        {
-            foreach (var property in GetType().GetProperties())
-            {
-
-                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
-                {
-                    string currentValue = (string)property.GetValue(this);
-
-                    if (currentValue != null)
-                    {
-                        property.SetValue(this, currentValue.Trim());
-                    }
-                }
-            }
-        }
 
     }
 }

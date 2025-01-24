@@ -49,12 +49,12 @@ namespace ScheduleApp
             {
                 Appointment newAppointment = new Appointment
                 {
-                    Title = createTitleInput.Text,
-                    Description = createDescriptionInput.Text,
-                    Location = createLocationInput.Text,
-                    Contact = createContactInput.Text,
-                    Type = createApptTypeInput.Text,
-                    URL = createLinkInput.Text,
+                    Title = createTitleInput.Text.Trim(),
+                    Description = createDescriptionInput.Text.Trim(),
+                    Location = createLocationInput.Text.Trim(),
+                    Contact = createContactInput.Text.Trim(),
+                    Type = createApptTypeInput.Text.Trim(),
+                    URL = createLinkInput.Text.Trim(),
                     CustomerID = _customer.ID,
                     UserID = _user.ID
                 };

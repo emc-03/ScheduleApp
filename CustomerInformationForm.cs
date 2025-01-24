@@ -97,14 +97,14 @@ namespace ScheduleApp
         {
 
             Customer customer = new Customer();
-            customer.FirstName = fnameInput.Text;
-            customer.LastName = lnameInput.Text;
-            customer.Address.PhoneNumber = phoneInput.Text;
-            customer.Address.Address1 = addressInput.Text;
-            customer.Address.Address2 = addressInput2.Text;
-            customer.Address.City.Name = cityInput.Text;
-            customer.Address.PostalCode = postalCodeInput.Text;
-            customer.Address.City.Country.Name = countryInput.Text;
+            customer.FirstName = fnameInput.Text.Trim();
+            customer.LastName = lnameInput.Text.Trim();
+            customer.Address.PhoneNumber = phoneInput.Text.Trim();
+            customer.Address.Address1 = addressInput.Text.Trim();
+            customer.Address.Address2 = addressInput2.Text.Trim();
+            customer.Address.City.Name = cityInput.Text.Trim();
+            customer.Address.PostalCode = postalCodeInput.Text.Trim();
+            customer.Address.City.Country.Name = countryInput.Text.Trim();
 
             try
             {

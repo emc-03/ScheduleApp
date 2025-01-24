@@ -12,7 +12,7 @@ namespace ScheduleApp.Database
     {
         public void Add(Address address)
         {
-            TrimFeilds(address);
+            
             CityData cityData = new CityData();
             cityData.Add(address.City);
 
@@ -45,7 +45,7 @@ namespace ScheduleApp.Database
 
         public void Update(Address address)
         {
-            TrimFeilds(address);
+           
             CityData cityData = new CityData();
             cityData.Update(address.City);
 
@@ -110,7 +110,7 @@ namespace ScheduleApp.Database
                             address.City = cityData.Get((int)reader["cityId"]);
 
                         }
-                        TrimFeilds(address);
+                        
                     }
 
                 }
@@ -120,23 +120,7 @@ namespace ScheduleApp.Database
             return address;
         }
 
-        //trim feilds methods
-        public void TrimFeilds(Address address)
-        {
-            foreach (var property in GetType().GetProperties())
-            {
-                
-                if (property.PropertyType == typeof(string) && property.CanRead && property.CanWrite)
-                {
-                    string currentValue = (string)property.GetValue(this);
-
-                    if (currentValue != null)
-                    {
-                        property.SetValue(this, currentValue.Trim());
-                    }
-                }
-            }
-        }
+       
     }
 }
 
