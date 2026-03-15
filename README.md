@@ -7,7 +7,7 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
 ![xUnit](https://img.shields.io/badge/xUnit-512BD4?style=flat&logo=dotnet&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat)
-A desktop scheduling application built using C# and .NET that allows users to manage customer information, appointments, and reports.
+## A desktop scheduling application built using C# and .NET that allows users to manage customer information, appointments, and reports.
 
 ---
 
