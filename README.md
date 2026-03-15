@@ -1,5 +1,12 @@
 # Scheduling Application
-
+![C#](https://img.shields.io/badge/C%23-%23239120?style=flat&logo=csharp&logoColor=white)
+![.NET Framework](https://img.shields.io/badge/.NET%20Framework-512BD4?style=flat&logo=dotnet&logoColor=white)
+![Windows Forms](https://img.shields.io/badge/Windows%20Forms-0078D6?style=flat&logo=windows&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white)
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91?style=flat&logo=visualstudio&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
+![xUnit](https://img.shields.io/badge/xUnit-512BD4?style=flat&logo=dotnet&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat)
 A desktop scheduling application built using C# and .NET that allows users to manage customer information, appointments, and reports.
 
 ---
