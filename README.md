@@ -91,8 +91,8 @@ Solution/
 - Upgrade UI to a modern framework (WPF or web-based UI)
 - Add role-based authentication
 - Improve reporting dashboard with charts
-- Add automated testing
-- Containerize the database for easier deployment
+- Add automated testing (in progess)
+- Containerize the database for easier deployment (in progress)
 - Build a REST API backend for web access
 
 ---
