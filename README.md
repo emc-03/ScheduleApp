@@ -1,4 +1,4 @@
-# C969 Scheduling Application
+# Scheduling Application
 
 A desktop scheduling application built using C# and .NET that allows users to manage customer information, appointments, and reports.
 
