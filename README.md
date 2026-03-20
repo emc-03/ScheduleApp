@@ -5,7 +5,7 @@
 ![SQL](https://img.shields.io/badge/SQL-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91?style=flat&logo=visualstudio&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat)
+
 ## A desktop scheduling application built using C# and .NET that allows users to manage customer information, appointments, and reports.
 
 ---
